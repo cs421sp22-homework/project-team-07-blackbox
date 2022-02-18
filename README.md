@@ -28,8 +28,15 @@ A brief description of your project (elevator pitch goes here).
 
 A quick introduction of the minimal setup you need to get the app up & running on a local computer. For example, your advisor might use the instruction here to run the application locally.
 
+1. Clone the project to your local computer
 ```shell
-commands here
+git clone https://github.com/cs421sp22-homework/project-team-07-blackbox.git
+```
+
+2. Install front-end dependency
+```shell
+cd project-team-07-blackbox\code\frontend
+npm install
 ```
 
 ## Developing
