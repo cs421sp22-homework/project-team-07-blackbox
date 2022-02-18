@@ -4,26 +4,25 @@ A brief description of your project (elevator pitch goes here).
 
 **Team**
 
-| Name | JHU Email | GitHub Username |
-| ---- | --------- | --------------- |
-|      |           |                 |
-|      |           |                 |
-|      |           |                 |
-|      |           |                 |
-|      |           |                 |
-|      |           |                 |
+| Name            | JHU Email       | GitHub Username |
+| --------------- | --------------- | --------------- |
+| Lu Wu           | lwu66@jhu.edu   | wulu0120        |
+| Yingying Zhuang | yzhuang6@jh.edu | DuangYYing      |
+| Zhuoying Li     | zli181@jhu.edu  | Joselyn19       |
+| Xinyi Li        | xli259@jh.edu   | yiyikkk         |
+| Yifan Li        | yli379@jhu.edu  | yachialice      |
 
 **Advisors** 
 
-| Name | JHU Email | GitHub Username |
-| ---- | --------- | --------------- |
-|      |           |                 |
+| Name     | JHU Email    | GitHub Username |
+| -------- | ------------ | --------------- |
+| Qifan Yu | qyu24@jh.edu | qifanyyy        |
 
 ## Documentation
 
-* [Project Document](/link/to/Google/doc)
+* [Project Document](https://docs.google.com/document/d/1lrwvV_BBTX9bgQO4EuTjWO5jQo29IkbaiXwtHO_O8BU/edit#)
 * [User Manual](link/to/GitHubPage)
-* [API Documentation](link/to/GitHubPage/api)
+* [API Documentation](https://cs421sp22-homework.github.io/project-team-07-blackbox/)
 
 ## Installing / Getting started
 
