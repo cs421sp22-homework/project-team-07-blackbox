@@ -21,7 +21,7 @@ A brief description of your project (elevator pitch goes here).
 ## Documentation
 
 * [Project Document](https://docs.google.com/document/d/1lrwvV_BBTX9bgQO4EuTjWO5jQo29IkbaiXwtHO_O8BU/edit#)
-* [User Manual](link/to/GitHubPage)
+* [User Manual](https://cs421sp22-homework.github.io/project-team-07-blackbox/)
 * [API Documentation](https://cs421sp22-homework.github.io/project-team-07-blackbox/)
 
 ## Installing / Getting started
