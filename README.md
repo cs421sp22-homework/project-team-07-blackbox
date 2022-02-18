@@ -39,7 +39,7 @@ A quick introduction of the minimal setup you need to get the app up & running o
    cd project-team-07-blackbox\code\frontend
    npm install
    ```
-3. Open backend code and run it, make sure your Java version is 11
+3. Open backend code project from IntelliJ IDEA and run file 'project-team-07-blackbox/code/backend/src/main/java/com/stylebox/StyleBoxBackendApplication.java', make sure your Java version is 11 and install Maven.
 
 4. Run frontend with the following command. The frontent webpage is run on http://localhost:3000 in default.
 
