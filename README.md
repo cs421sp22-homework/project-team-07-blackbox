@@ -33,11 +33,17 @@ A quick introduction of the minimal setup you need to get the app up & running o
 git clone https://github.com/cs421sp22-homework/project-team-07-blackbox.git
 ```
 
-2. Install front-end dependency
+2. Install frontend dependency
 ```shell
 cd project-team-07-blackbox\code\frontend
 npm install
 ```
+
+3. Open backend code and run it, make sure your Java version is 11
+
+4. Open frontend code and run it
+
+5. Open browser, and enter localhost:8080/index
 
 ## Developing
 
