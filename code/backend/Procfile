@@ -7,4 +7,4 @@
 \pard\pardeftab720\partightenfactor0
 
 \f0\fs26 \cf0 \expnd0\expndtw0\kerning0
-web: java -Dserver.port=$\{PORT\} -jar build/libs/backend-1.0.jar}
+\outl0\strokewidth0 \strokec2 web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/backend-0.0.1-SNAPSHOT.jar}
