@@ -7,5 +7,5 @@
 \pard\pardeftab720\partightenfactor0
 
 \f0\fs26 \cf0 \expnd0\expndtw0\kerning0
-web: java -jar target/
+web: java -jar ./target/
 \f1\fs22 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 StyleBox-backend-0.0.1-SNAPSHOT.jar}
