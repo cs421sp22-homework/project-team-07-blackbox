@@ -11,12 +11,12 @@
     <groupId>com</groupId>
     <artifactId>StyleBox-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+<!--    <packaging>war</packaging>-->
     <name>StyleBox-backend</name>
     <description>Demo project for Spring Boot</description>
-    <properties>
+<!--    <properties>-->
 <!--        <java.version>8</java.version>-->
-    </properties>
+<!--    </properties>-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
