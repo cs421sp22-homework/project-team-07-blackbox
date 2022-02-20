@@ -50,42 +50,55 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
 
 ## Developing
 
-1. Install IntelliJ IDEA
+1.  Install IntelliJ IDEA
 
-   We use IntelliJ IDEA as our development IDE. It can be downloaded here: https://www.jetbrains.com/idea/.
+We use IntelliJ IDEA as our development IDE. It can be downloaded here: https://www.jetbrains.com/idea/.
 
-2. Install React
+2. Clone repository
 
-   We are using React to develop the front end. To install React, you need to install Node.js first. Node.js can be downloaded here: https://nodejs.org/en/download/.
-
-   Then, use the following commands to set up the development environment.
-
-   ```
-   npm install -g create-react-app
-   cd project-team-07-blackbox\code\frontend
-   npm install
-   ```
-
-3. Download Heroku CLI
-
-   Our web app is deployed on Heroku, installing Heroku CLI allows developers to manage Heroku apps directly from the terminal. Heroku can be installed with npm with following command. You can also refer to https://devcenter.heroku.com/articles/heroku-cli for more installing options.
-
-   ```
-   npm install -g heroku
-   ```
-
-
-
-
-
-Detailed and step-by-step documentation for setting up local development. For example, a new team member will use these instructions to start developing the project further. 
-
-```shell
-commands here
+```
+git clone https://github.com/cs421sp22-homework/project-team-07-blackbox.git
 ```
 
-You should include what is needed (e.g. all of the configurations) to set up the dev environment. For instance, global dependencies or any other tools (include download links), explaining what database (and version) has been used, etc. If there is any virtual environment, local server, ..., explain here. 
+3. Install React
 
-Additionally, describe and show how to run the tests, explain your code style and show how to check it.
+We are using React to develop the front end. To install React, you need to install Node.js first. Node.js can be downloaded here: https://nodejs.org/en/download/.
 
-If your project needs some additional steps for the developer to build the project after some code changes, state them here. Moreover, give instructions on how to build and release a new version. In case there's some step you have to take that publishes this project to a server, it must be stated here. 
+Then, use the following commands to set up the development environment.
+
+```
+npm install -g create-react-app
+cd project-team-07-blackbox\code\frontend
+npm install
+```
+
+4. Download Heroku CLI
+
+Our web app is deployed on Heroku, installing Heroku CLI allows developers to manage Heroku apps directly from the terminal. Heroku can be installed with npm with following command. You can also refer to https://devcenter.heroku.com/articles/heroku-cli for more installing options.
+
+```
+npm install -g heroku
+```
+
+5. Set your JDK version to java 1.8
+6. Install Maven from http://maven.apache.org/download.cgi
+
+The dependencies we used:
+
+```
+spring-boot-starter-web
+spring-boot-starter-tomcat
+spring-boot-starter-test
+mysql-connector-java
+spring-data-jpa
+spring-boot-starter-data-jpa
+lombok
+jasypt-spring-boot-starter
+jasypt-spring-boot
+```
+
+The database we used is Mysql on Aliyun server.
+
+We use JUnit to do the unit test. The test code can be found in ``project-team-07-blackbox/code/backend/src/test/java/com/stylebox/``.
+
+We use Github Action to deploy the frontend and backend on Heroku automatically. The link can be seen on https://stylebox5.herokuapp.com/.
