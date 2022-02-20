@@ -1,7 +1,5 @@
 # Style Box 
 
-A brief description of your project (elevator pitch goes here).
-
 The Style Box is a platform that integrates the idea of e-commerce and social network. It has three sections: ‘design for you’, ‘design for others’ and ‘favorite ootd sharing’. The Style Box lets the customer get customized clothing shopping experience, gives stylists opportunities to show their talents and maintains an active fashion community. Our platform provides one-stop service, including outfit fixing, shopping, and delivery. The customer can pick up a stylist on our website to help them select clothing items and design the outfits. The customer will get a style report and buy all the clothing items on our website. Eventually, a style box would be delivered to the customer containing all they need to become a fashion insider.
 
 **Team**
@@ -28,8 +26,6 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
 
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get the app up & running on a local computer. For example, your advisor might use the instruction here to run the application locally.
-
 1. Clone the project to your local computer
 
    ```shell
@@ -53,6 +49,34 @@ A quick introduction of the minimal setup you need to get the app up & running o
    
 
 ## Developing
+
+1. Install IntelliJ IDEA
+
+   We use IntelliJ IDEA as our development IDE. It can be downloaded here: https://www.jetbrains.com/idea/.
+
+2. Install React
+
+   We are using React to develop the front end. To install React, you need to install Node.js first. Node.js can be downloaded here: https://nodejs.org/en/download/.
+
+   Then, use the following commands to set up the development environment.
+
+   ```
+   npm install -g create-react-app
+   cd project-team-07-blackbox\code\frontend
+   npm install
+   ```
+
+3. Download Heroku CLI
+
+   Our web app is deployed on Heroku, installing Heroku CLI allows developers to manage Heroku apps directly from the terminal. Heroku can be installed with npm with following command. You can also refer to https://devcenter.heroku.com/articles/heroku-cli for more installing options.
+
+   ```
+   npm install -g heroku
+   ```
+
+
+
+
 
 Detailed and step-by-step documentation for setting up local development. For example, a new team member will use these instructions to start developing the project further. 
 
