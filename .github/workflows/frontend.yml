@@ -14,3 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Add steps to build and deploy the frontend
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "stylebox5" #Must be unique in Heroku
+          heroku_email: "BlackBoxStyleBox@gmail.com"
