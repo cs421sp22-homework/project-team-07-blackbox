@@ -4,7 +4,7 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
 
 ## User Manual
 
-Documentation for your users on how to use the app! 
+Users can visit our website here: https://stylebox5.herokuapp.com/
 
 ## API Reference
 
