@@ -20,5 +20,9 @@ public class User {
     @JsonBackReference
     private Role role;
 
+    private String email;
+    private String username;
+    private String password;
+
 
 }
