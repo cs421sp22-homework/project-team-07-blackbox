@@ -43,7 +43,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoderBean() {
+    public static PasswordEncoder passwordEncoderBean() {
         return new BCryptPasswordEncoder();
     }
 
@@ -84,7 +84,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .ignoring()
             .antMatchers(
                 HttpMethod.GET,
-                "/" //Other Stuff You want to Ignore
+                "/login" //Other Stuff You want to Ignore
             )
             .and()
             .ignoring()
