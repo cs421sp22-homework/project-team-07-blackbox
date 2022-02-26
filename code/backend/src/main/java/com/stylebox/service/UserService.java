@@ -66,8 +66,8 @@ public class UserService {
         if (!bcryptpasswordencoder.matches(password, userLogin.getPassword())) {
                 throw new Rest400Exception("Incorrect password");
         }
-        User user = userLogin.getUser();
 
+//        User user = userLogin.getUser();
 //        // 验证用户状态
 //        if (user.isDisabled()) {
 //            throw new Rest401Exception("用户被锁定，" + user.getDisabledDescription());
@@ -117,6 +117,9 @@ public class UserService {
         BCryptPasswordEncoder bcryptpasswordencoder = new BCryptPasswordEncoder();
         String encode = bcryptpasswordencoder.encode(password);
         userLogin.setPassword(encode);
+        if(registerDTO.getEmail() != null) {
+            userLogin.setEmail(registerDTO.getEmail());
+        }
         userLoginRepository.save(userLogin);
 
         userRepository.save(user);
