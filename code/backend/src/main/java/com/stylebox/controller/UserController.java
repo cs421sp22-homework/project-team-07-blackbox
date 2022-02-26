@@ -1,5 +1,6 @@
 package com.stylebox.controller;
 
+import com.stylebox.dto.JwtTokenDTO;
 import com.stylebox.dto.LoginDTO;
 import com.stylebox.dto.RegisterDTO;
 import com.stylebox.entity.user.User;
@@ -10,7 +11,10 @@ import com.stylebox.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,20 +76,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
         UserLogin userByLogin = userService.getUserByLogin(loginDTO);//通过用户名获取用户
         userService.verifyUser(loginDTO.getPassword(), userByLogin);//验证
         String token = jwtTokenUtil.generateToken(userByLogin.getUsername());//生成token
         addJWTToResponse(request, response, token);//token写入cookie
+        return ResponseEntity.ok(new JwtTokenDTO(token));
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody RegisterDTO registerDTO,
+    public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO,
                          @RequestParam(value = "role") int roleid,
                          HttpServletRequest request, HttpServletResponse response) {
         User user = userService.createUser(registerDTO, roleid);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
         addJWTToResponse(request, response, token);
+        return ResponseEntity.ok(new JwtTokenDTO(token));
     }
 
     @GetMapping("/user/logout")
@@ -93,6 +99,10 @@ public class UserController {
         addJWTToResponse(request, response, "", Duration.ofSeconds(0));
     }
 
+    @ExceptionHandler({ AuthenticationException.class })
+    public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
 
 
 }
