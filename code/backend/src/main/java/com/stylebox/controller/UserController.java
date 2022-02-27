@@ -1,9 +1,6 @@
 package com.stylebox.controller;
 
-import com.stylebox.dto.AccountDTO;
-import com.stylebox.dto.JwtTokenDTO;
-import com.stylebox.dto.LoginDTO;
-import com.stylebox.dto.RegisterDTO;
+import com.stylebox.dto.*;
 import com.stylebox.entity.user.User;
 import com.stylebox.entity.user.UserLogin;
 //import com.stylebox.jwt.JwtTokenUtil;
@@ -112,6 +109,24 @@ public class UserController {
         return accountDTO;
     }
 
+    @PostMapping("/account")
+    public void modifyAccount(HttpServletRequest request, @RequestBody AccountDTO accountDTO){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        userService.modifyAccount(user, accountDTO);
+    }
+
+    @GetMapping("/customer/profile")
+    public CustomerProfileDTO getCustomerProfile(HttpServletRequest request){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        CustomerProfileDTO customerProfileDTO = userService.getCustomerProfile(user);
+        return customerProfileDTO;
+    }
+
+    @PostMapping("/customer/profile")
+    public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        userService.createCustomerProfile(user, customerProfileDTO);
+    }
 
 }
 
