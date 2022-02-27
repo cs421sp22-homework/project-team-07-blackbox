@@ -34,4 +34,16 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private StylistInformation stylistInformation;
+
+    @Column(name="phone")
+    private String phone;
+
+    @Column(name="address")
+    private String address;
+
+    @Column(name="payment")
+    private String payment;
+
+    @Column(name="facebook")
+    private String facebook;
 }

@@ -1,5 +1,6 @@
 package com.stylebox.service;
 
+import com.stylebox.dto.AccountDTO;
 import com.stylebox.dto.LoginDTO;
 import com.stylebox.dto.RegisterDTO;
 import com.stylebox.entity.user.*;
@@ -124,5 +125,14 @@ public class UserService {
 
         userRepository.save(user);
         return user;
+    }
+
+    public AccountDTO getAccount(User user){
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setEmail(user.getUserLogin().getEmail());
+        accountDTO.setAddress(user.getAddress());
+        accountDTO.setPayment(user.getPayment());
+        accountDTO.setFacebook(user.getFacebook());
+        return accountDTO;
     }
 }

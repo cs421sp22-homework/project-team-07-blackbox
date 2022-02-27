@@ -1,5 +1,6 @@
 package com.stylebox.controller;
 
+import com.stylebox.dto.AccountDTO;
 import com.stylebox.dto.JwtTokenDTO;
 import com.stylebox.dto.LoginDTO;
 import com.stylebox.dto.RegisterDTO;
@@ -102,6 +103,13 @@ public class UserController {
     @ExceptionHandler({ AuthenticationException.class })
     public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
+
+    @GetMapping("/account")
+    public AccountDTO getAccount(HttpServletRequest request){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        AccountDTO accountDTO = userService.getAccount(user);
+        return accountDTO;
     }
 
 
