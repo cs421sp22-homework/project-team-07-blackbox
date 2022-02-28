@@ -6,6 +6,7 @@ import com.stylebox.entity.user.*;
 import com.stylebox.repository.*;
 import exception.Rest400Exception;
 import exception.Rest401Exception;
+import exception.Rest404Exception;
 import exception.Rest500Exception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class UserService {
             userLogin = userLoginRepository.findByUsername(login);
         }
         if (!userLogin.isPresent()) {
-            throw new Rest400Exception("Username does not exist");
+            throw new Rest404Exception("Username does not exist");
         }
         return userLogin.get();
     }
@@ -105,7 +106,7 @@ public class UserService {
             user.setStylistInformation(stylistInformation);
         }
         if (!role.isPresent()) {
-            throw new Rest500Exception("Incorrect role");
+            throw new Rest400Exception("Incorrect role");
         }
         user.setRole(role.get());
 
