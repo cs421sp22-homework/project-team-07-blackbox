@@ -1,12 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import HelloWorld from "./Component/HelloWorld"
-import Login from './Component/LoginComponent';
+import StyleBox from './StyleBox'
 
 function App() {
   return (
     <div className="App">
-        <Login></Login>
+        <StyleBox> </StyleBox>
     </div>
   );
 }
