@@ -9,16 +9,16 @@ class HelloWorld extends Component{
         }
     }
 
-    componentDidMount(){
-        HelloWorldService.executeHelloWorldService()
-            .then(response=>this.setState({info: response.data}))
-            .catch(error => console.log(error.response))
-    }
+    // componentDidMount(){
+    //     HelloWorldService.executeHelloWorldService()
+    //         .then(response=>this.setState({info: response.data}))
+    //         .catch(error => console.log(error.response))
+    // }
 
 
     render(){
         return(
-            <h1>{this.state.info}</h1>
+            <h1>Sample Homepage</h1>
         )
     }
 }

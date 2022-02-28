@@ -32,17 +32,23 @@ class LoginCompnent extends Component{
     // submit btn function, 调用login method in AuthenticationService.js
     loginClicked() {
         console.log('Send username ' + this.state.username + 'password ' + this.state.password)
+        // console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
+        // this.props.history.push(`/`)
+        
         
         AuthenticationService
         .executeJwtAuthenticationService(this.state.username, this.state.password)
         .then((response) => {
             // 处理前端返回的token，待写
-            console.log(response.data.token)
+            //console.log(response.data.token)
+            console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
+            this.props.history.push(`/`)
         })
         .catch(() => {
             this.setState({showSuccessMessage: false})
             this.setState({hasLoginFailed: true})
         })
+        
     }
     
 
