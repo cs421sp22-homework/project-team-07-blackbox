@@ -120,7 +120,6 @@ export default function App() {
 
 
   return (
-      // <Login/>
       <HomePage/>
       // <NavBar/>
       // <HelloWorld></HelloWorld>

@@ -130,7 +130,7 @@ export default ({
                             </CardContainer>
 
                         ))}
-                        <a href={moreLink[tabKey]} tw="mr-12 mt-4 text-pink-500">Find Out More</a>
+                        <a href={moreLink[tabKey]} tw="mr-12 mt-4 text-pink-500 hocus:text-pink-900">Find Out More</a>
                     </TabContent>
 
                 ))}
