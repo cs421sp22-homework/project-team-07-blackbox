@@ -108,6 +108,9 @@ import ThankYouPage from "ThankYouPage.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/styleBox/HomePage";
 import HelloWorld from "./components/HelloWorld";
+import Login from "./pages/Login";
+import AgencyLandingPage from "./demos/AgencyLandingPage";
+import ContactUs from "./pages/ContactUs";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -115,6 +118,7 @@ export default function App() {
 
 
   return (
+      // <Login/>
       <HomePage/>
       // <HelloWorld></HelloWorld>
     // <Router>
