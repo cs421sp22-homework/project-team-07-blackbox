@@ -48,7 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.OPTIONS).permitAll()
             .antMatchers(
                 "/login",
-                "/register"
+                "/register",
+                    "/index",
+                    "/user/logout"
             ).permitAll()
             .anyRequest().authenticated()
             .and()
@@ -78,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         // 放行哪些原始域
 //        config.addAllowedOrigin("http://localhost:8081");
-        config.addAllowedOrigin("*");
+        config.addAllowedOriginPattern("*");
         // 是否发送 Cookie
         config.setAllowCredentials(true);
         // 放行哪些请求方式

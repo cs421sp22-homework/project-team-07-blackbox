@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.Duration;
 
-@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com"})
+@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -70,6 +70,7 @@ public class UserController {
 
     @GetMapping("/index")
     public String getHelloWorld() {
+
         return "Hello World";
     }
 
