@@ -111,6 +111,8 @@ import HelloWorld from "./components/HelloWorld";
 import Login from "./pages/Login";
 import AgencyLandingPage from "./demos/AgencyLandingPage";
 import ContactUs from "./pages/ContactUs";
+import NavBar from "./components/styleBox/NavBar";
+import Footer from "./components/styleBox/Footer";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -120,6 +122,7 @@ export default function App() {
   return (
       // <Login/>
       <HomePage/>
+      // <NavBar/>
       // <HelloWorld></HelloWorld>
     // <Router>
     //   <Switch>

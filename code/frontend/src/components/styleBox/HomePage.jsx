@@ -9,7 +9,7 @@ import quizImage from "../../images/quiz.jpeg"
 import {SectionHeading as HeadingBase, Subheading} from "../misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import Features from "../features/ThreeColWithSideImage";
+import Features from "../features/ThreeColWithoutSideImage";
 import TabItemGrid from "../cards/TabItemGrid";
 import womenItem1 from "../../images/clothing-items/women/bottoms/women-bottom-1.jpeg"
 import womenItem2 from "../../images/clothing-items/women/tops/women-tops-1.png"
@@ -23,13 +23,11 @@ import kidsItem1 from "../../images/clothing-items/kids/dress/kids-dress-1.png"
 import kidsItem2 from "../../images/clothing-items/kids/tops/kids-tops-1.png"
 import kidsItem3 from "../../images/clothing-items/kids/bottoms/kids-bottoms-1.png"
 import kidsItem4 from "../../images/clothing-items/kids/dress/kids-dress-2.png"
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Row = tw.div`flex`;
-const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-700 border-gray-400 hocus:border-gray-700`;
-const PrimaryNavLink = tw(
-    NavLink
-)`text-gray-100 bg-pink-500 px-6 py-3 border-none rounded hocus:bg-pink-900 focus:shadow-inner mt-6 md:mt-4 lg:mt-0`;
+
 const HeroRow = tw(Row)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
 
 const Column = tw.div`flex-1`
@@ -103,25 +101,8 @@ class HomePage extends Component {
                     <Content2Xl>
                         <div tw="flex flex-col justify-center h-full space-y-5">
                             {/*navigate bar*/}
-                            <NavRow>
-                                <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-                                    <NavLink target="_blank"
-                                             href="#">
-                                        Stylists
-                                    </NavLink>
-                                    <NavLink target="_blank" href="#">
-                                        Shopping
-                                    </NavLink>
-                                    <NavLink target="_blank" href="#">
-                                        Community
-                                    </NavLink>
-                                    <div tw="md:hidden flex-auto h-0"></div>
-                                    <PrimaryNavLink target="_blank" href="#">
-                                        Sign In
-                                    </PrimaryNavLink>
-                                </div>
-                            </NavRow>
-
+                            <NavBar/>
+                            {/*Intro to Style Box*/}
                             <HeroRow>
                                 <TextColumn>
                                     <Heading as="h1">{this.state.heading}</Heading>
@@ -316,67 +297,7 @@ class HomePage extends Component {
                         />
                        
                     </Content2Xl>
-                    <SixColumns>
-                        <ColumnFooter tw="mt--2">
-                            <SixColumHeader>Style Box</SixColumHeader>
-                        </ColumnFooter>
-                        <ColumnFooter>
-                            <ColumnHeading>Main</ColumnHeading>
-                            <LinkList>
-                                <LinkListItem>
-                                    <Link href="#">Blog</Link>
-                                </LinkListItem>
-                                <LinkListItem>
-                                    <Link href="#">FAQs</Link>
-                                </LinkListItem>
-                                <LinkListItem>
-                                    <Link href="#">Support</Link>
-                                </LinkListItem>
-                                <LinkListItem>
-                                    <Link href="#">About Us</Link>
-                                </LinkListItem>
-                            </LinkList>
-                        </ColumnFooter>
-                        <ColumnFooter>
-                            <ColumnHeading>Shopping</ColumnHeading>
-                            <LinkList>
-                                <LinkListItem>
-                                    <Link href="#">Women</Link>
-                                </LinkListItem>
-                                <LinkListItem>
-                                    <Link href="#">Men</Link>
-                                </LinkListItem>
-                                <LinkListItem>
-                                    <Link href="#">Kids</Link>
-                                </LinkListItem>
-                            </LinkList>
-                        </ColumnFooter>
-                        <ColumnFooter>
-                            <ColumnHeading>Stylists</ColumnHeading>
-                            <LinkList>
-                                <LinkListItem>
-                                    <Link href="#">Stylists</Link>
-                                </LinkListItem>
-                            </LinkList>
-                        </ColumnFooter>
-                        <ColumnFooter>
-                            <ColumnHeading>Community</ColumnHeading>
-                            <LinkList>
-                                <LinkListItem>
-                                    <Link href="#">Community</Link>
-                                </LinkListItem>
-                            </LinkList>
-                        </ColumnFooter>
-                        <ColumnFooter>
-                            <ColumnHeading>Contact Us</ColumnHeading>
-                            <LinkList>
-                                <LinkListItem>
-                                    <div>Email: BlackBoxStyleBox@gmail.com</div>
-                                    <div tw='mt-4'>Phone: 1667910xxxx</div>
-                                </LinkListItem>
-                            </LinkList>
-                        </ColumnFooter>
-                    </SixColumns>
+                    <Footer/>
                 </Container>
             </AnimationRevealPage>
         )
