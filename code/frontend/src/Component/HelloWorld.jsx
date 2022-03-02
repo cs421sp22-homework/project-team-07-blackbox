@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import HelloWorldService from "../api/styleBox/HelloWorldService";
 import axios from 'axios';
+import AuthenticationService from '../api/styleBox/AuthenticationService';
 
 class HelloWorld extends Component{
     constructor(props){

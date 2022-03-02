@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import HelloWorldService from "../api/styleBox/HelloWorldService";
 import axios from 'axios';
+import AuthenticationService from '../api/styleBox/AuthenticationService';
 
-class Logout extends Component{
+class Homepage extends Component{
     constructor(props){
         super(props)
         this.state={
-            info: 'Logout',
+            info: 'Homepage',
         }
         this.logout = this.logout.bind(this)
     }
@@ -14,7 +15,13 @@ class Logout extends Component{
     
 
     logout(){
-        axios.get(`http://localhost:8080/user/logout`).then((response)=>{console.log(response)}).catch(()=>{console.log("error")})
+        AuthenticationService
+        .deleteAuthentication()
+        .then((response)=>{
+            console.log(response)
+            this.props.history.push(`/login`)
+        })
+        .catch(()=>{console.log("error")})
     }
 
     render(){
@@ -23,8 +30,9 @@ class Logout extends Component{
             <h1>{this.state.info}</h1>
             <p><button type='submit' className='btn btn-primary my-3' onClick={this.logout}>logout</button></p>
                 </div>
+        
         )
     }
 }
 
-export default Logout
+export default Homepage

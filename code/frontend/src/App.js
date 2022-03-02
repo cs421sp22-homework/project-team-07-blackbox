@@ -4,7 +4,8 @@ import './App.css';
 // import HelloWorld from "./Component/HelloWorld"
 // import Login from './Component/LoginComponent';
 import StyleBox from './Component/StyleBox';
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from "react-cookie";
+
 
 class App extends Component {
   render() {

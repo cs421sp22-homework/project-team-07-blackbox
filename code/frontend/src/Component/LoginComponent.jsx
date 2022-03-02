@@ -33,25 +33,14 @@ class LoginCompnent extends Component{
     // submit btn function, 调用login method in AuthenticationService.js
     loginClicked(event) {
         console.log('Send username ' + this.state.username + ' password ' + this.state.password)
-        // this.props.history.push(`/HelloWorld`)
-        
-        // axios.post(`http://localhost:8080/login`, {username: this.state.username, password: this.state.password})
-        // .then((response)=>{
-        //     console.log(response); 
-        //     this.props.history.push(`/index`)} )
-        // .catch(()=>console.log("no"))
 
-        // console.log("end")
-        // axios.get(`http://localhost:8080/index`).then((response)=>{console.log(response)})
-
-        // console.log("end")
         AuthenticationService
         .executeJwtAuthenticationService(this.state.username, this.state.password)
         .then((response) => {
             // 处理前端返回的token，待写
             console.log("yes")
             console.log(response)
-            // AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+            AuthenticationService.registerSuccessfulLoginForJwt(response.data.token)
             this.props.history.push(`/user/logout`)
             console.log("yes2")
         })
@@ -116,8 +105,8 @@ class LoginCompnent extends Component{
                                 </label>
                             </div>
                         </div>
-                            <button type='submit' className='btn btn-primary my-3' onClick={this.loginClicked}>Login</button>
-                            <input type="submit" className='btn btn-primary my-3' value="Submit" />
+                            {/* <button type='submit' className='btn btn-primary my-3' onClick={this.loginClicked}>Login</button> */}
+                            <input type="submit" className='btn btn-primary my-3' value="Login"/>
                     </form>
                 </div>
             </div>

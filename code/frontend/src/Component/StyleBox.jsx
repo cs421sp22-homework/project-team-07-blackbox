@@ -3,9 +3,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import HelloWorld from './HelloWorld'
 // import AuthenticationService from './AuthenticationService.js'
 import LoginComponent from './LoginComponent'
-import NewLogin from './NewLogin'
-import Logout from './Logout'
-
+import Homepage from './Homepage'
+import AuthenticatedRoute from './AuthenticatedRoute'
 
 class StyleBox extends Component {
     render() {
@@ -15,12 +14,10 @@ class StyleBox extends Component {
                     <>
                         {/* <HeaderComponent/> */}
                         <Switch>
-                            <Route path="/index" exact component={HelloWorld}/>
+                            <Route path="/" exact component={LoginComponent}/>
                             <Route path="/login" component={LoginComponent}/>
-                            <Route path="/newlogin" component={NewLogin}/>
-                            <Route path="/user/logout" component={Logout}/>
-                            {/* <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/> */}
-                            {/* <Route component={ErrorComponent}/> */}
+                            <AuthenticatedRoute path="/index" exact component={HelloWorld}/>
+                            <AuthenticatedRoute path="/user/logout" component={Homepage}/>
                         </Switch>
                         {/* <FooterComponent/> */}
                     </>
