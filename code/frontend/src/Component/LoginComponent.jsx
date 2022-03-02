@@ -31,7 +31,7 @@ class LoginCompnent extends Component{
     }
 
     // submit btn function, 调用login method in AuthenticationService.js
-    loginClicked() {
+    loginClicked(event) {
         console.log('Send username ' + this.state.username + ' password ' + this.state.password)
         // this.props.history.push(`/HelloWorld`)
         
@@ -61,6 +61,7 @@ class LoginCompnent extends Component{
             this.setState({hasLoginFailed: true})
             console.log("no2")
         })
+        event.preventDefault();
     }
     
 
@@ -94,7 +95,7 @@ class LoginCompnent extends Component{
 
                 <div className="alert alert-primary w-50" role="alert">
                 
-          
+                    <form onSubmit={this.loginClicked}>
                         <h1 className='my-3'>Login <span className="badge badge-secondary"></span></h1>
                         <div className='row mt-5'>
                             <label htmlFor="inputAccount" className='col-sm-2 col-form-label'>Account: </label>
@@ -116,8 +117,8 @@ class LoginCompnent extends Component{
                             </div>
                         </div>
                             <button type='submit' className='btn btn-primary my-3' onClick={this.loginClicked}>Login</button>
-
-      
+                            <input type="submit" className='btn btn-primary my-3' value="Submit" />
+                    </form>
                 </div>
             </div>
         )
