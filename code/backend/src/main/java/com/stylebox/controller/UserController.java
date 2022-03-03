@@ -1,8 +1,6 @@
 package com.stylebox.controller;
 
-import com.stylebox.dto.JwtTokenDTO;
-import com.stylebox.dto.LoginDTO;
-import com.stylebox.dto.RegisterDTO;
+import com.stylebox.dto.*;
 import com.stylebox.entity.user.User;
 import com.stylebox.entity.user.UserLogin;
 //import com.stylebox.jwt.JwtTokenUtil;
@@ -17,11 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.Duration;
 
-@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com"})
+@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -72,6 +71,7 @@ public class UserController {
 
     @GetMapping("/index")
     public String getHelloWorld() {
+
         return "Hello World";
     }
 
@@ -104,6 +104,31 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 
+    @GetMapping("/account")
+    public AccountDTO getAccount(HttpServletRequest request){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        AccountDTO accountDTO = userService.getAccount(user);
+        return accountDTO;
+    }
+
+    @PostMapping("/account")
+    public void modifyAccount(HttpServletRequest request, @RequestBody AccountDTO accountDTO){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        userService.modifyAccount(user, accountDTO);
+    }
+
+    @GetMapping("/customer/profile")
+    public CustomerProfileDTO getCustomerProfile(HttpServletRequest request){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        CustomerProfileDTO customerProfileDTO = userService.getCustomerProfile(user);
+        return customerProfileDTO;
+    }
+
+    @PostMapping("/customer/profile")
+    public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        userService.createCustomerProfile(user, customerProfileDTO);
+    }
 
 }
 

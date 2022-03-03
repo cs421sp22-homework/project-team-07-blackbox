@@ -1,5 +1,7 @@
 package com.stylebox.service;
 
+import com.stylebox.dto.AccountDTO;
+import com.stylebox.dto.CustomerProfileDTO;
 import com.stylebox.dto.LoginDTO;
 import com.stylebox.dto.RegisterDTO;
 import com.stylebox.entity.user.*;
@@ -96,11 +98,13 @@ public class UserService {
         if (roleid == 0) {
             role = roleRepository.findByName("Customer");
             CustomerInformation customerInformation = new CustomerInformation();
+            customerInformation.setUser(user);
             customerInformationRepository.save(customerInformation);
             user.setCustomerInformation(customerInformation);
         } else {
             role = roleRepository.findByName("Stylist");
             StylistInformation stylistInformation = new StylistInformation();
+            stylistInformation.setUser(user);
             stylistInformationRepository.save(stylistInformation);
             user.setStylistInformation(stylistInformation);
         }
@@ -124,5 +128,48 @@ public class UserService {
 
         userRepository.save(user);
         return user;
+    }
+
+    public AccountDTO getAccount(User user){
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setEmail(user.getUserLogin().getEmail());
+        accountDTO.setAddress(user.getAddress());
+        accountDTO.setPayment(user.getPayment());
+        accountDTO.setFacebook(user.getFacebook());
+        return accountDTO;
+    }
+
+    public void modifyAccount(User user, AccountDTO accountDTO){
+        user.getUserLogin().setEmail(accountDTO.getEmail());
+        user.setAddress(accountDTO.getAddress());
+        user.setPayment(accountDTO.getPayment());
+        user.setPhone(accountDTO.getPhone());
+        user.setFacebook(accountDTO.getFacebook());
+        userRepository.save(user);
+    }
+
+    public CustomerProfileDTO getCustomerProfile(User user){
+        CustomerProfileDTO customerProfileDTO = new CustomerProfileDTO();
+        customerProfileDTO.setGender(user.getCustomerInformation().getGender());
+        customerProfileDTO.setHeight(user.getCustomerInformation().getHeight());
+        customerProfileDTO.setWeight(user.getCustomerInformation().getWeight());
+        customerProfileDTO.setShirtSize(user.getCustomerInformation().getShirtSize());
+        customerProfileDTO.setBottomSize(user.getCustomerInformation().getBottomSize());
+        customerProfileDTO.setJeanSize(user.getCustomerInformation().getJeanSize());
+        customerProfileDTO.setShoeSize(user.getCustomerInformation().getShoeSize());
+        customerProfileDTO.setStyleSet(user.getCustomerInformation().getStyleSet());
+        return customerProfileDTO;
+    }
+
+    public void createCustomerProfile(User user, CustomerProfileDTO customerProfileDTO){
+        user.getCustomerInformation().setGender(customerProfileDTO.getGender());
+        user.getCustomerInformation().setHeight(customerProfileDTO.getHeight());
+        user.getCustomerInformation().setWeight(customerProfileDTO.getWeight());
+        user.getCustomerInformation().setShirtSize(customerProfileDTO.getShirtSize());
+        user.getCustomerInformation().setBottomSize(customerProfileDTO.getBottomSize());
+        user.getCustomerInformation().setJeanSize(customerProfileDTO.getJeanSize());
+        user.getCustomerInformation().setShoeSize(customerProfileDTO.getShoeSize());
+        user.getCustomerInformation().setStyleSet(customerProfileDTO.getStyleSet());
+        userRepository.save(user);
     }
 }
