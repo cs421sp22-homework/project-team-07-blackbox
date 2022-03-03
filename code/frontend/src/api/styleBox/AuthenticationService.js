@@ -1,17 +1,17 @@
 import axios from 'axios'
 // import cookie from 'react-cookie';
 import { API_URL } from '../../Constants'
-// import { useCookies } from 'react-cookie';
-// import { withCookies } from "react-cookie";
+import data from "bootstrap/js/src/dom/data";
+axios.defaults.withCredentials = true;
 
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'token'
-axios.defaults.withCredentials = true
-
-
+export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
 class AuthenticationService {
     
     // Login 方法传递username, password到后端
+    executeJwtAuthenticationService(usernameValue, passwordValue){
+        // let user = {username: usernameValue, password: passwordValue}
+        return axios.post(`${API_URL}/login`, {username: usernameValue, password: passwordValue},{withCredentials: true})
     executeJwtAuthenticationService(username, password){
         const data = {
             username: username,

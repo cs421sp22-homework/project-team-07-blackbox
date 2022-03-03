@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {API_URL} from "../../Constants";
+axios.defaults.withCredentials = true;
 
 class HelloWorldService{
     executeHelloWorldService(){
