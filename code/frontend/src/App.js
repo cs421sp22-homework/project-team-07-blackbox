@@ -5,6 +5,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/styleBox/HomePage";
 import Login from "./components/styleBox/Login";
+import Register from "./components/styleBox/Register"
 import AuthenticatedRoute from './components/styleBox/AuthenticatedRoute'
 import UserProfile from './components/styleBox/UserProfile'
 
@@ -20,6 +21,7 @@ export default function App() {
           <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={Login}/>
+              <Route path="/register" component={Register}/>
               <AuthenticatedRoute path="/user/profile" component={UserProfile}/>
           </Switch>
       </>
