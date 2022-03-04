@@ -1,9 +1,6 @@
 package com.stylebox.service;
 
-import com.stylebox.dto.AccountDTO;
-import com.stylebox.dto.CustomerProfileDTO;
-import com.stylebox.dto.LoginDTO;
-import com.stylebox.dto.RegisterDTO;
+import com.stylebox.dto.*;
 import com.stylebox.entity.user.*;
 import com.stylebox.repository.*;
 import exception.Rest400Exception;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import org.modelmapper.ModelMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +29,8 @@ public class UserService {
     final CustomerInformationRepository customerInformationRepository;
 
     final StylistInformationRepository stylistInformationRepository;
+
+    final ModelMapper modelMapper;
 
 //    static Pattern usernamePattern = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_-]{5,15}$");
 
@@ -172,5 +172,19 @@ public class UserService {
         user.getCustomerInformation().setShoeSize(customerProfileDTO.getShoeSize());
         user.getCustomerInformation().setStyleSet(customerProfileDTO.getStyleSet());
         userRepository.save(user);
+    }
+
+    public StylistProfileGetDTO getStylistProfile(User user) {
+        StylistProfileGetDTO stylistProfileGetDTO = modelMapper.map(user.getStylistInformation(), StylistProfileGetDTO.class);
+        modelMapper.map(user, stylistProfileGetDTO);
+        modelMapper.map(user.getUserLogin(), stylistProfileGetDTO);
+        return stylistProfileGetDTO;
+    }
+
+    public void modifyStylistProfile(User user, StylistProfileModifyDTO stylistProfileModifyDTO) {
+        modelMapper.map(stylistProfileModifyDTO, user);
+        userRepository.save(user);
+        modelMapper.map(stylistProfileModifyDTO, user.getStylistInformation());
+        stylistInformationRepository.save(user.getStylistInformation());
     }
 }

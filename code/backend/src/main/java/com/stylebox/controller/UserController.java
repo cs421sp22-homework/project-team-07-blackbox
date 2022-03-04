@@ -6,6 +6,7 @@ import com.stylebox.entity.user.UserLogin;
 //import com.stylebox.jwt.JwtTokenUtil;
 import com.stylebox.service.UserService;
 import com.stylebox.util.JwtTokenUtil;
+import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -120,14 +121,37 @@ public class UserController {
     @GetMapping("/customer/profile")
     public CustomerProfileDTO getCustomerProfile(HttpServletRequest request){
         User user = jwtTokenUtil.getUserFromRequest(request);
-        CustomerProfileDTO customerProfileDTO = userService.getCustomerProfile(user);
-        return customerProfileDTO;
+        if (!user.getRole().getName().equals("Customer")) {
+            throw new Rest400Exception("Incorrect role");
+        }
+        return userService.getCustomerProfile(user);
     }
 
     @PostMapping("/customer/profile")
     public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO){
         User user = jwtTokenUtil.getUserFromRequest(request);
+        if (!user.getRole().getName().equals("Customer")) {
+            throw new Rest400Exception("Incorrect role");
+        }
         userService.createCustomerProfile(user, customerProfileDTO);
+    }
+
+    @GetMapping("/stylist/profile")
+    public StylistProfileGetDTO getStylistProfile(HttpServletRequest request) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        if (!user.getRole().getName().equals("Stylist")) {
+            throw new Rest400Exception("Incorrect role");
+        }
+        return userService.getStylistProfile(user);
+    }
+
+    @PostMapping("/stylist/profile")
+    public void modifyStylistProfile(HttpServletRequest request, @RequestBody StylistProfileModifyDTO stylistProfileModifyDTO) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        if (!user.getRole().getName().equals("Stylist")) {
+            throw new Rest400Exception("Incorrect role");
+        }
+        userService.modifyStylistProfile(user, stylistProfileModifyDTO);
     }
 
 }

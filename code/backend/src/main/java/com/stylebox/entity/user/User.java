@@ -46,4 +46,7 @@ public class User {
 
     @Column(name="facebook")
     private String facebook;
+
+    @Column(name="nickname")
+    private String nickname;
 }
