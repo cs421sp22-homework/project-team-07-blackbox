@@ -23,7 +23,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
         PrintWriter out = response.getWriter();
         HashMap<String, String> data = new HashMap<>();
         data.put("message", HttpStatus.UNAUTHORIZED.getReasonPhrase());
-        data.put("display_message", "没有权限");
+        data.put("display_message", "unauthorized");
         out.write(new ObjectMapper().writeValueAsString(data));
         out.flush();
         out.close();

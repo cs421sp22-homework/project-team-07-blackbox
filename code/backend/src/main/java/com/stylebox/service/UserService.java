@@ -151,27 +151,12 @@ public class UserService {
     }
 
     public CustomerProfileDTO getCustomerProfile(User user){
-        CustomerProfileDTO customerProfileDTO = new CustomerProfileDTO();
-        customerProfileDTO.setGender(user.getCustomerInformation().getGender());
-        customerProfileDTO.setHeight(user.getCustomerInformation().getHeight());
-        customerProfileDTO.setWeight(user.getCustomerInformation().getWeight());
-        customerProfileDTO.setShirtSize(user.getCustomerInformation().getShirtSize());
-        customerProfileDTO.setBottomSize(user.getCustomerInformation().getBottomSize());
-        customerProfileDTO.setJeanSize(user.getCustomerInformation().getJeanSize());
-        customerProfileDTO.setShoeSize(user.getCustomerInformation().getShoeSize());
-        customerProfileDTO.setStyleSet(user.getCustomerInformation().getStyleSet());
-        return customerProfileDTO;
+        return modelMapper.map(user.getCustomerInformation(), CustomerProfileDTO.class);
     }
 
     public void createCustomerProfile(User user, CustomerProfileDTO customerProfileDTO){
-        user.getCustomerInformation().setGender(customerProfileDTO.getGender());
-        user.getCustomerInformation().setHeight(customerProfileDTO.getHeight());
-        user.getCustomerInformation().setWeight(customerProfileDTO.getWeight());
-        user.getCustomerInformation().setShirtSize(customerProfileDTO.getShirtSize());
-        user.getCustomerInformation().setBottomSize(customerProfileDTO.getBottomSize());
-        user.getCustomerInformation().setJeanSize(customerProfileDTO.getJeanSize());
-        user.getCustomerInformation().setShoeSize(customerProfileDTO.getShoeSize());
-        user.getCustomerInformation().setStyleSet(customerProfileDTO.getStyleSet());
+        modelMapper.map(customerProfileDTO, user.getCustomerInformation());
+        customerInformationRepository.save(user.getCustomerInformation());
         userRepository.save(user);
     }
 
