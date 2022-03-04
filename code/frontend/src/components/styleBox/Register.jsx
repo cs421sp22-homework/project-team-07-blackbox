@@ -151,6 +151,17 @@ class Login extends Component {
                     <p tw="mt-2 text-sm text-orange-700">{this.state.emailMessage}</p>
                     <Input type="text" name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange}/>
                     <p tw="my-2 text-sm text-orange-700">{this.state.pswMessage}</p>
+                    <div tw="grid grid-cols-2">
+                        <div>
+                            <p tw="my-2 text-sm text-black">Select register role: </p>
+                        </div>
+                        <div>
+                            <select tw="mx-2 my-2 rounded-full" name="role" value={this.state.role} onChange={this.handleChange}>
+                                <option value="0"> Customer </option>
+                                <option value="1"> Stylist </option>
+                            </select>
+                        </div>
+                    </div>
                     <SubmitButton type="submit" onClick={this.registerClicked}> Register </SubmitButton>
                   </Form>
                 </FormContainer>
