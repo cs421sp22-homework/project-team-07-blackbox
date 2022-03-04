@@ -140,7 +140,7 @@ class Login extends Component {
                   </p>
                   <p tw="mt-8 text-sm text-gray-600 text-center">
                     Dont have an account?{" "}
-                    <a href="# " tw="border-b border-gray-500 border-dotted">
+                    <a href="/register" tw="border-b border-gray-500 border-dotted">
                       Register
                     </a>
                   </p>
