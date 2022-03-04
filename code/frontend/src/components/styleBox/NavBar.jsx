@@ -28,8 +28,8 @@ class NavBar extends Component{
                         Community
                     </NavLink>
                     <div tw="md:hidden flex-auto h-0"></div>
-                    <PrimaryNavLink target="_blank" href="#">
-                        Sign In
+                    <PrimaryNavLink target="_blank" href="/login">
+                        Login
                     </PrimaryNavLink>
                 </div>
             </NavRow>
