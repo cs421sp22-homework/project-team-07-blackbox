@@ -105,16 +105,18 @@ import ComponentRenderer from "ComponentRenderer.js";
 import MainLandingPage from "MainLandingPage.js";
 import ThankYouPage from "ThankYouPage.js";
 
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/styleBox/HomePage";
 import HelloWorld from "./components/HelloWorld";
-import AgencyLandingPage from "./demos/AgencyLandingPage"
-import EventLandingPage from "./demos/EventLandingPage"
-import HostingCloudLandingPage from "./demos/HostingCloudLandingPage"
-import RestaurantLandingPage from "./demos/RestaurantLandingPage"
-import SaaSProductLandingPage from "./demos/SaaSProductLandingPage"
-import StyleProfile from"./components/styleBox/StyleProfile"
+import Login from "./pages/Login";
+import AgencyLandingPage from "./demos/AgencyLandingPage";
+import ContactUs from "./pages/ContactUs";
+import NavBar from "./components/styleBox/NavBar";
+import Footer from "./components/styleBox/Footer";
+import Quiz from "./components/styleBox/Quiz";
+import StyleProfile from"./components/styleBox/StyleProfile";
+import AccountSetting from "./components/styleBox/AccountSetting"
+import CustomerProfile from"./components/styleBox/CustomerProfile"
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -122,8 +124,9 @@ export default function App() {
 
 
   return (
-    <StyleProfile></StyleProfile>
-      // <HelloWorld></HelloWorld>
+      <StyleProfile/>
+      // <HomePage/>
+      // <NavBar/>
     // <Router>
     //   <Switch>
     //     <Route path="/components/:type/:subtype/:name">

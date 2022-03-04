@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading as HeadingTitle } from "../misc/Headings.js";
+//import { SectionHeading as HeadingTitle } from "../misc/Headings.js";
 import { ReactComponent as QuotesLeftIcon } from "../../images/quotes-l.svg";
 import { ReactComponent as QuotesRightIcon } from "../../images/quotes-r.svg";
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.svg";
@@ -13,10 +13,11 @@ import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-
 
 import "slick-carousel/slick/slick.css";
 
+const HeadingTitle =  tw.h2`text-4xl sm:text-5xl font-black tracking-wide text-center`
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 const HeadingInfoContainer = tw.div`flex flex-col items-center`;
-const HeadingDescription = tw.p`mt-4 font-medium text-gray-600 text-center max-w-sm`;
+const HeadingDescription = tw.p`mt-2 font-medium text-gray-600 text-center max-w-sm`;
 
 const TestimonialSliderContainer = tw.div`mt-24`;
 const TestimonialSlider = styled(Slider)``;
@@ -29,14 +30,15 @@ const ImageContainer = styled.div`
 `;
 const TextContainer = tw.div`md:mx-3 lg:mx-6 md:w-6/12 py-4 flex flex-col justify-between`;
 const QuoteContainer = tw.div`relative p-6 md:p-8 lg:p-10 mt-4 md:mt-0`;
-const Quote = tw.blockquote`text-center md:text-left font-medium text-xl lg:text-2xl xl:text-3xl`;
+const Quote = tw.blockquote`text-center md:text-left font-medium text-xl lg:text-xl xl:text-xl`;
 const CustomerInfo = tw.div`px-5 lg:px-10 text-center md:text-left mt-4 md:mt-0`;
-const StylistName = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-primary-500`;
-const StylistTitle = tw.p`font-medium text-sm`;
-const CustomerTitle = tw.p`font-medium text-sm`;
-const CustomerName = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-primary-500`;
-const FollowerNumTitle = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-primary-500`;
-const FollowerNum = tw.p`font-medium text-sm`;
+const CustomerTitle = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
+const CustomerName = tw.h5`font-bold text-lg lg:text-xl xl:text-xl text-primary-500`;
+const FollowerNumTitle = tw.h5`font-bold text-xl lg:text-xl xl:text-xl text-primary-500`;
+const FollowerNum = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
+
+
+
 
 
 const QuotesLeft = tw(QuotesLeftIcon)`w-8 h-8 lg:w-10 lg:h-10 text-primary-500 absolute top-0 left-0`;
@@ -131,26 +133,47 @@ export default () => {
                     <QuotesRight />
                   </QuoteContainer>
                   <CustomerInfo>
-                    <CustomerName>{testimonial.customerName}</CustomerName>
-                    <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
-                    <FollowerNumTitle>{testimonial.FollowerNumTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.FollowerNum}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.LikeNumTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.LikeNum}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.RateTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Rate}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.StyleTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Style}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.NicknameTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Nickname}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.AgeTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Age}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.GenderTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Gender}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.EmailTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Email}</FollowerNum>
-                    <FollowerNumTitle>{testimonial.FacebookTitle}</FollowerNumTitle>
-                    <FollowerNum>{testimonial.Facebook}</FollowerNum>
+                    <div className="grid grid-cols-2">
+                        <CustomerName>{testimonial.customerName}</CustomerName>
+                        <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.FollowerNumTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.FollowerNum}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.LikeNumTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.LikeNum}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.RateTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Rate}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.StyleTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Style}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.NicknameTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Nickname}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.AgeTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Age}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.GenderTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Gender}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.EmailTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Email}</FollowerNum>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <FollowerNumTitle>{testimonial.FacebookTitle}</FollowerNumTitle>
+                        <FollowerNum>{testimonial.Facebook}</FollowerNum>
+                    </div>
+
                   </CustomerInfo>
                 </TextContainer>
               </Testimonial>
