@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -37,10 +37,6 @@ const CustomerName = tw.h5`font-bold text-lg lg:text-xl xl:text-xl text-primary-
 const FollowerNumTitle = tw.h5`font-bold text-xl lg:text-xl xl:text-xl text-primary-500`;
 const FollowerNum = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
 
-
-
-
-
 const QuotesLeft = tw(QuotesLeftIcon)`w-8 h-8 lg:w-10 lg:h-10 text-primary-500 absolute top-0 left-0`;
 const QuotesRight = tw(QuotesRightIcon)`w-8 h-8 lg:w-10 lg:h-10 text-primary-500 absolute bottom-0 right-0`;
 
@@ -76,113 +72,118 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;
 
-export default () => {
-  /*
-   * You can modify the testimonials shown by modifying the array below
-   * You can add or remove objects from the array as you need.
-   */
-  const testimonials = [
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      quote:
-        "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
-      customerName: "UserName:",
-      customerTitle: "Charlotte Hale",
-      FollowerNumTitle: "FollowerNum:",
-      FollowerNum:"9000",
-      LikeNumTitle:"LikeNum:",
-      LikeNum:"3000",
-      RateTitle:"Rate:",
-      Rate: "5.0",
-      StyleTitle:"Style:",
-      Style:"Casual",
-      NicknameTitle:"Nickname:",
-      Nickname: "Charlotte",
-      AgeTitle:"Age:",
-      Age: "23",
-      GenderTitle:"Gender:",
-      Gender: "Female",
-      EmailTitle:"Email:",
-      Email:"Charlotte@stylebox.com",
-      FacebookTitle:"Facebook:",
-      Facebook:"Charlotte_Stylist"
+class StylistProfileImageIntro extends Component{
+  constructor(props){
+    super(props)
 
+    this.state = {
+      // parameter
+      testimonials: [{
+        imageSrc:
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+        quote:
+          "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
+        customerName: "UserName:",
+        customerTitle: "Charlotte Hale",
+        FollowerNumTitle: "FollowerNum:",
+        FollowerNum:"9000",
+        LikeNumTitle:"LikeNum:",
+        LikeNum:"3000",
+        RateTitle:"Rate:",
+        Rate: "5.0",
+        StyleTitle:"Style:",
+        Style:"Casual",
+        NicknameTitle:"Nickname:",
+        Nickname: "Charlotte",
+        AgeTitle:"Age:",
+        Age: "23",
+        GenderTitle:"Gender:",
+        Gender: "Female",
+        EmailTitle:"Email:",
+        Email:"Charlotte@stylebox.com",
+        FacebookTitle:"Facebook:",
+        Facebook:"Charlotte_Stylist"
+    }]}
+      
 
+    // method part
+  }
 
-    }
-  ];
-  return (
-    <Container>
-      <Content>
-        <HeadingInfoContainer>
-          <HeadingTitle>Stylist Profile</HeadingTitle>
-          <HeadingDescription></HeadingDescription>
-        </HeadingInfoContainer>
-        <TestimonialSliderContainer>
-          <TestimonialSlider nextArrow={<NextArrow />} prevArrow={<PreviousArrow />}>
-            {testimonials.map((testimonial, index) => (
-              <Testimonial key={index}>
-                <ImageContainer>
-                  <img src={testimonial.imageSrc} alt={testimonial.customerName} />
-                </ImageContainer>
-                <TextContainer>
-                  <QuoteContainer>
-                    <QuotesLeft />
-                    <Quote>{testimonial.quote}</Quote>
-                    <QuotesRight />
-                  </QuoteContainer>
-                  <CustomerInfo>
-                    <div className="grid grid-cols-2">
-                        <CustomerName>{testimonial.customerName}</CustomerName>
-                        <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.FollowerNumTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.FollowerNum}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.LikeNumTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.LikeNum}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.RateTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Rate}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.StyleTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Style}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.NicknameTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Nickname}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.AgeTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Age}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.GenderTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Gender}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.EmailTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Email}</FollowerNum>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <FollowerNumTitle>{testimonial.FacebookTitle}</FollowerNumTitle>
-                        <FollowerNum>{testimonial.Facebook}</FollowerNum>
-                    </div>
+  render(){
+    return (
+      <Container>
+        <Content>
+          <HeadingInfoContainer>
+            <HeadingTitle>Stylist Profile</HeadingTitle>
+            <HeadingDescription></HeadingDescription>
+          </HeadingInfoContainer>
+          <TestimonialSliderContainer>
+            <TestimonialSlider nextArrow={<NextArrow />} prevArrow={<PreviousArrow />}>
+              {this.state.testimonials.map((testimonial, index) => (
+                <Testimonial key={index}>
+                  <ImageContainer>
+                    <img src={testimonial.imageSrc} alt={testimonial.customerName} />
+                  </ImageContainer>
+                  <TextContainer>
+                    <QuoteContainer>
+                      <QuotesLeft />
+                      <Quote>{testimonial.quote}</Quote>
+                      <QuotesRight />
+                    </QuoteContainer>
+                    <CustomerInfo>
+                      <div className="grid grid-cols-2">
+                          <CustomerName>{testimonial.customerName}</CustomerName>
+                          <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.FollowerNumTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.FollowerNum}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.LikeNumTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.LikeNum}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.RateTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Rate}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.StyleTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Style}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.NicknameTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Nickname}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.AgeTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Age}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.GenderTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Gender}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.EmailTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Email}</FollowerNum>
+                      </div>
+                      <div className="grid grid-cols-2">
+                          <FollowerNumTitle>{testimonial.FacebookTitle}</FollowerNumTitle>
+                          <FollowerNum>{testimonial.Facebook}</FollowerNum>
+                      </div>
 
-                  </CustomerInfo>
-                </TextContainer>
-              </Testimonial>
-            ))}
-          </TestimonialSlider>
-        </TestimonialSliderContainer>
-      </Content>
-      <DecoratorBlob1 />
-      <DecoratorBlob2 />
-    </Container>
-  );
-};
+                    </CustomerInfo>
+                  </TextContainer>
+                </Testimonial>
+              ))}
+            </TestimonialSlider>
+          </TestimonialSliderContainer>
+        </Content>
+        <DecoratorBlob1 />
+        <DecoratorBlob2 />
+      </Container>
+    )
+  }
+}
+
+export default StylistProfileImageIntro
