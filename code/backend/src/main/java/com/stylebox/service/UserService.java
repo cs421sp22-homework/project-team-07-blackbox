@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.modelmapper.ModelMapper;
 
@@ -182,6 +183,23 @@ public class UserService {
     }
 
     public void modifyStylistProfile(User user, StylistProfileModifyDTO stylistProfileModifyDTO) {
+//        Set<String> styleList = stylistProfileModifyDTO.getStyle();
+//        for (String s : styleList) {
+//            // 从tag数据库里根据当前tag找到对应的tag
+//            Optional<Tag> tagByName = tagRepository.findByName(s);
+//            // 如果在数据库中存在当前tag，就保存到当前paper的tag中
+//            // 如果数据库中不存在当前tag，就先新建当前tag，保存至数据库中，再把新建的tag保存到当前paper的tag里
+//            if (tagByName.isPresent()) {
+//                paper.addTag(tagByName.get());
+//            } else {
+//                Tag tag = new Tag();
+//                tag.setName(s);
+//                tag.setDisplayName(s);
+//                //category.getPaper().add(paper);
+//                tagRepository.saveAndFlush(tag);
+//                paper.addTag(tagRepository.findTagByName(s));
+//            }
+//        }
         modelMapper.map(stylistProfileModifyDTO, user);
         userRepository.save(user);
         modelMapper.map(stylistProfileModifyDTO, user.getStylistInformation());

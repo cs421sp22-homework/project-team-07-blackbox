@@ -11,5 +11,5 @@ public class StylistProfileModifyDTO {
     private String photo;
     private String intro;
     private String gender;
-    private Set<Style> style;
+    private Set<String> style;
 }
