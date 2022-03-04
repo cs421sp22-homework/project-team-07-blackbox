@@ -1,6 +1,5 @@
 import axios from 'axios'
-import {API_URL} from "../../Constants";
-axios.defaults.withCredentials = true;
+import {API_URL} from "../../Constants"
 
 class HelloWorldService{
     executeHelloWorldService(){

@@ -1,42 +1,45 @@
 import axios from 'axios'
-// import cookie from 'react-cookie';
 import { API_URL } from '../../Constants'
-import data from "bootstrap/js/src/dom/data";
-axios.defaults.withCredentials = true;
-
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
+import cookie from 'react-cookies'
 
 class AuthenticationService {
     
     // Login 方法传递username, password到后端
     executeJwtAuthenticationService(usernameValue, passwordValue){
-        // let user = {username: usernameValue, password: passwordValue}
-        return axios.post(`${API_URL}/login`, {username: usernameValue, password: passwordValue},{withCredentials: true})
-    executeJwtAuthenticationService(username, password){
-        const data = {
-            username: username,
-            password: password
-          };
-        console.log("here!")
-        return axios.post(`${API_URL}/login`,
-            data
-        )
+        let user = {username: usernameValue, password: passwordValue}
+        return axios.post(`${API_URL}/login`, user, {withCredentials: true})
     }
 
-    // 处理前端返回的token方法，代写
-    registerSuccessfulLoginForJwt(token){
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, token)
+    // Register
+    registerUtil(usernameValue, emailValue, passwordValue, role){
+        let user = {username: usernameValue, email: emailValue, password: passwordValue}
+        return axios.post(`${API_URL}/register`, {user, role}, {withCredentials: true})
     }
 
-    isUserLoggedIn(){
-        let token = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
-        if(token===null) return false
+    // Login / register successful -> register成功后自动login
+    loginSuccessfulRegister(token){
+        this.setupAxiosInterceptors(token)
+    }
+
+    // 判断用户是否登录，通过cookie
+    isUserLoggedIn() {
+        let token = cookie.load('jwt')
+        if (token === undefined) {
+            return false
+        }
         return true
     }
 
-    deleteAuthentication(){
-        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
-        return axios.get(`${API_URL}/user/logout`)
+    // Create Interceptors
+    setupAxiosInterceptors(token){
+        axios.interceptors.request.use(
+            (config) => {
+                if (this.isUserLoggedIn()){
+                    config.headers.authorization = token
+                }
+                return config
+            }
+        )
     }
 
 
