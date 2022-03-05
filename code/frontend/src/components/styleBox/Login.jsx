@@ -95,6 +95,7 @@ class Login extends Component {
   loginClicked(event) {
       console.log('Send username ' + this.state.username + 'password ' + this.state.password)
   
+      event.preventDefault();
       AuthenticationService
       .executeJwtAuthenticationService(this.state.username, this.state.password)
       .then((response) => {
@@ -103,7 +104,7 @@ class Login extends Component {
               alert('Login successful !')
               console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
               AuthenticationService.loginSuccessfulRegister(cookie.load)
-              this.props.history.push(`/user/profile`, this.state.username)
+              this.props.history.push(`/stylist/profile`)
           }            
       })
       .catch((error) => {
@@ -111,7 +112,7 @@ class Login extends Component {
           this.setState({hasLoginFailed: true})
           alert(error.response.data.displayMessage)
       })
-      event.preventDefault();
+      
   }
   
   // -----------------Render--------------------
