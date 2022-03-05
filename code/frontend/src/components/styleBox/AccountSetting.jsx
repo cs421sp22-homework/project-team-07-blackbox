@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import QuizForm from "./QuizForm";
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
-
+import AccountSettingService from "../../api/styleBox/AccountSettingService";
 
 class AccountSetting extends Component{
     constructor(props) {
@@ -10,14 +10,14 @@ class AccountSetting extends Component{
 
         this.state={
             // account information
-           username："Choral"，
+           username:"Choral",
            email:"Choral@gmail.com",
            phone:"4423455645",
            address:"3501 Saint Paul Street",
            payment:"34131242",
-           facebook:"Choralove"，
-           nickname："Chorl",
-           edit = false
+           facebook:"Choralove",
+           nickname:"Chorl",
+           edit:false
 
         }
     }
@@ -83,7 +83,7 @@ class AccountSetting extends Component{
         this.redirect();
     }
 
-    AccountSettingService.getHomepage({
+    AccountSettingService.getHomepage()
     .then(response=>this.setState({
         username: response.data.username,
         address: response.data.address,
@@ -95,7 +95,8 @@ class AccountSetting extends Component{
 
     }))
     .catch(error => console.log(error.response))
-    }
+
+
 
 
 

@@ -124,7 +124,7 @@ export default function App() {
 
 
   return (
-      <AccountSetting/>
+      <CustomerProfile/>
       // <HomePage/>
       // <NavBar/>
     // <Router>

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import QuizForm from "./QuizForm";
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
+import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
 
 
 class CustomerProfile extends Component{
