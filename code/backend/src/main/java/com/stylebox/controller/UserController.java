@@ -48,7 +48,7 @@ public class UserController {
         ResponseCookie cookie;
         if (null != origin && origin.contains("davidz.cn")) {
             cookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)
+//                    .httpOnly(true)
                     .secure(false)
                     .path("/")
                     .maxAge(maxAge)
@@ -57,7 +57,7 @@ public class UserController {
                     .build();
         } else {
             cookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)
+//                    .httpOnly(true)
                     .secure(false)
                     .path("/")
                     .maxAge(maxAge)
