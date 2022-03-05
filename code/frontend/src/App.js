@@ -114,7 +114,7 @@ import ContactUs from "./pages/ContactUs";
 import NavBar from "./components/styleBox/NavBar";
 import Footer from "./components/styleBox/Footer";
 import Quiz from "./components/styleBox/Quiz";
-import StyleProfile from"./components/styleBox/StyleProfile";
+import StylistProfile from"./components/styleBox/StylistProfile";
 import AccountSetting from "./components/styleBox/AccountSetting"
 import CustomerProfile from"./components/styleBox/CustomerProfile"
 
@@ -124,7 +124,7 @@ export default function App() {
 
 
   return (
-      <StyleProfile/>
+      <StylistProfile/>
       // <HomePage/>
       // <NavBar/>
     // <Router>
