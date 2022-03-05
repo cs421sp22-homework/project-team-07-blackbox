@@ -8,8 +8,8 @@ import java.util.Set;
 @Data
 public class CustomerProfileDTO {
     private String gender;
-    private String ft;
-    private String in;
+    private String ftSize;
+    private String inSize;
     private String weight;
     private String shirtSize;
     private String bottomSize;
