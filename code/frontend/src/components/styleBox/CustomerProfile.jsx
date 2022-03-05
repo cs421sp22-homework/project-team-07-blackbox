@@ -10,16 +10,16 @@ class CustomerProfile extends Component{
         super(props);
 
         this.state={
-            gender="Female",
-            ftSize="23",
-            inSize="20",
-            weight="60",
-            shirtSize="80",
-            bottomSize="20",
-            jeanSize="40",
-            shoeSize="35",
-            style=["casual, business"],
-            edit = false,
+            gender:"Female",
+            ftSize:"23",
+            inSize:"20",
+            weight:"60",
+            shirtSize:"80",
+            bottomSize:"20",
+            jeanSize:"40",
+            shoeSize:"35",
+            style:["casual, business"],
+            edit : false,
         }
     }
     //componentDidMount(){
