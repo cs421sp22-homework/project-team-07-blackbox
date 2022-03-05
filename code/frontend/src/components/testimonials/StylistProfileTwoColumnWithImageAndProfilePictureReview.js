@@ -13,6 +13,7 @@ import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-5.svg";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
+import StylistProfileImageIntro from "./StylistProfileImageIntro.js";
 
 import "slick-carousel/slick/slick.css";
 
@@ -79,30 +80,30 @@ export default ({
    * You can modify the testimonials shown by modifying the array below or passing in the testimonials prop above
    * You can add or remove objects from the array as you need.
    */
-  const defaultTestimonials = [
+  let display = [
     {
-      imageSrc:
+      image:
         PastDesign1,
       profileImageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      quote:
+      idea:
         "The design is in casual style. A simple white sweater with colored trousers makes the overall match harmonious and not too complicated. The black bag contrasts sharply with the white sweater. ",
       customerName: "Charlotte Hale",
       customerTitle: "Stylist"
     },
     {
-      imageSrc:
+      image:
         PastDesign2,
       profileImageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      quote:
+      idea:
         "The white sweater is very simple and refreshing. Pants full of flowers make you feel spring. The brown backpack is classic and playful. The casual look is simple but eye-catching.",
       customerName: "Charlotte Hale",
       customerTitle: "Stylist"
     }
   ];
 
-  if (!testimonials || testimonials.length === 0) testimonials = defaultTestimonials;
+  if (!testimonials || testimonials.length === 0) testimonials = display;
 
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [imageSliderRef, setImageSliderRef] = useState(null);
@@ -118,7 +119,7 @@ export default ({
               <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
                 {testimonials.map((testimonial, index) => (
                   <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.imageSrc}/>
+                    <Image src={testimonial.image}/>
                     <ControlContainer>
                       <ControlButton onClick={imageSliderRef?.slickPrev}>
                         <ChevronLeftIcon />
@@ -138,7 +139,7 @@ export default ({
                       <QuoteContainer>
                         <Quote>
                           <QuotesLeft />
-                          {testimonial.quote}
+                          {testimonial.idea}
                           <QuotesRight />
                         </Quote>
                       </QuoteContainer>
