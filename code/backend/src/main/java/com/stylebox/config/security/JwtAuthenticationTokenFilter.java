@@ -26,14 +26,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        // 1. 从请求中中获取 jwt
+        // 1. Get the JWT from the request
         String jwt = jwtTokenUtil.getJWTFromRequest(httpServletRequest);
-        // 2. 验证 jwt
+        // 2. validate jwt
         if (null != jwt) {
             Long userId = jwtTokenUtil.getUserIdFromToken(jwt);
             Optional<User> user = userRepository.findById(userId);
             if (user.isPresent()) {
-                // 3. 设置 Authentication 认证 TODO: hack
+                // 3. Authentication
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(null, null, null);
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

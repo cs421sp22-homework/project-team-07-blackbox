@@ -9,4 +9,5 @@ public class AccountDTO {
     private String address;
     private String payment;
     private String facebook;
+    private String nickname;
 }

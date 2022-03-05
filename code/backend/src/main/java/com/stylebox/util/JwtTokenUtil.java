@@ -39,11 +39,6 @@ public class JwtTokenUtil {
     @Value("${jwt.token.expiration.in.seconds}")
     private Long expiration;
 
-    /**
-     * 根据用户信息生成 token
-     *
-     * @return token
-     */
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, username);
@@ -61,13 +56,6 @@ public class JwtTokenUtil {
         return new Date(createdDate.getTime() + expiration * 1000);
     }
 
-
-    /**
-     * 从 token 中获取用户名
-     *
-     * @param token jwt
-     * @return userId
-     */
     public Long getUserIdFromToken(String token) {
         Long userId;
         try {
@@ -80,12 +68,6 @@ public class JwtTokenUtil {
         return userId;
     }
 
-    /**
-     * 从 token 中获取荷载
-     *
-     * @param token jwt
-     * @return claims
-     */
     private Claims getClaimsFromToken(String token) {
         Claims claims = null;
         try {
@@ -99,12 +81,6 @@ public class JwtTokenUtil {
         return claims;
     }
 
-    /**
-     * 根据荷载生成 jwt token
-     *
-     * @param claims 载荷
-     * @return token
-     */
     private String generateToken(Map<String, Object> claims) {
         return Jwts.builder()
             .setClaims(claims)
@@ -112,12 +88,6 @@ public class JwtTokenUtil {
             .compact();
     }
 
-    /**
-     * 从请求中获得 jwt
-     *
-     * @param request 请求
-     * @return jwt token
-     */
     public String getJWTFromRequest(HttpServletRequest request) {
         Cookie[] cookieList = request.getCookies();
         String jwt = null;
@@ -135,12 +105,12 @@ public class JwtTokenUtil {
     public User getUserFromRequest(HttpServletRequest request) {
         String jwt = getJWTFromRequest(request);
         if (null == jwt) {
-            throw new Rest400Exception("jwt为空");
+            throw new Rest400Exception("jwt is null");
         }
         Long userId = getUserIdFromToken(jwt);
         Optional<User> user = userRepository.findById(userId);
         if (!user.isPresent()) {
-            throw new Rest400Exception("jwt错误");
+            throw new Rest400Exception("incorrect jwt");
         }
         return user.get();
     }

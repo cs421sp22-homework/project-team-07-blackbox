@@ -138,18 +138,13 @@ public class UserService {
     public AccountDTO getAccount(User user){
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setEmail(user.getUserLogin().getEmail());
-        accountDTO.setAddress(user.getAddress());
-        accountDTO.setPayment(user.getPayment());
-        accountDTO.setFacebook(user.getFacebook());
+        modelMapper.map(user, accountDTO);
         return accountDTO;
     }
 
     public void modifyAccount(User user, AccountDTO accountDTO){
         user.getUserLogin().setEmail(accountDTO.getEmail());
-        user.setAddress(accountDTO.getAddress());
-        user.setPayment(accountDTO.getPayment());
-        user.setPhone(accountDTO.getPhone());
-        user.setFacebook(accountDTO.getFacebook());
+        modelMapper.map(accountDTO, user);
         userRepository.save(user);
     }
 

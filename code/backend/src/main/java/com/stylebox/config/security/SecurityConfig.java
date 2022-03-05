@@ -74,22 +74,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        // 1. 添加 CORS配置信息
+        // 1. Example Add CORS configuration information
         CorsConfiguration config = new CorsConfiguration();
-        // 放行哪些原始域
+        // Which origin are allowed
 //        config.addAllowedOrigin("http://localhost:8081");
         config.addAllowedOriginPattern("*");
-        // 是否发送 Cookie
+        // whether to send Cookie
         config.setAllowCredentials(true);
-        // 放行哪些请求方式
+        // which request method are allowed
         config.addAllowedMethod("*");
-        // 放行哪些原始请求头部信息
+        // Which original request headers are allowed
         config.addAllowedHeader("*");
-        // 暴露哪些头部信息
+        // Which original request headers are exposed
         config.addExposedHeader("*");
-        // 设置过期时间(10分钟)
+        // Setting the Expiration Time (10 minutes)
         config.setMaxAge(600L);
-        // 2. 添加映射路径
+        // 2. Adding a Mapping Path
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**", config);
         return corsConfigurationSource;

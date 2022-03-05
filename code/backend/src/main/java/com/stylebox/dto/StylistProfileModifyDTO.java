@@ -7,7 +7,6 @@ import java.util.Set;
 
 @Data
 public class StylistProfileModifyDTO {
-    private String nickname;
     private String photo;
     private String intro;
     private String gender;

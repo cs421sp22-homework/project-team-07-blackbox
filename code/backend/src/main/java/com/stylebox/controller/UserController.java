@@ -35,12 +35,12 @@ public class UserController {
 //        return userService.verify(loginDTO);
 //    }
     /**
-     * 添加 jwt 到响应中
+     * addJWTToResponse
      *
-     * @param request  请求
-     * @param response 响应
+     * @param request  request
+     * @param response response
      * @param token    jwt token
-     * @param maxAge   过期时间
+     * @param maxAge   expiration time
      */
     public static void addJWTToResponse(HttpServletRequest request, HttpServletResponse response, String token, Duration maxAge) {
         String origin = request.getHeader("Origin");
@@ -108,8 +108,7 @@ public class UserController {
     @GetMapping("/account")
     public AccountDTO getAccount(HttpServletRequest request){
         User user = jwtTokenUtil.getUserFromRequest(request);
-        AccountDTO accountDTO = userService.getAccount(user);
-        return accountDTO;
+        return userService.getAccount(user);
     }
 
     @PostMapping("/account")
