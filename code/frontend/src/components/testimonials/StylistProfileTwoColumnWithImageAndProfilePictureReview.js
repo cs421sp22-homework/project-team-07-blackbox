@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -16,6 +16,7 @@ import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
 import StylistProfileImageIntro from "./StylistProfileImageIntro.js";
 
 import "slick-carousel/slick/slick.css";
+
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
@@ -69,100 +70,10 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;
 
-export default ({
-  subheading = "",
-  heading = "Past Design",
-  description = "Here are the design overview and the design idea of each past design of the stylist.",
-  testimonials = null,
-  textOnLeft = false
-}) => {
-  /*
-   * You can modify the testimonials shown by modifying the array below or passing in the testimonials prop above
-   * You can add or remove objects from the array as you need.
-   */
-  let display = [
-    {
-      image:
-        PastDesign1,
-      profileImageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      idea:
-        "The design is in casual style. A simple white sweater with colored trousers makes the overall match harmonious and not too complicated. The black bag contrasts sharply with the white sweater. ",
-      customerName: "Charlotte Hale",
-      customerTitle: "Stylist"
-    },
-    {
-      image:
-        PastDesign2,
-      profileImageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      idea:
-        "The white sweater is very simple and refreshing. Pants full of flowers make you feel spring. The brown backpack is classic and playful. The casual look is simple but eye-catching.",
-      customerName: "Charlotte Hale",
-      customerTitle: "Stylist"
-    }
-  ];
-
-  if (!testimonials || testimonials.length === 0) testimonials = display;
-
-  // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
-  const [imageSliderRef, setImageSliderRef] = useState(null);
-  const [textSliderRef, setTextSliderRef] = useState(null);
-
-  return (
-    <Container>
-      <Content>
-        <HeadingInfo tw="text-center lg:hidden" subheading={subheading} heading={heading} description={description} />
-        <TestimonialsContainer>
-          <Testimonials>
-            <Testimonial>
-              <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
-                {testimonials.map((testimonial, index) => (
-                  <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.image}/>
-                    <ControlContainer>
-                      <ControlButton onClick={imageSliderRef?.slickPrev}>
-                        <ChevronLeftIcon />
-                      </ControlButton>
-                      <ControlButton onClick={imageSliderRef?.slickNext}>
-                        <ChevronRightIcon />
-                      </ControlButton>
-                    </ControlContainer>
-                  </ImageAndControlContainer>
-                ))}
-              </TestimonialImageSlider>
-              <TextContainer textOnLeft={textOnLeft}>
-                <HeadingInfo tw="hidden lg:block" subheading={subheading} heading={heading} description={description} />
-                <TestimonialTextSlider arrows={false} ref={setTextSliderRef} asNavFor={imageSliderRef} fade={true}>
-                  {testimonials.map((testimonial, index) => (
-                    <TestimonialText key={index}>
-                      <QuoteContainer>
-                        <Quote>
-                          <QuotesLeft />
-                          {testimonial.idea}
-                          <QuotesRight />
-                        </Quote>
-                      </QuoteContainer>
-                      <CustomerInfo>
-                        <CustomerProfilePicture src={testimonial.profileImageSrc} alt={testimonial.customerName} />
-                        <CustomerTextInfo>
-                          <CustomerName>{testimonial.customerName}</CustomerName>
-                          <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
-                        </CustomerTextInfo>
-                      </CustomerInfo>
-                    </TestimonialText>
-                  ))}
-                </TestimonialTextSlider>
-              </TextContainer>
-            </Testimonial>
-          </Testimonials>
-        </TestimonialsContainer>
-      </Content>
-      <DecoratorBlob1 />
-      <DecoratorBlob2 />
-    </Container>
-  );
-};
+const imageSliderRef = null, setImageSliderRef = null, textSliderRef = null, setTextSliderRef = null;
+/*
+const [imageSliderRef, setImageSliderRef] = useState(null);
+const [textSliderRef, setTextSliderRef] = useState(null);*/
 
 const HeadingInfo = ({ subheading, heading, description, ...props }) => (
   <div {...props}>
@@ -171,3 +82,80 @@ const HeadingInfo = ({ subheading, heading, description, ...props }) => (
     <Description>{description}</Description>
   </div>
 );
+
+class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      subheading: "",
+      heading: "Past Design",
+      description: "Here are the design overview and the design idea of each past design of the stylist.",
+      testimonials: null,
+      textOnLeft: false,
+      profileImageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+      customerName: "Charlotte Hale",
+      customerTitle: "Stylist",
+      
+    }
+  }
+  render(){
+    return (
+      <Container>
+        <Content>
+          <HeadingInfo tw="text-center lg:hidden" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
+          <TestimonialsContainer>
+            <Testimonials>
+              <Testimonial>
+                <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
+                  {this.props.display.map((testimonial, index) => (
+                    <ImageAndControlContainer key={index}>
+                      <Image src={testimonial.image}/>
+                      <ControlContainer>
+                        <ControlButton onClick={imageSliderRef?.slickPrev}>
+                          <ChevronLeftIcon />
+                        </ControlButton>
+                        <ControlButton onClick={imageSliderRef?.slickNext}>
+                          <ChevronRightIcon />
+                        </ControlButton>
+                      </ControlContainer>
+                    </ImageAndControlContainer>
+                  ))}
+                </TestimonialImageSlider>
+                <TextContainer textOnLeft={this.state.textOnLeft}>
+                  <HeadingInfo tw="hidden lg:block" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
+                  <TestimonialTextSlider arrows={false} ref={setTextSliderRef} asNavFor={imageSliderRef} fade={true}>
+                    {this.props.display.map((testimonial, index) => (
+                      <TestimonialText key={index}>
+                        <QuoteContainer>
+                          <Quote>
+                            <QuotesLeft />
+                            {testimonial.idea}
+                            <QuotesRight />
+                          </Quote>
+                        </QuoteContainer>
+                        <CustomerInfo>
+                          <CustomerProfilePicture src={this.state.profileImageSrc} alt={this.state.customerName} />
+                          <CustomerTextInfo>
+                            <CustomerName>{this.state.customerName}</CustomerName>
+                            <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
+                          </CustomerTextInfo>
+                        </CustomerInfo>
+                      </TestimonialText>
+                    ))}
+                  </TestimonialTextSlider>
+                </TextContainer>
+              </Testimonial>
+            </Testimonials>
+          </TestimonialsContainer>
+        </Content>
+        <DecoratorBlob1 />
+        <DecoratorBlob2 />
+      </Container>
+    );
+  }
+}
+
+export default StylistProfileTwoColumnWithImageAndProfilePictureReview
+
+

@@ -77,23 +77,8 @@ class StylistProfileImageIntro extends Component{
     super(props)
 
     this.state = {
-      // parameter
-      testimonials: [{
-        nickname: "Charlotte",
-        photo:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-        intro:
-          "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
-        gender: "Female",
-        style: ["Casual", "Business"],
-        age: 23,
-        userName: "Charlotte Hale",
-        email:"Charlotte@stylebox.com",
-        facebook:"Charlotte_Stylist",
-        rate: 5,
-        followerNum: 9000,
-        likeNum: 3000 
-    }]}
+      
+    }
       
 
     // method part
@@ -109,7 +94,7 @@ class StylistProfileImageIntro extends Component{
           </HeadingInfoContainer>
           <TestimonialSliderContainer>
             <TestimonialSlider nextArrow={<NextArrow />} prevArrow={<PreviousArrow />}>
-              {this.state.testimonials.map((testimonial, index) => (
+              {this.props.testimonials.map((testimonial, index) => (
                 <Testimonial key={index}>
                   <ImageContainer>
                     <img src={testimonial.photo} alt={testimonial.customerName} />
