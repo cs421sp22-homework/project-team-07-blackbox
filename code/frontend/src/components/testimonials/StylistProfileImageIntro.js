@@ -32,8 +32,8 @@ const TextContainer = tw.div`md:mx-3 lg:mx-6 md:w-6/12 py-4 flex flex-col justif
 const QuoteContainer = tw.div`relative p-6 md:p-8 lg:p-10 mt-4 md:mt-0`;
 const Quote = tw.blockquote`text-center md:text-left font-medium text-xl lg:text-xl xl:text-xl`;
 const CustomerInfo = tw.div`px-5 lg:px-10 text-center md:text-left mt-4 md:mt-0`;
-const CustomerTitle = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
-const CustomerName = tw.h5`font-bold text-lg lg:text-xl xl:text-xl text-primary-500`;
+const CustomerName = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
+const CustomerTitle = tw.h5`font-bold text-lg lg:text-xl xl:text-xl text-primary-500`;
 const FollowerNumTitle = tw.h5`font-bold text-xl lg:text-xl xl:text-xl text-primary-500`;
 const FollowerNum = tw.p`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
 
@@ -79,30 +79,20 @@ class StylistProfileImageIntro extends Component{
     this.state = {
       // parameter
       testimonials: [{
-        imageSrc:
+        nickname: "Charlotte",
+        photo:
           "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-        quote:
+        intro:
           "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
-        customerName: "UserName:",
-        customerTitle: "Charlotte Hale",
-        FollowerNumTitle: "FollowerNum:",
-        FollowerNum:"9000",
-        LikeNumTitle:"LikeNum:",
-        LikeNum:"3000",
-        RateTitle:"Rate:",
-        Rate: "5.0",
-        StyleTitle:"Style:",
-        Style:"Casual",
-        NicknameTitle:"Nickname:",
-        Nickname: "Charlotte",
-        AgeTitle:"Age:",
-        Age: "23",
-        GenderTitle:"Gender:",
-        Gender: "Female",
-        EmailTitle:"Email:",
-        Email:"Charlotte@stylebox.com",
-        FacebookTitle:"Facebook:",
-        Facebook:"Charlotte_Stylist"
+        gender: "Female",
+        style: ["Casual", "Business"],
+        age: 23,
+        userName: "Charlotte Hale",
+        email:"Charlotte@stylebox.com",
+        facebook:"Charlotte_Stylist",
+        rate: 5,
+        followerNum: 9000,
+        likeNum: 3000 
     }]}
       
 
@@ -122,54 +112,54 @@ class StylistProfileImageIntro extends Component{
               {this.state.testimonials.map((testimonial, index) => (
                 <Testimonial key={index}>
                   <ImageContainer>
-                    <img src={testimonial.imageSrc} alt={testimonial.customerName} />
+                    <img src={testimonial.photo} alt={testimonial.customerName} />
                   </ImageContainer>
                   <TextContainer>
                     <QuoteContainer>
                       <QuotesLeft />
-                      <Quote>{testimonial.quote}</Quote>
+                      <Quote>{testimonial.intro}</Quote>
                       <QuotesRight />
                     </QuoteContainer>
                     <CustomerInfo>
                       <div className="grid grid-cols-2">
-                          <CustomerName>{testimonial.customerName}</CustomerName>
-                          <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
+                          <CustomerTitle>UserName:</CustomerTitle>
+                          <CustomerName>{testimonial.userName}</CustomerName>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.FollowerNumTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.FollowerNum}</FollowerNum>
+                          <FollowerNumTitle>FollowerNum:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.followerNum}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.LikeNumTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.LikeNum}</FollowerNum>
+                          <FollowerNumTitle>LikeNum:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.likeNum}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.RateTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Rate}</FollowerNum>
+                          <FollowerNumTitle>Rate:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.rate}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.StyleTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Style}</FollowerNum>
+                          <FollowerNumTitle>Style:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.style + " "}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.NicknameTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Nickname}</FollowerNum>
+                          <FollowerNumTitle>Nickname:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.nickname}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.AgeTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Age}</FollowerNum>
+                          <FollowerNumTitle>Age:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.age}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.GenderTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Gender}</FollowerNum>
+                          <FollowerNumTitle>Gender:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.gender}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.EmailTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Email}</FollowerNum>
+                          <FollowerNumTitle>Email:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.email}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>{testimonial.FacebookTitle}</FollowerNumTitle>
-                          <FollowerNum>{testimonial.Facebook}</FollowerNum>
+                          <FollowerNumTitle>Facebook:</FollowerNumTitle>
+                          <FollowerNum>{testimonial.facebook}</FollowerNum>
                       </div>
 
                     </CustomerInfo>
