@@ -6,7 +6,7 @@ class AccountSettingService{
     getHomepage(){
         return axios.get(`${API_URL}/account`, {withCredentials: true})
     }
-    modifyAccount(){
+    modifyAccount(info){
         return axios.patch(`${API_URL}/account`,info,{withCredentials: true})
     }
 }

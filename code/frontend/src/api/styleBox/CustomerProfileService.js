@@ -6,7 +6,7 @@ class CustomerProfileService{
     getHomepage(){
         return axios.get(`${API_URL}/customer/profile`, {withCredentials: true})
     }
-    modifyProfile(){
+    modifyProfile(info){
         return axios.patch(`${API_URL}/customer/profile`,info,{withCredentials: true})
     }
 }

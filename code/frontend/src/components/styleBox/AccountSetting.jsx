@@ -20,6 +20,14 @@ class AccountSetting extends Component{
            edit:false
 
         }
+        this.clickedit = this.clickedit.bind(this)
+        this.changeEmail = this.changeEmail.bind(this)
+        this.changePhone = this.changePhone.bind(this)
+        this.changeAddress = this.changeAddress.bind(this)
+        this.changePayment = this.changePayment.bind(this)
+        this.changeFacebook = this.changeFacebook.bind(this)
+        this.changeNickname = this.changeNickname.bind(this)
+        this.submitInfo = this.submitInfo.bind(this)
     }
 
     clickedit(){
@@ -83,22 +91,19 @@ class AccountSetting extends Component{
         this.redirect();
     }
 
-    AccountSettingService.getHomepage()
-    .then(response=>this.setState({
-        username: response.data.username,
-        address: response.data.address,
-        phone: response.data.phone,
-        address: response.data.address,
-        payment: response.data.payment,
-        facebook: response.data.facebook,
-        nickname: response.data.nickname,
+    componentDidMount() {
+        AccountSettingService.getHomepage()
+            .then(response=>this.setState({
+                username: response.data.username,
+                address: response.data.address,
+                phone: response.data.phone,
+                payment: response.data.payment,
+                facebook: response.data.facebook,
+                nickname: response.data.nickname,
 
-    }))
-    .catch(error => console.log(error.response))
-
-
-
-
+            }))
+            .catch(error => console.log(error.response))
+    }
 
     render() {
         return (
