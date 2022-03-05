@@ -1,7 +1,0 @@
-.DS_Store
-.vscode/*
-.idea/*
-.gradle/*
-node_modules/*
-code/frontend/node_modules/*
-code/frontend/node_modules/.cache/.eslintcache
