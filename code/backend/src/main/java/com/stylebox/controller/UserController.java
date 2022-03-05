@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 import java.time.Duration;
 
 @CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000"})
@@ -85,9 +86,9 @@ public class UserController {
         return ResponseEntity.ok(new JwtTokenDTO(token));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/{role}")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO,
-                         @RequestParam(value = "role") int roleid,
+                         @PathVariable("role") int roleid,
                          HttpServletRequest request, HttpServletResponse response) {
         User user = userService.createUser(registerDTO, roleid);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
