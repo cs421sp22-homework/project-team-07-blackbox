@@ -13,11 +13,11 @@ public class StylistProfileGetDTO {
     private String intro;
     private String gender;
     private Integer age;
-    private Set<Style> style;
+    private Set<String> style;
     private String username;
     private String email;
     private String facebook;
-    private Double rate;
+    private Integer rate;
     private Integer followerNum;
     private Integer likeNum;
     private List<DisplayDTO> display;

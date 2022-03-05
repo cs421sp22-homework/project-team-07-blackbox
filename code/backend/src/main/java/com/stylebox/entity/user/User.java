@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -49,4 +51,15 @@ public class User {
 
     @Column(name="nickname")
     private String nickname;
+
+    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_style",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
+    @JsonManagedReference
+    private Set<Style> styleSet = new HashSet<>();
+
+    public void addStyle(Style style) {
+        this.styleSet.add(style);
+    }
 }

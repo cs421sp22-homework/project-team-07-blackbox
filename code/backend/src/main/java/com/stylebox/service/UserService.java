@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,6 +27,8 @@ public class UserService {
     final UserLoginRepository userLoginRepository;
 
     final RoleRepository roleRepository;
+
+    final StyleRepository styleRepository;
 
     final CustomerInformationRepository customerInformationRepository;
 
@@ -151,10 +154,20 @@ public class UserService {
     }
 
     public CustomerProfileDTO getCustomerProfile(User user){
-        return modelMapper.map(user.getCustomerInformation(), CustomerProfileDTO.class);
+        CustomerProfileDTO customerProfileDTO = modelMapper.map(user.getCustomerInformation(), CustomerProfileDTO.class);
+        Set<Style> styles = user.getStyleSet();
+        Set<String> styleSet = new HashSet<>();
+        for (Style st : styles) {
+            styleSet.add(st.getStyleName());
+        }
+        customerProfileDTO.setStyleSet(styleSet);
+        return customerProfileDTO;
     }
 
     public void createCustomerProfile(User user, CustomerProfileDTO customerProfileDTO){
+        Set<String> styleSet = customerProfileDTO.getStyleSet();
+        modifyStyle(styleSet, user);
+        userRepository.save(user);
         modelMapper.map(customerProfileDTO, user.getCustomerInformation());
         customerInformationRepository.save(user.getCustomerInformation());
         userRepository.save(user);
@@ -162,32 +175,39 @@ public class UserService {
 
     public StylistProfileGetDTO getStylistProfile(User user) {
         StylistProfileGetDTO stylistProfileGetDTO = modelMapper.map(user.getStylistInformation(), StylistProfileGetDTO.class);
+        Set<Style> styles = user.getStyleSet();
+        Set<String> styleSet = new HashSet<>();
+        for (Style st : styles) {
+            styleSet.add(st.getStyleName());
+        }
+        stylistProfileGetDTO.setStyle(styleSet);
         modelMapper.map(user, stylistProfileGetDTO);
         modelMapper.map(user.getUserLogin(), stylistProfileGetDTO);
         return stylistProfileGetDTO;
     }
 
     public void modifyStylistProfile(User user, StylistProfileModifyDTO stylistProfileModifyDTO) {
-//        Set<String> styleList = stylistProfileModifyDTO.getStyle();
-//        for (String s : styleList) {
-//            // 从tag数据库里根据当前tag找到对应的tag
-//            Optional<Tag> tagByName = tagRepository.findByName(s);
-//            // 如果在数据库中存在当前tag，就保存到当前paper的tag中
-//            // 如果数据库中不存在当前tag，就先新建当前tag，保存至数据库中，再把新建的tag保存到当前paper的tag里
-//            if (tagByName.isPresent()) {
-//                paper.addTag(tagByName.get());
-//            } else {
-//                Tag tag = new Tag();
-//                tag.setName(s);
-//                tag.setDisplayName(s);
-//                //category.getPaper().add(paper);
-//                tagRepository.saveAndFlush(tag);
-//                paper.addTag(tagRepository.findTagByName(s));
-//            }
-//        }
+        Set<String> styleSet = stylistProfileModifyDTO.getStyle();
+        modifyStyle(styleSet, user);
         modelMapper.map(stylistProfileModifyDTO, user);
         userRepository.save(user);
         modelMapper.map(stylistProfileModifyDTO, user.getStylistInformation());
         stylistInformationRepository.save(user.getStylistInformation());
+    }
+
+    private void modifyStyle(Set<String> styleSet, User user) {
+        for (String s : styleSet) {
+            Optional<Style> styleByName = styleRepository.findByStyleName(s);
+            // if exist current style, save
+            // else, create
+            if (styleByName.isPresent()) {
+                user.addStyle(styleByName.get());
+            } else {
+                Style style = new Style();
+                style.setStyleName(s);
+                styleRepository.saveAndFlush(style);
+                user.addStyle(styleRepository.findByStyleName(s).get());
+            }
+        }
     }
 }

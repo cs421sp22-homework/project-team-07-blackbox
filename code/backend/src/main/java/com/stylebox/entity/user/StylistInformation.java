@@ -30,14 +30,18 @@ public class StylistInformation {
     @Column(name = "gender")
     private String gender;
 
-    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
-    @JoinTable(name = "stylist_style",
-            joinColumns = {@JoinColumn(name = "stylist_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
-    @JsonManagedReference
-    private Set<Style> styleSet = new HashSet<>();
+//    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
+//    @JoinTable(name = "stylist_style",
+//            joinColumns = {@JoinColumn(name = "stylist_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
+//    @JsonManagedReference
+//    private Set<Style> styleSet = new HashSet<>();
 
     @Column(name = "age")
     private Integer age;
+
+//    public void addStyle(Style style) {
+//        this.styleSet.add(style);
+//    }
 
 }

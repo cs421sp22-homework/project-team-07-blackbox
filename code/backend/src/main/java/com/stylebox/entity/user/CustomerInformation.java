@@ -28,8 +28,11 @@ public class CustomerInformation {
     @Column(name="gender")
     private String gender;
 
-    @Column(name="height")
-    private String height;
+    @Column(name="ft")
+    private String ft;
+
+    @Column(name="in")
+    private String in;
 
     @Column(name="weight")
     private String weight;
@@ -46,10 +49,14 @@ public class CustomerInformation {
     @Column(name="shoeSize")
     private String shoeSize;
 
-    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
-    @JoinTable(name = "customer_style",
-            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
-    @JsonManagedReference
-    private Set<Style> styleSet = new HashSet<>();
+//    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
+//    @JoinTable(name = "customer_style",
+//            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
+//    @JsonManagedReference
+//    private Set<Style> styleSet = new HashSet<>();
+//
+//    public void addStyle(Style style) {
+//        this.styleSet.add(style);
+//    }
 }
