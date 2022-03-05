@@ -28,11 +28,11 @@ public class CustomerInformation {
     @Column(name="gender")
     private String gender;
 
-    @Column(name="ft")
-    private String ft;
+    @Column(name="ftSize")
+    private String ftSize;
 
-    @Column(name="in")
-    private String in;
+    @Column(name="inSize")
+    private String inSize;
 
     @Column(name="weight")
     private String weight;

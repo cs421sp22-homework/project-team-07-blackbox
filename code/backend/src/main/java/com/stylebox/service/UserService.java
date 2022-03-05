@@ -170,14 +170,14 @@ public class UserService {
 
     public StylistProfileGetDTO getStylistProfile(User user) {
         StylistProfileGetDTO stylistProfileGetDTO = modelMapper.map(user.getStylistInformation(), StylistProfileGetDTO.class);
+        modelMapper.map(user, stylistProfileGetDTO);
+        modelMapper.map(user.getUserLogin(), stylistProfileGetDTO);
         Set<Style> styles = user.getStyleSet();
         Set<String> styleSet = new HashSet<>();
         for (Style st : styles) {
             styleSet.add(st.getStyleName());
         }
         stylistProfileGetDTO.setStyle(styleSet);
-        modelMapper.map(user, stylistProfileGetDTO);
-        modelMapper.map(user.getUserLogin(), stylistProfileGetDTO);
         return stylistProfileGetDTO;
     }
 
