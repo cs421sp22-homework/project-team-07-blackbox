@@ -8,7 +8,7 @@ import Login from "./components/styleBox/Login";
 import Register from "./components/styleBox/Register"
 import AuthenticatedRoute from './components/styleBox/AuthenticatedRoute'
 import StylistProfile from"./components/styleBox/StylistProfile";
-
+import CustomerProfile from "./components/styleBox/CustomerProfile";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -23,6 +23,8 @@ export default function App() {
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
               <Route path="/stylist/profile" component={StylistProfile}/>
+              <Route path="/customer/profile" component={CustomerProfile}/>
+
           </Switch>
       </>
   </Router>

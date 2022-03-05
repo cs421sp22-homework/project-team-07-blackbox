@@ -297,8 +297,8 @@ class HomePage extends Component {
                         />
                        
                     </Content2Xl>
-                    <Footer/>
                 </Container>
+                <Footer/>
             </AnimationRevealPage>
         )
     }

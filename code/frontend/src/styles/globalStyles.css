@@ -15,3 +15,8 @@
     transform: scale(0);
     /* transform: translateY(-150%); */
 }
+
+.footer{
+    box-shadow: 5px 10px 8px #888888;
+    border-top: solid 2px gainsboro;
+}

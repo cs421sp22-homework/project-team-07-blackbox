@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import tw from "twin.macro";
+import "../../styles/tailwind.min.css"
 
-
-const SixColumns = tw.div`mt-40 p-10 bg-gray-200 w-full flex flex-wrap text-center sm:text-left justify-center sm:justify-start md:justify-between `;
+const SixColumns = tw.div`mt-40 p-10 bg-white w-full flex flex-wrap text-center sm:text-left justify-center sm:justify-start md:justify-between `;
 const SixColumHeader = tw.div`text-2xl font-bold text-left w-full h-10`;
 const ColumnFooter = tw.div`px-4 sm:px-0 sm:w-1/4 md:w-auto mt-12`;
 
@@ -17,8 +17,8 @@ class Footer extends Component{
     }
 
     render(){
-        return(
-            <SixColumns>
+        return(<div >
+            <SixColumns className="footer">
                 <ColumnFooter tw="mt--2">
                     <SixColumHeader>Style Box</SixColumHeader>
                 </ColumnFooter>
@@ -79,6 +79,7 @@ class Footer extends Component{
                     </LinkList>
                 </ColumnFooter>
             </SixColumns>
+            </div>
         )
     }
 }

@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 
 const Row = tw.div`flex`;
-const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
+const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between ml-4 mt-4`;
 const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-700 border-gray-400 hocus:border-gray-700`;
 const PrimaryNavLink = tw(
     NavLink
