@@ -10,13 +10,13 @@ class AccountSetting extends Component{
 
         this.state={
             // account information
-           username:"Choral",
-           email:"Choral@gmail.com",
-           phone:"4423455645",
-           address:"3501 Saint Paul Street",
-           payment:"34131242",
-           facebook:"Choralove",
-           nickname:"Chorl",
+           username:"",
+           email:"",
+           phone:"",
+           address:"",
+           payment:"",
+           facebook:"",
+           nickname:"",
            edit:false
 
         }
@@ -97,6 +97,7 @@ class AccountSetting extends Component{
                 username: response.data.username,
                 address: response.data.address,
                 phone: response.data.phone,
+                email: response.data.email,
                 payment: response.data.payment,
                 facebook: response.data.facebook,
                 nickname: response.data.nickname,
