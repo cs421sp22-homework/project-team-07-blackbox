@@ -88,9 +88,9 @@ public class UserController {
 
     @PostMapping("/register/{role}")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO,
-                         @PathVariable("role") int roleid,
+                         @PathVariable int role,
                          HttpServletRequest request, HttpServletResponse response) {
-        User user = userService.createUser(registerDTO, roleid);
+        User user = userService.createUser(registerDTO, role);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
         addJWTToResponse(request, response, token);
         return ResponseEntity.ok(new JwtTokenDTO(token));
