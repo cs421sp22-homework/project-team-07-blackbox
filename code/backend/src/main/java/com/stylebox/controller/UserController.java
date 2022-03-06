@@ -53,7 +53,7 @@ public class UserController {
                     .path("/")
                     .maxAge(maxAge)
 //                    .domain(".davidz.cn") // The domain name of the Cookie can be accessed
-                    .sameSite("Lax")
+//                    .sameSite("Lax")
                     .build();
         } else {
             cookie = ResponseCookie.from("jwt", token)
@@ -61,7 +61,7 @@ public class UserController {
                     .secure(false)
                     .path("/")
                     .maxAge(maxAge)
-                    .sameSite("Lax")
+ //                   .sameSite("Lax")
                     .build();
         }
         response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
