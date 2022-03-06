@@ -7,7 +7,9 @@ import HomePage from "./components/styleBox/HomePage";
 import Login from "./components/styleBox/Login";
 import Register from "./components/styleBox/Register"
 import AuthenticatedRoute from './components/styleBox/AuthenticatedRoute'
-import UserProfile from './components/styleBox/UserProfile'
+import Quiz from "./components/styleBox/Quiz";
+import BasicRouter from "./components/styleBox/BasicRouter";
+// import StylistProfile from"./components/styleBox/StylistProfile";
 
 
 export default function App() {
@@ -16,16 +18,17 @@ export default function App() {
 
 
   return (
-    <Router>
-      <>
+      <Router>
+        <>
           <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/login" component={Login}/>
-              <Route path="/register" component={Register}/>
-              <AuthenticatedRoute path="/user/profile" component={UserProfile}/>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            {/*<Route path="/stylist/profile" component={StylistProfile}/>*/}
+            <Route path="/quiz" component={Quiz}/>
           </Switch>
-      </>
-  </Router>
+        </>
+      </Router>
   );
 }
 

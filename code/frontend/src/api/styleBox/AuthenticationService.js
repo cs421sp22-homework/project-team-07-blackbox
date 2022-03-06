@@ -3,7 +3,6 @@ import { API_URL } from '../../Constants'
 import cookie from 'react-cookies'
 
 class AuthenticationService {
-    
     // Login 方法传递username, password到后端
     executeJwtAuthenticationService(usernameValue, passwordValue){
         let user = {username: usernameValue, password: passwordValue}
