@@ -12,7 +12,7 @@ class AuthenticationService {
     // Register
     registerUtil(usernameValue, emailValue, passwordValue, role){
         let user = {username: usernameValue, email: emailValue, password: passwordValue}
-        return axios.post(`${API_URL}/register/{role}`, user, {withCredentials: true})
+        return axios.post(`${API_URL}/register/${role}`, user, {withCredentials: true})
     }
 
     // Login / register successful -> register成功后自动login
