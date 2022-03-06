@@ -57,8 +57,9 @@ class CustomerProfile extends Component {
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            styleSet: this.state.styleSet
+            styleSet: this.state.styleSet.split(',')
         }
+        console.log(this.state.styleSet.split(','))
         this.setState({edit: false})
         CustomerProfileService.modifyProfile(info)
         // this.redirect();
