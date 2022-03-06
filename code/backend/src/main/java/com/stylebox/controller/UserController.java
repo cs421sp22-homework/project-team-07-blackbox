@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.time.Duration;
 
-@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000"})
+@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000","https://style-box.netlify.app/","http://style-box.netlify.app/"})
 @RestController
 @RequiredArgsConstructor
 public class UserController {
