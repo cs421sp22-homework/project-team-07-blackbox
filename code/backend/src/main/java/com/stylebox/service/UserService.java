@@ -164,7 +164,6 @@ public class UserService {
     public void createCustomerProfile(User user, CustomerProfileDTO customerProfileDTO){
         Set<String> styleSet = customerProfileDTO.getStyleSet();
         modifyStyle(styleSet, user);
-        userRepository.save(user);
         modelMapper.map(customerProfileDTO, user.getCustomerInformation());
         customerInformationRepository.save(user.getCustomerInformation());
         userRepository.save(user);
@@ -193,18 +192,21 @@ public class UserService {
     }
 
     private void modifyStyle(Set<String> styleSet, User user) {
+        Set<Style> newStyleSet = new HashSet<>();
         for (String s : styleSet) {
             Optional<Style> styleByName = styleRepository.findByStyleName(s);
             // if exist current style, save
             // else, create
             if (styleByName.isPresent()) {
-                user.addStyle(styleByName.get());
+                newStyleSet.add(styleByName.get());
             } else {
                 Style style = new Style();
                 style.setStyleName(s);
                 styleRepository.saveAndFlush(style);
-                user.addStyle(styleRepository.findByStyleName(s).get());
+                newStyleSet.add(styleRepository.findByStyleName(s).get());
             }
         }
+        user.setStyleSet(newStyleSet);
+        userRepository.save(user);
     }
 }

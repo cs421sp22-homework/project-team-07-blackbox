@@ -59,7 +59,7 @@ public class User {
     @JsonManagedReference
     private Set<Style> styleSet = new HashSet<>();
 
-    public void addStyle(Style style) {
-        this.styleSet.add(style);
-    }
+//    public void addStyle(Style style) {
+//        this.styleSet.add(style);
+//    }
 }
