@@ -8,13 +8,13 @@ Users can visit our website here: https://stylebox5.herokuapp.com/
 
 ## API Reference
 
-# User
+### User
 
-## GET get account setting
+#### GET get account setting
 
 GET /account
 
-### Response data
+##### Response data
 
 status code **200**
 
@@ -28,11 +28,11 @@ status code **200**
 |» nickname|string|true|none|none|
 |» username|string|true|none|none|
 
-## POST modify account setting
+#### POST modify account setting
 
 POST /account
 
-### Request Param
+##### Request Param
 
 |Name|Position|Type|Required|Description|
 |---|---|---|---|---|
@@ -45,15 +45,15 @@ POST /account
 |» nickname|body|string|true|none|
 
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|
 
-## POST create customer profile
+#### POST create customer profile
 
 POST /customer/profile
 
-### Request Param
+##### Request Param
 
 |Name|Position|Type|Required|Description|
 |---|---|---|---|---|
@@ -68,15 +68,15 @@ POST /customer/profile
 |» shoeSize|body|string|true|none|
 |» styleSet|body|[string]|true|none|
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
-## GET get customer profile
+#### GET get customer profile
 
 GET /customer/profile
 
-### Response
+##### Response
 
 status code **200**
 
@@ -92,11 +92,11 @@ status code **200**
 |» shoeSize|string|true|none|none|
 |» style|[string]|true|none|none|
 
-## POST register
+#### POST register
 
 POST /register/{role}
 
-### Request Param
+##### Request Param
 
 |Name|Position|Type|Required|Description|
 |---|---|---|---|---|
@@ -107,16 +107,16 @@ POST /register/{role}
 |» username|body|string|true|none|
 
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
 
-## GET get stylist profile
+#### GET get stylist profile
 
 GET /stylist/profile
 
-### Response
+##### Response
 
 status code **200**
 
@@ -138,11 +138,11 @@ status code **200**
 |»» image|string|true|none|none|
 |»» idea|string|true|none|none|
 
-## POST create stylist profile
+#### POST create stylist profile
 
 POST /stylist/profile
 
-### Request Param
+##### Request Param
 
 |Name|Position|Type|Required|Description|
 |---|---|---|---|---|
@@ -153,16 +153,16 @@ POST /stylist/profile
 |» style|body|[string]|true|none|
 |» age|body|integer|true|none|
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
 
-## POST login
+#### POST login
 
 POST /login
 
-### Request Param
+##### Request Param
 
 |Name|Position|Type|Required|Description|
 |---|---|---|---|---|
@@ -170,15 +170,15 @@ POST /login
 |» password|body|string|true|none|
 |» username|body|string|true|or email|
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
-## GET logout
+#### GET logout
 
 GET /user/logout
 
-### Response
+##### Response
 
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|Inline|
 
