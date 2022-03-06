@@ -49,19 +49,19 @@ public class UserController {
         if (null != origin && origin.contains("davidz.cn")) {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(false)
+                    .secure(true)
                     .path("/")
                     .maxAge(maxAge)
 //                    .domain(".davidz.cn") // The domain name of the Cookie can be accessed
-//                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
         } else {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(false)
+                    .secure(true)
                     .path("/")
                     .maxAge(maxAge)
- //                   .sameSite("Lax")
+                    .sameSite("None")
                     .build();
         }
         response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
