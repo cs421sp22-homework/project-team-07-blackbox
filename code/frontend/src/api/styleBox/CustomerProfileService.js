@@ -7,7 +7,7 @@ class CustomerProfileService{
         return axios.get(`${API_URL}/customer/profile`, {withCredentials: true})
     }
     modifyProfile(info){
-        return axios.patch(`${API_URL}/customer/profile`,info,{withCredentials: true})
+        return axios.post(`${API_URL}/customer/profile`,info,{withCredentials: true})
     }
 }
 export default new CustomerProfileService()

@@ -10,119 +10,58 @@ class CustomerProfile extends Component {
         super(props);
 
         this.state = {
-            gender: "Female",
-            ftSize: "23",
-            inSize: "20",
-            weight: "60",
-            shirtSize: "80",
-            bottomSize: "20",
-            jeanSize: "40",
-            shoeSize: "35",
-            style: ["casual, business"],
+            gender: "",
+            ftSize: "",
+            inSize: "",
+            weight: "",
+            shirtSize: "",
+            bottomSize: "",
+            jeanSize: "",
+            shoeSize: "",
+            styleSet: ["casual","business"],
             edit: false
         }
 
         this.clickedit = this.clickedit.bind(this)
-        this.changeGender = this.changeGender.bind(this)
-        this.changeFtsize = this.changeFtsize.bind(this)
-        this.changeInsize = this.changeInsize.bind(this)
-        this.changeWeight = this.changeWeight.bind(this)
-        this.changeShirtsize = this.changeShirtsize.bind(this)
-        this.changeBottomsize = this.changeBottomsize.bind(this)
-        this.changeJeansize = this.changeJeansize.bind(this)
-        this.changeShoesize = this.changeShoesize.bind(this)
-        this.changeStyle = this.changeStyle.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         this.submitInfo = this.submitInfo.bind(this)
     }
 
     //componentDidMount(){
     clickedit() {
-        if (this.edit == false) {
+        if (this.state.edit === false) {
             this.setState({edit: true});
         }
     }
 
-    changeGender(e) {
-        let gender = e.target.value;
-        this.setState({
-            gender: gender
-        })
+    handleChange(event) {
+        this.setState(
+            {
+                [event.target.name]
+                    : event.target.value
+            }
+        )
     }
 
-    changeFtsize(e) {
-        let ftSize = e.target.value;
-        this.setState({
-            ftSize: ftSize
-        })
-    }
 
-    changeInsize(e) {
-        let inSize = e.target.value;
-        this.setState({
-            inSize: inSize
-        })
-    }
-
-    changeWeight(e) {
-        let weight = e.target.value;
-        this.setState({
-            weight: weight
-        })
-    }
-
-    changeShirtsize(e) {
-        let shirtSize = e.target.value;
-        this.setState({
-            shirtSize: shirtSize
-        })
-    }
-
-    changeBottomsize(e) {
-        let bottomSize = e.target.value;
-        this.setState({
-            bottomSize: bottomSize
-        })
-    }
-
-    changeJeansize(e) {
-        let jeanSize = e.target.value;
-        this.setState({
-            jeanSize: jeanSize
-        })
-    }
-
-    changeShoesize(e) {
-        let shoeSize = e.target.value;
-        this.setState({
-            shoeSize: shoeSize
-        })
-    }
-
-    changeStyle(e) {
-        let style = e.target.value;
-        this.setState({
-            style: style
-        })
-    }
-
-    redirect() {
-    }
+    // redirect() {
+    // }
 
     submitInfo() {
         let info = {
             gender: this.state.gender,
-            ft: this.state.ft,
-            in: this.state.in,
+            ftSize: this.state.ftSize,
+            inSize: this.state.inSize,
             weight: this.state.weight,
             shirtSize: this.state.shirtSize,
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            style: this.state.style
+            styleSet: this.state.styleSet
         }
         this.setState({edit: false})
         CustomerProfileService.modifyProfile(info)
-        this.redirect();
+        // this.redirect();
     }
 
     componentDidMount() {
@@ -136,7 +75,7 @@ class CustomerProfile extends Component {
                 bottomSize: response.data.bottomSize,
                 jeanSize: response.data.jeanSize,
                 shoeSize: response.data.shoeSize,
-                style: response.data.style
+                styleSet: response.data.styleSet
             }))
             .catch(error => console.log(error.response))
 
@@ -184,7 +123,7 @@ class CustomerProfile extends Component {
                                 </div>
                                 <label>Preference Style:</label>
                                 <div className="grid grid-cols-2">
-                                    <text>{this.state.style + " "}</text>
+                                    <text>{this.state.styleSet + " "}</text>
                                 </div>
                                 <button onClick={this.clickedit}>Edit</button>
                             </div>
@@ -196,40 +135,39 @@ class CustomerProfile extends Component {
                             <div className=" grid grid-cols-2 gap-1">
                                 <label>Gender:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.gender} onChange={this.changeGender}/>
+                                    <input type="text" value={this.state.gender} name="gender" onChange={this.handleChange}/>
                                 </div>
                                 <label>Height:</label>
                                 <div className="grid grid-cols-4">
-                                    <input type="text" value={this.state.ftSize} onChange={this.changeFtsize}/>
+                                    <input type="text" value={this.state.ftSize} name="ftSize" onChange={this.handleChange}/>
                                     <label>FT.</label>
-                                    <input type="text" value={this.state.inSize} onChange={this.changeInsize}/>
+                                    <input type="text" value={this.state.inSize} name="inSize" onChange={this.handleChange}/>
                                     <label>IN.</label>
                                 </div>
                                 <label>Weight:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.weight} onChange={this.changeWeight}/>
+                                    <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange}/>
                                     <label>LBS.</label>
                                 </div>
                                 <label>Shirt Size:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.shirtSize} onChange={this.changeShirtsize}/>
+                                    <input type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>
                                 </div>
                                 <label>Bottom Size:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.bottomSize} onChange={this.changeBottomsize}/>
-                                    <text>{this.state.bottomSize}</text>
+                                    <input type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>
                                 </div>
                                 <label>Jean Size:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.jeanSize} onChange={this.changeJeansize}/>
+                                    <input type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>
                                 </div>
                                 <label>Shoe Size:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.shoeSize} onChange={this.changeShoesize}/>
+                                    <input type="text" value={this.state.shoeSize} name="shoeSize" onChange={this.handleChange}/>
                                 </div>
                                 <label>Preference Style:</label>
                                 <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.style} onChange={this.changeStyle}/>
+                                    <input type="text" value={this.state.styleSet} name="styleSet" onChange={this.handleChange}/>
                                 </div>
                                 <button onClick={this.submitInfo}>Submit</button>
                             </div>

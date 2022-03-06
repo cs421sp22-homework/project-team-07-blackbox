@@ -44,7 +44,8 @@ class AccountSetting extends Component{
     
    
     submitInfo(){
-        let info = {email: this.state.email,
+        let info = { username: this.state.username,
+            email: this.state.email,
             phone: this.state.phone,
             address: this.state.address,
             payment: this.state.payment,
