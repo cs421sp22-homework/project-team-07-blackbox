@@ -28,15 +28,6 @@ const QuizForm = styled.main.attrs({
             ${tw`border-gray-300 mb-4 w-full border-solid border rounded py-2 px-4`}
         }
 
-        button {
-            ${tw`bg-pink-500 hover:bg-pink-700 text-white font-bold border border-pink-700 rounded text-lg mt-10 mx-8 py-3 px-8`}
-        }
-
-        text{
-            ${tw`text-xl text-gray-700 mb-4 w-full border-solid border rounded py-2 px-4`}
-            //& {background-color: pink;}
-            //&:hover {font-size: 2rem;}
-        }
     }
 `
 

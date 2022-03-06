@@ -10,6 +10,9 @@ import AuthenticatedRoute from './components/styleBox/AuthenticatedRoute'
 import StylistProfile from"./components/styleBox/StylistProfile";
 import CustomerProfile from "./components/styleBox/CustomerProfile";
 import AccountSetting from "./components/styleBox/AccountSetting"
+import Quiz from "./components/styleBox/Quiz";
+import BasicRouter from "./components/styleBox/BasicRouter";
+
 
 
 export default function App() {
@@ -24,6 +27,7 @@ export default function App() {
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
+              <AuthenticatedRoute path="/quiz" component={Quiz}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>

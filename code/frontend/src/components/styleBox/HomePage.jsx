@@ -40,9 +40,7 @@ const Description = tw(
     DescriptionBase
 )`mt-4 text-center lg:text-left lg:text-base text-gray-700 max-w-lg mx-auto lg:mx-0`;
 const Actions = tw.div`flex flex-col sm:flex-row justify-center lg:justify-start`;
-const ActionButton = tw(
-    AnchorLink
-)`px-8 py-3 font-bold rounded bg-pink-500 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-inner focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
+const ActionButton = tw.a`px-8 py-3 font-bold rounded bg-pink-500 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-inner focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
 const SecondaryButton = tw(
     ActionButton
 )`mt-6 sm:mt-12 sm:ml-8 bg-gray-300 text-gray-800 hocus:bg-gray-500 hocus:text-gray-900`;
@@ -50,16 +48,6 @@ const ImageColumn = tw(Column)`mx-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-8`;
 const ImageContainer = tw.div``;
 const Image = tw.img`max-w-full rounded-t sm:rounded`;
 
-
-const SixColumns = tw.div`mt-40 p-10 bg-gray-200 w-full flex flex-wrap text-center sm:text-left justify-center sm:justify-start md:justify-between `;
-const SixColumHeader = tw.div`text-2xl font-bold text-left w-full h-10`;
-const ColumnFooter = tw.div`px-4 sm:px-0 sm:w-1/4 md:w-auto mt-12`;
-
-const ColumnHeading = tw.h5`uppercase font-bold`;
-
-const LinkList = tw.ul`mt-6 text-sm font-medium`;
-const LinkListItem = tw.li`mt-3`;
-const Link = tw.a`border-b-2 border-transparent hocus:border-gray-700 pb-1 transition duration-300`;
 
 class HomePage extends Component {
     constructor(props) {
@@ -134,7 +122,7 @@ class HomePage extends Component {
                         </div>
                         <div tw="flex justify-center pb-20">
                             <Actions>
-                                <SecondaryButton href="#">
+                                <SecondaryButton href="/quiz">
                                     Take Quiz
                                 </SecondaryButton>
                             </Actions>
@@ -295,7 +283,7 @@ class HomePage extends Component {
                                 }
                             }
                         />
-                       
+
                     </Content2Xl>
                 </Container>
                 <Footer/>

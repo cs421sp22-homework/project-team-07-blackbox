@@ -76,7 +76,6 @@ class LoginCompnent extends Component{
 
         })
         .catch((error) => {
-            console.log(error.response.data)
             alert(error.response.data.displayMessage)
             this.setState({showSuccessMessage: false})
             this.setState({hasLoginFailed: true})
@@ -115,9 +114,8 @@ class LoginCompnent extends Component{
 
                 <div className="alert alert-primary w-50" role="alert">
 
-                    <form>
-                        <h1 className='my-3'>Login <span class="badge badge-secondary"></span></h1>
 
+                    <h1 className='my-3'>Login <span class="badge badge-secondary"></span></h1>
                     <form onSubmit={this.loginClicked}>
                         <h1 className='my-3'>Login <span className="badge badge-secondary"></span></h1>
                         <div className='row mt-5'>

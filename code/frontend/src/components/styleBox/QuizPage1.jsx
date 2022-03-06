@@ -3,7 +3,7 @@ import QuizForm from "./QuizForm";
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 
-
+const Button = tw.button`bg-pink-500 hover:bg-pink-700 text-white font-bold border border-pink-700 rounded text-lg mt-10 mx-8 py-3 px-8`
 
 class QuizPage1 extends Component{
     constructor(props) {
@@ -42,7 +42,7 @@ class QuizPage1 extends Component{
                             </div>
                         </div>
                     </form>
-                    <button onClick={this.props.nextPage}>Next</button>
+                    <Button onClick={this.props.nextPage}>Next</Button>
                 </span>
 
             </QuizForm>

@@ -12,9 +12,6 @@ const LinkListItem = tw.li`mt-3`;
 const Link = tw.a`border-b-2 border-transparent hocus:border-gray-700 pb-1 transition duration-300`;
 
 class Footer extends Component{
-    constructor(props) {
-        super(props);
-    }
 
     render(){
         return(<div >
