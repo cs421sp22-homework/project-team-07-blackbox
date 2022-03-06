@@ -102,7 +102,7 @@ class Login extends Component {
                     alert('Register successful, automatic login !')
                     console.log('register successfully with username' + this.state.username + ' and password ' + this.state.password)
                     AuthenticationService.loginSuccessfulRegister(cookie.load)
-                    this.props.history.push(`/customer/profile`)
+                    this.props.history.push(`/stylist/profile`)
                 }            
             })
             .catch((error) => {
