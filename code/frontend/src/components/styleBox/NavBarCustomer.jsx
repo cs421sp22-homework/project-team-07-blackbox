@@ -41,7 +41,7 @@ class NavBarCustomer extends Component{
                          className="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="py-1" aria-labelledby="dropdownDividerButton">
                             <li>
-                                <a href="/"
+                                <a href="/customer/profile"
                                    className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Style Profile</a>
                             </li>
                             <li>

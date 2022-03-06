@@ -3,6 +3,7 @@ import QuizForm from "./QuizForm";
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
+import CustomerForm from "./CustomerForm";
 
 
 class CustomerProfile extends Component {
@@ -50,14 +51,14 @@ class CustomerProfile extends Component {
     submitInfo() {
         let info = {
             gender: this.state.gender,
-            ftSize: this.state.ftSize,
-            inSize: this.state.inSize,
+            ftSize: this.state.ft,
             weight: this.state.weight,
             shirtSize: this.state.shirtSize,
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            styleSet: this.state.styleSet.split(',')
+            styleSet: this.state.styleSet.split(','),
+            inSize: this.state.in,
         }
         console.log(this.state.styleSet.split(','))
         this.setState({edit: false})
@@ -85,7 +86,7 @@ class CustomerProfile extends Component {
 
     render() {
         return (
-            <QuizForm>
+            <CustomerForm>
                 <span>
                     {this.state.edit == false &&
                         <form>
@@ -126,8 +127,8 @@ class CustomerProfile extends Component {
                                 <div className="grid grid-cols-2">
                                     <text>{this.state.styleSet + " "}</text>
                                 </div>
-                                <button onClick={this.clickedit}>Edit</button>
                             </div>
+                            <button onClick={this.clickedit}>Edit</button>
                         </form>
                     }
 
@@ -170,15 +171,15 @@ class CustomerProfile extends Component {
                                 <div className="grid grid-cols-2">
                                     <input type="text" value={this.state.styleSet} name="styleSet" onChange={this.handleChange}/>
                                 </div>
-                                <button onClick={this.submitInfo}>Submit</button>
                             </div>
+                            <button onClick={this.submitInfo}>Submit</button>
                         </form>
                     }
 
 
                 </span>
 
-            </QuizForm>
+            </CustomerForm>
         )
     }
 }
