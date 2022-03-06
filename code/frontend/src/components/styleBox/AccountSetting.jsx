@@ -3,6 +3,8 @@ import QuizForm from "./QuizForm";
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 import AccountSettingService from "../../api/styleBox/AccountSettingService";
+import CustomerForm from "./CustomerForm";
+import NavBarCustomer from "./NavBarCustomer";
 
 class AccountSetting extends Component{
     constructor(props) {
@@ -74,85 +76,88 @@ class AccountSetting extends Component{
 
     render() {
         return (
-            <QuizForm>
-                <span>
-                    {this.state.edit == false &&
-                    <form>
-                        <div className=" grid grid-cols-2 gap-1">
-                            <label>Username:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.username}</text>
-                            </div>
+            <div>
+                <NavBarCustomer/>
+                <CustomerForm>
+                    <span>
+                        {this.state.edit == false &&
+                        <form>
+                            <div className=" grid grid-cols-2 gap-1">
+                                <label>Username:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.username}</text>
+                                </div>
 
-                            <label>Phone:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.phone}</text>
-                            </div>
-                            <label>Email:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.email}</text>
-                            </div>
-                            <label>Shipping Address:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.address}</text>
-                            </div>
-                            <label>Payment Information:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.payment}</text>
-                            </div>
-                            <label>Facebook:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.facebook}</text>
-                            </div>
-                            <label>Nickname:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.nickname}</text>
+                                <label>Phone:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.phone}</text>
+                                </div>
+                                <label>Email:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.email}</text>
+                                </div>
+                                <label>Shipping Address:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.address}</text>
+                                </div>
+                                <label>Payment Information:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.payment}</text>
+                                </div>
+                                <label>Facebook:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.facebook}</text>
+                                </div>
+                                <label>Nickname:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.nickname}</text>
+                                </div>
                             </div>
                             <button onClick={this.clickedit}>Edit</button>
-                        </div>
-                    </form>
-                    }
+                        </form>
+                        }
 
-                    {this.state.edit == true &&
-                    <form>
-                        <div className=" grid grid-cols-2 gap-1">
-                            <label>Username:</label>
-                            <div className="grid grid-cols-2">
-                                <text >{this.state.username}</text>
-                            </div>
-                            <label>Phone:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.phone} name="phone" onChange = {this.handleChange}/>
-                            </div>
-                            <label>Email:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.email} name="email" onChange = {this.handleChange}/>
-                            </div>
-                            <label>Shipping Address:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.address} name="address" onChange = {this.handleChange}/>
-                            </div>
-                            <label>Payment Information:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.payment} name="payment" onChange = {this.handleChange}/>
-                            </div>
-                            <label>Facebook:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.facebook} name="facebook" onChange = {this.handleChange}/>
-                            </div>
-                            <label>Nickname:</label>
-                            <div className="grid grid-cols-2">
-                                <input type="text" value={this.state.nickname} name="nickname" onChange = {this.handleChange}/>
+                        {this.state.edit == true &&
+                        <form>
+                            <div className=" grid grid-cols-2 gap-1">
+                                <label>Username:</label>
+                                <div className="grid grid-cols-2">
+                                    <text >{this.state.username}</text>
+                                </div>
+                                <label>Phone:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.phone} name="phone" onChange = {this.handleChange}/>
+                                </div>
+                                <label>Email:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.email} name="email" onChange = {this.handleChange}/>
+                                </div>
+                                <label>Shipping Address:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.address} name="address" onChange = {this.handleChange}/>
+                                </div>
+                                <label>Payment Information:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.payment} name="payment" onChange = {this.handleChange}/>
+                                </div>
+                                <label>Facebook:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.facebook} name="facebook" onChange = {this.handleChange}/>
+                                </div>
+                                <label>Nickname:</label>
+                                <div className="grid grid-cols-2">
+                                    <input type="text" value={this.state.nickname} name="nickname" onChange = {this.handleChange}/>
+                                </div>
                             </div>
                             <button onClick={this.submitInfo}>Submit</button>
-                        </div>
-                    </form>
-                    }
+                        </form>
+                        }
 
 
-                </span>
+                    </span>
 
-            </QuizForm>
+                </CustomerForm>
+            </div>
         )
     }
 }

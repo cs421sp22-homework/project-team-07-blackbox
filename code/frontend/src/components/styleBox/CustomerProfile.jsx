@@ -4,7 +4,6 @@ import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
 import CustomerForm from "./CustomerForm";
-import QuizService from "../../api/styleBox/QuizService";
 import NavBarCustomer from "./NavBarCustomer";
 
 
@@ -21,7 +20,7 @@ class CustomerProfile extends Component {
             bottomSize: "",
             jeanSize: "",
             shoeSize: "",
-            styleSet: ["casual","business"],
+            styleSet: "",
             edit: false
         }
 
@@ -49,39 +48,24 @@ class CustomerProfile extends Component {
 
     // redirect() {
     // }
-    submitInfo(){
+
+    submitInfo() {
         let info = {
             gender: this.state.gender,
-            ftSize: this.state.ft,
+            ftSize: this.state.ftSize,
+            inSize: this.state.inSize,
             weight: this.state.weight,
             shirtSize: this.state.shirtSize,
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            styleSet: this.state.style,
-            inSize: this.state.in,
+            styleSet: this.state.styleSet.split(',')
         }
+        console.log(this.state.styleSet)
         this.setState({edit: false})
-        QuizService.executeQuizService(info)
+        CustomerProfileService.modifyProfile(info)
         // this.redirect();
     }
-    // submitInfo() {
-    //     let info = {
-    //         gender: this.state.gender,
-    //         ftSize: this.state.ft,
-    //         weight: this.state.weight,
-    //         shirtSize: this.state.shirtSize,
-    //         bottomSize: this.state.bottomSize,
-    //         jeanSize: this.state.jeanSize,
-    //         shoeSize: this.state.shoeSize,
-    //         styleSet: this.state.styleSet.split(','),
-    //         inSize: this.state.in,
-    //     }
-    //     console.log(this.state.styleSet.split(','))
-    //     this.setState({edit: false})
-    //     CustomerProfileService.modifyProfile(info)
-    //     // this.redirect();
-    // }
 
     componentDidMount() {
         CustomerProfileService.getHomepage()
@@ -104,7 +88,7 @@ class CustomerProfile extends Component {
     render() {
         return (
             <div>
-            <NavBarCustomer  />
+                <NavBarCustomer/>
                 <CustomerForm>
                     <span>
                         {this.state.edit == false &&
@@ -193,6 +177,7 @@ class CustomerProfile extends Component {
                                 </div>
                                 <button onClick={this.submitInfo}>Submit</button>
                             </form>
+
                         }
 
 

@@ -7,6 +7,7 @@ class CustomerProfileService{
         return axios.get(`${API_URL}/customer/profile`, {withCredentials: true})
     }
     modifyProfile(info){
+        console.log(info)
         return axios.post(`${API_URL}/customer/profile`,info,{withCredentials: true})
     }
 }
