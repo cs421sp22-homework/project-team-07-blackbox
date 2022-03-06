@@ -4,6 +4,8 @@ import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
 import CustomerForm from "./CustomerForm";
+import QuizService from "../../api/styleBox/QuizService";
+import NavBarCustomer from "./NavBarCustomer";
 
 
 class CustomerProfile extends Component {
@@ -47,8 +49,7 @@ class CustomerProfile extends Component {
 
     // redirect() {
     // }
-
-    submitInfo() {
+    submitInfo(){
         let info = {
             gender: this.state.gender,
             ftSize: this.state.ft,
@@ -57,14 +58,30 @@ class CustomerProfile extends Component {
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            styleSet: this.state.styleSet.split(','),
+            styleSet: this.state.style,
             inSize: this.state.in,
         }
-        console.log(this.state.styleSet.split(','))
         this.setState({edit: false})
-        CustomerProfileService.modifyProfile(info)
+        QuizService.executeQuizService(info)
         // this.redirect();
     }
+    // submitInfo() {
+    //     let info = {
+    //         gender: this.state.gender,
+    //         ftSize: this.state.ft,
+    //         weight: this.state.weight,
+    //         shirtSize: this.state.shirtSize,
+    //         bottomSize: this.state.bottomSize,
+    //         jeanSize: this.state.jeanSize,
+    //         shoeSize: this.state.shoeSize,
+    //         styleSet: this.state.styleSet.split(','),
+    //         inSize: this.state.in,
+    //     }
+    //     console.log(this.state.styleSet.split(','))
+    //     this.setState({edit: false})
+    //     CustomerProfileService.modifyProfile(info)
+    //     // this.redirect();
+    // }
 
     componentDidMount() {
         CustomerProfileService.getHomepage()
@@ -86,100 +103,103 @@ class CustomerProfile extends Component {
 
     render() {
         return (
-            <CustomerForm>
-                <span>
-                    {this.state.edit == false &&
-                        <form>
-                            <div className=" grid grid-cols-2 gap-1">
-                                <label>Gender:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.gender}</text>
+            <div>
+            <NavBarCustomer  />
+                <CustomerForm>
+                    <span>
+                        {this.state.edit == false &&
+                            <form>
+                                <div className=" grid grid-cols-2 gap-1">
+                                    <label>Gender:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.gender}</text>
+                                    </div>
+                                    <label>Height:</label>
+                                    <div className="grid grid-cols-4">
+                                        <text>{this.state.ftSize}</text>
+                                        <label>FT.</label>
+                                        <text>{this.state.inSize}</text>
+                                        <label>IN.</label>
+                                    </div>
+                                    <label>Weight:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.weight}</text>
+                                        <label>LBS.</label>
+                                    </div>
+                                    <label>Shirt Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.shirtSize}</text>
+                                    </div>
+                                    <label>Bottom Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.bottomSize}</text>
+                                    </div>
+                                    <label>Jean Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.jeanSize}</text>
+                                    </div>
+                                    <label>Shoe Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.shoeSize}</text>
+                                    </div>
+                                    <label>Preference Style:</label>
+                                    <div className="grid grid-cols-2">
+                                        <text>{this.state.styleSet + " "}</text>
+                                    </div>
                                 </div>
-                                <label>Height:</label>
-                                <div className="grid grid-cols-4">
-                                    <text>{this.state.ftSize}</text>
-                                    <label>FT.</label>
-                                    <text>{this.state.inSize}</text>
-                                    <label>IN.</label>
-                                </div>
-                                <label>Weight:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.weight}</text>
-                                    <label>LBS.</label>
-                                </div>
-                                <label>Shirt Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.shirtSize}</text>
-                                </div>
-                                <label>Bottom Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.bottomSize}</text>
-                                </div>
-                                <label>Jean Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.jeanSize}</text>
-                                </div>
-                                <label>Shoe Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.shoeSize}</text>
-                                </div>
-                                <label>Preference Style:</label>
-                                <div className="grid grid-cols-2">
-                                    <text>{this.state.styleSet + " "}</text>
-                                </div>
-                            </div>
-                            <button onClick={this.clickedit}>Edit</button>
-                        </form>
-                    }
+                                <button onClick={this.clickedit}>Edit</button>
+                            </form>
+                        }
 
-                    {this.state.edit == true &&
-                        <form>
-                            <div className=" grid grid-cols-2 gap-1">
-                                <label>Gender:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.gender} name="gender" onChange={this.handleChange}/>
+                        {this.state.edit == true &&
+                            <form>
+                                <div className=" grid grid-cols-2 gap-1">
+                                    <label>Gender:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.gender} name="gender" onChange={this.handleChange}/>
+                                    </div>
+                                    <label>Height:</label>
+                                    <div className="grid grid-cols-4">
+                                        <input type="text" value={this.state.ftSize} name="ftSize" onChange={this.handleChange}/>
+                                        <label>FT.</label>
+                                        <input type="text" value={this.state.inSize} name="inSize" onChange={this.handleChange}/>
+                                        <label>IN.</label>
+                                    </div>
+                                    <label>Weight:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange}/>
+                                        <label>LBS.</label>
+                                    </div>
+                                    <label>Shirt Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>
+                                    </div>
+                                    <label>Bottom Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>
+                                    </div>
+                                    <label>Jean Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>
+                                    </div>
+                                    <label>Shoe Size:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.shoeSize} name="shoeSize" onChange={this.handleChange}/>
+                                    </div>
+                                    <label>Preference Style:</label>
+                                    <div className="grid grid-cols-2">
+                                        <input type="text" value={this.state.styleSet} name="styleSet" onChange={this.handleChange}/>
+                                    </div>
                                 </div>
-                                <label>Height:</label>
-                                <div className="grid grid-cols-4">
-                                    <input type="text" value={this.state.ftSize} name="ftSize" onChange={this.handleChange}/>
-                                    <label>FT.</label>
-                                    <input type="text" value={this.state.inSize} name="inSize" onChange={this.handleChange}/>
-                                    <label>IN.</label>
-                                </div>
-                                <label>Weight:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange}/>
-                                    <label>LBS.</label>
-                                </div>
-                                <label>Shirt Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>
-                                </div>
-                                <label>Bottom Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>
-                                </div>
-                                <label>Jean Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>
-                                </div>
-                                <label>Shoe Size:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.shoeSize} name="shoeSize" onChange={this.handleChange}/>
-                                </div>
-                                <label>Preference Style:</label>
-                                <div className="grid grid-cols-2">
-                                    <input type="text" value={this.state.styleSet} name="styleSet" onChange={this.handleChange}/>
-                                </div>
-                            </div>
-                            <button onClick={this.submitInfo}>Submit</button>
-                        </form>
-                    }
+                                <button onClick={this.submitInfo}>Submit</button>
+                            </form>
+                        }
 
 
-                </span>
+                    </span>
 
-            </CustomerForm>
+                </CustomerForm>
+            </div>
         )
     }
 }
