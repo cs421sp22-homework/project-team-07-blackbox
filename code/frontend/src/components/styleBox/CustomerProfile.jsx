@@ -11,17 +11,18 @@ class CustomerProfile extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            gender: "",
-            ftSize: "",
-            inSize: "",
-            weight: "",
-            shirtSize: "",
-            bottomSize: "",
-            jeanSize: "",
-            shoeSize: "",
-            styleSet: "",
-            edit: false
+        this.state={
+            gender:"Female",
+            ftSize:"23",
+            inSize:"20",
+            weight:"60",
+            shirtSize:"80",
+            bottomSize:"20",
+            jeanSize:"40",
+            shoeSize:"35",
+            style:["casual, business"],
+            edit : false,
+
         }
 
         this.clickedit = this.clickedit.bind(this)
