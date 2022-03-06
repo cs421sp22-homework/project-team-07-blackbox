@@ -9,27 +9,28 @@ const PrimaryNavLink = tw(
     NavLink
 )`text-gray-100 bg-pink-500 px-6 py-3 border-none rounded hocus:bg-pink-900 focus:shadow-inner mt-6 md:mt-4 lg:mt-0`;
 class NavBar extends Component{
-    constructor(props) {
-        super(props);
-    }
 
     render(){
         return(
             <NavRow>
                 <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
-                    <NavLink target="_blank"
+                    <NavLink target="_self"
+                             href="/">
+                        Homepage
+                    </NavLink>
+                    <NavLink target="_self"
                              href="#">
                         Stylists
                     </NavLink>
-                    <NavLink target="_blank" href="#">
+                    <NavLink target="_self" href="#">
                         Shopping
                     </NavLink>
-                    <NavLink target="_blank" href="#">
+                    <NavLink target="_self" href="#">
                         Community
                     </NavLink>
                     <div tw="md:hidden flex-auto h-0"></div>
-                    <PrimaryNavLink target="_blank" href="#">
-                        Sign In
+                    <PrimaryNavLink target="_self" href="/login">
+                        Login
                     </PrimaryNavLink>
                 </div>
             </NavRow>

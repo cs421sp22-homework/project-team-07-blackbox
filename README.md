@@ -1,6 +1,6 @@
 # Style Box 
 
-The Style Box is a platform that integrates the idea of e-commerce and social network. It has three sections: ‘design for you’, ‘design for others’ and ‘favorite ootd sharing’. The Style Box lets the customer get customized clothing shopping experience, gives stylists opportunities to show their talents and maintains an active fashion community. Our platform provides one-stop service, including outfit fixing, shopping, and delivery. The customer can pick up a stylist on our website to help them select clothing items and design the outfits. The customer will get a style report and buy all the clothing items on our website. Eventually, a style box would be delivered to the customer containing all they need to become a fashion insider.
+The Style Box is a platform that integrates the idea of e-commerce and social network. It has three sections: ‘design for you’, ‘design for others’ and ‘favorite ootd sharing’. The Style Box lets the customer get customized clothing shopping experience, gives stylists opportunities to show their talents and maintains an active fashion community. The customer can pick up a stylist on our website to help them select clothing items and design the outfits. 
 
 **Team**
 
@@ -37,7 +37,7 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
    cd project-team-07-blackbox\code\frontend
    npm install
    ```
-3. Open backend code project from IntelliJ IDEA and run file 'project-team-07-blackbox/code/backend/src/main/java/com/stylebox/StyleBoxBackendApplication.java', make sure your Java version is 11 and install Maven.
+3. Open backend code project from IntelliJ IDEA and run file 'project-team-07-blackbox/code/backend/src/main/java/com/stylebox/StyleBoxBackendApplication.java', make sure your Java version is 1.8 and install Maven.
 
 4. Run frontend with the following command. The frontent webpage is run on http://localhost:3000 in default.
 

@@ -40,9 +40,7 @@ const Description = tw(
     DescriptionBase
 )`mt-4 text-center lg:text-left lg:text-base text-gray-700 max-w-lg mx-auto lg:mx-0`;
 const Actions = tw.div`flex flex-col sm:flex-row justify-center lg:justify-start`;
-const ActionButton = tw(
-    AnchorLink
-)`px-8 py-3 font-bold rounded bg-pink-500 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-inner focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
+const ActionButton = tw.a`px-8 py-3 font-bold rounded bg-pink-500 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-inner focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
 const SecondaryButton = tw(
     ActionButton
 )`mt-6 sm:mt-12 sm:ml-8 bg-gray-300 text-gray-800 hocus:bg-gray-500 hocus:text-gray-900`;
@@ -124,7 +122,7 @@ class HomePage extends Component {
                         </div>
                         <div tw="flex justify-center pb-20">
                             <Actions>
-                                <SecondaryButton href="#">
+                                <SecondaryButton href="/quiz">
                                     Take Quiz
                                 </SecondaryButton>
                             </Actions>
@@ -285,7 +283,7 @@ class HomePage extends Component {
                                 }
                             }
                         />
-                       
+
                     </Content2Xl>
                 </Container>
                 <Footer/>
