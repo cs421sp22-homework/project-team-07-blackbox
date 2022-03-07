@@ -12,4 +12,5 @@ public class StylistProfileModifyDTO {
     private String gender;
     private Set<String> style;
     private Integer age;
+    private String token;
 }

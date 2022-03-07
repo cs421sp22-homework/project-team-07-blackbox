@@ -16,4 +16,5 @@ public class CustomerProfileDTO {
     private String jeanSize;
     private String shoeSize;
     private Set<String> styleSet;
+    private String token;
 }

@@ -13,7 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -101,26 +101,26 @@ public class UserController {
         addJWTToResponse(request, response, "", Duration.ofSeconds(0));
     }
 
-    @ExceptionHandler({ AuthenticationException.class })
-    public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
-    }
+//    @ExceptionHandler({ AuthenticationException.class })
+//    public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+//    }
 
     @GetMapping("/account")
-    public AccountDTO getAccount(HttpServletRequest request){
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public AccountDTO getAccount(String token){
+        User user = jwtTokenUtil.getUserFromJwt(token);
         return userService.getAccount(user);
     }
 
     @PostMapping("/account")
-    public void modifyAccount(HttpServletRequest request, @RequestBody AccountDTO accountDTO){
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public void modifyAccount(@RequestBody AccountDTO accountDTO){
+        User user = jwtTokenUtil.getUserFromJwt(accountDTO.getToken());
         userService.modifyAccount(user, accountDTO);
     }
 
     @GetMapping("/customer/profile")
-    public CustomerProfileDTO getCustomerProfile(HttpServletRequest request){
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public CustomerProfileDTO getCustomerProfile(String token){
+        User user = jwtTokenUtil.getUserFromJwt(token);
         if (!user.getRole().getName().equals("Customer")) {
             throw new Rest400Exception("Incorrect role");
         }
@@ -128,8 +128,8 @@ public class UserController {
     }
 
     @PostMapping("/customer/profile")
-    public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO){
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public void createCustomerProfile(@RequestBody CustomerProfileDTO customerProfileDTO){
+        User user = jwtTokenUtil.getUserFromJwt(customerProfileDTO.getToken());
         if (!user.getRole().getName().equals("Customer")) {
             throw new Rest400Exception("Incorrect role");
         }
@@ -137,8 +137,8 @@ public class UserController {
     }
 
     @GetMapping("/stylist/profile")
-    public StylistProfileGetDTO getStylistProfile(HttpServletRequest request) {
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public StylistProfileGetDTO getStylistProfile(String token) {
+        User user = jwtTokenUtil.getUserFromJwt(token);
         if (!user.getRole().getName().equals("Stylist")) {
             throw new Rest400Exception("Incorrect role");
         }
@@ -146,8 +146,8 @@ public class UserController {
     }
 
     @PostMapping("/stylist/profile")
-    public void modifyStylistProfile(HttpServletRequest request, @RequestBody StylistProfileModifyDTO stylistProfileModifyDTO) {
-        User user = jwtTokenUtil.getUserFromRequest(request);
+    public void modifyStylistProfile(@RequestBody StylistProfileModifyDTO stylistProfileModifyDTO) {
+        User user = jwtTokenUtil.getUserFromJwt(stylistProfileModifyDTO.getToken());
         if (!user.getRole().getName().equals("Stylist")) {
             throw new Rest400Exception("Incorrect role");
         }

@@ -104,7 +104,11 @@ public class JwtTokenUtil {
 
     public User getUserFromRequest(HttpServletRequest request) {
         String jwt = getJWTFromRequest(request);
-        if (null == jwt) {
+        return getUserFromJwt(jwt);
+    }
+
+    public User getUserFromJwt(String jwt) {
+        if (null == jwt || jwt.equals("")) {
             throw new Rest400Exception("jwt is null");
         }
         Long userId = getUserIdFromToken(jwt);

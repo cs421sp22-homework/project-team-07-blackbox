@@ -11,4 +11,5 @@ public class AccountDTO {
     private String payment;
     private String facebook;
     private String nickname;
+    private String token;
 }
