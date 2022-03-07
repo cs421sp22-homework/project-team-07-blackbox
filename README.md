@@ -101,4 +101,4 @@ The database we used is Mysql on Aliyun server.
 
 We use JUnit to do the unit test. The test code can be found in ``project-team-07-blackbox/code/backend/src/test/java/com/stylebox/``.
 
-We use Github Action to deploy the frontend and backend on Heroku automatically. The link can be seen on https://stylebox5.herokuapp.com/.
+We deploy the frontend and backend on Aliyun. The link can be seen on http://121.41.106.214/.
