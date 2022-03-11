@@ -1,30 +1,30 @@
 import tw from 'twin.macro'
 import AnchorLink from "react-anchor-link-smooth-scroll/lib/anchor-link";
 import React, {Component} from 'react'
-import { Container, Content2Xl } from '../misc/Layouts'
-import { components } from "../../ComponentRenderer.js";
-import homePageImage from "../../images/homepage-clothing.jpeg"
-import stylistImage from "../../images/stylist.jpeg"
-import quizImage from "../../images/quiz.jpeg"
-import {SectionHeading as HeadingBase, Subheading} from "../misc/Headings";
+import { Container, Content2Xl } from '../components/misc/Layouts'
+import { components } from "../ComponentRenderer.js";
+import homePageImage from "../images/homepage-clothing.jpeg"
+import stylistImage from "../images/stylist.jpeg"
+import quizImage from "../images/quiz.jpeg"
+import {SectionHeading as HeadingBase, Subheading} from "../components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import Features from "../features/ThreeColWithoutSideImage";
-import TabItemGrid from "../cards/TabItemGrid";
-import womenItem1 from "../../images/clothing-items/women/bottoms/women-bottom-1.jpeg"
-import womenItem2 from "../../images/clothing-items/women/tops/women-tops-1.png"
-import womenItem3 from "../../images/clothing-items/women/accessories/women-accessories-1.jpeg"
-import womenItem4 from "../../images/clothing-items/women/bottoms/women-bottom-2.png"
-import menItem1 from "../../images/clothing-items/men/tops/men-tops-1.png"
-import menItem2 from "../../images/clothing-items/men/tops/men-tops-2.png"
-import menItem3 from "../../images/clothing-items/men/accessories/men-accessories-1.png"
-import menItem4 from "../../images/clothing-items/men/shoes/men-shoes-1.png"
-import kidsItem1 from "../../images/clothing-items/kids/dress/kids-dress-1.png"
-import kidsItem2 from "../../images/clothing-items/kids/tops/kids-tops-1.png"
-import kidsItem3 from "../../images/clothing-items/kids/bottoms/kids-bottoms-1.png"
-import kidsItem4 from "../../images/clothing-items/kids/dress/kids-dress-2.png"
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import Features from "../components/features/ThreeColWithoutSideImage";
+import TabItemGrid from "../components/cards/TabItemGrid";
+import womenItem1 from "../images/clothing-items/women/bottoms/women-bottom-1.jpeg"
+import womenItem2 from "../images/clothing-items/women/tops/women-tops-1.png"
+import womenItem3 from "../images/clothing-items/women/accessories/women-accessories-1.jpeg"
+import womenItem4 from "../images/clothing-items/women/bottoms/women-bottom-2.png"
+import menItem1 from "../images/clothing-items/men/tops/men-tops-1.png"
+import menItem2 from "../images/clothing-items/men/tops/men-tops-2.png"
+import menItem3 from "../images/clothing-items/men/accessories/men-accessories-1.png"
+import menItem4 from "../images/clothing-items/men/shoes/men-shoes-1.png"
+import kidsItem1 from "../images/clothing-items/kids/dress/kids-dress-1.png"
+import kidsItem2 from "../images/clothing-items/kids/tops/kids-tops-1.png"
+import kidsItem3 from "../images/clothing-items/kids/bottoms/kids-bottoms-1.png"
+import kidsItem4 from "../images/clothing-items/kids/dress/kids-dress-2.png"
+import NavBar from "./navBar_footer/NavBar";
+import Footer from "./navBar_footer/Footer";
 
 const Row = tw.div`flex`;
 

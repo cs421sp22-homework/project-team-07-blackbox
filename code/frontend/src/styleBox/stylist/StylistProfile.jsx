@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import Footer from "components/styleBox/Footer.jsx";
+import Footer from "styleBox/navBar_footer/Footer.jsx";
 import StylistProfileImageIntro from "components/testimonials/StylistProfileImageIntro.js"
 import StylistProfilePastDesign from "components/testimonials/StylistProfileTwoColumnWithImageAndProfilePictureReview.js"
 import StylistService from "api/styleBox/StylistService";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
-import NavBarCustomer from "./NavBarCustomer";
+import NavBarCustomer from "../navBar_footer/NavBarCustomer";
 
 class StylistProfile extends Component{
   constructor(props){

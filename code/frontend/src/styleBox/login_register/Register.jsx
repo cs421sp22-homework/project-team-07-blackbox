@@ -7,7 +7,7 @@ import styled from "styled-components";
 import AuthenticationService from '../../api/styleBox/AuthenticationService';
 import cookie from 'react-cookies'
 import validator from 'validator'
-import NavBar from "./NavBar";
+import NavBar from "../navBar_footer/NavBar";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;

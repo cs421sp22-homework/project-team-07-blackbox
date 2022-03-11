@@ -7,7 +7,7 @@ import "../../styles/tailwind.min.css"
 
 import AuthenticationService from '../../api/styleBox/AuthenticationService';
 import cookie from 'react-cookies'
-import NavBar from "./NavBar";
+import NavBar from "../../styleBox/navBar_footer/NavBar";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;

@@ -5,7 +5,7 @@ import Features from "components/features/VerticalWithAlternateImageAndText.js";
 import Blog from "components/blogs/ThreeColSimpleWithImage.js";
 import Testimonial from "components/testimonials/TwoColumnWithImage.js";
 import ContactUsForm from "components/forms/SimpleContactUs.js";
-import Footer from "components/styleBox/Footer.jsx";
+import Footer from "styleBox/navBar_footer/Footer.jsx";
 import TwoColumnWithImageAndProfilePictureReview from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js"
 import TwoColumnWithImageAndRating from "components/testimonials/TwoColumnWithImageAndRating.js"
 import TwoColumnWithImage from "components/testimonials/TwoColumnWithImage.js"

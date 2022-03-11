@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import AuthenticationService from '../../api/styleBox/AuthenticationService';
+import AuthenticationService from '../api/styleBox/AuthenticationService';
 
 class AuthenticatedRoute extends Component {
     render() {

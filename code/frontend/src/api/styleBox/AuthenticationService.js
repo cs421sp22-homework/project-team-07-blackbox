@@ -22,11 +22,17 @@ class AuthenticationService {
 
     // 判断用户是否登录，通过cookie
     isUserLoggedIn() {
-        let token = cookie.load('jwt')
-        if (token === undefined) {
-            return false
-        }
+        // let token = cookie.load('jwt')
+        // if (token === undefined) {
+        //     return false
+        // }
+        // let user = sessionStorage.getItem('token')
         return true
+    }
+
+    storeToken(token){
+        sessionStorage.setItem('token', token)
+        // this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
     }
 
     // Create Interceptors

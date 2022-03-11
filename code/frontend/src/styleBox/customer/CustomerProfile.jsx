@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import QuizForm from "./QuizForm";
+import QuizForm from "../quiz/QuizForm"
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
 import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
 import CustomerForm from "./CustomerForm";
-import NavBarCustomer from "./NavBarCustomer";
+import NavBarCustomer from "../navBar_footer/NavBarCustomer";
 
 
 class CustomerProfile extends Component {
@@ -52,6 +52,7 @@ class CustomerProfile extends Component {
 
     submitInfo() {
         let info = {
+            token: sessionStorage.getItem('token'),
             gender: this.state.gender,
             ftSize: this.state.ftSize,
             inSize: this.state.inSize,

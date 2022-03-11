@@ -3,15 +3,14 @@ import "styles/globalStyles.css";
 import React from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomePage from "./components/styleBox/HomePage";
-import Login from "./components/styleBox/Login";
-import Register from "./components/styleBox/Register"
-import AuthenticatedRoute from './components/styleBox/AuthenticatedRoute'
-import StylistProfile from"./components/styleBox/StylistProfile";
-import CustomerProfile from "./components/styleBox/CustomerProfile";
-import AccountSetting from "./components/styleBox/AccountSetting"
-import Quiz from "./components/styleBox/Quiz";
-import BasicRouter from "./components/styleBox/BasicRouter";
+import HomePage from "./styleBox/HomePage";
+import Login from "./styleBox/login_register/Login";
+import Register from "./styleBox/login_register/Register"
+import AuthenticatedRoute from './styleBox/AuthenticatedRoute'
+import StylistProfile from"./styleBox/stylist/StylistProfile";
+import CustomerProfile from "./styleBox/customer/CustomerProfile";
+import AccountSetting from "./styleBox/AccountSetting"
+import Quiz from "./styleBox/quiz/Quiz";
 
 
 
