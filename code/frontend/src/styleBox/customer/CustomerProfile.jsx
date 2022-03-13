@@ -5,6 +5,7 @@ import tw from 'twin.macro'
 import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
 import CustomerForm from "./CustomerForm";
 import NavBarCustomer from "../navBar_footer/NavBarCustomer";
+import Footer from 'styleBox/navBar_footer/Footer';
 
 
 class CustomerProfile extends Component {
@@ -186,6 +187,7 @@ class CustomerProfile extends Component {
                     </span>
 
                 </CustomerForm>
+                <Footer/>
             </div>
         )
     }

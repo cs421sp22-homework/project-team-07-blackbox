@@ -9,8 +9,11 @@ import Register from "./styleBox/login_register/Register"
 import AuthenticatedRoute from './styleBox/AuthenticatedRoute'
 import StylistProfile from"./styleBox/stylist/StylistProfile";
 import CustomerProfile from "./styleBox/customer/CustomerProfile";
-import AccountSetting from "./styleBox/AccountSetting"
+import AccountSetting from "./styleBox/AccountSetting";
 import Quiz from "./styleBox/quiz/Quiz";
+import ReadStylist from "./styleBox/customer/ReadStylist";
+import Test from "components/features/DashedBorderSixFeatures";
+import CreateOrder from "styleBox/order/CreateOrder";
 
 
 
@@ -26,10 +29,13 @@ export default function App() {
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
+              <Route path="/test" component={Test}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
+              <AuthenticatedRoute path="/stylist/homepage" component={ReadStylist}/>
+              <AuthenticatedRoute path="/order" component={CreateOrder}/>
           </Switch>
       </>
   </Router>
