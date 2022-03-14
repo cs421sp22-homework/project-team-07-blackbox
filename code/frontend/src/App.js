@@ -31,7 +31,7 @@ export default function App() {
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
-              <AuthenticatedRoute path="/order" component={OrderList}/>
+              <AuthenticatedRoute path="/orders" component={OrderList}/>
           </Switch>
       </>
   </Router>
