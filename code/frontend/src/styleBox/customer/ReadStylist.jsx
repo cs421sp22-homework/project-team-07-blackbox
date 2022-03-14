@@ -13,7 +13,7 @@ import styled from "styled-components";
 
 
 const PrimaryButton = styled(PrimaryButtonBase)(props => [
-  tw`w-56 mx-8 mt-10 mt-8 md:mt-8 text-sm inline-block`,
+  tw`w-56 mx-8 mt-10 mt-8 md:mt-8 text-sm inline-block bg-pink-500 hover:bg-pink-400`,
   props.buttonRounded && tw`rounded-full`
 ]);
 
@@ -114,7 +114,10 @@ class ReadStylist extends Component{
   createOrder(){
     this.props.history.push({
       pathname:'/order',
-      state: this.state.testimonials[0].stylistId
+      state: {
+        stylistId: this.state.testimonials[0].stylistId,
+        nickname: this.state.testimonials[0].nickname
+      }
     });
   }
 

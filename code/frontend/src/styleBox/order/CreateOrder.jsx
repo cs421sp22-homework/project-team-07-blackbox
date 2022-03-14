@@ -55,8 +55,9 @@ class CreateOrder extends Component {
         return (
             <div>
                 <NavBarCustomer/>
-                    {/* <div>stylist id: {state}</div> */}
-                    <CreateOrderForm/>
+                    {/* <div>stylist id: {state[0]}</div>
+                    <div>stylist nickname: {state[1]}</div> */}
+                    <CreateOrderForm stylist={state}/>
                     
                 <Footer/>
             </div>
