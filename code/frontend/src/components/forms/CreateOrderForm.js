@@ -107,7 +107,7 @@ class CreateOrderForm extends Component{
     console.log(this.state.selectedStyles)
   }
 
-  submitInfo(){
+  submitInfo(event){
     let info = {
       styleSet : this.state.selectedStyles,
       occasionSet: this.state.selectedOccasions,
@@ -116,16 +116,18 @@ class CreateOrderForm extends Component{
       clothPriceLow: this.state.clothPriceLow,
       clothPriceHigh: this.state.clothPriceHigh
     }
+    event.preventDefault();
     console.log("create info")
     OrderService.createOrder(this.props.stylist.stylistId,info)
     .then((response)=>{
       console.log(response.data);
+      alert("Create order success!");
       this.props.history.push('/');
     })
     .catch((error) => {
-      console.log('meet error'+error.response);
+      console.log(error.response);
       alert("Create order failed. Please try again.");
-      this.props.history.push("/");
+      // this.props.history.push("/");
     })
   }
 
@@ -136,7 +138,7 @@ class CreateOrderForm extends Component{
         <FormContainer>
           <div tw="mx-auto max-w-4xl">
             <h2 align="center">Create an Order</h2>
-            <form action="#">
+            <form>
 
                 <Column>
                   <div>Stylist Name: {this.props.stylist.nickname}</div>

@@ -51,13 +51,12 @@ class CreateOrder extends Component {
 
 
     render() {
-        const {state} = this.props.location
         return (
             <div>
                 <NavBarCustomer/>
-                    {/* <div>stylist id: {state[0]}</div>
+                    {/* <div>stylist id: {this.props.stylistId}</div>
                     <div>stylist nickname: {state[1]}</div> */}
-                    <CreateOrderForm stylist={state}/>
+                    <CreateOrderForm stylist={this.props.location} history={this.props.history}/>
                     
                 <Footer/>
             </div>
