@@ -44,7 +44,7 @@ public class StylistService {
         StyListsDTO styListsDTO = new StyListsDTO();
         Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
                 ("rate", "followNum")));
-
+        // Look at https://blog.csdn.net/qq_46497008/article/details/116203251 spring data jpa复杂查询
         Specification<StylistInformation> specification = new Specification<StylistInformation>() {
             @Override
             public Predicate toPredicate(Root<StylistInformation> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
