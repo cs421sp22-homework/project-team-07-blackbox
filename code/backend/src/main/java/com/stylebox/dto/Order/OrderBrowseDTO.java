@@ -11,10 +11,10 @@ public class OrderBrowseDTO {
     private String nickname;
     private int orderPrice;
     private Set<String> styleSet;
-    private Set<String> locationSet;
+    private Set<String> occasionSet;
     private String description;
     private int clothPriceLow;
     private int clothPriceHigh;
     private Date time;
-    private int orderId;
+    private Long orderId;
 }

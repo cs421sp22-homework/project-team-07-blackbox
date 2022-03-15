@@ -18,6 +18,10 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedEntityGraph(name = "Orders.Graph", attributeNodes = {
+        @NamedAttributeNode("customer"),
+        @NamedAttributeNode("stylist"),
+})
 public class Orders {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -29,7 +33,7 @@ public class Orders {
 
     @Column(name = "last_edit_datetime")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastEditDatetime;
+    private Date lastEditDatetime = new Date();
 
     @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
     @JoinTable(name = "order_style",
@@ -52,6 +56,9 @@ public class Orders {
 
     @Column(name = "cloth_price_high")
     private int clothPriceHigh;
+
+    @Column(name = "is_read")
+    private boolean isRead = false;
 
     @ManyToOne(targetEntity = CustomerInformation.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_info_id", referencedColumnName = "id")

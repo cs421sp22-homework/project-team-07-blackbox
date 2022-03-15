@@ -1,23 +1,27 @@
 package com.stylebox.service;
 
+import com.stylebox.dto.Order.OrderBrowseDTO;
 import com.stylebox.dto.Order.OrderCreateDTO;
 import com.stylebox.dto.Order.OrderListDTO;
+import com.stylebox.dto.stylist.StyDTO;
 import com.stylebox.entity.stylist.Orders;
-import com.stylebox.entity.user.CustomerInformation;
-import com.stylebox.entity.user.Style;
-import com.stylebox.entity.user.StylistInformation;
-import com.stylebox.entity.user.User;
+import com.stylebox.entity.user.*;
 import com.stylebox.repository.stylist.OrderRepository;
 import com.stylebox.repository.user.CustomerInformationRepository;
 import com.stylebox.repository.user.StyleRepository;
 import com.stylebox.repository.user.StylistInformationRepository;
+import com.stylebox.util.SortUtil;
+import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import javax.persistence.criteria.*;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +35,8 @@ public class OrderService {
     final StylistInformationRepository stylistInformationRepository;
 
     final ModelMapper modelMapper;
+
+    final SortUtil sortUtil;
 
     public void createOrder(User user, Long styid, OrderCreateDTO orderCreateDTO) {
         Orders orders = new Orders();
@@ -63,7 +69,66 @@ public class OrderService {
         orderRepository.save(orders);
     }
 
-    public OrderListDTO getOrderList(User user) {
-        return new OrderListDTO();
+    public OrderListDTO getOrderList(User user, int page, String sort, int limit) {
+        OrderListDTO orderListDTO = new OrderListDTO();
+        if (sort.equals("time")) {
+            sort = "createdDatetime";
+        } else if (sort.equals("-time")) {
+            sort = "-createdDatetime";
+        }
+        Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
+                ("createdDatetime", "isRead")));
+
+        Specification<Orders> specification = new Specification<Orders>() {
+            @Override
+            public Predicate toPredicate(Root<Orders> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Predicate predicate = criteriaBuilder.conjunction();
+                // condition: check user id
+                if (user.getRole().getName().equals("Customer")) {
+                    Join<Orders, CustomerInformation> joinCust = root.join("customer");
+                    predicate.getExpressions().add(criteriaBuilder
+                            .equal(joinCust.get("id"), user.getCustomerInformation().getId()));
+                } else if (user.getRole().getName().equals("Stylist")){
+                    Join<Orders, StylistInformation> joinSty = root.join("stylist");
+                    predicate.getExpressions().add(criteriaBuilder
+                            .equal(joinSty.get("id"), user.getStylistInformation().getId()));
+                } else {
+                    throw new Rest400Exception("Incorrect role");
+                }
+                return predicate;
+            }
+        };
+
+        Page<Orders> all = orderRepository.findAll(specification, pageable);
+        int totalPages = all.getTotalPages();
+
+        List<OrderBrowseDTO> orderBrowseDTOS = new ArrayList<>();
+        for (Orders o : all) {
+            OrderBrowseDTO orderBrowseDTO = modelMapper.map(o, OrderBrowseDTO.class);
+            //nickname
+            if (user.getRole().getName().equals("Customer")) {
+                orderBrowseDTO.setNickname(o.getStylist().getUser().getNickname());
+            } else {
+                orderBrowseDTO.setNickname(o.getCustomer().getUser().getNickname());
+            }
+            //styleSet
+            Set<String> styles = new HashSet<>();
+            for (Style s : o.getStyleSet()) {
+                styles.add(s.getStyleName());
+            }
+            orderBrowseDTO.setStyleSet(styles);
+            //occasionSet
+            Set<String> occs = new HashSet<>(Arrays.asList(o.getOccasions().split(",")));
+            orderBrowseDTO.setOccasionSet(occs);
+            //lastEditDatetime -- time
+            orderBrowseDTO.setTime(o.getLastEditDatetime());
+            //orderid
+            orderBrowseDTO.setOrderId(o.getId());
+            orderBrowseDTOS.add(orderBrowseDTO);
+        }
+        orderListDTO.setTotalPages(totalPages);
+        orderListDTO.setData(orderBrowseDTOS);
+
+        return orderListDTO;
     }
 }

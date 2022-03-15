@@ -26,8 +26,12 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public OrderListDTO getOrderList(HttpServletRequest request) {
+    public OrderListDTO getOrderList(HttpServletRequest request,
+                                     @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                     @RequestParam(value = "sort", required = false, defaultValue = "") String sort,
+                                     @RequestParam(value = "limit", required = false, defaultValue = "3") int limit
+    ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
-        return orderService.getOrderList(user);
+        return orderService.getOrderList(user, page, sort, limit);
     }
 }
