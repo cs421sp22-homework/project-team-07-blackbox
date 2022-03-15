@@ -1,4 +1,4 @@
-package com.stylebox.repository;
+package com.stylebox.repository.user;
 
 import com.stylebox.entity.user.User;
 import org.springframework.data.domain.Page;

@@ -1,8 +1,8 @@
 package com.stylebox.util;
 
 import com.stylebox.entity.user.User;
-import com.stylebox.repository.UserLoginRepository;
-import com.stylebox.repository.UserRepository;
+import com.stylebox.repository.user.UserLoginRepository;
+import com.stylebox.repository.user.UserRepository;
 import exception.Rest400Exception;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;

@@ -1,7 +1,7 @@
 package com.stylebox.config.security;
 
 import com.stylebox.entity.user.User;
-import com.stylebox.repository.UserRepository;
+import com.stylebox.repository.user.UserRepository;
 import com.stylebox.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

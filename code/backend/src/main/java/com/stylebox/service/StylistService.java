@@ -1,16 +1,13 @@
 package com.stylebox.service;
 
-import com.github.wenhao.jpa.PredicateBuilder;
-import com.github.wenhao.jpa.Specifications;
 import com.stylebox.dto.stylist.StyDTO;
 import com.stylebox.dto.stylist.StyListsDTO;
 import com.stylebox.entity.user.*;
-import com.stylebox.repository.RoleRepository;
-import com.stylebox.repository.StyleRepository;
-import com.stylebox.repository.StylistInformationRepository;
-import com.stylebox.repository.UserRepository;
+import com.stylebox.repository.user.RoleRepository;
+import com.stylebox.repository.user.StyleRepository;
+import com.stylebox.repository.user.StylistInformationRepository;
+import com.stylebox.repository.user.UserRepository;
 import com.stylebox.util.SortUtil;
-import com.sun.xml.bind.v2.TODO;
 import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

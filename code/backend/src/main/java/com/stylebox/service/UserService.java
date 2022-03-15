@@ -2,7 +2,7 @@ package com.stylebox.service;
 
 import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.*;
-import com.stylebox.repository.*;
+import com.stylebox.repository.user.*;
 import exception.Rest400Exception;
 import exception.Rest404Exception;
 import lombok.RequiredArgsConstructor;
