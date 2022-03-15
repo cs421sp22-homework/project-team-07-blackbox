@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.Duration;
@@ -49,19 +51,19 @@ public class UserController {
         if (null != origin && origin.contains("davidz.cn")) {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(true)
+                    .secure(false)
                     .path("/")
                     .maxAge(maxAge)
 //                    .domain(".davidz.cn") // The domain name of the Cookie can be accessed
-                    .sameSite("None")
+//                    .sameSite("None")
                     .build();
         } else {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(true)
+                    .secure(false)
                     .path("/")
                     .maxAge(maxAge)
-                    .sameSite("None")
+//                    .sameSite("None")
                     .build();
         }
         response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());

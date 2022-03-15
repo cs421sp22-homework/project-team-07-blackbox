@@ -12,9 +12,5 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Page<User> findAll(@Nullable Specification<User> spec, Pageable pageable);
-
-    @EntityGraph(value = "User.Graph", type = EntityGraph.EntityGraphType.FETCH)
-    List<User> findByIdIn(List<Long> idList, Sort sort);
 
 }
