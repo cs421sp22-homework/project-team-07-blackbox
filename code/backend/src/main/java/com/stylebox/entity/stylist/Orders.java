@@ -18,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -41,8 +41,8 @@ public class Order {
     @Column(name = "occasions")
     private String occasions;
 
-    @Column(name = "discription")
-    private String discription;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "order_price")
     private int orderPrice;
@@ -54,12 +54,12 @@ public class Order {
     private int clothPriceHigh;
 
     @ManyToOne(targetEntity = CustomerInformation.class, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "customer", referencedColumnName = "id")
+    @JoinColumn(name = "customer_info_id", referencedColumnName = "id")
     @JsonBackReference
     private CustomerInformation customer;
 
     @ManyToOne(targetEntity = StylistInformation.class, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "stylist", referencedColumnName = "id")
+    @JoinColumn(name = "stylist_info_id", referencedColumnName = "id")
     @JsonBackReference
     private StylistInformation stylist;
 }

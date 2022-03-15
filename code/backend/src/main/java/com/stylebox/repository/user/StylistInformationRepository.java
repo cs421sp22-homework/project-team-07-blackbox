@@ -12,10 +12,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StylistInformationRepository extends JpaRepository<StylistInformation, Long>, JpaSpecificationExecutor<StylistInformation> {
     Page<StylistInformation> findAll(@Nullable Specification<StylistInformation> spec, Pageable pageable);
 
-//    @EntityGraph(value = "stylistInformation.Graph", type = EntityGraph.EntityGraphType.FETCH)
-//    List<StylistInformation> findByIdIn(List<Long> idList, Sort sort);
+    Optional<StylistInformation> findById(Long id);
 }

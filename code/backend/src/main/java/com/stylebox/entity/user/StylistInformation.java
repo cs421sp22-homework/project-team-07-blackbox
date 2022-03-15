@@ -2,7 +2,7 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.stylebox.entity.stylist.Order;
+import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,7 +40,7 @@ public class StylistInformation {
     @Column(name = "followNum")
     private Integer followNum;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "stylist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<Order> orderSet = new HashSet<>();
+    private Set<Orders> orderSet = new HashSet<>();
 }

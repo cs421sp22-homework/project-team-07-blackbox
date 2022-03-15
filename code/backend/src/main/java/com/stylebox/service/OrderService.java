@@ -2,11 +2,15 @@ package com.stylebox.service;
 
 import com.stylebox.dto.Order.OrderCreateDTO;
 import com.stylebox.dto.Order.OrderListDTO;
-import com.stylebox.entity.stylist.Order;
+import com.stylebox.entity.stylist.Orders;
+import com.stylebox.entity.user.CustomerInformation;
 import com.stylebox.entity.user.Style;
+import com.stylebox.entity.user.StylistInformation;
 import com.stylebox.entity.user.User;
 import com.stylebox.repository.stylist.OrderRepository;
+import com.stylebox.repository.user.CustomerInformationRepository;
 import com.stylebox.repository.user.StyleRepository;
+import com.stylebox.repository.user.StylistInformationRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,11 +26,15 @@ public class OrderService {
 
     final StyleRepository styleRepository;
 
+    final CustomerInformationRepository customerInformationRepository;
+
+    final StylistInformationRepository stylistInformationRepository;
+
     final ModelMapper modelMapper;
 
     public void createOrder(User user, Long styid, OrderCreateDTO orderCreateDTO) {
-        Order order = new Order();
-        modelMapper.map(orderCreateDTO, order);
+        Orders orders = new Orders();
+        modelMapper.map(orderCreateDTO, orders);
 
         // save styleSet
         Set<Style> newStyleSet = new HashSet<>();
@@ -43,11 +51,16 @@ public class OrderService {
                 newStyleSet.add(styleRepository.findByStyleName(s).get());
             }
         }
-        order.setStyleSet(newStyleSet);
+        orders.setStyleSet(newStyleSet);
 
         // save occasions
-        order.setOccasions(String.join(",", orderCreateDTO.getOccasionSet()));
-        orderRepository.save(order);
+        orders.setOccasions(String.join(",", orderCreateDTO.getOccasionSet()));
+
+        //customer, stylist
+        orders.setCustomer(user.getCustomerInformation());
+        orders.setStylist(stylistInformationRepository.getById(styid));
+
+        orderRepository.save(orders);
     }
 
     public OrderListDTO getOrderList(User user) {
