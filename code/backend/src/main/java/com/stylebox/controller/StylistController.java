@@ -40,6 +40,13 @@ public class StylistController {
         stylistService.addFollowRecord(followerId, id);
     }
 
+    @DeleteMapping("/unfollow/{id}")
+    public void deleteFollower(HttpServletRequest request, @PathVariable Long id){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        Long followerId = user.getId();
+        stylistService.deleteFollowRecord(followerId, id);
+    }
+
     @GetMapping("/followStylist")
     public StyListsDTO getFollowStylist(HttpServletRequest request,
         @RequestParam(value = "page", required = false, defaultValue = "0") int page,

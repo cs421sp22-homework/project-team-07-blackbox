@@ -30,7 +30,7 @@ public class StylistInformation {
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "stylistInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "stylistInformation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FollowRecord> followRecords = new ArrayList<>();
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "followee_id", referencedColumnName = "id")
@@ -63,13 +63,17 @@ public class StylistInformation {
 //    }
 
     public void addFollowRecord(FollowRecord followRecord){
-        followRecords.add(followRecord);
-        followRecord.setStylistInformation(this);
+        if(!followRecords.contains(followRecord)) {
+            followRecords.add(followRecord);
+            followRecord.setStylistInformation(this);
+        }
     }
 
     public void deleteFollowRecord(FollowRecord followRecord){
-        followRecords.remove(followRecord);
-        followRecord.setStylistInformation(null);
+        if(followRecords.contains(followRecord)) {
+            followRecords.remove(followRecord);
+            followRecord.setStylistInformation(null);
+        }
     }
 
 }

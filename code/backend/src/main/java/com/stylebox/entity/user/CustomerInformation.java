@@ -26,7 +26,7 @@ public class CustomerInformation {
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "customerInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerInformation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FollowRecord> followRecords = new ArrayList<>();
 
 

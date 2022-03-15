@@ -47,28 +47,28 @@ public class StylistService {
     final UserRepository userRepository;
 
 
-    //add a stylist in current user's follow record
+    //add a follow record
     public void addFollowRecord(Long followerId, Long followeeId){
-        FollowRecord followRecord = new FollowRecord();
-        //set customerInformation of followRecord
-        Optional<CustomerInformation> customerInformationById = customerInformationRepository.findById(followerId);
-        if(customerInformationById.isPresent()) {
-            followRecord.setCustomerInformation(customerInformationById.get());
-        }else{
-            throw new Rest404Exception("FollowerId does not exist");
+        FollowRecord followRecord = getValidFollowRecord(followerId, followeeId);
+        //If record is not in the repository, add
+        Optional<FollowRecord> followRecordToBeAdd = followRepository.findByFollowerIdAndFolloweeId(followerId, followeeId);
+        if(!followRecordToBeAdd.isPresent()) {
+            followRecord.getStylistInformation().addFollowRecord(followRecord);
+            followRecord.getCustomerInformation().addFollowRecord(followRecord);
+            followRepository.save(followRecord);
         }
-        //set stylistInformation of followRecord
-        Optional<StylistInformation> stylistInformationById = stylistInformationRepository.findById(followeeId);
-        if(stylistInformationById.isPresent()){
-            followRecord.setStylistInformation(stylistInformationById.get());
+    }
+    //delete a follow record
+    public void deleteFollowRecord(Long followerId, Long followeeId){
+        //Detemine if the followRecord is valid (followerId is a customer_id, followeeId is a stylistId)
+        getValidFollowRecord(followerId, followeeId);
+
+        Optional<FollowRecord> followRecordToBeDelete = followRepository.findByFollowerIdAndFolloweeId(followerId, followeeId);
+        if(followRecordToBeDelete.isPresent()) {
+            followRepository.deleteById(followRecordToBeDelete.get().getId());
         }else{
-            throw new Rest404Exception("FolloweeId does not exist");
+            throw new Rest404Exception("followRecord does not exist");
         }
-
-        stylistInformationById.get().addFollowRecord(followRecord);
-        customerInformationById.get().addFollowRecord(followRecord);
-
-        followRepository.save(followRecord);
     }
 
     //get all searched follow stylists
@@ -119,5 +119,26 @@ public class StylistService {
         styListsDTO.setData(styDTOList);
         return styListsDTO;
     }
+
+    private FollowRecord getValidFollowRecord(Long followerId, Long followeeId){
+        FollowRecord followRecord = new FollowRecord();
+        //set customerInformation of followRecord
+        Optional<CustomerInformation> customerInformationById = customerInformationRepository.findById(followerId);
+        if(customerInformationById.isPresent()) {
+            followRecord.setCustomerInformation(customerInformationById.get());
+        }else{
+            throw new Rest404Exception("FollowerId does not exist");
+        }
+        //set stylistInformation of followRecord
+        Optional<StylistInformation> stylistInformationById = stylistInformationRepository.findById(followeeId);
+        if(stylistInformationById.isPresent()){
+            followRecord.setStylistInformation(stylistInformationById.get());
+        }else{
+            throw new Rest404Exception("FolloweeId does not exist");
+        }
+
+        return followRecord;
+    }
+
 }
 
