@@ -2,12 +2,15 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.stylebox.repository.FollowRepository;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,8 +27,20 @@ public class StylistInformation {
     @JsonBackReference
     private User user;
 
+    @OneToMany(mappedBy = "stylistInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FollowRecord> followRecords = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "followee_id", referencedColumnName = "id")
+//    private List<FollowRecord> followRecords = new ArrayList<>();
+
+    @Column(name = "follow_num")
+    private String followNum;
+
     @Column(name = "intro")
     private String intro;
+
+    @Column(name = "rate")
+    private String rate;
 
     @Column(name = "gender")
     private String gender;
@@ -43,5 +58,15 @@ public class StylistInformation {
 //    public void addStyle(Style style) {
 //        this.styleSet.add(style);
 //    }
+
+    public void addFollowRecord(FollowRecord followRecord){
+        followRecords.add(followRecord);
+        followRecord.setStylistInformation(this);
+    }
+
+    public void deleteFollowRecord(FollowRecord followRecord){
+        followRecords.remove(followRecord);
+        followRecord.setStylistInformation(null);
+    }
 
 }

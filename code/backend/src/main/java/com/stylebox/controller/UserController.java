@@ -49,19 +49,19 @@ public class UserController {
         if (null != origin && origin.contains("davidz.cn")) {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(true)
+                    .secure(false)
                     .path("/")
                     .maxAge(maxAge)
 //                    .domain(".davidz.cn") // The domain name of the Cookie can be accessed
-                    .sameSite("None")
+//                    .sameSite("None")
                     .build();
         } else {
             cookie = ResponseCookie.from("jwt", token)
 //                    .httpOnly(true)
-                    .secure(true)
+                    .secure(false)
                     .path("/")
                     .maxAge(maxAge)
-                    .sameSite("None")
+//                    .sameSite("None")
                     .build();
         }
         response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
@@ -88,8 +88,8 @@ public class UserController {
 
     @PostMapping("/register/{role}")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO,
-                         @PathVariable int role,
-                         HttpServletRequest request, HttpServletResponse response) {
+                                      @PathVariable int role,
+                                      HttpServletRequest request, HttpServletResponse response) {
         User user = userService.createUser(registerDTO, role);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
         addJWTToResponse(request, response, token);
@@ -155,5 +155,3 @@ public class UserController {
     }
 
 }
-
-

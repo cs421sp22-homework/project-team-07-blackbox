@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,10 @@ public class CustomerInformation {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference
     private User user;
+
+    @OneToMany(mappedBy = "customerInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FollowRecord> followRecords = new ArrayList<>();
+
 
     @Column(name="gender")
     private String gender;
@@ -48,6 +53,16 @@ public class CustomerInformation {
 
     @Column(name="shoeSize")
     private String shoeSize;
+
+    public void addFollowRecord(FollowRecord followRecord){
+        followRecords.add(followRecord);
+        followRecord.setCustomerInformation(this);
+    }
+
+    public void deleteFollowRecord(FollowRecord followRecord){
+        followRecords.remove(followRecord);
+        followRecord.setCustomerInformation(null);
+    }
 
 //    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
 //    @JoinTable(name = "customer_style",
