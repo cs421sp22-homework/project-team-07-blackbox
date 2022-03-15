@@ -52,6 +52,10 @@ public class User {
     @Column(name="nickname")
     private String nickname;
 
+    @Column(name="avartar")
+    private String avartar;
+
+
     @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_style",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
