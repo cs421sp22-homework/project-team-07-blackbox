@@ -25,9 +25,6 @@ public class CustomerInformation {
     @JsonBackReference
     private User user;
 
-    @Column(name="gender")
-    private String gender;
-
     @Column(name="ftSize")
     private String ftSize;
 

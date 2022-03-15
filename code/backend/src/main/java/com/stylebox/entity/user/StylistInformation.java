@@ -30,9 +30,6 @@ public class StylistInformation {
     @Column(name = "intro")
     private String intro;
 
-    @Column(name = "gender")
-    private String gender;
-
 //    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
 //    @JoinTable(name = "stylist_style",
 //            joinColumns = {@JoinColumn(name = "stylist_id", referencedColumnName = "id")},
