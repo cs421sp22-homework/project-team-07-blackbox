@@ -45,35 +45,20 @@ public class StylistService {
         Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
                 ("rate", "followNum")));
 
-//        PredicateBuilder<User> styAndBuilder = Specifications.<User>and();
-//        styAndBuilder.eq("role.id", roleRepository.findByName("Stylist").get().getId());
-//        if (!style.equals("")) {
-//            Optional<Style> byId = styleRepository.findByStyleName(style);
-//            if (!byId.isPresent()) {
-//                throw new Rest400Exception("Invalid Style");
-//            } else {
-//                styAndBuilder.eq("styleSet.id", byId.get().getId());
-//            }
-//        }
-//
-//        if (!search.equals("")) {
-//            String pattern = "%" + search + "%";
-//            PredicateBuilder<User> styOrBuilder = Specifications.<User>or();
-//            styOrBuilder.like("nickname", pattern); // TODO: how to add username
-//            specification = styOrBuilder.build().and(styAndBuilder.build());
-//        } else {
-//            specification = styAndBuilder.build();
-//        }
-
         Specification<StylistInformation> specification = new Specification<StylistInformation>() {
             @Override
             public Predicate toPredicate(Root<StylistInformation> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Predicate predicate = criteriaBuilder.conjunction();
-                // join StylistInformation, User, UserLogin
+                // join StylistInformation, role, User, UserLogin table
+                // root is StylistInformation table. Means the main target I want to SELECT is StylistInformation
+                // Join<StylistInformation, User> name = root.join("user")means join StylistInformation and User table
+                // And root point to StylistInformation table, root.join("user") means
+                // the StylistInformation table has user field that point to User table
                 Join<StylistInformation, User> joinUser = root.join("user");
                 Join<User, Role> joinRole = joinUser.join("role");
                 Join<User, UserLogin> joinUserLogin = joinUser.join("userLogin");
 
+                // base condition: role is Stylist
                 predicate.getExpressions().add(criteriaBuilder.equal(joinRole.get("name"), "Stylist"));
                 // 1. first condition: style
                 if (!style.equals("")) {
@@ -86,7 +71,7 @@ public class StylistService {
                         throw new Rest400Exception("Style doesn't exist");
                     }
                 }
-                // 2. search
+                // 2. second condition: search
                 if (!search.equals("")) {
                     Predicate predicateIntro = criteriaBuilder.like(root.get("intro"), "%" + search + "%");
                     Predicate predicateNick = criteriaBuilder.like(joinUser.get("nickname"), "%" + search + "%");
