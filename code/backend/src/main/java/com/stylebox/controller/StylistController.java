@@ -1,26 +1,37 @@
 package com.stylebox.controller;
 
-import com.stylebox.dto.FollowListGetDTO;
-import com.stylebox.dto.StylistListSearchDTO;
-import com.stylebox.entity.user.FollowRecord;
-import com.stylebox.entity.user.User;
-import com.stylebox.repository.FollowRepository;
+import com.stylebox.dto.stylist.StyListsDTO;
 import com.stylebox.service.StylistService;
 import com.stylebox.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.stylebox.entity.user.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000","https://style-box.netlify.app","http://style-box.netlify.app"})
 @RestController
 @RequiredArgsConstructor
 public class StylistController {
+    final StylistService stylistService;
+
     final JwtTokenUtil jwtTokenUtil;
 
-    final StylistService stylistService;
+    @GetMapping("/stylists")
+    public StyListsDTO getStyLists(
+        @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+        @RequestParam(value = "style", required = false, defaultValue = "") String style,
+        @RequestParam(value = "sort", required = false, defaultValue = "") String sort,
+        @RequestParam(value = "search", required = false, defaultValue = "") String search,
+        @RequestParam(value = "limit", required = false, defaultValue = "3") int limit)
+    {
+        return stylistService.getStyLists(page, style, sort, search, limit);
+    }
+
 
     @PostMapping("/follow/{id}")
     public void addFollower(HttpServletRequest request, @PathVariable Long id) {
@@ -30,8 +41,14 @@ public class StylistController {
     }
 
     @GetMapping("/followStylist")
-    public List<FollowListGetDTO> getFollowStylist(HttpServletRequest request, @RequestBody StylistListSearchDTO filter){
+    public StyListsDTO getFollowStylist(HttpServletRequest request,
+        @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+        @RequestParam(value = "style", required = false, defaultValue = "") String style,
+        @RequestParam(value = "sort", required = false, defaultValue = "") String sort,
+        @RequestParam(value = "search", required = false, defaultValue = "") String search,
+        @RequestParam(value = "limit", required = false, defaultValue = "3") int limit)
+    {
         Long followerId = jwtTokenUtil.getUserFromRequest(request).getId();
-        return stylistService.getFollowStylist(followerId, filter);
+        return stylistService.getFollowStylist(followerId, page, style, sort, search, limit);
     }
 }

@@ -1,13 +1,13 @@
-package com.stylebox.dto;
+package com.stylebox.dto.stylist;
 
 import lombok.Data;
 
 @Data
-public class FollowListGetDTO {
+public class StyDTO {
     private String avatar;
-    private String rate;
+    private int rate;
     private String intro;
     private Long stylistId;
     private String nickname;
-    private Integer followNum;
+    private int followNum;
 }

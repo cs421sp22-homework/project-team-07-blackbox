@@ -17,6 +17,9 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedEntityGraph(name = "StylistInformation.Graph", attributeNodes = {
+        @NamedAttributeNode("user"),
+})
 public class StylistInformation {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

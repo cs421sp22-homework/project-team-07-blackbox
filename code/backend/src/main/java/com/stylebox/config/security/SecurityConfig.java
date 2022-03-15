@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 1. Example Add CORS configuration information
         CorsConfiguration config = new CorsConfiguration();
         // Which origin are allowed
-//        config.addAllowedOrigin("http://localhost:8081");
+//        config.addAllowedOrigin("http://localhost:8080");
         config.addAllowedOriginPattern("*");
         // whether to send Cookie
         config.setAllowCredentials(true);

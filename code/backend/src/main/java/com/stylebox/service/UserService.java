@@ -1,19 +1,15 @@
 package com.stylebox.service;
 
-import com.stylebox.dto.*;
+import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.*;
 import com.stylebox.repository.*;
 import exception.Rest400Exception;
-import exception.Rest401Exception;
 import exception.Rest404Exception;
-import exception.Rest500Exception;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;

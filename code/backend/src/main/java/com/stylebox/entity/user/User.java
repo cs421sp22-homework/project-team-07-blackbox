@@ -17,6 +17,12 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedEntityGraph(name = "User.Graph", attributeNodes = {
+        @NamedAttributeNode("styleSet"),
+        @NamedAttributeNode("role"),
+        @NamedAttributeNode("customerInformation"),
+        @NamedAttributeNode("stylistInformation"),
+})
 public class User {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -56,6 +62,10 @@ public class User {
 
     @Column(name="nickname")
     private String nickname;
+
+    @Column(name="avartar")
+    private String avartar;
+
 
     @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_style",

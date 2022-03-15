@@ -1,6 +1,6 @@
 package com.stylebox.controller;
 
-import com.stylebox.dto.*;
+import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.User;
 import com.stylebox.entity.user.UserLogin;
 //import com.stylebox.jwt.JwtTokenUtil;
@@ -8,7 +8,6 @@ import com.stylebox.service.UserService;
 import com.stylebox.util.JwtTokenUtil;
 import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -16,13 +15,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import java.time.Duration;
 
-@CrossOrigin(origins={"http://stylebox5.herokuapp.com","https://stylebox5.herokuapp.com","http://localhost:3000","https://style-box.netlify.app","http://style-box.netlify.app"})
+@CrossOrigin(origins = {"http://stylebox5.herokuapp.com", "https://stylebox5.herokuapp.com",
+        "http://localhost:3000", "https://style-box.netlify.app", "http://style-box.netlify.app",
+        "http://121.41.106.214"})
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -35,6 +36,7 @@ public class UserController {
 //    public Boolean login(@RequestBody LoginDTO loginDTO) {
 //        return userService.verify(loginDTO);
 //    }
+
     /**
      * addJWTToResponse
      *
@@ -101,25 +103,25 @@ public class UserController {
         addJWTToResponse(request, response, "", Duration.ofSeconds(0));
     }
 
-    @ExceptionHandler({ AuthenticationException.class })
+    @ExceptionHandler({AuthenticationException.class})
     public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 
     @GetMapping("/account")
-    public AccountDTO getAccount(HttpServletRequest request){
+    public AccountDTO getAccount(HttpServletRequest request) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return userService.getAccount(user);
     }
 
     @PostMapping("/account")
-    public void modifyAccount(HttpServletRequest request, @RequestBody AccountDTO accountDTO){
+    public void modifyAccount(HttpServletRequest request, @RequestBody AccountDTO accountDTO) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         userService.modifyAccount(user, accountDTO);
     }
 
     @GetMapping("/customer/profile")
-    public CustomerProfileDTO getCustomerProfile(HttpServletRequest request){
+    public CustomerProfileDTO getCustomerProfile(HttpServletRequest request) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         if (!user.getRole().getName().equals("Customer")) {
             throw new Rest400Exception("Incorrect role");
@@ -128,7 +130,7 @@ public class UserController {
     }
 
     @PostMapping("/customer/profile")
-    public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO){
+    public void createCustomerProfile(HttpServletRequest request, @RequestBody CustomerProfileDTO customerProfileDTO) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         if (!user.getRole().getName().equals("Customer")) {
             throw new Rest400Exception("Incorrect role");

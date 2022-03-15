@@ -1,22 +1,33 @@
 package com.stylebox.service;
 
-import com.stylebox.dto.FollowListGetDTO;
-import com.stylebox.dto.StylistListSearchDTO;
+import com.stylebox.dto.stylist.StyDTO;
+import com.stylebox.dto.stylist.StyListsDTO;
+import com.stylebox.entity.user.*;
+import com.stylebox.repository.RoleRepository;
+import com.stylebox.repository.StyleRepository;
+import com.stylebox.repository.StylistInformationRepository;
+import com.stylebox.repository.UserRepository;
+import com.stylebox.util.SortUtil;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.stylebox.entity.user.CustomerInformation;
 import com.stylebox.entity.user.FollowRecord;
 import com.stylebox.entity.user.StylistInformation;
 import com.stylebox.repository.CustomerInformationRepository;
 import com.stylebox.repository.FollowRepository;
-import com.stylebox.repository.StylistInformationRepository;
 import exception.Rest404Exception;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +38,16 @@ public class StylistService {
     final CustomerInformationRepository customerInformationRepository;
     final StylistInformationRepository stylistInformationRepository;
 
+    final SortUtil sortUtil;
+
+    final StyleRepository styleRepository;
+
+    final RoleRepository roleRepository;
+
+    final UserRepository userRepository;
+
+
+    //add a stylist in current user's follow record
     public void addFollowRecord(Long followerId, Long followeeId){
         FollowRecord followRecord = new FollowRecord();
         //set customerInformation of followRecord
@@ -50,20 +71,53 @@ public class StylistService {
         followRepository.save(followRecord);
     }
 
-    public List<FollowListGetDTO> getFollowStylist(Long followerId, StylistListSearchDTO filter){
+    //get all searched follow stylists
+    public StyListsDTO getFollowStylist(Long followerId, int page, String style, String sort, String search, int limit) {
+        Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
+                ("rate", "followNum")));
+
+        //query: stylistHasSearch & stylistHasStyle & pageable & followedByCurrentUser
+        Page<StylistInformation> all = stylistInformationRepository.findAll(
+                        where(StylistSpecifications.stylistHasSearch(search))
+                        .and(StylistSpecifications.stylistHasStyle(style))
+                        .and(StylistSpecifications.stylistFollowedBy(followerId)), pageable);
+
+        int totalPages = all.getTotalPages();
 
 
-        List<FollowRecord> followRecords = followRepository.findByCustomerInformationId(followerId);
-        List<FollowListGetDTO> followListGetDTOS = new ArrayList<>();
+        return MapToStyListsDTO(all, totalPages);
+    }
 
-        for(FollowRecord record : followRecords){
-            FollowListGetDTO followListGetDTO = new FollowListGetDTO();
-            followListGetDTO.setAvatar(record.getStylistInformation().getUser().getAvatar());
-            followListGetDTO.setAvatar(record.getStylistInformation().getUser().getNickname());
-            followListGetDTO.setStylistId(record.getStylistInformation().getId());
-            modelMapper.map(record.getStylistInformation(), followListGetDTO);
-            followListGetDTOS.add(followListGetDTO);
+
+    //Get all searched stylists
+    public StyListsDTO getStyLists(int page, String style, String sort, String search, int limit) {
+        Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
+                ("rate", "followNum")));
+
+        //query: stylistHasSearch & stylistHasStyle & pageable
+        Page<StylistInformation> all = stylistInformationRepository.findAll(
+                where(StylistSpecifications.stylistHasSearch(search))
+                        .and(StylistSpecifications.stylistHasStyle(style)), pageable);
+
+        int totalPages = all.getTotalPages();
+
+        StyListsDTO styListsDTO = MapToStyListsDTO(all, totalPages);
+
+        return styListsDTO;
+    }
+
+    private StyListsDTO MapToStyListsDTO(Page<StylistInformation> all, int totalPages) {
+        StyListsDTO styListsDTO = new StyListsDTO();
+        List<StyDTO> styDTOList = new ArrayList<>();
+        for (StylistInformation sty : all) {
+            StyDTO styDTO = modelMapper.map(sty, StyDTO.class);
+            styDTO.setStylistId(sty.getUser().getId());
+            modelMapper.map(sty.getUser(), styDTO);
+            styDTOList.add(styDTO);
         }
-        return followListGetDTOS;
+        styListsDTO.setTotalPages(totalPages);
+        styListsDTO.setData(styDTOList);
+        return styListsDTO;
     }
 }
+
