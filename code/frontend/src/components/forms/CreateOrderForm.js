@@ -35,7 +35,10 @@ const Input = tw.input``;
 const TextArea = tw.textarea`h-24 sm:h-full resize-none`;
 const SubmitButton = tw.button`w-full sm:w-32 mt-6 py-3 bg-pink-500 text-gray-100 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
 const Select = tw.select`w-full  mt-6 py-3 bg-gray-100 text-pink-500 rounded-full font-bold tracking-wide shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
-const MultiSelect = tw(Multiselect)`w-full  mt-6 bg-gray-100 text-pink-500  tracking-wide text-sm transition duration-300 transform hover:text-pink-700 hover:bg-gray-200 block `;
+const MultiSelect = tw(Multiselect)`w-full  mt-6 bg-gray-100 text-pink-500  tracking-wide text-sm transition duration-300 
+transform hover:text-pink-700 hover:bg-gray-200`;
+
+
 
 const SvgDotPattern1 = tw(SvgDotPatternIcon)`absolute bottom-0 right-0 transform translate-y-1/2 translate-x-1/2 -z-10 opacity-50 text-pink-500 fill-current w-24`
 
@@ -118,11 +121,16 @@ class CreateOrderForm extends Component{
     }
     event.preventDefault();
     console.log("create info")
-    OrderService.createOrder(this.props.stylist.stylistId,info)
+    OrderService.createOrder(this.props.stylist.stylistId,info) //this.props.location.stylistId
     .then((response)=>{
       console.log(response.data);
       alert("Create order success!");
-      this.props.history.push('/');
+      this.props.history.push({
+        pathname:'/stylist/homepage',
+        state: {
+          stylistId: this.props.stylist.stylistId
+        }
+      });
     })
     .catch((error) => {
       console.log(error.response);

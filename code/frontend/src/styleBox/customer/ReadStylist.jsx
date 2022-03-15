@@ -13,7 +13,7 @@ import styled from "styled-components";
 
 
 const PrimaryButton = styled(PrimaryButtonBase)(props => [
-  tw`w-56 mx-8 mt-10 mt-8 md:mt-8 text-sm inline-block bg-pink-500 hover:bg-pink-400`,
+  tw`w-56 mx-8 mt-10 mt-8 md:mt-8 text-sm inline-block bg-pink-500 hover:bg-gray-100 hover:text-pink-500 focus:bg-pink-500 focus:text-gray-100`,
   props.buttonRounded && tw`rounded-full`
 ]);
 
@@ -129,8 +129,8 @@ class ReadStylist extends Component{
         <NavBarCustomer />
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
         <div align="center">
-          <PrimaryButton className="mx-8 ..." buttonRounded={true} as="a" onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
-          <PrimaryButton buttonRounded={true} as="a" onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
+          <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
+          <PrimaryButton buttonRounded={true} onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
         </div>
         <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
