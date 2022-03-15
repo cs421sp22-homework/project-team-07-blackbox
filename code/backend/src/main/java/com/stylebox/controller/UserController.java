@@ -35,45 +35,9 @@ public class UserController {
 //    public Boolean login(@RequestBody LoginDTO loginDTO) {
 //        return userService.verify(loginDTO);
 //    }
-    /**
-     * addJWTToResponse
-     *
-     * @param request  request
-     * @param response response
-     * @param token    jwt token
-     * @param maxAge   expiration time
-     */
-    public static void addJWTToResponse(HttpServletRequest request, HttpServletResponse response, String token, Duration maxAge) {
-        String origin = request.getHeader("Origin");
-        ResponseCookie cookie;
-        if (null != origin && origin.contains("davidz.cn")) {
-            cookie = ResponseCookie.from("jwt", token)
-//                    .httpOnly(true)
-                    .secure(false)
-                    .path("/")
-                    .maxAge(maxAge)
-//                    .domain(".davidz.cn") // The domain name of the Cookie can be accessed
-//                    .sameSite("None")
-                    .build();
-        } else {
-            cookie = ResponseCookie.from("jwt", token)
-//                    .httpOnly(true)
-                    .secure(false)
-                    .path("/")
-                    .maxAge(maxAge)
-//                    .sameSite("None")
-                    .build();
-        }
-        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-    }
-
-    public static void addJWTToResponse(HttpServletRequest request, HttpServletResponse response, String token) {
-        addJWTToResponse(request, response, token, Duration.ofDays(30));
-    }
 
     @GetMapping("/index")
     public String getHelloWorld() {
-
         return "Hello World";
     }
 
@@ -82,7 +46,9 @@ public class UserController {
         UserLogin userByLogin = userService.getUserByLogin(loginDTO);//通过用户名获取用户
         userService.verifyUser(loginDTO.getPassword(), userByLogin);//验证
         String token = jwtTokenUtil.generateToken(userByLogin.getUsername());//生成token
-        addJWTToResponse(request, response, token);//token写入cookie
+        jwtTokenUtil.addJWTToResponse(request, response, token);//token写入cookie
+        ResponseCookie roleCookie = jwtTokenUtil.generateCookie(response, "role", userByLogin.getUser().getRole().getName(), Duration.ofDays(30));
+        jwtTokenUtil.addCookieToResponse(response, roleCookie);
         return ResponseEntity.ok(new JwtTokenDTO(token));
     }
 
@@ -92,13 +58,15 @@ public class UserController {
                          HttpServletRequest request, HttpServletResponse response) {
         User user = userService.createUser(registerDTO, role);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
-        addJWTToResponse(request, response, token);
+        jwtTokenUtil.addJWTToResponse(request, response, token);
+        ResponseCookie roleCookie = jwtTokenUtil.generateCookie(response, "role", user.getRole().getName(), Duration.ofDays(30));
+        jwtTokenUtil.addCookieToResponse(response, roleCookie);
         return ResponseEntity.ok(new JwtTokenDTO(token));
     }
 
     @GetMapping("/user/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
-        addJWTToResponse(request, response, "", Duration.ofSeconds(0));
+        jwtTokenUtil.addJWTToResponse(request, response, "", Duration.ofSeconds(0));
     }
 
     @ExceptionHandler({ AuthenticationException.class })
