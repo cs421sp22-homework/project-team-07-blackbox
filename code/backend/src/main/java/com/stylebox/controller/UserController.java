@@ -1,9 +1,8 @@
 package com.stylebox.controller;
 
-import com.stylebox.dto.*;
+import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.User;
 import com.stylebox.entity.user.UserLogin;
-//import com.stylebox.jwt.JwtTokenUtil;
 import com.stylebox.service.UserService;
 import com.stylebox.util.JwtTokenUtil;
 import exception.Rest400Exception;
