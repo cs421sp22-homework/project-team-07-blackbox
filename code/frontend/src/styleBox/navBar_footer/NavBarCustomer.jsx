@@ -18,8 +18,7 @@ class NavBarCustomer extends Component{
                         Homepage
                     </NavLink>
                     <NavLink target="_self"
-                             href="#">
-                        Stylists
+                             href="/stylistList">
                     </NavLink>
                     <NavLink target="_self" href="#">
                         Shopping

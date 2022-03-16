@@ -18,7 +18,7 @@ class NavBarStylist extends Component{
                         Homepage
                     </NavLink>
                     <NavLink target="_self"
-                             href="#">
+                             href="/stylistList">
                         Stylists
                     </NavLink>
                     <NavLink target="_self" href="#">

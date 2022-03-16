@@ -7,9 +7,11 @@ import CustomerBrowseStylistService from "api/styleBox/CustomerBrowseStylistServ
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
 import NavBarCustomer from "../navBar_footer/NavBarCustomer";
+import NavBarStylist from "styleBox/navBar_footer/NavBarStylist";
 import { PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import tw from "twin.macro";
 import styled from "styled-components";
+import Cookies from 'react-cookies';
 
 
 const PrimaryButton = styled(PrimaryButtonBase)(props => [
@@ -45,6 +47,7 @@ class ReadStylist extends Component{
       button: "Follow"
     }
 
+    this.checkUser = this.checkUser.bind(this)
     this.changeFollowState = this.changeFollowState.bind(this)
     this.createOrder = this.createOrder.bind(this)
 
@@ -86,6 +89,9 @@ class ReadStylist extends Component{
     .catch(error => console.log(error.response))
   }
 
+  checkUser(){
+    return Cookies.get('role');
+  }
 
 
   changeFollowState(){
@@ -127,7 +133,7 @@ class ReadStylist extends Component{
     console.log("stylistID:"+this.state.testimonials[0].stylistId)
     return(
       <AnimationRevealPage>
-        <NavBarCustomer />
+        {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
         <div align="center">
           <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
