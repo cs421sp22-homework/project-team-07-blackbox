@@ -14,6 +14,8 @@ import Quiz from "./styleBox/quiz/Quiz";
 import ReadStylist from "./styleBox/customer/ReadStylist";
 import Test from "components/features/DashedBorderSixFeatures";
 import CreateOrder from "styleBox/order/CreateOrder";
+import StylistList from "./styleBox/stylist/StylistList";
+import FollowStylist from"./styleBox/customer/followStylistList"
 
 
 
@@ -30,7 +32,9 @@ export default function App() {
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
               <Route path="/test" component={Test}/>
+              <Route path="/stylistList" component={StylistList}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
+              <AuthenticatedRoute path="/followStylist" component={FollowStylist}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
