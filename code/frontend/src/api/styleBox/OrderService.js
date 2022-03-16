@@ -8,6 +8,11 @@ class OrderService {
         return axios.get(`${API_URL}/orders`, param, {withCredentials: true})
     }
 
+    // Get order detail
+    getOrderDetail(id){
+        return axios.get(`${API_URL}/orderDetail/${id}`, {withCredentials: true})
+    }
+
 }
 
 export default new OrderService()

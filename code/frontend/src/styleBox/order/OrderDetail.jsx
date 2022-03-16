@@ -39,7 +39,6 @@ class OrderDetail extends Component{
         }
         this.checkUser = this.checkUser.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
-        
     }
 
     // return user type
@@ -52,11 +51,40 @@ class OrderDetail extends Component{
         this.props.history.push("/orders");
     }
 
+    componentDidMount(){
+        OrderService.getOrderDetail(this.state.orderId)
+        .then((response) => {
+            if (response.status === 200) {
+                this.setState({
+                    cusNickname: response.data.cusNickname,
+                    orderPrice: response.data.orderPrice,
+                    styleSet: response.data.styleSet,
+                    locationSet: response.data.locationSet,
+                    description: response.data.description,
+                    clothPriceLow: response.data.clothPriceLow,
+                    clothPriceHigh: response.data.clothPriceHigh,
+                    time: response.data.time,
+                    gender: response.data.gender,
+                    ftSize: response.data.ftSize,
+                    inSize: response.data.inSize,
+                    weight: response.data.weight,
+                    shirtSize: response.data.shirtSize,
+                    bottomSize: response.data.bottomSize,
+                    jeanSize: response.data.jeanSize,
+                    shoeSize: response.data.shoeSize
+                })
+                .catch((error) => {
+                    console.log(error.response.data)
+                })
+            }
+        })
+    }
+
 
     render(){
         return(
             <AnimationRevealPage>
-                <NavBar/>
+                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 <Container>
                     <Content>
                         <div className="p-6 mx-24 my-10 flex-initial shadow-lg rounded-lg bg-gray-50 text-gray-700">
@@ -166,8 +194,6 @@ class OrderDetail extends Component{
                                 </div>
                             </div>
                         </div>
-                    
-                    
                     </Content>
                 </Container>
             </AnimationRevealPage>

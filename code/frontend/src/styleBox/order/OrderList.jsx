@@ -31,7 +31,7 @@ class OrderList extends Component{
                 orderPrice: 300,
                 styleSet: ["Cool"],
                 locationSet: ["Casual"],
-                description: "This is a sample description",
+                description: "This is a sample description. Some quick example text to build on the card title and make up the bulk of the card's content. Want to desigin a cloth style for business meeting.",
                 clothPriceLow: 200,
                 clothPriceHigh: 300,
                 time: "2022/3/5",
@@ -56,6 +56,7 @@ class OrderList extends Component{
         this.showOrderList = this.showOrderList.bind(this)
         this.checkUser = this.checkUser.bind(this)
         this.viewOrder = this.viewOrder.bind(this)
+        this.showDescription = this.showDescription.bind(this)
     }
 
     // return user type
@@ -93,18 +94,25 @@ class OrderList extends Component{
     }
 
     componentDidMount(){
-        //this.showOrderList(1, "")
+        this.showOrderList(1, "")
     }
 
     viewOrder(orderId){
         // console.log(orderId)
         this.props.history.push({pathname:"/orderDetail", query: { id : orderId }})
     }
+
+    showDescription(info){
+        if(info.length > 10){
+            return info.substring(0, 9) + " ..."
+        }
+        return info
+    }
     
     render(){
         return(
             <AnimationRevealPage>
-                <NavBar />
+                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 <Container>
                     <Content>
                     <MainContainer>
@@ -139,7 +147,7 @@ class OrderList extends Component{
                                             <TableValue>{order.orderPrice}</TableValue>
                                             <TableValue>{order.styleSet.join(', ')}</TableValue>
                                             <TableValue>{order.locationSet.join(', ')}</TableValue>
-                                            <TableValue>{order.description}</TableValue>
+                                            <TableValue>{this.showDescription(order.description)}</TableValue>
                                             <TableValue>{order.clothPriceLow}</TableValue>
                                             <TableValue>{order.clothPriceHigh}</TableValue>
                                             <TableValue>{order.time}</TableValue>
