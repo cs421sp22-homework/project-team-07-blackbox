@@ -161,6 +161,9 @@ public class OrderService {
         //occasionSet
         Set<String> occs = new HashSet<>(Arrays.asList(o.getOccasions().split(",")));
         orderDetailDTO.setOccasionSet(occs);
+
+        o.setRead(true);
+        orderRepository.save(o);
         return orderDetailDTO;
     }
 }
