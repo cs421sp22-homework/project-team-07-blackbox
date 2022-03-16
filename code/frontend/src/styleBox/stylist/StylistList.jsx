@@ -14,6 +14,8 @@ import {SectionHeading, Subheading as SubheadingBase} from "../../components/mis
 import {PrimaryButton as PrimaryButtonBase} from "../../components/misc/Buttons";
 import {ReactComponent as SvgDotPattern} from "../../images/dot-pattern.svg";
 import {Link} from 'react-router-dom';
+import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-3-icon.svg";
+import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-3-icon.svg";
 import QuizService from "../../api/styleBox/QuizService";
 // const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Container = tw.div`relative`;
@@ -49,6 +51,19 @@ const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block m
 const DecoratorBlob = styled(SvgDotPattern)(props => [
     tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-pink-500 -z-10`
 ]);
+
+const Controls = styled.div`
+  ${tw`flex mt-8 sm:mt-0`}
+  .divider {
+    ${tw`my-3 border-r`}
+  }
+`;
+const ControlButton = styled.button`
+  ${tw`mx-3 p-4 rounded-full transition duration-300 bg-gray-200 hover:bg-gray-300 text-pink-500 hover:text-pink-700 focus:outline-none focus:shadow-outline`}
+  svg {
+    ${tw`w-4 h-4 stroke-3`}
+  }
+`;
 
 class StylistList extends Component{
     constructor(props){
@@ -90,7 +105,7 @@ class StylistList extends Component{
     }
 
     changePage(event){
-        if(event.target.name ==="preBtn"){
+        if(event.target.name ==="prevBtn"){
             this.setState({page:this.state.page-1})
         }
         if(event.target.name ==="nextBtn"){
@@ -222,17 +237,18 @@ class StylistList extends Component{
                             <ul className="flex list-style-none ">
                                 {(this.state.page === 1)
                                     ? <li className="page-item disabled">
-                                        <PrimaryButton
-                                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                            tabIndex="-1" aria-disabled="true">Previous
-                                        </PrimaryButton>
+                                        <ControlButton tabIndex="-1" aria-disabled="true">
+                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
+                                            <ArrowLeftIcon />
+                                        </ControlButton>
                                     </li>
                                     : <li className="page-item">
-                                        <PrimaryButton name='prevBtn'
-                                                className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                onClick={this.changePage}>Previous
-                                        </PrimaryButton>
+                                        <ControlButton name='prevBtn' onClick={this.changePage}>
+                                                {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
+                                            <ArrowLeftIcon />
+                                        </ControlButton>
                                     </li>}
+
 
                                 <li className="page-item"><p
                                     className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p>
@@ -240,16 +256,16 @@ class StylistList extends Component{
 
                                 {(this.state.page === this.state.totalPage)
                                     ? <li className="page-item disabled">
-                                        <PrimaryButton
-                                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                            tabIndex="-1" aria-disabled="true">Next
-                                        </PrimaryButton>
+                                        <ControlButton tabIndex="-1" aria-disabled="true">
+                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
+                                            <ArrowRightIcon />
+                                        </ControlButton>
                                     </li>
                                     : <li className="page-item">
-                                        <PrimaryButton name='nextBtn'
-                                                className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                onClick={this.changePage}>Next
-                                        </PrimaryButton>
+                                        <ControlButton name='nextBtn'  onClick={this.changePage}>
+                                                {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
+                                            <ArrowRightIcon />
+                                        </ControlButton>
                                     </li>
                                 }
                             </ul>
