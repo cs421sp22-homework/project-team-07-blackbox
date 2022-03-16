@@ -12,6 +12,7 @@ import CustomerProfile from "./styleBox/customer/CustomerProfile";
 import AccountSetting from "./styleBox/AccountSetting"
 import Quiz from "./styleBox/quiz/Quiz";
 import OrderList from "./styleBox/order/OrderList";
+import OrderDetail from "styleBox/order/OrderDetail";
 
 
 
@@ -32,6 +33,7 @@ export default function App() {
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
               <AuthenticatedRoute path="/orders" component={OrderList}/>
+              <Route path="/orderDetail" component={OrderDetail} />
           </Switch>
       </>
   </Router>
