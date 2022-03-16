@@ -2,7 +2,6 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.stylebox.repository.FollowRepository;
 import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

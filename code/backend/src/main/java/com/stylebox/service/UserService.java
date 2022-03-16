@@ -2,6 +2,7 @@ package com.stylebox.service;
 
 import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.*;
+import com.stylebox.repository.stylist.FollowRepository;
 import com.stylebox.repository.user.*;
 import exception.Rest400Exception;
 import exception.Rest404Exception;
