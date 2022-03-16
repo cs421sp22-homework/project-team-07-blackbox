@@ -86,14 +86,14 @@ class OrderDetail extends Component{
                 {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 <Container>
                     <Content>
-                        <div className="p-6 mx-24 my-10 flex-initial shadow-lg rounded-lg bg-gray-50 text-gray-700">
+                        <div className="p-6 mx-16 my-16 flex-initial shadow-lg rounded-lg bg-gray-50 text-gray-700">
                             <div className="grid grid-cols-3">
-                                <h2 className="font-semibold text-3xl mb-5 px-3 py-5">Order # {this.state.orderId} Detail</h2>
-                                <p className='text-lg flex items-end mb-8'>(Created In {this.state.time})</p>
+                                <h2 className="font-semibold text-2xl mb-5 px-3 py-5">Order # {this.state.orderId} Detail</h2>
+                                <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
-                                    <button type="button" className="m-5 p-2 bg-blue-600 text-white text-xl leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Accept</button>
-                                    <button type="button" className="m-5 p-2 bg-red-600 text-white text-xl leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Reject</button>
-                                    <button onClick={this.backToOrders} type="button" className="m-5 p-2 bg-gray-200 text-gray-700 text-xl leading-tight rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Back to Orders</button>
+                                    <button type="button" className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Accept</button>
+                                    <button type="button" className="m-5 p-2 bg-red-600 text-white text-base leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Reject</button>
+                                    <button onClick={this.backToOrders} type="button" className="m-5 p-2 bg-gray-200 text-gray-700 text-base leading-tight rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Back to Orders</button>
                                 </div>
                             </div>
                             
@@ -101,42 +101,42 @@ class OrderDetail extends Component{
                             
                             <div className="grid grid-cols-3 px-5">
                                 <div className='grid grid-cols-3'>
-                                    <p className='text-xl'><FontAwesomeIcon icon={Icons.faUserGroup} /> Customer: </p>
-                                    <p className='col-span-2 text-xl text-gray-600'> &nbsp; &#8194; {this.state.cusNickname}</p>
+                                    <p className='text-base'><FontAwesomeIcon icon={Icons.faUserGroup} /> Customer: </p>
+                                    <p className='col-span-2 text-base text-gray-600'> &nbsp; &#8194; {this.state.cusNickname}</p>
                                 </div>
 
                                 <div className='grid grid-cols-3'>
-                                    <p className='text-xl'><FontAwesomeIcon icon={Icons.faTShirt} />&#8194; Styles: </p>
-                                    <p className='col-span-2 text-xl text-gray-600'> {this.state.styleSet.join(', ')}</p>
+                                    <p className='text-base'><FontAwesomeIcon icon={Icons.faTShirt} />&#8194; Styles: </p>
+                                    <p className='col-span-2 text-base text-gray-600'> {this.state.styleSet.join(', ')}</p>
                                 </div>
 
                                 <div className='grid grid-cols-3'>
-                                    <p className='text-xl'><FontAwesomeIcon icon={Icons.faLocationDot} />&#8194; Locations: </p>
-                                    <p className='col-span-2 text-xl text-gray-600'> {this.state.locationSet.join(', ')}</p>
+                                    <p className='text-base'><FontAwesomeIcon icon={Icons.faLocationDot} />&#8194; Locations: </p>
+                                    <p className='col-span-2 text-base text-gray-600'> {this.state.locationSet.join(', ')}</p>
                                 </div>
                             </div>
 
                             <div className="px-5 mt-8 mb-2 grid grid-cols-3">
                                 <div className='grid grid-cols-3'>
-                                    <p className='text-xl'> <FontAwesomeIcon icon={Icons.faDollarSign} /> Order Price: </p>
-                                    <p className='col-span-2 text-xl text-gray-600'> &nbsp; &#8194; {this.state.orderPrice}</p>
+                                    <p className='text-base'> <FontAwesomeIcon icon={Icons.faDollarSign} /> Order Price: </p>
+                                    <p className='col-span-2 text-base text-gray-600'> &nbsp; &#8194; {this.state.orderPrice}</p>
                                 </div>
 
                                 <div className='grid grid-cols-2'>
-                                    <p className='text-xl'> <FontAwesomeIcon icon={Icons.faDollarSign} /> ClothPrice (Low): </p>
-                                    <p className='text-xl text-gray-600'> &nbsp; {this.state.clothPriceLow}</p>
+                                    <p className='text-base'> <FontAwesomeIcon icon={Icons.faDollarSign} /> ClothPrice (Low): </p>
+                                    <p className='text-base text-gray-600'> &nbsp; {this.state.clothPriceLow}</p>
                                 </div>
 
                                 <div className='grid grid-cols-2'>
-                                    <p className='text-xl'> <FontAwesomeIcon icon={Icons.faDollarSign} /> ClothPrice (High): </p>
-                                    <p className='text-xl text-gray-600'> &nbsp; {this.state.clothPriceHigh}</p>
+                                    <p className='text-base'> <FontAwesomeIcon icon={Icons.faDollarSign} /> ClothPrice (High): </p>
+                                    <p className='text-base text-gray-600'> &nbsp; {this.state.clothPriceHigh}</p>
                                 </div>
                             </div>
 
                             <div className="flex justify-start">
                                 <div className="block p-6 m-3 rounded-lg shadow-lg bg-gray-100">
-                                    <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Description: </h5>
-                                    <p className="text-gray-700 text-lg mb-4">{this.state.description}</p>
+                                    <h5 className="text-gray-900 text-base leading-tight font-medium mb-2">Description: </h5>
+                                    <p className="text-gray-700 text-base mb-4">{this.state.description}</p>
                                 </div>
                             </div>
 
@@ -144,50 +144,50 @@ class OrderDetail extends Component{
                             <hr className="my-6 border-gray-300" />
                             <div className="flex justify-start">
                                 <div className="block p-6 m-3 rounded-lg shadow-lg bg-gray-100">
-                                    <h5 className="text-gray-900 text-2xl leading-tight font-medium mb-2">Customer Info: </h5>
-                                    <h5 className="text-gray-900 text-xl leading-tight font-medium my-8 mx-10">(This part is available to your stylist for he/she to know you better ... Customer can look the information from 'Menu -- Profile' section.) </h5>
+                                    <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Customer Info: </h5>
+                                    <h5 className="text-gray-900 text-base leading-tight font-medium my-8 mx-10">(This part is available to your stylist. Customer can look the information from 'Menu -- Profile' section.) </h5>
                                     
                                     <div className="grid grid-cols-4 m-5">
-                                        <div className='grid grid-cols-3'>
-                                            <p className='text-xl'><FontAwesomeIcon icon={Icons.faUserGroup} /> Gender: </p>
-                                            <p className='col-span-2 text-xl text-gray-600'> &nbsp; &#8194; {this.state.gender}</p>
+                                        <div className='grid grid-cols-5'>
+                                            <p className='col-span-2 text-base'><FontAwesomeIcon icon={Icons.faUserGroup} /> Gender: </p>
+                                            <p className='text-base text-gray-600'>  {this.state.gender}</p>
+                                        </div>
+
+                                        <div className='grid grid-cols-4'>
+                                            <p className='col-span-2 text-base'><FontAwesomeIcon icon={Icons.faLaptopMedical} />&#8194; FtSize: </p>
+                                            <p className='text-base text-gray-600'> {this.state.ftSize}</p>
                                         </div>
 
                                         <div className='grid grid-cols-3'>
-                                            <p className='text-xl'><FontAwesomeIcon icon={Icons.faLaptopMedical} />&#8194; FtSize: </p>
-                                            <p className='col-span-2 text-xl text-gray-600'> &#8194; {this.state.ftSize}</p>
+                                            <p className='text-base'><FontAwesomeIcon icon={Icons.faBookMedical} />&#8194; InSize: </p>
+                                            <p className='col-span-2 text-base text-gray-600'> &#8194; {this.state.inSize}</p>
                                         </div>
 
-                                        <div className='grid grid-cols-3'>
-                                            <p className='text-xl'><FontAwesomeIcon icon={Icons.faBookMedical} />&#8194; InSize: </p>
-                                            <p className='col-span-2 text-xl text-gray-600'> &#8194; {this.state.inSize}</p>
-                                        </div>
-
-                                        <div className='grid grid-cols-3'>
-                                            <p className='text-xl'><FontAwesomeIcon icon={Icons.faClinicMedical} /> Weight: </p>
-                                            <p className='col-span-2 text-xl text-gray-600'> &#8194; {this.state.weight}</p>
+                                        <div className='grid grid-cols-4'>
+                                            <p className='col-span-2 text-base'><FontAwesomeIcon icon={Icons.faClinicMedical} /> &#8194; Weight: </p>
+                                            <p className='text-base text-gray-600'> {this.state.weight}</p>
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-4 m-5">
                                         <div className='grid grid-cols-7'>
-                                            <p className='col-span-3 text-xl'><FontAwesomeIcon icon={Icons.faTShirt} /> ShirtSize: </p>
-                                            <p className='text-xl text-gray-600'> &#8194; {this.state.shirtSize}</p>
+                                            <p className='col-span-3 text-base'><FontAwesomeIcon icon={Icons.faTShirt} /> ShirtSize: </p>
+                                            <p className='text-base text-gray-600'> &#8194; {this.state.shirtSize}</p>
                                         </div>
 
                                         <div className='grid grid-cols-7'>
-                                            <p className='col-span-4 text-xl'><FontAwesomeIcon icon={Icons.faSocks} />&#8194; BottomSize: </p>
-                                            <p className='text-xl text-gray-600'> {this.state.bottomSize}</p>
+                                            <p className='col-span-4 text-base'><FontAwesomeIcon icon={Icons.faSocks} />&#8194; BottomSize: </p>
+                                            <p className='text-base text-gray-600'> {this.state.bottomSize}</p>
                                         </div>
 
-                                        <div className='grid grid-cols-7'>
-                                            <p className='col-span-3 text-xl'><FontAwesomeIcon icon={Icons.faShirt} />&#8194; JeanSize: </p>
-                                            <p className='text-xl text-gray-600'> &#8194; {this.state.jeanSize}</p>
+                                        <div className='grid grid-cols-5'>
+                                            <p className='col-span-3 text-base'><FontAwesomeIcon icon={Icons.faShirt} />&#8194; JeanSize: </p>
+                                            <p className='text-base text-gray-600'> {this.state.jeanSize}</p>
                                         </div>
 
-                                        <div className='grid grid-cols-7'>
-                                            <p className='col-span-3 text-xl'><FontAwesomeIcon icon={Icons.faSocks} />&#8194; ShoeSize: </p>
-                                            <p className='text-xl text-gray-600'> &#8194; {this.state.shoeSize}</p>
+                                        <div className='grid grid-cols-5'>
+                                            <p className='col-span-3 text-base'><FontAwesomeIcon icon={Icons.faSocks} />&#8194; ShoeSize: </p>
+                                            <p className='text-base text-gray-600'> {this.state.shoeSize}</p>
                                         </div>
                                     </div>
                                 </div>

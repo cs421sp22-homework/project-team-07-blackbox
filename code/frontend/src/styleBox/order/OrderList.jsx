@@ -116,8 +116,8 @@ class OrderList extends Component{
                     <Content>
                     <MainContainer>
                     <MainContent>
-                        <h2 className="text-5xl font-bold mt-0 mb-6">My Order</h2>
-                        <h5 className="text-3xl font-bold mb-8">View your order list</h5>
+                        <h2 className="text-3xl font-bold mt-0 mb-6">My Order</h2>
+                        <h5 className="text-xl font-bold mb-8">View your order list</h5>
                     
                         <div className="flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-6 lg:px-8 overflow-hidden">
                             <table className="min-w-full">
