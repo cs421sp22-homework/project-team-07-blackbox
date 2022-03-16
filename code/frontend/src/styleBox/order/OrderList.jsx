@@ -2,6 +2,7 @@ import tw from 'twin.macro'
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import NavBarCustomer from '../navBar_footer/NavBarCustomer';
 import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
+import NavBar from 'styleBox/navBar_footer/NavBar';
 import React, {Component} from "react";
 import { Container as ContainerBase} from "components/misc/Layouts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -54,6 +55,7 @@ class OrderList extends Component{
         this.changePage = this.changePage.bind(this)
         this.showOrderList = this.showOrderList.bind(this)
         this.checkUser = this.checkUser.bind(this)
+        this.viewOrder = this.viewOrder.bind(this)
     }
 
     // return user type
@@ -91,25 +93,31 @@ class OrderList extends Component{
     }
 
     componentDidMount(){
-        this.showOrderList(1, "")
+        //this.showOrderList(1, "")
+    }
+
+    viewOrder(orderId){
+        // console.log(orderId)
+        this.props.history.push({pathname:"/orderDetail", query: { id : orderId }})
     }
     
     render(){
         return(
             <AnimationRevealPage>
-                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+                <NavBar />
                 <Container>
                     <Content>
                     <MainContainer>
                     <MainContent>
-                        <h2 class="text-5xl font-bold mt-0 mb-6">My Order</h2>
-                        <h5 class="text-3xl font-bold mb-8">View your order list</h5>
+                        <h2 className="text-5xl font-bold mt-0 mb-6">My Order</h2>
+                        <h5 className="text-3xl font-bold mb-8">View your order list</h5>
                     
                         <div className="flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-6 lg:px-8 overflow-hidden">
                             <table className="min-w-full">
                                 <thead className="bg-white border-b bg-gray-50">
                                     <tr>
                                         <TableRow> Id </TableRow>
+                                        <TableRow> OrderId </TableRow>
                                         <TableRow> Nickname </TableRow>
                                         <TableRow> OrderPrice </TableRow>
                                         <TableRow> Styles </TableRow>
@@ -125,17 +133,18 @@ class OrderList extends Component{
                                 <tbody>
                                     {this.state.orderlst.map((order, index) => (
                                         <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                                            <TableValue>{index}</TableValue>
                                             <TableValue>{order.orderId}</TableValue>
                                             <TableValue>{order.nickname}</TableValue>
                                             <TableValue>{order.orderPrice}</TableValue>
-                                            <TableValue>{order.styleSet}</TableValue>
-                                            <TableValue>{order.locationSet}</TableValue>
+                                            <TableValue>{order.styleSet.join(', ')}</TableValue>
+                                            <TableValue>{order.locationSet.join(', ')}</TableValue>
                                             <TableValue>{order.description}</TableValue>
                                             <TableValue>{order.clothPriceLow}</TableValue>
                                             <TableValue>{order.clothPriceHigh}</TableValue>
                                             <TableValue>{order.time}</TableValue>
                                             <TableValue>{order.isRead.toString()}</TableValue>
-                                            <TableValue><ViewBtn>View</ViewBtn></TableValue>
+                                            <TableValue><ViewBtn onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn></TableValue>
                                         </tr>
                                     ))}
                                 </tbody>
