@@ -82,6 +82,7 @@ class Login extends Component {
               alert('Login successful !')
               console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
               AuthenticationService.loginSuccessfulRegister(cookie.load)
+              // if (cookies.get('role')=1)
               this.props.history.push(`/stylist/profile`)
           }            
       })
