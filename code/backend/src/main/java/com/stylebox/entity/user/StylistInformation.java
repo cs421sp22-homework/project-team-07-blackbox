@@ -3,6 +3,7 @@ package com.stylebox.entity.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.stylebox.repository.FollowRepository;
+import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,22 +46,8 @@ public class StylistInformation {
     @Column(name = "rate")
     private String rate;
 
-    @Column(name = "gender")
-    private String gender;
-
-//    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
-//    @JoinTable(name = "stylist_style",
-//            joinColumns = {@JoinColumn(name = "stylist_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
-//    @JsonManagedReference
-//    private Set<Style> styleSet = new HashSet<>();
-
     @Column(name = "age")
     private Integer age;
-
-//    public void addStyle(Style style) {
-//        this.styleSet.add(style);
-//    }
 
     public void addFollowRecord(FollowRecord followRecord){
         if(!followRecords.contains(followRecord)) {
@@ -80,4 +67,7 @@ public class StylistInformation {
         this.followNum = followRecords.size();
     }
 
+    @OneToMany(mappedBy = "stylist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Orders> orderSet = new HashSet<>();
 }

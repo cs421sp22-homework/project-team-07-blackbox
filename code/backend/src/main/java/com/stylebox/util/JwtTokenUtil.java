@@ -1,8 +1,8 @@
 package com.stylebox.util;
 
 import com.stylebox.entity.user.User;
-import com.stylebox.repository.UserLoginRepository;
-import com.stylebox.repository.UserRepository;
+import com.stylebox.repository.user.UserLoginRepository;
+import com.stylebox.repository.user.UserRepository;
 import exception.Rest400Exception;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
@@ -10,11 +10,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -113,5 +117,42 @@ public class JwtTokenUtil {
             throw new Rest400Exception("incorrect jwt");
         }
         return user.get();
+    }
+
+    /**
+     * addJWTToResponse
+     *
+     * @param request  request
+     * @param response response
+     * @param token    jwt token
+     * @param maxAge   expiration time
+     */
+    public void addJWTToResponse(HttpServletRequest request, HttpServletResponse response, String token, Duration maxAge) {
+        String origin = request.getHeader("Origin");
+        ResponseCookie cookie;
+        if (null != origin && origin.contains("davidz.cn")) {
+            cookie = generateCookie(response, "jwt", token, maxAge);
+        } else {
+            cookie = generateCookie(response, "jwt", token, maxAge);
+        }
+        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+    }
+
+    public void addJWTToResponse(HttpServletRequest request, HttpServletResponse response, String token) {
+        addJWTToResponse(request, response, token, Duration.ofDays(30));
+    }
+
+    public ResponseCookie generateCookie(HttpServletResponse response, String name, String content, Duration maxAge) {
+        return ResponseCookie.from(name, content)
+//                    .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(maxAge)
+//                    .sameSite("None")
+                .build();
+    }
+
+    public void addCookieToResponse(HttpServletResponse response, ResponseCookie cookie) {
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
     }
 }

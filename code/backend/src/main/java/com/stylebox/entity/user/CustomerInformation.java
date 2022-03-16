@@ -2,6 +2,7 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,11 +28,7 @@ public class CustomerInformation {
 
     @OneToMany(mappedBy = "customerInformation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FollowRecord> followRecords = new ArrayList<>();
-
-
-    @Column(name="gender")
-    private String gender;
-
+  
     @Column(name="ftSize")
     private String ftSize;
 
@@ -64,14 +60,7 @@ public class CustomerInformation {
         followRecord.setCustomerInformation(null);
     }
 
-//    @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
-//    @JoinTable(name = "customer_style",
-//            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "style_id", referencedColumnName = "id")})
-//    @JsonManagedReference
-//    private Set<Style> styleSet = new HashSet<>();
-//
-//    public void addStyle(Style style) {
-//        this.styleSet.add(style);
-//    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Orders> orderSet = new HashSet<>();
 }

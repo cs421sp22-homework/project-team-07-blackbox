@@ -1,4 +1,4 @@
-package com.stylebox.repository;
+package com.stylebox.repository.user;
 
 import com.stylebox.entity.user.Style;
 import com.stylebox.entity.user.UserLogin;
