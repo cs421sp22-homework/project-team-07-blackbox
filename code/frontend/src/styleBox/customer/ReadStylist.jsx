@@ -51,7 +51,8 @@ class ReadStylist extends Component{
   }
 
   componentDidMount(){
-    CustomerBrowseStylistService.getHomepage(this.state.stylistId)
+    window.scrollTo(0, 0);
+    CustomerBrowseStylistService.getHomepage(this.props.location.query.stylistId)
     .then(response=>{this.setState({
       testimonials: [{
         nickname: response.data.nickname,

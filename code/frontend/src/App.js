@@ -12,7 +12,7 @@ import CustomerProfile from "./styleBox/customer/CustomerProfile";
 import AccountSetting from "./styleBox/AccountSetting";
 import Quiz from "./styleBox/quiz/Quiz";
 import ReadStylist from "./styleBox/customer/ReadStylist";
-import Test from "components/features/DashedBorderSixFeatures";
+import Test from "demos/EventLandingPage";
 import CreateOrder from "styleBox/order/CreateOrder";
 import StylistList from "./styleBox/stylist/StylistList";
 import FollowStylist from"./styleBox/customer/followStylistList"

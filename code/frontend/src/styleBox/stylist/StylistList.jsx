@@ -46,7 +46,7 @@ const Statistics = tw.div`flex flex-col items-center sm:block text-center md:tex
 const Value = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4 font-bold text-lg sm:text-xl lg:text-2xl text-pink-500  tracking-wide`;
 const Key = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4 font-medium text-pink-500`;
 
-const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0 `;
+const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0 inline-block bg-pink-500 hover:bg-gray-100 hover:text-pink-500 focus:bg-pink-500 focus:text-gray-100 rounded-full`;
 
 const DecoratorBlob = styled(SvgDotPattern)(props => [
     tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-pink-500 -z-10`
@@ -221,11 +221,15 @@ class StylistList extends Component{
 
                                         </Statistics>
                                         {/*onClick={this.learnMore.bind(this,testimonial.stylistId)}*/}
-                                        <Link to={{pathname:'/stylistList', query:{stylistId:stylistLst.stylistId}}}>
+                                        {/* <Link to={{pathname:'/stylistList', query:{stylistId:stylistLst.stylistId}}}>
                                             <PrimaryButton >
                                             {"Learn More"}
                                             </PrimaryButton>
-                                        </Link>
+                                        </Link> */}
+                                        <PrimaryButton onClick={()=>{this.props.history.push({
+                                            pathname:'/stylist/homepage',
+                                            query:{stylistId: stylistLst.stylistId}
+                                        })}}>Learn More</PrimaryButton>
 
                                     </TextContent>
                                 </TextColumn>
