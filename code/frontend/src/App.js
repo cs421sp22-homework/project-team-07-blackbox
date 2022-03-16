@@ -33,7 +33,7 @@ export default function App() {
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
               <AuthenticatedRoute path="/orders" component={OrderList}/>
-              <Route path="/orderDetail" component={OrderDetail} />
+              <AuthenticatedRoute path="/orderDetail" component={OrderDetail} />
           </Switch>
       </>
   </Router>
