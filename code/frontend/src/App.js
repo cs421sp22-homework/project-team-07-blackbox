@@ -40,10 +40,10 @@ export default function App() {
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
-              <Route path="/orders" component={OrderList}/>
-              <Route path="/orderDetail" component={OrderDetail} />
-              <Route path="/stylist/homepage" component={ReadStylist}/>
-              <Route path="/order" component={CreateOrder}/>
+              <AuthenticatedRoute path="/orders" component={OrderList}/>
+              <AuthenticatedRoute path="/orderDetail" component={OrderDetail} />
+              <AuthenticatedRoute path="/stylist/homepage" component={ReadStylist}/>
+              <AuthenticatedRoute path="/order" component={CreateOrder}/>
           </Switch>
       </>
   </Router>
