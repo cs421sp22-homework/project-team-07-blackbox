@@ -36,15 +36,13 @@ public class StylistController {
     @PostMapping("/follow/{id}")
     public void addFollower(HttpServletRequest request, @PathVariable Long id) {
         User user = jwtTokenUtil.getUserFromRequest(request);
-        Long followerId = user.getId();
-        stylistService.addFollowRecord(followerId, id);
+        stylistService.addFollowRecord(user, id);
     }
 
     @DeleteMapping("/unfollow/{id}")
     public void deleteFollower(HttpServletRequest request, @PathVariable Long id){
         User user = jwtTokenUtil.getUserFromRequest(request);
-        Long followerId = user.getId();
-        stylistService.deleteFollowRecord(followerId, id);
+        stylistService.deleteFollowRecord(user, id);
     }
 
     @GetMapping("/followStylist")

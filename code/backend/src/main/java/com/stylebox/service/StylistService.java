@@ -21,7 +21,7 @@ import java.util.Arrays;
 import com.stylebox.entity.user.CustomerInformation;
 import com.stylebox.entity.user.FollowRecord;
 import com.stylebox.entity.user.StylistInformation;
-import com.stylebox.repository.CustomerInformationRepository;
+import com.stylebox.repository.user.CustomerInformationRepository;
 import com.stylebox.repository.FollowRepository;
 import exception.Rest404Exception;
 
@@ -49,7 +49,11 @@ public class StylistService {
 
 
     //add a follow record
-    public void addFollowRecord(Long followerId, Long followeeId){
+    public void addFollowRecord(User user, Long followeeId){
+        if(user.getRole().getName().equals("Stylists")){
+            throw new Rest404Exception("Stylists can't unfollow other stylists");
+        }
+        Long followerId = user.getId();
         FollowRecord followRecord = getValidFollowRecord(followerId, followeeId);
         //If record is not in the repository, add
         Optional<FollowRecord> followRecordToBeAdd = followRepository.findByFollowerIdAndFolloweeId(followerId, followeeId);
@@ -60,7 +64,11 @@ public class StylistService {
         }
     }
     //delete a follow record
-    public void deleteFollowRecord(Long followerId, Long followeeId){
+    public void deleteFollowRecord(User user, Long followeeId){
+        if(user.getRole().getName().equals("Stylists")){
+            throw new Rest404Exception("Stylists can't follow other stylists");
+        }
+        Long followerId = user.getId();
         //Detemine if the followRecord is valid (followerId is a customer_id, followeeId is a stylistId)
         getValidFollowRecord(followerId, followeeId);
 
