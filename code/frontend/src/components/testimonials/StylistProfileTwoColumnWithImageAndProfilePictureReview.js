@@ -37,7 +37,7 @@ const Image = tw.img`max-w-full rounded-t sm:rounded`;
 
 const ControlContainer = tw.div`absolute bottom-0 right-0 bg-gray-100 px-6 py-4 rounded-tl-3xl border`;
 const ControlButton = styled(PrimaryButton)`
-  ${tw`mx-3 rounded-full text-gray-100 p-2`}
+  ${tw`mx-3 rounded-full text-gray-100 p-2 bg-pink-500`}
   svg {
     ${tw`w-5 h-5`}
   }
@@ -57,15 +57,15 @@ const Quote = tw.blockquote`text-center lg:text-left text-sm sm:text-lg lg:text-
 const CustomerInfo = tw.div`mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start`;
 const CustomerProfilePicture = tw.img`rounded-full w-20 h-20`;
 const CustomerTextInfo = tw.div`text-center lg:text-left sm:ml-6 mt-2 sm:mt-0`;
-const CustomerName = tw.h5`font-semibold text-xl lg:text-2xl xl:text-3xl text-primary-500`;
+const CustomerName = tw.h5`font-semibold text-xl lg:text-2xl xl:text-3xl text-pink-500`;
 const CustomerTitle = tw.p`font-medium text-secondary-100`;
 
-const QuotesLeft = tw(QuotesLeftIcon)`w-6 h-6 opacity-75 text-primary-500 inline-block mr-1 -mt-3`;
-const QuotesRight = tw(QuotesRightIcon)`w-6 h-6 opacity-75 text-primary-500 inline-block ml-1 -mt-3`;
+const QuotesLeft = tw(QuotesLeftIcon)`w-6 h-6 opacity-75 text-pink-500 inline-block mr-1 -mt-3`;
+const QuotesRight = tw(QuotesRightIcon)`w-6 h-6 opacity-75 text-pink-500 inline-block ml-1 -mt-3`;
 
 const DecoratorBlob1 = tw(
   SvgDecoratorBlob1
-)`absolute w-32 top-0 left-0 -z-10 text-primary-500 opacity-25 transform -translate-x-full`;
+)`absolute w-32 top-0 left-0 -z-10 text-pink-500 opacity-25 transform -translate-x-full`;
 const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;

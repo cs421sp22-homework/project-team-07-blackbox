@@ -13,6 +13,11 @@ class OrderService {
         return axios.get(`${API_URL}/orderDetail/${id}`, {withCredentials: true})
     }
 
-}
+    createOrder(stylistId, info){
+        console.log("here!");
+        console.log(stylistId);
+        return axios.post(`${API_URL}/order/${stylistId}`, info, {withCredentials: true})
+    }
 
+}
 export default new OrderService()

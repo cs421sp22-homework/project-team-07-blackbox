@@ -9,10 +9,15 @@ import Register from "./styleBox/login_register/Register"
 import AuthenticatedRoute from './styleBox/AuthenticatedRoute'
 import StylistProfile from"./styleBox/stylist/StylistProfile";
 import CustomerProfile from "./styleBox/customer/CustomerProfile";
-import AccountSetting from "./styleBox/AccountSetting"
+import AccountSetting from "./styleBox/AccountSetting";
 import Quiz from "./styleBox/quiz/Quiz";
 import OrderList from "./styleBox/order/OrderList";
 import OrderDetail from "styleBox/order/OrderDetail";
+import ReadStylist from "./styleBox/customer/ReadStylist";
+import Test from "demos/EventLandingPage";
+import CreateOrder from "styleBox/order/CreateOrder";
+import StylistList from "./styleBox/stylist/StylistList";
+import FollowStylist from"./styleBox/customer/followStylistList"
 
 
 
@@ -28,12 +33,17 @@ export default function App() {
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
+              <Route path="/test" component={Test}/>
+              <Route path="/stylistList" component={StylistList}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
+              <AuthenticatedRoute path="/followStylist" component={FollowStylist}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
-              <AuthenticatedRoute path="/orders" component={OrderList}/>
-              <AuthenticatedRoute path="/orderDetail" component={OrderDetail} />
+              <Route path="/orders" component={OrderList}/>
+              <Route path="/orderDetail" component={OrderDetail} />
+              <Route path="/stylist/homepage" component={ReadStylist}/>
+              <Route path="/order" component={CreateOrder}/>
           </Switch>
       </>
   </Router>

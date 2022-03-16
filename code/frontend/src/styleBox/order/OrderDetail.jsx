@@ -5,7 +5,6 @@ import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
 import React, {Component} from "react";
 import { Container as ContainerBase} from "components/misc/Layouts";
 import OrderService from 'api/styleBox/OrderService';
-import NavBar from 'styleBox/navBar_footer/NavBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 import Cookies from 'react-cookies';

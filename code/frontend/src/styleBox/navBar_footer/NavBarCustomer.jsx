@@ -18,8 +18,7 @@ class NavBarCustomer extends Component{
                         Homepage
                     </NavLink>
                     <NavLink target="_self"
-                             href="#">
-                        Stylists
+                             href="/stylistList">
                     </NavLink>
                     <NavLink target="_self" href="#">
                         Shopping
@@ -49,8 +48,11 @@ class NavBarCustomer extends Component{
                                    className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Account Setting</a>
                             </li>
                             <li>
-                                <a href="/orders"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Orders</a>
+                                <a href="/orders" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Orders</a>
+                            </li>
+                            <li>
+                            <a href="/followStylist"
+                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">FollowStylist</a>
                             </li>
                             <li>
                                 <a href="#"

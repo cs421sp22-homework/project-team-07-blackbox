@@ -2,7 +2,6 @@ import tw from 'twin.macro'
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import NavBarCustomer from '../navBar_footer/NavBarCustomer';
 import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
-import NavBar from 'styleBox/navBar_footer/NavBar';
 import React, {Component} from "react";
 import { Container as ContainerBase} from "components/misc/Layouts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
