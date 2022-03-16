@@ -1,6 +1,7 @@
 package com.stylebox.controller;
 
 import com.stylebox.dto.Order.OrderCreateDTO;
+import com.stylebox.dto.Order.OrderDetailDTO;
 import com.stylebox.dto.Order.OrderListDTO;
 import com.stylebox.entity.user.User;
 import com.stylebox.service.OrderService;
@@ -33,5 +34,11 @@ public class OrderController {
     ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return orderService.getOrderList(user, page, sort, limit);
+    }
+
+    @GetMapping("/orderDetail/{id}")
+    public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        return orderService.getOrderDetail(user, orderId);
     }
 }

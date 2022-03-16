@@ -2,6 +2,7 @@ package com.stylebox.service;
 
 import com.stylebox.dto.Order.OrderBrowseDTO;
 import com.stylebox.dto.Order.OrderCreateDTO;
+import com.stylebox.dto.Order.OrderDetailDTO;
 import com.stylebox.dto.Order.OrderListDTO;
 import com.stylebox.dto.stylist.StyDTO;
 import com.stylebox.entity.stylist.Orders;
@@ -12,6 +13,8 @@ import com.stylebox.repository.user.StyleRepository;
 import com.stylebox.repository.user.StylistInformationRepository;
 import com.stylebox.util.SortUtil;
 import exception.Rest400Exception;
+import exception.Rest401Exception;
+import exception.Rest404Exception;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.modelmapper.ModelMapper;
@@ -130,5 +133,34 @@ public class OrderService {
         orderListDTO.setData(orderBrowseDTOS);
 
         return orderListDTO;
+    }
+
+    public OrderDetailDTO getOrderDetail(User user, Long orderId) {
+        Optional<Orders> op = orderRepository.findById(orderId);
+        if (!op.isPresent()) {
+            throw new Rest404Exception("Not found the order");
+        }
+        Orders o = op.get();
+        //check user identity
+        if (!o.getCustomer().getUser().getId().equals(user.getId())
+                && !o.getStylist().getUser().getId().equals(user.getId())) {
+            throw new Rest401Exception("Cannot view other users' orders");
+        }
+
+        OrderDetailDTO orderDetailDTO = modelMapper.map(o.getCustomer(), OrderDetailDTO.class);
+        modelMapper.map(o.getCustomer().getUser(), orderDetailDTO);
+        modelMapper.map(o, orderDetailDTO);
+        orderDetailDTO.setCusNickname(o.getCustomer().getUser().getNickname());
+        orderDetailDTO.setTime(o.getCreatedDatetime());
+        //styleSet
+        Set<String> styles = new HashSet<>();
+        for (Style s : o.getStyleSet()) {
+            styles.add(s.getStyleName());
+        }
+        orderDetailDTO.setStyleSet(styles);
+        //occasionSet
+        Set<String> occs = new HashSet<>(Arrays.asList(o.getOccasions().split(",")));
+        orderDetailDTO.setOccasionSet(occs);
+        return orderDetailDTO;
     }
 }
