@@ -42,6 +42,9 @@ public class OrderService {
     final SortUtil sortUtil;
 
     public void createOrder(User user, Long styid, OrderCreateDTO orderCreateDTO) {
+        if (!user.getRole().getName().equals("Customer")) {
+            throw new Rest401Exception("Stylist cannot create order");
+        }
         Orders orders = new Orders();
         modelMapper.map(orderCreateDTO, orders);
 
