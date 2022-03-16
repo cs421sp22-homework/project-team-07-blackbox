@@ -12,6 +12,7 @@ import CustomerProfile from "./styleBox/customer/CustomerProfile";
 import AccountSetting from "./styleBox/AccountSetting"
 import Quiz from "./styleBox/quiz/Quiz";
 import StylistList from "./styleBox/stylist/StylistList";
+import FollowStylist from"./styleBox/customer/followStylistList"
 
 
 
@@ -29,6 +30,7 @@ export default function App() {
               <Route path="/register" component={Register}/>
               <Route path="/stylistList" component={StylistList}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
+              <AuthenticatedRoute path="/followStylist" component={FollowStylist}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
