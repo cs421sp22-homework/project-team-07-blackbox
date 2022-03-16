@@ -65,7 +65,10 @@ public class StylistService {
 
         Optional<FollowRecord> followRecordToBeDelete = followRepository.findByFollowerIdAndFolloweeId(followerId, followeeId);
         if(followRecordToBeDelete.isPresent()) {
+            followRecordToBeDelete.get().getStylistInformation().deleteFollowRecord(followRecordToBeDelete.get());
+            followRecordToBeDelete.get().getCustomerInformation().deleteFollowRecord(followRecordToBeDelete.get());
             followRepository.deleteById(followRecordToBeDelete.get().getId());
+
         }else{
             throw new Rest404Exception("followRecord does not exist");
         }

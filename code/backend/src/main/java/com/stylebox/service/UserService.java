@@ -32,6 +32,8 @@ public class UserService {
 
     final ModelMapper modelMapper;
 
+    final FollowRepository followRepository;
+
 //    static Pattern usernamePattern = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_-]{5,15}$");
 
 //    static Pattern passwordPattern = Pattern.compile("^(?=(?=.*[0-9])(?=.*[a-z])|(?=.*[0-9])(?=.*[A-Z])|(?=.*[0-9])(?=.*[`~!@#$%^&*()\\-=_+])|(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*[`~!@#$%^&*()\\-=_+])|(?=.*[A-Z])(?=.*[`~!@#$%^&*()\\-=_+])).{6,16}$");
@@ -204,5 +206,18 @@ public class UserService {
         }
         user.setStyleSet(newStyleSet);
         userRepository.save(user);
+    }
+
+    public StylistHomepageDTO getStylistHomepage(User user, Long followeeId){
+        Optional<StylistInformation> stylistInformation = stylistInformationRepository.findById(followeeId);
+        if(!stylistInformation.isPresent()){
+            throw new Rest400Exception("Run stylistId. Stylist does not exist.");
+        }
+
+        StylistProfileGetDTO stylistProfileGetDTO = getStylistProfile(stylistInformation.get().getUser());
+        StylistHomepageDTO stylistHomepageDTO = modelMapper.map(stylistProfileGetDTO, StylistHomepageDTO.class);
+        Optional<FollowRecord> followRecord = followRepository.findByFollowerIdAndFolloweeId(user.getCustomerInformation().getId(), followeeId);
+        stylistHomepageDTO.setFollow(followRecord.isPresent());
+        return stylistHomepageDTO;
     }
 }

@@ -37,7 +37,7 @@ public class StylistInformation {
 //    private List<FollowRecord> followRecords = new ArrayList<>();
 
     @Column(name = "follow_num")
-    private String followNum;
+    private int followNum = 0;
 
     @Column(name = "intro")
     private String intro;
@@ -66,14 +66,18 @@ public class StylistInformation {
         if(!followRecords.contains(followRecord)) {
             followRecords.add(followRecord);
             followRecord.setStylistInformation(this);
+//            this.followNum++;
         }
+        this.followNum = followRecords.size();
     }
 
     public void deleteFollowRecord(FollowRecord followRecord){
         if(followRecords.contains(followRecord)) {
             followRecords.remove(followRecord);
             followRecord.setStylistInformation(null);
+//            this.followNum--;
         }
+        this.followNum = followRecords.size();
     }
 
 }
