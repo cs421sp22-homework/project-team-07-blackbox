@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,9 @@ public class CustomerInformation {
     @JsonBackReference
     private User user;
 
+    @OneToMany(mappedBy = "customerInformation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<FollowRecord> followRecords = new ArrayList<>();
+  
     @Column(name="ftSize")
     private String ftSize;
 
@@ -45,6 +49,16 @@ public class CustomerInformation {
 
     @Column(name="shoeSize")
     private String shoeSize;
+
+    public void addFollowRecord(FollowRecord followRecord){
+        followRecords.add(followRecord);
+        followRecord.setCustomerInformation(this);
+    }
+
+    public void deleteFollowRecord(FollowRecord followRecord){
+        followRecords.remove(followRecord);
+        followRecord.setCustomerInformation(null);
+    }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference

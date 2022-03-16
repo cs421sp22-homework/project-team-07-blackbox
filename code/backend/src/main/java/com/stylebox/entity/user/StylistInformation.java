@@ -2,13 +2,16 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.stylebox.repository.FollowRepository;
 import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,17 +31,41 @@ public class StylistInformation {
     @JsonBackReference
     private User user;
 
+    @OneToMany(mappedBy = "stylistInformation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<FollowRecord> followRecords = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "followee_id", referencedColumnName = "id")
+//    private List<FollowRecord> followRecords = new ArrayList<>();
+
+    @Column(name = "follow_num")
+    private int followNum = 0;
+
     @Column(name = "intro")
     private String intro;
+
+    @Column(name = "rate")
+    private String rate;
 
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "rate")
-    private Integer rate;
+    public void addFollowRecord(FollowRecord followRecord){
+        if(!followRecords.contains(followRecord)) {
+            followRecords.add(followRecord);
+            followRecord.setStylistInformation(this);
+//            this.followNum++;
+        }
+        this.followNum = followRecords.size();
+    }
 
-    @Column(name = "followNum")
-    private Integer followNum;
+    public void deleteFollowRecord(FollowRecord followRecord){
+        if(followRecords.contains(followRecord)) {
+            followRecords.remove(followRecord);
+            followRecord.setStylistInformation(null);
+//            this.followNum--;
+        }
+        this.followNum = followRecords.size();
+    }
 
     @OneToMany(mappedBy = "stylist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
