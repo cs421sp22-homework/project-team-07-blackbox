@@ -1,6 +1,6 @@
 package com.stylebox.entity.user;
 
-import com.stylebox.repository.StyleRepository;
+import com.stylebox.repository.user.StyleRepository;
 import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
