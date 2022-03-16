@@ -11,6 +11,7 @@ import StylistProfile from"./styleBox/stylist/StylistProfile";
 import CustomerProfile from "./styleBox/customer/CustomerProfile";
 import AccountSetting from "./styleBox/AccountSetting"
 import Quiz from "./styleBox/quiz/Quiz";
+import StylistList from "./styleBox/stylist/StylistList";
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
+              <Route path="/stylistList" component={StylistList}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
               <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
