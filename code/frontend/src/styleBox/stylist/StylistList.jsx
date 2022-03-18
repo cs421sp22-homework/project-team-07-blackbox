@@ -2,7 +2,7 @@ import tw from 'twin.macro'
 import React, {Component} from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Footer from "styleBox/navBar_footer/Footer.jsx";
-import Cookies from 'react-cookies';
+import cookies from 'react-cookies';
 import { Container as ContainerBase} from "components/misc/Layouts";
 import NavBar from "styleBox/navBar_footer/NavBar.jsx";
 import NavBarCustomer from '../navBar_footer/NavBarCustomer';
@@ -114,9 +114,6 @@ class StylistList extends Component{
         this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
     }
 
-    checkUser(){
-        return Cookies.get('role');
-    }
 
     searchBtn(event){
         this.setState({
@@ -165,7 +162,7 @@ class StylistList extends Component{
     render() {
         return(
             <AnimationRevealPage>
-                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+                {cookies.load('role') === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
                     {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
