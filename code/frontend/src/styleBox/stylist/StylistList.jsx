@@ -138,7 +138,7 @@ class StylistList extends Component{
     showStylistList(pageValue,styleValue,sortValue,searchValue,limitValue){
         StylistListService.getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue)
             .then(response => this.setState({
-                stylistLists: response.data
+                stylistLists: response.data.data
             }))
             .catch(error => console.log(error.response))
     }

@@ -12,7 +12,7 @@ class StylistListService {
 
     searchInfo(info){
         console.log(info)
-        return axios.post(`${API_URL}/stylists`,info,{withCredentials: true})
+        return axios.get(`${API_URL}/stylists`,info)
     }
 
 

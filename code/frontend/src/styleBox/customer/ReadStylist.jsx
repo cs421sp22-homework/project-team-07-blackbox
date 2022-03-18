@@ -47,7 +47,6 @@ class ReadStylist extends Component{
       button: "Follow"
     }
 
-    this.checkUser = this.checkUser.bind(this)
     this.changeFollowState = this.changeFollowState.bind(this)
     this.createOrder = this.createOrder.bind(this)
 
@@ -55,28 +54,31 @@ class ReadStylist extends Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
+    console.log(this.props.location.query.stylistId);
     CustomerBrowseStylistService.getHomepage(this.props.location.query.stylistId)
-    .then(response=>{this.setState({
+    .then((response)=>{
+      // console.log('here!1')
+      console.log(response.data);
+      this.setState({
       testimonials: [{
-        nickname: response.data.nickname,
-        photo: response.data.photo,
-        intro: response.data.intro,
-        gender: response.data.gender,
-        style: response.data.style,
-        age: response.data.age,
-        userName: response.data.username,
-        email:response.data.email,
-        facebook: response.data.facebook,
-        rate: response.data.rate,
-        followerNum: response.data.followerNum,
-        likeNum: response.data.likeNum,
-        stylistId: response.data.stylistId,
-        isFollow: response.data.isFollow
+        nickname: response.data.stylistProfileGetDTO.nickname,
+        photo: response.data.stylistProfileGetDTO.photo,
+        intro: response.data.stylistProfileGetDTO.intro,
+        gender: response.data.stylistProfileGetDTO.gender,
+        style: response.data.stylistProfileGetDTO.style,
+        age: response.data.stylistProfileGetDTO.age,
+        userName: response.data.stylistProfileGetDTO.username,
+        email:response.data.stylistProfileGetDTO.email,
+        facebook: response.data.stylistProfileGetDTO.facebook,
+        rate: response.data.stylistProfileGetDTO.rate,
+        followerNum: response.data.stylistProfileGetDTO.followerNum,
+        likeNum: response.data.stylistProfileGetDTO.likeNum,
+        stylistId: this.props.location.query.stylistId,
+        isFollow: response.data.follow
       }],
-      display: response.data.display,
-    }
-    ); 
-    if (response.data.isFollow){
+      display: response.data.stylistProfileGetDTO.display,
+    }); 
+    if (response.data.Follow){
       this.setState({
         button : "Unfollow"
       })
@@ -85,12 +87,9 @@ class ReadStylist extends Component{
         button : "Follow"
       })
     };
+    // console.log('here');
     })
     .catch(error => console.log(error.response))
-  }
-
-  checkUser(){
-    return Cookies.get('role');
   }
 
 
@@ -133,7 +132,7 @@ class ReadStylist extends Component{
     console.log("stylistID:"+this.state.testimonials[0].stylistId)
     return(
       <AnimationRevealPage>
-        {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+        {Cookies.load('role') === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
         <div align="center">
           <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
