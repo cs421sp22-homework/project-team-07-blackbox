@@ -20,47 +20,47 @@ const ViewBtn = tw.button`inline-block px-6 py-2 border-2 border-blue-600 text-b
 class OrderList extends Component{
     constructor(props) {
         super(props);
-        
+
         this.state = {
             currentPage: 1,
-            maxPage: 5,
+            totalPage: 5,
             sort: "",
             orderlst: [{
                 nickname: "MangoC",
                 orderPrice: 300,
                 styleSet: ["Cool"],
-                locationSet: ["Casual"],
+                occasionSet: ["Casual"],
                 description: "This is a sample description. Some quick example text to build on the card title and make up the bulk of the card's content. Want to desigin a cloth style for business meeting.",
                 clothPriceLow: 200,
                 clothPriceHigh: 300,
                 time: "2022/3/5",
                 orderId: 1,
-                isRead: false
+                read: false
             },
             {
                 nickname: "xxx",
                 orderPrice: 230,
                 styleSet: ["None", "Sexy"],
-                locationSet: ["Dating"],
+                occasionSet: ["Dating"],
                 description: "Look beautiful",
                 clothPriceLow: 500,
                 clothPriceHigh: 800,
                 time: "2022/3/9",
                 orderId: 2,
-                isRead: true
+                read: true
             }]
         }
         this.sortBtn = this.sortBtn.bind(this)
         this.changePage = this.changePage.bind(this)
         this.showOrderList = this.showOrderList.bind(this)
-        this.checkUser = this.checkUser.bind(this)
+        this.checkCustomer = this.checkCustomer.bind(this)
         this.viewOrder = this.viewOrder.bind(this)
         this.showDescription = this.showDescription.bind(this)
     }
 
     // return user type
-    checkUser(){
-        return Cookies.get('role');
+    checkCustomer(){
+        return Cookies.load('role')==='Customer';
     }
 
     changePage(event){
@@ -78,22 +78,23 @@ class OrderList extends Component{
             this.setState({sort: "time"})
         }
         if(event.target.name === "viewBtn"){
-            this.setState({sort: "isRead"})
+            this.setState({sort: "read"})
         }
         // update sorted result
-        this.showOrderList(this.state.currentPage, this.state.sort)
+        this.showOrderList(this.state.currentPage-1, this.state.sort)
     }
 
     showOrderList(pageValue, sortValue){
         OrderService.getOrderList(pageValue, sortValue)
         .then(response => this.setState({
-            orderlst: response.data
+            orderlst: response.data.data,
+            totalPage: response.data.totalPages
         }))
         .catch(error => console.log(error.response))
     }
 
     componentDidMount(){
-        this.showOrderList(1, "")
+        this.showOrderList(0, "")
     }
 
     viewOrder(orderId){
@@ -107,18 +108,18 @@ class OrderList extends Component{
         }
         return info
     }
-    
+
     render(){
         return(
             <AnimationRevealPage>
-                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+                {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
                 <Container>
                     <Content>
                     <MainContainer>
                     <MainContent>
                         <h2 className="text-3xl font-bold mt-0 mb-6">My Order</h2>
                         <h5 className="text-xl font-bold mb-8">View your order list</h5>
-                    
+
                         <div className="flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-6 lg:px-8 overflow-hidden">
                             <table className="min-w-full">
                                 <thead className="bg-white border-b bg-gray-50">
@@ -132,7 +133,7 @@ class OrderList extends Component{
                                         <TableRow> Description </TableRow>
                                         <TableRow> ClothPrice (Low) </TableRow>
                                         <TableRow> ClothPrice (High) </TableRow>
-                                        <TableRow> Time <button name="timeBtn" onClick={this.sortBtn}><FontAwesomeIcon icon={Icons.faSort} /></button> </TableRow> 
+                                        <TableRow> Time <button name="timeBtn" onClick={this.sortBtn}><FontAwesomeIcon icon={Icons.faSort} /></button> </TableRow>
                                         <TableRow> View <button name="viewBtn" onClick={this.sortBtn}><FontAwesomeIcon icon={Icons.faSort} /></button> </TableRow>
                                         <TableRow> Action </TableRow>
                                     </tr>
@@ -145,12 +146,12 @@ class OrderList extends Component{
                                             <TableValue>{order.nickname}</TableValue>
                                             <TableValue>{order.orderPrice}</TableValue>
                                             <TableValue>{this.showDescription(order.styleSet.join(', '))}</TableValue>
-                                            <TableValue>{this.showDescription(order.locationSet.join(', '))}</TableValue>
+                                            <TableValue>{this.showDescription(order.occasionSet.join(', '))}</TableValue>
                                             <TableValue>{this.showDescription(order.description)}</TableValue>
                                             <TableValue>{order.clothPriceLow}</TableValue>
                                             <TableValue>{order.clothPriceHigh}</TableValue>
                                             <TableValue>{this.showDescription(order.time)}</TableValue>
-                                            <TableValue>{order.isRead.toString()}</TableValue>
+                                            <TableValue>{order.read.toString()}</TableValue>
                                             <TableValue><ViewBtn onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn></TableValue>
                                         </tr>
                                     ))}
@@ -171,7 +172,7 @@ class OrderList extends Component{
 
                                     <li class="page-item"><p className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.currentPage}</p></li>
 
-                                    {(this.state.currentPage === this.state.maxPage)
+                                    {(this.state.currentPage === this.state.totalPage)
                                         ? <li className="page-item disabled"><button
                                             className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
                                             tabindex="-1" aria-disabled="true">Next</button></li>
@@ -184,7 +185,7 @@ class OrderList extends Component{
                         </div>
                     </MainContent>
                     </MainContainer>
-                    </Content>     
+                    </Content>
                 </Container>
             </AnimationRevealPage>
         )
