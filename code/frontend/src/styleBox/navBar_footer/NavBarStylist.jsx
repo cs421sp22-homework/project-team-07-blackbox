@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import tw from "twin.macro";
 import "../../styles/tailwind.min.css"
 import 'flowbite'
+import Dropdown from 'react-bootstrap/Dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../../styles/globalStyles.css"
 
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between ml-4 mt-4`;
@@ -12,7 +15,7 @@ class NavBarStylist extends Component{
     render(){
         return(
             <NavRow>
-                <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
+                <div className="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
                     <NavLink target="_self"
                              href="/">
                         Homepage
@@ -28,7 +31,20 @@ class NavBarStylist extends Component{
                         Community
                     </NavLink>
 
-                    <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
+
+                    <Dropdown>
+                        <Dropdown.Toggle id="dropdown-basic">
+                            Account
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="/customer/profile">Stylist Profile</Dropdown.Item>
+                            <Dropdown.Item href="/account">Account Setting</Dropdown.Item>
+                            <Dropdown.Item href="/orders">Orders</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Sign out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    {/* <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
                             className="text-white bg-pink-500 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
                             type="button">Account <svg className="ml-2 w-4 h-4" fill="none"
                                                        stroke="currentColor" viewBox="0 0 24 24"
@@ -56,7 +72,7 @@ class NavBarStylist extends Component{
                                        Orders</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </NavRow>
         )

@@ -21,3 +21,7 @@
     border-top: solid 2px gainsboro;
 }
 
+#dropdown-basic{
+    background-color: rgb(236 72 153);
+    border: none;
+}
