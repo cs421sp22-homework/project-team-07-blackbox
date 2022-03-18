@@ -74,14 +74,13 @@ class OrderList extends Component{
     }
 
     sortBtn(event){
-        if(event.target.name === "timeBtn"){
-            this.setState({sort: "time"})
+        console.log(event.currentTarget.getAttribute('name'))
+        if(event.currentTarget.getAttribute('name') === "timeBtn"){
+            this.showOrderList(this.state.currentPage-1, "time")
         }
-        if(event.target.name === "viewBtn"){
-            this.setState({sort: "read"})
+        if(event.currentTarget.getAttribute('name') === "viewBtn"){
+            this.showOrderList(this.state.currentPage-1, "isRead")
         }
-        // update sorted result
-        this.showOrderList(this.state.currentPage-1, this.state.sort)
     }
 
     showOrderList(pageValue, sortValue){
