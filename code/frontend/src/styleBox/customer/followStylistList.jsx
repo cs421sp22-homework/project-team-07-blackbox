@@ -8,7 +8,7 @@ import NavBar from "styleBox/navBar_footer/NavBar.jsx";
 import NavBarCustomer from '../navBar_footer/NavBarCustomer';
 import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
 import StylistListSingleProfile from "../../components/testimonials/StylistListSingleProfile";
-import StylistListService from "api/styleBox/StylistListService";
+import followStylistListService from "api/styleBox/followStylistListService";
 import styled from "styled-components";
 import {SectionHeading, Subheading as SubheadingBase} from "../../components/misc/Headings";
 import {PrimaryButton as PrimaryButtonBase} from "../../components/misc/Buttons";
@@ -139,7 +139,7 @@ class followStylistList extends Component{
 
 
     showStylistList(pageValue,styleValue,sortValue,searchValue,limitValue){
-        StylistListService.getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue)
+        followStylistListService.getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue)
             .then(response => this.setState({
                 stylistLists: response.data
             }))
@@ -152,7 +152,7 @@ class followStylistList extends Component{
             style: this.state.style,
 
         }
-        StylistListService.searchInfo(info)
+        followStylistListService.searchInfo(info)
 
     }
 
@@ -168,14 +168,14 @@ class followStylistList extends Component{
                 {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
-                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.state.searchBtn}/>
-                    <select   onChange={this.state.sortBtn}>
+                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
+                    <select   onChange={this.sortBtn}>
                         <option disabled selected value> - select an sort option - </option>
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
                     </select>
-                    <select  onChange={this.state.styleBtn}>
+                    <select  onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
                         <option value="sexy">sexy</option>
                         <option value="sports">sports</option>
