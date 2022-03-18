@@ -140,19 +140,29 @@ class StylistList extends Component{
 
     showStylistList(pageValue,styleValue,sortValue,searchValue,limitValue){
         StylistListService.getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue)
-            .then(response => this.setState({
-                stylistLists: response.data
-            }))
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+
+            stylistLists: response.data.data
+        }
+        )}
+            )
             .catch(error => console.log(error.response))
     }
     submitInfo(){
         let info = {
-            search: this.state.search,
-            sort: this.state.sort,
+            page: this.state.page-1,
             style: this.state.style,
+            sort: this.state.sort,
+            search: this.state.search,
+            limit: this.state.limit
 
         }
         StylistListService.searchInfo(info)
+        // this.redirect();
+        this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+
 
     }
 
@@ -180,7 +190,7 @@ class StylistList extends Component{
                         <option disabled selected value> - select an style option - </option>
                         <option value="sexy">sexy</option>
                         <option value="sports">sports</option>
-                        <option value="casual">casual</option>
+                        <option value="Casual">casual</option>
                         <option value="academic">academic</option>
                         <option value="formal">formal</option>
                     </select>
