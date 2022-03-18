@@ -78,7 +78,7 @@ class ReadStylist extends Component{
       }],
       display: response.data.stylistProfileGetDTO.display,
     }); 
-    if (response.data.Follow){
+    if (response.data.follow){
       this.setState({
         button : "Unfollow"
       })
@@ -95,21 +95,23 @@ class ReadStylist extends Component{
 
   changeFollowState(){
     if (this.state.testimonials[0].isFollow){
-      CustomerBrowseStylistService.followStylist(this.state.testimonials[0].stylistId)
+      CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
       .then(response=>{
         this.state.testimonials[0].isFollow = false;
         this.setState({
           button : "Follow"
         });
+        console.log("change!")
       })
       .catch(error => console.log(error.response))
     }else{
-      CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
+      CustomerBrowseStylistService.followStylist(this.state.testimonials[0].stylistId)
       .then( response=>{
         this.state.testimonials[0].isFollow = true;
         this.setState({
           button : "Unfollow",
         });
+        console.log("change!")
       })
       .catch(error => console.log(error.response))
     }
