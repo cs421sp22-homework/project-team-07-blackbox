@@ -23,11 +23,11 @@ public class StylistController {
 
     @GetMapping("/stylists")
     public StyListsDTO getStyLists(
-        @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+        @RequestParam(value = "page", defaultValue = "0") int page,
         @RequestParam(value = "style", required = false, defaultValue = "") String style,
         @RequestParam(value = "sort", required = false, defaultValue = "") String sort,
         @RequestParam(value = "search", required = false, defaultValue = "") String search,
-        @RequestParam(value = "limit", required = false, defaultValue = "3") int limit)
+        @RequestParam(value = "limit", defaultValue = "3") int limit)
     {
         return stylistService.getStyLists(page, style, sort, search, limit);
     }
