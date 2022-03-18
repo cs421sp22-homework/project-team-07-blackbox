@@ -9,11 +9,11 @@ import cookie from 'react-cookies'
 import validator from 'validator'
 import NavBar from "../navBar_footer/NavBar";
 
-const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center m-8`;
+const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const MainContent = tw.div`mt-12 flex flex-col items-center`;
-const Heading = tw.h1`text-2xl xl:text-3xl font-extrabold`;
+const Heading = tw.h1`text-2xl xl:text-3xl font-extrabold text-pink-900`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
 
 
@@ -40,8 +40,8 @@ class Login extends Component {
         email: '',
         password: '',
         role: 0,
-        emailMessage: 'Enter your email in xxx@xxx form',
-        pswMessage: 'Need strong password: length > 7, at least 1 lowercase, uppercase, number and symbol'
+        emailMessage: '',
+        pswMessage: ''
     }
     // function part
     this.checkPassword = this.checkPassword.bind(this)
@@ -126,15 +126,15 @@ class Login extends Component {
                   <Form>
                     <Input type="text" name='username' placeholder='Enter UserName Here' value={this.state.username} onChange={this.handleChange}/>
                     <Input type='text' name='email' placeholder='Enter Email Here' value={this.state.email} onChange={this.handleChange} />
-                    <p className="mt-2 text-sm text-orange-700">{this.state.emailMessage}</p>
+                    <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.emailMessage}</p>
                     <Input type="text" name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange}/>
-                    <p className="my-2 text-sm text-orange-700">{this.state.pswMessage}</p>
+                    <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.pswMessage}</p>
                     <div className="grid grid-cols-2">
                         <div>
-                            <p className="my-2 text-sm text-black">Select register role: </p>
+                            <p className="my-6 md:text-sm text-pink-900 ">Select register role: </p>
                         </div>
                         <div>
-                            <select className="mx-2 my-2 rounded-full" name="role" value={this.state.role} onChange={this.handleChange}>
+                            <select className="border-gray-300 my-6 w-full border-solid border rounded py-2 px-4 text-pink-900 text-sm" name="role" value={this.state.role} onChange={this.handleChange}>
                                 <option value="0"> Customer </option>
                                 <option value="1"> Stylist </option>
                             </select>
