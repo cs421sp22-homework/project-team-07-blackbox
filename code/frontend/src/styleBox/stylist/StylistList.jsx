@@ -67,7 +67,7 @@ const ControlButton = styled.button`
 
 class StylistList extends Component{
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
             page:1,
@@ -120,7 +120,7 @@ class StylistList extends Component{
 
     searchBtn(event){
         this.setState({
-            search:event.targte.value
+            search:event.target.value
         })
     }
 
@@ -168,14 +168,15 @@ class StylistList extends Component{
                 {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
-                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.state.searchBtn}/>
-                    <select   onChange={this.state.sortBtn}>
+                    {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
+                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
+                    <select   onChange={this.sortBtn}>
                         <option disabled selected value> - select an sort option - </option>
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
                     </select>
-                    <select  onChange={this.state.styleBtn}>
+                    <select  onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
                         <option value="sexy">sexy</option>
                         <option value="sports">sports</option>
