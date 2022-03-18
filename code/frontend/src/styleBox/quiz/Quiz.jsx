@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {ContainerWithSmallPadding} from "../misc/Layouts";
-import NavBarCustomer from "./NavBarCustomer";
-import Footer from "./Footer";
+import {ContainerWithSmallPadding} from "../../components/misc/Layouts";
+import NavBarCustomer from "../../styleBox/navBar_footer/NavBarCustomer";
+import Footer from "../navBar_footer/Footer";
 import "../../styles/tailwind.min.css"
 import QuizPage1 from "./QuizPage1";
 import QuizPage2 from "./QuizPage2";
@@ -186,6 +186,7 @@ class Quiz extends Component{
 
     submitInfo(){
         let info = {
+            token: sessionStorage.getItem('token'),
             gender: this.state.gender,
             ftSize: this.state.ft,
             weight: this.state.weight,

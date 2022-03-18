@@ -7,7 +7,7 @@ const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between ml-4 mt-4`;
 const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-700 border-gray-400 hocus:border-gray-700`;
 
-class NavBarCustomer extends Component{
+class NavBarStylist extends Component{
 
     render(){
         return(
@@ -18,7 +18,7 @@ class NavBarCustomer extends Component{
                         Homepage
                     </NavLink>
                     <NavLink target="_self"
-                             href="#">
+                             href="/stylistList">
                         Stylists
                     </NavLink>
                     <NavLink target="_self" href="#">
@@ -31,8 +31,8 @@ class NavBarCustomer extends Component{
                     <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
                             className="text-white bg-pink-500 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
                             type="button">Account <svg className="ml-2 w-4 h-4" fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
+                                                       stroke="currentColor" viewBox="0 0 24 24"
+                                                       xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                     </svg></button>
 
@@ -41,20 +41,19 @@ class NavBarCustomer extends Component{
                          className="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="py-1" aria-labelledby="dropdownDividerButton">
                             <li>
-                                <a href="/customer/profile"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Style Profile</a>
+                                <a href="/stylist/profile"
+                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                       Stylist Profile</a>
                             </li>
                             <li>
                                 <a href="/account"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Account Setting</a>
+                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                       Account Setting</a>
                             </li>
                             <li>
-                                <a href="#"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Orders</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cart</a>
+                                <a href="/orders"
+                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                       Orders</a>
                             </li>
                         </ul>
                     </div>
@@ -64,4 +63,4 @@ class NavBarCustomer extends Component{
     }
 }
 
-export default NavBarCustomer
+export default NavBarStylist

@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import QuizForm from "./QuizForm";
-import "../../styles/tailwind.min.css"
+import QuizForm from "./quiz/QuizForm";
+import "../styles/tailwind.min.css";
 import tw from 'twin.macro'
-import AccountSettingService from "../../api/styleBox/AccountSettingService";
-import CustomerForm from "./CustomerForm";
-import NavBarCustomer from "./NavBarCustomer";
+import AccountSettingService from "../api/styleBox/AccountSettingService";
+import CustomerForm from "./customer/CustomerForm";
+import NavBarCustomer from "./navBar_footer/NavBarCustomer";
 
 class AccountSetting extends Component{
     constructor(props) {
@@ -46,7 +46,9 @@ class AccountSetting extends Component{
     
    
     submitInfo(){
-        let info = { username: this.state.username,
+        let info = { 
+            token: sessionStorage.getItem('token'),
+            username: this.state.username,
             email: this.state.email,
             phone: this.state.phone,
             address: this.state.address,

@@ -7,7 +7,7 @@ import "../../styles/tailwind.min.css"
 
 import AuthenticationService from '../../api/styleBox/AuthenticationService';
 import cookie from 'react-cookies'
-import NavBar from "./NavBar";
+import NavBar from "../../styleBox/navBar_footer/NavBar";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -82,6 +82,7 @@ class Login extends Component {
               alert('Login successful !')
               console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
               AuthenticationService.loginSuccessfulRegister(cookie.load)
+              // if (cookies.get('role')=1)
               this.props.history.push(`/stylist/profile`)
           }            
       })
@@ -108,17 +109,17 @@ class Login extends Component {
                     <Input type="text" name='username' placeholder='Enter Email or UserName Here' value={this.state.username} onChange={this.handleChange}/>
                     <Input type={this.state.showPassword?'text':'password'} name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange} />
                       <div className="w-48 grid grid-cols-2 mx-auto">
-                          <p tw="mt-4 text-xs text-gray-600 text-center">Hide Password</p>
+                          <p className="mt-4 text-xs text-gray-600 text-center">Hide Password</p>
                           <Input type="checkbox" name='hiddenbox'onClick={this.hidePassword}/>
                       </div>
                     <SubmitButton type="submit" onClick={this.loginClicked}> Login </SubmitButton>
                   </Form>
-                  <p tw="mt-6 text-xs text-gray-600 text-center">
+                  <p className="mt-6 text-xs text-gray-600 text-center">
                     <a href={"# "} tw="border-b border-gray-500 border-dotted">
                       Forgot Password ?
                     </a>
                   </p>
-                  <p tw="mt-8 text-sm text-gray-600 text-center">
+                  <p className="mt-8 text-sm text-gray-600 text-center">
                     Dont have an account?{" "}
                     <a href="/register" tw="border-b border-gray-500 border-dotted">
                       Register

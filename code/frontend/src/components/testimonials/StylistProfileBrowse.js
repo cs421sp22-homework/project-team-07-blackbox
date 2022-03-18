@@ -10,8 +10,12 @@ import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-2-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-4.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-5.svg";
+import { PrimaryButton} from "components/misc/Buttons.js";
 
 import "slick-carousel/slick/slick.css";
+import CustomerBrowseStylistService from "api/styleBox/CustomerBrowseStylistService";
+
+const Button = tw(PrimaryButton)`w-56 mx-8 mt-10 inline-block`
 
 const HeadingTitle =  tw.h2`text-4xl sm:text-5xl font-black tracking-wide text-center`
 const Container = tw.div`relative`;
@@ -72,17 +76,19 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;
 
-class StylistProfileImageIntro extends Component{
+class StylistProfileBrowse extends Component{
   constructor(props){
     super(props)
 
     this.state = {
       
     }
-      
+    
 
     // method part
   }
+
+  
 
   render(){
     return (
@@ -98,7 +104,9 @@ class StylistProfileImageIntro extends Component{
                 <Testimonial key={index}>
                   <ImageContainer>
                     <img src={testimonial.photo} alt={testimonial.customerName} />
+                    
                   </ImageContainer>
+                  
                   <TextContainer>
                     <QuoteContainer>
                       <QuotesLeft />
@@ -151,7 +159,10 @@ class StylistProfileImageIntro extends Component{
                   </TextContainer>
                 </Testimonial>
               ))}
+              
             </TestimonialSlider>
+            
+
           </TestimonialSliderContainer>
         </Content>
         <DecoratorBlob1 />
@@ -161,4 +172,4 @@ class StylistProfileImageIntro extends Component{
   }
 }
 
-export default StylistProfileImageIntro
+export default StylistProfileBrowse

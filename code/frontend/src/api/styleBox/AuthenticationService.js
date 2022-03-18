@@ -26,7 +26,13 @@ class AuthenticationService {
         if (token === undefined) {
             return false
         }
+        // let user = sessionStorage.getItem('token')
         return true
+    }
+
+    storeToken(token){
+        sessionStorage.setItem('token', token)
+        // this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
     }
 
     // Create Interceptors

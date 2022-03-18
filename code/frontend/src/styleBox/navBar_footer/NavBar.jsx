@@ -13,13 +13,13 @@ class NavBar extends Component{
     render(){
         return(
             <NavRow>
-                <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
+                <div className="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
                     <NavLink target="_self"
                              href="/">
                         Homepage
                     </NavLink>
                     <NavLink target="_self"
-                             href="#">
+                             href="/stylistList">
                         Stylists
                     </NavLink>
                     <NavLink target="_self" href="#">
@@ -28,7 +28,7 @@ class NavBar extends Component{
                     <NavLink target="_self" href="#">
                         Community
                     </NavLink>
-                    <div tw="md:hidden flex-auto h-0"></div>
+                    <div className="md:hidden flex-auto h-0"></div>
                     <PrimaryNavLink target="_self" href="/login">
                         Login
                     </PrimaryNavLink>

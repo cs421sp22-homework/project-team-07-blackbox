@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import Footer from "components/styleBox/Footer.jsx";
+import Footer from "styleBox/navBar_footer/Footer.jsx";
 import StylistProfileImageIntro from "components/testimonials/StylistProfileImageIntro.js"
 import StylistProfilePastDesign from "components/testimonials/StylistProfileTwoColumnWithImageAndProfilePictureReview.js"
 import StylistService from "api/styleBox/StylistService";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
-import NavBarCustomer from "./NavBarCustomer";
+import NavBarCustomer from "../navBar_footer/NavBarCustomer";
+import NavBarStylist from "styleBox/navBar_footer/NavBarStylist";
 
 class StylistProfile extends Component{
   constructor(props){
@@ -34,54 +35,6 @@ class StylistProfile extends Component{
   }
 
   componentDidMount(){
-    /*
-    this.setState(
-      {
-        testimonials: [{
-          nickname: "111",
-          photo: "http://dummyimage.com/400x400",
-          intro: "nulla eu est ex commodo",
-          gender: "quis ut",
-          style: [
-            "voluptate do exercitation nulla",
-            "fugiat nostrud ex Duis",
-            "aute ipsum laboris dolor Lorem",
-            "sed proident esse non"
-          ],
-          age: 54,
-          userName: "111",
-          email: "y.vnjtnre@qq.com",
-          facebook: "Lorem mollit ut incididunt",
-          rate: 24,
-          followerNum: 84,
-          likeNum: 57
-        }],
-        display: [{
-          image: "http://dummyimage.com/400x400",
-          idea: "14"
-        },
-        {
-          image: "http://dummyimage.com/400x400",
-          idea: "10"
-        },
-        {
-          image: "http://dummyimage.com/400x400",
-          idea: "60"
-        },
-        {
-          image: "http://dummyimage.com/400x400",
-          idea: "81"
-        },
-        {
-          image: "http://dummyimage.com/400x400",
-          idea: "29"
-        }]
-      }, () =>{
-        console.log(this.state.testimonials)
-        console.log(this.state.display)
-      }
-    )
-    */
 
     StylistService.getHomepage()
     .then(response=>this.setState({
@@ -92,7 +45,7 @@ class StylistProfile extends Component{
         gender: response.data.gender,
         style: response.data.style,
         age: response.data.age,
-        userName: response.data.username,
+        userName: response.data.userName,
         email:response.data.email,
         facebook: response.data.facebook,
         rate: response.data.rate,
@@ -107,7 +60,7 @@ class StylistProfile extends Component{
   render() {
     return(
       <AnimationRevealPage>
-        <NavBarCustomer />
+        <NavBarStylist />
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
         <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
