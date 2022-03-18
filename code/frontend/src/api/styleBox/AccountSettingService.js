@@ -4,7 +4,7 @@ import cookie from "react-cookies"
 
 class AccountSettingService{
     getHomepage(){
-        return axios.get(`${API_URL}/account`, {token: sessionStorage.getItem('token')}, {withCredentials: true})
+        return axios.get(`${API_URL}/account`,{withCredentials: true})
     }
     modifyAccount(info){
         return axios.post(`${API_URL}/account`,info,{withCredentials: true})
