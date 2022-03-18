@@ -3,12 +3,8 @@ package com.stylebox.service;
 import com.stylebox.dto.stylist.StyDTO;
 import com.stylebox.dto.stylist.StyListsDTO;
 import com.stylebox.entity.user.*;
-import com.stylebox.repository.user.RoleRepository;
-import com.stylebox.repository.user.StyleRepository;
-import com.stylebox.repository.user.StylistInformationRepository;
-import com.stylebox.repository.user.UserRepository;
+import com.stylebox.repository.user.*;
 import com.stylebox.util.SortUtil;
-import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -22,7 +18,9 @@ import com.stylebox.entity.user.CustomerInformation;
 import com.stylebox.entity.user.FollowRecord;
 import com.stylebox.entity.user.StylistInformation;
 import com.stylebox.repository.user.CustomerInformationRepository;
-import com.stylebox.repository.FollowRepository;
+import com.stylebox.repository.stylist.FollowRepository;
+import com.stylebox.repository.user.CustomerInformationRepository;
+import com.stylebox.repository.stylist.FollowRepository;
 import exception.Rest404Exception;
 
 import java.util.List;
@@ -50,8 +48,8 @@ public class StylistService {
 
     //add a follow record
     public void addFollowRecord(User user, Long followeeId){
-        if(user.getRole().getName().equals("Stylists")){
-            throw new Rest404Exception("Stylists can't unfollow other stylists");
+        if(user.getRole().getName().equals("Stylist")){
+            throw new Rest404Exception("Stylists can't follow other stylists");
         }
         Long followerId = user.getId();
         FollowRecord followRecord = getValidFollowRecord(followerId, followeeId);
@@ -65,8 +63,8 @@ public class StylistService {
     }
     //delete a follow record
     public void deleteFollowRecord(User user, Long followeeId){
-        if(user.getRole().getName().equals("Stylists")){
-            throw new Rest404Exception("Stylists can't follow other stylists");
+        if(user.getRole().getName().equals("Stylist")){
+            throw new Rest404Exception("Stylists can't unfollow other stylists");
         }
         Long followerId = user.getId();
         //Detemine if the followRecord is valid (followerId is a customer_id, followeeId is a stylistId)

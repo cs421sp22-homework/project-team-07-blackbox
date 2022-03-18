@@ -1,4 +1,4 @@
-package com.stylebox.repository;
+package com.stylebox.repository.stylist;
 
 import com.stylebox.entity.user.FollowRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
