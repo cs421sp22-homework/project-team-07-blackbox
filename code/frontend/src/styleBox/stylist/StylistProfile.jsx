@@ -8,6 +8,7 @@ import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
 import NavBarCustomer from "../navBar_footer/NavBarCustomer";
 import NavBarStylist from "styleBox/navBar_footer/NavBarStylist";
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 
 class StylistProfile extends Component{
   constructor(props){
@@ -60,7 +61,7 @@ class StylistProfile extends Component{
   render() {
     return(
       <AnimationRevealPage>
-        <NavBarStylist />
+        <NavBarAuthenticated/>
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
         <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />

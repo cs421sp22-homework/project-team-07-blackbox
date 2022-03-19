@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons"
 import OrderService from 'api/styleBox/OrderService';
 import Cookies from 'react-cookies';
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -53,15 +55,10 @@ class OrderList extends Component{
         this.sortBtn = this.sortBtn.bind(this)
         this.changePage = this.changePage.bind(this)
         this.showOrderList = this.showOrderList.bind(this)
-        this.checkCustomer = this.checkCustomer.bind(this)
         this.viewOrder = this.viewOrder.bind(this)
         this.showDescription = this.showDescription.bind(this)
     }
 
-    // return user type
-    checkCustomer(){
-        return Cookies.load('role')==='Customer';
-    }
 
     changePage(event){
         let myPage = this.state.currentPage
@@ -113,7 +110,7 @@ class OrderList extends Component{
     render(){
         return(
             <AnimationRevealPage>
-                {this.checkCustomer? <NavBarCustomer/>: <NavBarStylist/>}
+                <NavBarAuthenticated/>
                 <Container>
                     <Content>
                     <MainContainer>

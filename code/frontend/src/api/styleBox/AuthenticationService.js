@@ -47,6 +47,16 @@ class AuthenticationService {
         )
     }
 
+    logOut(){
+        axios.get(`${API_URL}/user/logout`, {withCredentials: true})
+            .then((response)=>{
+                console.log(response.data)
+        })
+        cookie.remove('jwt')
+        cookie.remove('role')
+
+    }
+
 
 }
 

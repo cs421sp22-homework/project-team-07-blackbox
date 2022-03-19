@@ -21,6 +21,8 @@ import cookie from 'react-cookies'
 
 import QuizFinish from "./QuizFinish";
 import QuizService from "../../api/styleBox/QuizService";
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import Cookies from "react-cookies";
 
 class Quiz extends Component{
     constructor(props) {
@@ -206,7 +208,8 @@ class Quiz extends Component{
 
         return (
             <div>
-                <NavBarCustomer/>
+                <NavBarAuthenticated/>
+                {Cookies.load('role') === 'Stylist' && <Alert severity="warning">Stylist's quiz result won't be stored.</Alert>}
                 <ContainerWithSmallPadding>
                     {this.state.pageNum===1 && !this.state.weightValid && <Alert severity="warning">Pleas enter a valid weight.</Alert>}
                     {this.state.pageNum===1 && !this.state.heightValid && <Alert severity="warning">Pleas enter a valid height.</Alert>}

@@ -17,6 +17,7 @@ import {Link} from 'react-router-dom';
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-3-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-3-icon.svg";
 import QuizService from "../../api/styleBox/QuizService";
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 // const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Container = tw.div`relative`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -188,7 +189,7 @@ class StylistList extends Component{
     render() {
         return(
             <AnimationRevealPage>
-                {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
+                <NavBarAuthenticated/>
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
                     {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}

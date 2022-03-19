@@ -8,6 +8,7 @@ import "../../styles/tailwind.min.css"
 import AuthenticationService from '../../api/styleBox/AuthenticationService';
 import cookie from 'react-cookies'
 import NavBar from "../../styleBox/navBar_footer/NavBar";
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -82,7 +83,7 @@ class Login extends Component {
               alert('Login successful !')
               console.log('login successfully with username' + this.state.username + ' and password ' + this.state.password)
               AuthenticationService.loginSuccessfulRegister(cookie.load)
-              this.props.history.push(`/stylist/profile`)
+              this.props.history.push(`/`)
           }            
       })
       .catch((error) => {
@@ -97,7 +98,7 @@ class Login extends Component {
   render(){
     return(
       <AnimationRevealPage>
-          <NavBar/>
+          <NavBarAuthenticated/>
         <Container>
           <Content>
             <MainContainer>

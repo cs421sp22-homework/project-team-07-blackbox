@@ -8,6 +8,7 @@ import OrderService from 'api/styleBox/OrderService';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 import Cookies from 'react-cookies';
+import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg justify-center flex-1`;
@@ -83,7 +84,7 @@ class OrderDetail extends Component {
     render() {
         return (
             <AnimationRevealPage>
-                {this.checkCustomer? <NavBarCustomer/> : <NavBarStylist/>}
+                <NavBarAuthenticated/>
                 <Container>
                     <Content>
                         <div className="p-6 mx-16 my-16 flex-initial shadow-lg rounded-lg bg-gray-50 text-gray-700">

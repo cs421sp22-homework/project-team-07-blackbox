@@ -6,6 +6,8 @@ import 'flowbite'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../styles/globalStyles.css"
 import Dropdown from "./Dropdown";
+import AccountSettingService from "../../api/styleBox/AccountSettingService";
+import AuthenticationService from "../../api/styleBox/AuthenticationService";
 
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between ml-4 mt-4`;
@@ -56,7 +58,8 @@ class NavBarCustomer extends Component{
                         },
                         {
                             ItemName: "Sign out",
-                            link: "#/action-3"
+                            link: "/",
+                            onClick: AuthenticationService.logOut
                         }
 
 

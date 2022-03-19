@@ -25,6 +25,8 @@ import kidsItem3 from "../images/clothing-items/kids/bottoms/kids-bottoms-1.png"
 import kidsItem4 from "../images/clothing-items/kids/dress/kids-dress-2.png"
 import NavBar from "./navBar_footer/NavBar";
 import Footer from "./navBar_footer/Footer";
+import Cookies from "react-cookies";
+import NavBarAuthenticated from "./navBar_footer/NavBarAuthenticated";
 
 const Row = tw.div`flex`;
 
@@ -89,7 +91,7 @@ class HomePage extends Component {
                     <Content2Xl>
                         <div className="flex flex-col justify-center h-full space-y-5">
                             {/*navigate bar*/}
-                            <NavBar/>
+                            <NavBarAuthenticated/>
                             {/*Intro to Style Box*/}
                             <HeroRow>
                                 <TextColumn>
