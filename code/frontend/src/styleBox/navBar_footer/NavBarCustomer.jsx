@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import tw from "twin.macro";
 import "../../styles/tailwind.min.css"
 import 'flowbite'
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../styles/globalStyles.css"
+import Dropdown from "./Dropdown";
 
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between ml-4 mt-4`;
@@ -32,55 +33,36 @@ class NavBarCustomer extends Component{
                         Community
                     </NavLink>
 
+                    <Dropdown MenuName="Account" items={[
+                        {
+                            ItemName: "Customer Profile",
+                            link: "/customer/profile"
+                        },
+                        {
+                            ItemName: "Account Setting",
+                            link: "/account"
+                        },
+                        {
+                            ItemName: "Orders",
+                            link: "/orders"
+                        },
+                        {
+                            ItemName: "Followed Stylists",
+                            link: "#/action-1"
+                        },
+                        {
+                            ItemName: "Cart",
+                            link: "#/action-2"
+                        },
+                        {
+                            ItemName: "Sign out",
+                            link: "#/action-3"
+                        }
 
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdown-basic">
-                            Account
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="/customer/profile">Customer Profile</Dropdown.Item>
-                            <Dropdown.Item href="/account">Account Setting</Dropdown.Item>
-                            <Dropdown.Item href="/orders">Orders</Dropdown.Item>
-                            <Dropdown.Item href="#/action-1">FollowStylists</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Cart</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Sign out</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    {/* <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
-                            className="text-white bg-pink-500 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
-                            type="button">Account <svg className="ml-2 w-4 h-4" fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                    </svg></button>
 
 
-                    <div id="dropdownDivider"
-                         className="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                        <ul className="py-1" aria-labelledby="dropdownDividerButton">
-                            <li>
-                                <a href="/customer/profile"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Style Profile</a>
-                            </li>
-                            <li>
-                                <a href="/account"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Account Setting</a>
-                            </li>
-                            <li>
-                                <a href="/orders" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Orders</a>
-                            </li>
-                            <li>
-                            <a href="/followStylist"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">FollowStylist</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                       Cart</a>
-                            </li>
-                        </ul>
-                    </div> */}
+                    ]}/>
+
                 </div>
             </NavRow>
         )

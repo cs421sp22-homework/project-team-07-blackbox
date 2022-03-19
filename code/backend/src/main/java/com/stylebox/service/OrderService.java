@@ -1,9 +1,6 @@
 package com.stylebox.service;
 
-import com.stylebox.dto.Order.OrderBrowseDTO;
-import com.stylebox.dto.Order.OrderCreateDTO;
-import com.stylebox.dto.Order.OrderDetailDTO;
-import com.stylebox.dto.Order.OrderListDTO;
+import com.stylebox.dto.Order.*;
 import com.stylebox.dto.stylist.StyDTO;
 import com.stylebox.entity.stylist.Orders;
 import com.stylebox.entity.user.*;
@@ -50,23 +47,27 @@ public class OrderService {
 
         // save styleSet
         Set<Style> newStyleSet = new HashSet<>();
-        for (String s : orderCreateDTO.getStyleSet()) {
-            Optional<Style> styleByName = styleRepository.findByStyleName(s);
+        for (OrderStyleDTO s : orderCreateDTO.getStyleSet()) {
+            Optional<Style> styleByName = styleRepository.findByStyleName(s.getName());
             // if exist current style, save
             // else, create
             if (styleByName.isPresent()) {
                 newStyleSet.add(styleByName.get());
             } else {
                 Style style = new Style();
-                style.setStyleName(s);
+                style.setStyleName(s.getName());
                 styleRepository.saveAndFlush(style);
-                newStyleSet.add(styleRepository.findByStyleName(s).get());
+                newStyleSet.add(styleRepository.findByStyleName(s.getName()).get());
             }
         }
         orders.setStyleSet(newStyleSet);
 
         // save occasions
-        orders.setOccasions(String.join(",", orderCreateDTO.getOccasionSet()));
+        Set<String> temp = new HashSet<>();
+        for (OrderStyleDTO occ : orderCreateDTO.getOccasionSet()) {
+            temp.add(occ.getName());
+        }
+        orders.setOccasions(String.join(",", temp));
 
         //customer, stylist
         orders.setCustomer(user.getCustomerInformation());

@@ -1,5 +1,9 @@
-package com.stylebox.entity.user;
+package com.stylebox.util;
 
+import com.stylebox.entity.user.FollowRecord;
+import com.stylebox.entity.user.Style;
+import com.stylebox.entity.user.StylistInformation;
+import com.stylebox.entity.user.User;
 import com.stylebox.repository.user.StyleRepository;
 import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;

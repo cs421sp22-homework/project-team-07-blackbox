@@ -21,13 +21,13 @@ public class SortUtil {
             if (symbol == '-') {
                 String substring = sort.substring(1);
                 if (sortCheck(substring, sortCondition)) {
-                    pageable = PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, substring));
+                    pageable = PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, substring));
                 } else {
                     throw new Rest400Exception("Invalid sort");
                 }
             } else {
                 if (sortCheck(sort, sortCondition)) {
-                    pageable = PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, sort));
+                    pageable = PageRequest.of(page, limit, Sort.by(Sort.Direction.DESC, sort));
                 } else {
                     throw new Rest400Exception("Invalid sort");
                 }
@@ -66,13 +66,13 @@ public class SortUtil {
             if (symbol == '-') {
                 String substring = sort.substring(1);
                 if (sortCheck(substring, sortCondition)) {
-                    return " order by " + substring + " desc";
+                    return " order by " + substring;
                 } else {
                     throw new Rest400Exception("Invalid sort");
                 }
             } else {
                 if (sortCheck(sort, sortCondition)) {
-                    return " order by " + sort;
+                    return " order by " + sort + " desc";
                 } else {
                     throw new Rest400Exception("Invalid sort");
                 }

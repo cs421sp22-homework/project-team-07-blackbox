@@ -47,6 +47,7 @@ class ReadStylist extends Component{
       button: "Follow"
     }
 
+    this.checkUser = this.checkUser.bind(this)
     this.changeFollowState = this.changeFollowState.bind(this)
     this.createOrder = this.createOrder.bind(this)
 
@@ -54,10 +55,9 @@ class ReadStylist extends Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    console.log(this.props.location.query.stylistId);
+    console.log(this.props.location.query.stylistId)
     CustomerBrowseStylistService.getHomepage(this.props.location.query.stylistId)
-    .then((response)=>{
-      // console.log('here!1')
+    .then(response=>{
       console.log(response.data);
       this.setState({
       testimonials: [{
@@ -77,7 +77,8 @@ class ReadStylist extends Component{
         isFollow: response.data.follow
       }],
       display: response.data.stylistProfileGetDTO.display,
-    }); 
+    }
+    ); 
     if (response.data.follow){
       this.setState({
         button : "Unfollow"
@@ -87,21 +88,24 @@ class ReadStylist extends Component{
         button : "Follow"
       })
     };
-    // console.log('here');
     })
     .catch(error => console.log(error.response))
+  }
+
+  checkUser(){
+    return Cookies.get('role');
   }
 
 
   changeFollowState(){
     if (this.state.testimonials[0].isFollow){
+      console.log(this.state.testimonials[0])
       CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
       .then(response=>{
         this.state.testimonials[0].isFollow = false;
         this.setState({
           button : "Follow"
         });
-        console.log("change!")
       })
       .catch(error => console.log(error.response))
     }else{
@@ -111,7 +115,6 @@ class ReadStylist extends Component{
         this.setState({
           button : "Unfollow",
         });
-        console.log("change!")
       })
       .catch(error => console.log(error.response))
     }
@@ -134,7 +137,7 @@ class ReadStylist extends Component{
     console.log("stylistID:"+this.state.testimonials[0].stylistId)
     return(
       <AnimationRevealPage>
-        {Cookies.load('role') === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+        {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
         <div align="center">
           <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>

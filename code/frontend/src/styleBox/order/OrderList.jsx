@@ -64,13 +64,15 @@ class OrderList extends Component{
     }
 
     changePage(event){
+        let myPage = this.state.currentPage
         if(event.target.name === "prevBtn"){
             this.setState({currentPage: this.state.currentPage - 1})
+            myPage = myPage - 2
         }
         if(event.target.name === "nextBtn"){
             this.setState({currentPage: this.state.currentPage + 1})
         }
-        this.showOrderList(this.state.currentPage, this.state.sort)
+        this.showOrderList(myPage, this.state.sort)
     }
 
     sortBtn(event){

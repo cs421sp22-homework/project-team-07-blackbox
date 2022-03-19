@@ -106,12 +106,15 @@ class StylistList extends Component{
 
     changePage(event){
         if(event.target.name ==="prevBtn"){
+            let curPage = this.state.page;
             this.setState({page:this.state.page-1})
+            this.showStylistList(curPage-2,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
         if(event.target.name ==="nextBtn"){
             this.setState({page:this.state.page+1})
+            this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
-        this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+        
     }
 
 
@@ -142,7 +145,8 @@ class StylistList extends Component{
                 console.log(response.data)
                 this.setState({
 
-            stylistLists: response.data.data
+            stylistLists: response.data.data,
+            totalPage: response.data.totalPages
         }
         )}
         )
@@ -166,7 +170,7 @@ class StylistList extends Component{
 
 
     componentDidMount(){
-        this.showStylistList(1,"","","",5)
+        this.showStylistList(0,"","","",5)
     }
 
 
@@ -247,41 +251,26 @@ class StylistList extends Component{
 
                         <div className="flex justify-center my-6 ">
                         <nav>
-                            <ul className="flex list-style-none ">
-                                {(this.state.page === 1)
-                                    ? <li className="page-item disabled">
-                                        <ControlButton tabIndex="-1" aria-disabled="true">
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
-                                            <ArrowLeftIcon />
-                                        </ControlButton>
-                                    </li>
-                                    : <li className="page-item">
-                                        <ControlButton name='prevBtn' onClick={this.changePage}>
-                                                {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
-                                            <ArrowLeftIcon />
-                                        </ControlButton>
-                                    </li>}
+                        <ul className="flex list-style-none">
+                                    {(this.state.page === 1)
+                                        ? <li className="page-item disabled"><button
+                                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                            tabindex="-1" aria-disabled="true">Previous</button></li>
+                                        : <li class="page-item"><button name='prevBtn'
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                            onClick={this.changePage}>Previous</button></li>}
 
+                                    <li class="page-item"><p className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p></li>
 
-                                <li className="page-item"><p
-                                    className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p>
-                                </li>
-
-                                {(this.state.page === this.state.totalPage)
-                                    ? <li className="page-item disabled">
-                                        <ControlButton tabIndex="-1" aria-disabled="true">
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
-                                            <ArrowRightIcon />
-                                        </ControlButton>
-                                    </li>
-                                    : <li className="page-item">
-                                        <ControlButton name='nextBtn'  onClick={this.changePage}>
-                                                {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
-                                            <ArrowRightIcon />
-                                        </ControlButton>
-                                    </li>
-                                }
-                            </ul>
+                                    {(this.state.page === this.state.totalPage)
+                                        ? <li className="page-item disabled"><button
+                                            className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                            tabindex="-1" aria-disabled="true">Next</button></li>
+                                        : <li class="page-item"><button name='nextBtn'
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                            onClick={this.changePage}>Next</button></li>
+                                    }
+                                </ul>
                         </nav>
                     </div>
                     {/*</MainContent>*/}

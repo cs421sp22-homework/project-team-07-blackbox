@@ -1,4 +1,3 @@
-import "tailwindcss/dist/base.css";
 import "styles/globalStyles.css";
 import React from "react";
 
@@ -18,7 +17,9 @@ import Test from "demos/EventLandingPage";
 import CreateOrder from "styleBox/order/CreateOrder";
 import StylistList from "./styleBox/stylist/StylistList";
 import FollowStylist from"./styleBox/customer/followStylistList"
-
+import NavBarCustomer from "./styleBox/navBar_footer/NavBarCustomer";
+import NavBarStylist from "./styleBox/navBar_footer/NavBarStylist";
+import DropDown from "./styleBox/navBar_footer/Dropdown"
 
 
 export default function App() {
