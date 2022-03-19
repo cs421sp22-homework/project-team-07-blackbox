@@ -56,24 +56,26 @@ class ReadStylist extends Component{
   componentDidMount(){
     window.scrollTo(0, 0);
     CustomerBrowseStylistService.getHomepage(this.props.location.query.stylistId)
-    .then(response=>{this.setState({
+    .then(response=>{
+      console.log(response.data);
+      this.setState({
       testimonials: [{
-        nickname: response.data.nickname,
-        photo: response.data.photo,
-        intro: response.data.intro,
-        gender: response.data.gender,
-        style: response.data.style,
-        age: response.data.age,
-        userName: response.data.username,
-        email:response.data.email,
-        facebook: response.data.facebook,
-        rate: response.data.rate,
-        followerNum: response.data.followerNum,
-        likeNum: response.data.likeNum,
-        stylistId: response.data.stylistId,
-        isFollow: response.data.isFollow
+        nickname: response.data.stylistProfileGetDTO.nickname,
+        photo: response.data.stylistProfileGetDTO.photo,
+        intro: response.data.stylistProfileGetDTO.intro,
+        gender: response.data.stylistProfileGetDTO.gender,
+        style: response.data.stylistProfileGetDTO.style,
+        age: response.data.stylistProfileGetDTO.age,
+        userName: response.data.stylistProfileGetDTO.username,
+        email:response.data.stylistProfileGetDTO.email,
+        facebook: response.data.stylistProfileGetDTO.facebook,
+        rate: response.data.stylistProfileGetDTO.rate,
+        followerNum: response.data.stylistProfileGetDTO.followerNum,
+        likeNum: response.data.stylistProfileGetDTO.likeNum,
+        stylistId: response.data.stylistProfileGetDTO.stylistId,
+        isFollow: response.data.follow
       }],
-      display: response.data.display,
+      display: response.data.stylistProfileGetDTO.display,
     }
     ); 
     if (response.data.isFollow){
@@ -96,7 +98,7 @@ class ReadStylist extends Component{
 
   changeFollowState(){
     if (this.state.testimonials[0].isFollow){
-      CustomerBrowseStylistService.followStylist(this.state.testimonials[0].stylistId)
+      CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
       .then(response=>{
         this.state.testimonials[0].isFollow = false;
         this.setState({
@@ -105,7 +107,7 @@ class ReadStylist extends Component{
       })
       .catch(error => console.log(error.response))
     }else{
-      CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
+      CustomerBrowseStylistService.followStylist(this.state.testimonials[0].stylistId)
       .then( response=>{
         this.state.testimonials[0].isFollow = true;
         this.setState({
