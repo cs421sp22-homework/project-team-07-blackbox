@@ -55,6 +55,7 @@ class ReadStylist extends Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
+    console.log(this.props.location.query.stylistId)
     CustomerBrowseStylistService.getHomepage(this.props.location.query.stylistId)
     .then(response=>{
       console.log(response.data);
@@ -72,13 +73,13 @@ class ReadStylist extends Component{
         rate: response.data.stylistProfileGetDTO.rate,
         followerNum: response.data.stylistProfileGetDTO.followerNum,
         likeNum: response.data.stylistProfileGetDTO.likeNum,
-        stylistId: response.data.stylistProfileGetDTO.stylistId,
+        stylistId: this.props.location.query.stylistId,
         isFollow: response.data.follow
       }],
       display: response.data.stylistProfileGetDTO.display,
     }
     ); 
-    if (response.data.isFollow){
+    if (response.data.follow){
       this.setState({
         button : "Unfollow"
       })
@@ -98,6 +99,7 @@ class ReadStylist extends Component{
 
   changeFollowState(){
     if (this.state.testimonials[0].isFollow){
+      console.log(this.state.testimonials[0])
       CustomerBrowseStylistService.unfollowStylist(this.state.testimonials[0].stylistId)
       .then(response=>{
         this.state.testimonials[0].isFollow = false;
