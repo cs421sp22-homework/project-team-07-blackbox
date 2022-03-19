@@ -20,7 +20,6 @@ export default function Dropdown({
                                         }
                                     ]
                                 }) {
-    items.map((item,index)=>{console.log(item.ItemName)})
     return (
         <Menu style={{zIndex: "9999"}} as="div" className="relative inline-block text-left ">
             <div>

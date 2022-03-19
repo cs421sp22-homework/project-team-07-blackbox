@@ -1,6 +1,6 @@
 import tw from 'twin.macro'
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import NavBarCustomer from '../navBar_footer/NavBarCustomer';
+import NavBarCustomer from 'styleBox/navBar_footer/NavBarCustomer';
 import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
 import React, {Component} from "react";
 import { Container as ContainerBase} from "components/misc/Layouts";
@@ -113,7 +113,7 @@ class OrderList extends Component{
     render(){
         return(
             <AnimationRevealPage>
-                {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
+                {this.checkCustomer? <NavBarCustomer/>: <NavBarStylist/>}
                 <Container>
                     <Content>
                     <MainContainer>
@@ -173,7 +173,7 @@ class OrderList extends Component{
 
                                     <li class="page-item"><p className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.currentPage}</p></li>
 
-                                    {(this.state.currentPage === this.state.totalPage)
+                                    {(this.state.currentPage >= this.state.totalPage)
                                         ? <li className="page-item disabled"><button
                                             className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
                                             tabindex="-1" aria-disabled="true">Next</button></li>
