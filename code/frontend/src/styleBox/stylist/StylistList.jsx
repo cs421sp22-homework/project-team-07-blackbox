@@ -108,17 +108,19 @@ class StylistList extends Component{
         if(event.target.name ==="prevBtn"){
             let curPage = this.state.page;
             this.setState({page:this.state.page-1})
+            //this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
             this.showStylistList(curPage-2,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
         if(event.target.name ==="nextBtn"){
             this.setState({page:this.state.page+1})
             this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
+        //this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
         
     }
 
     checkUser(){
-        return Cookies.get('role');
+        return Cookies.load('role')==='Customer';
     }
 
     searchBtn(event){
@@ -156,7 +158,7 @@ class StylistList extends Component{
     }
     submitInfo(){
         let info = {
-            page: this.state.page-1,
+            page: this.state.page,
             style: this.state.style,
             sort: this.state.sort,
             search: this.state.search,
@@ -164,8 +166,15 @@ class StylistList extends Component{
 
         }
         StylistListService.searchInfo(info)
+            // .then(response => {
+            // this.setState({
+            //     page:0,
+            //     style:"",
+            //     sort:"",
+            //     search:"",})
+            // this.redirect()})
         // this.redirect();
-        this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+        this.showStylistList(this.state.page-1,this.state.style,this.state.sort, this.state.search,this.state.limit)
 
 
     }
@@ -179,7 +188,7 @@ class StylistList extends Component{
     render() {
         return(
             <AnimationRevealPage>
-                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+                {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
                     {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
@@ -189,14 +198,16 @@ class StylistList extends Component{
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
+                        <option value="">null</option>
                     </select>
                     <select  onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
-                        <option value="sexy">sexy</option>
-                        <option value="sports">sports</option>
+                        <option value="Sexy">sexy</option>
+                        <option value="Sports">sports</option>
                         <option value="Casual">casual</option>
-                        <option value="academic">academic</option>
-                        <option value="formal">formal</option>
+                        <option value="Academic">academic</option>
+                        <option value="Formal">formal</option>
+                        <option value="">null</option>
                     </select>
                     <PrimaryButton name="submitBtn" className="add-btn btn-Search" type="submit"  onClick={this.submitInfo}>Search </PrimaryButton>
 
@@ -255,22 +266,22 @@ class StylistList extends Component{
                         <nav>
                         <ul className="flex list-style-none">
                                     {(this.state.page === 1)
-                                        ? <li className="page-item disabled"><button
+                                        ? <li className="page-item disabled"><ControlButton
                                             className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                            tabindex="-1" aria-disabled="true">Previous</button></li>
-                                        : <li class="page-item"><button name='prevBtn'
+                                            tabindex="-1" aria-disabled="true"><ArrowLeftIcon /></ControlButton></li>
+                                        : <li class="page-item"><ControlButton name='prevBtn'
                                             class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                            onClick={this.changePage}>Previous</button></li>}
+                                            onClick={this.changePage}><ArrowLeftIcon /></ControlButton></li>}
 
                                     <li class="page-item"><p className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p></li>
 
                                     {(this.state.page === this.state.totalPage)
-                                        ? <li className="page-item disabled"><button
+                                        ? <li className="page-item disabled"><ControlButton
                                             className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                            tabindex="-1" aria-disabled="true">Next</button></li>
-                                        : <li class="page-item"><button name='nextBtn'
+                                            tabindex="-1" aria-disabled="true"><ArrowRightIcon /></ControlButton></li>
+                                        : <li class="page-item"><ControlButton name='nextBtn'
                                             class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                            onClick={this.changePage}>Next</button></li>
+                                            onClick={this.changePage}><ArrowRightIcon /></ControlButton></li>
                                     }
                                 </ul>
                         </nav>

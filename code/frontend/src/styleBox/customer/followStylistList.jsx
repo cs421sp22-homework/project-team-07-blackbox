@@ -8,7 +8,7 @@ import NavBar from "styleBox/navBar_footer/NavBar.jsx";
 import NavBarCustomer from '../navBar_footer/NavBarCustomer';
 import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
 import StylistListSingleProfile from "../../components/testimonials/StylistListSingleProfile";
-import followStylistListService from "api/styleBox/followStylistListService";
+import StylistListService from "api/styleBox/StylistListService";
 import styled from "styled-components";
 import {SectionHeading, Subheading as SubheadingBase} from "../../components/misc/Headings";
 import {PrimaryButton as PrimaryButtonBase} from "../../components/misc/Buttons";
@@ -17,6 +17,7 @@ import {Link} from 'react-router-dom';
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-3-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-3-icon.svg";
 import QuizService from "../../api/styleBox/QuizService";
+import followStylistListService from "api/styleBox/followStylistListService";
 // const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Container = tw.div`relative`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -46,7 +47,7 @@ const Statistics = tw.div`flex flex-col items-center sm:block text-center md:tex
 const Value = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4 font-bold text-lg sm:text-xl lg:text-2xl text-pink-500  tracking-wide`;
 const Key = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4 font-medium text-pink-500`;
 
-const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0 `;
+const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0 inline-block bg-pink-500 hover:bg-gray-100 hover:text-pink-500 focus:bg-pink-500 focus:text-gray-100 rounded-full`;
 
 const DecoratorBlob = styled(SvgDotPattern)(props => [
     tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-pink-500 -z-10`
@@ -67,7 +68,7 @@ const ControlButton = styled.button`
 
 class followStylistList extends Component{
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
             page:1,
@@ -106,21 +107,26 @@ class followStylistList extends Component{
 
     changePage(event){
         if(event.target.name ==="prevBtn"){
+            let curPage = this.state.page;
             this.setState({page:this.state.page-1})
+            //this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+            this.showStylistList(curPage-2,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
         if(event.target.name ==="nextBtn"){
             this.setState({page:this.state.page+1})
+            this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
-        this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+        //this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
+
     }
 
     checkUser(){
-        return Cookies.get('role');
+        return Cookies.load('role')==='Customer';
     }
 
     searchBtn(event){
         this.setState({
-            search:event.targte.value
+            search:event.target.value
         })
     }
 
@@ -140,48 +146,69 @@ class followStylistList extends Component{
 
     showStylistList(pageValue,styleValue,sortValue,searchValue,limitValue){
         followStylistListService.getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue)
-            .then(response => this.setState({
-                stylistLists: response.data
-            }))
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+
+                        stylistLists: response.data.data,
+                        totalPage: response.data.totalPages
+                    }
+                )}
+            )
             .catch(error => console.log(error.response))
     }
     submitInfo(){
         let info = {
-            search: this.state.search,
-            sort: this.state.sort,
+            page: this.state.page,
             style: this.state.style,
+            sort: this.state.sort,
+            search: this.state.search,
+            limit: this.state.limit
 
         }
         followStylistListService.searchInfo(info)
+        // .then(response => {
+        // this.setState({
+        //     page:0,
+        //     style:"",
+        //     sort:"",
+        //     search:"",})
+        // this.redirect()})
+        // this.redirect();
+        this.showStylistList(this.state.page-1,this.state.style,this.state.sort, this.state.search,this.state.limit)
+
 
     }
 
 
     componentDidMount(){
-        this.showStylistList(1,"","","",5)
+        this.showStylistList(0,"","","",5)
     }
 
 
     render() {
         return(
             <AnimationRevealPage>
-                {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+                {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
                 <div className="col-12 col-lg-5 text-right ">
+                    {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
                     <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
                     <select   onChange={this.sortBtn}>
                         <option disabled selected value> - select an sort option - </option>
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
+                        <option value="">null</option>
                     </select>
                     <select  onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
-                        <option value="sexy">sexy</option>
-                        <option value="sports">sports</option>
-                        <option value="casual">casual</option>
-                        <option value="academic">academic</option>
-                        <option value="formal">formal</option>
+                        <option value="Sexy">sexy</option>
+                        <option value="Sports">sports</option>
+                        <option value="Casual">casual</option>
+                        <option value="Academic">academic</option>
+                        <option value="Formal">formal</option>
+                        <option value="">null</option>
                     </select>
                     <PrimaryButton name="submitBtn" className="add-btn btn-Search" type="submit"  onClick={this.submitInfo}>Search </PrimaryButton>
 
@@ -221,11 +248,15 @@ class followStylistList extends Component{
 
                                     </Statistics>
                                     {/*onClick={this.learnMore.bind(this,testimonial.stylistId)}*/}
-                                    <Link to={{pathname:'/stylistList', query:{stylistId:stylistLst.stylistId}}}>
-                                        <PrimaryButton >
+                                    {/* <Link to={{pathname:'/stylistList', query:{stylistId:stylistLst.stylistId}}}>
+                                            <PrimaryButton >
                                             {"Learn More"}
-                                        </PrimaryButton>
-                                    </Link>
+                                            </PrimaryButton>
+                                        </Link> */}
+                                    <PrimaryButton onClick={()=>{this.props.history.push({
+                                        pathname:'/stylist/homepage',
+                                        query:{stylistId: stylistLst.stylistId}
+                                    })}}>Learn More</PrimaryButton>
 
                                 </TextContent>
                             </TextColumn>
@@ -234,39 +265,24 @@ class followStylistList extends Component{
 
                     <div className="flex justify-center my-6 ">
                         <nav>
-                            <ul className="flex list-style-none ">
+                            <ul className="flex list-style-none">
                                 {(this.state.page === 1)
-                                    ? <li className="page-item disabled">
-                                        <ControlButton tabIndex="-1" aria-disabled="true">
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
-                                            <ArrowLeftIcon />
-                                        </ControlButton>
-                                    </li>
-                                    : <li className="page-item">
-                                        <ControlButton name='prevBtn' onClick={this.changePage}>
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
-                                            <ArrowLeftIcon />
-                                        </ControlButton>
-                                    </li>}
+                                    ? <li className="page-item disabled"><ControlButton
+                                        className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                        tabindex="-1" aria-disabled="true"><ArrowLeftIcon /></ControlButton></li>
+                                    : <li class="page-item"><ControlButton name='prevBtn'
+                                                                           class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                           onClick={this.changePage}><ArrowLeftIcon /></ControlButton></li>}
 
-
-                                <li className="page-item"><p
-                                    className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p>
-                                </li>
+                                <li class="page-item"><p className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 pointer-events-none focus:shadow-none">{this.state.page}</p></li>
 
                                 {(this.state.page === this.state.totalPage)
-                                    ? <li className="page-item disabled">
-                                        <ControlButton tabIndex="-1" aria-disabled="true">
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"*/}
-                                            <ArrowRightIcon />
-                                        </ControlButton>
-                                    </li>
-                                    : <li className="page-item">
-                                        <ControlButton name='nextBtn'  onClick={this.changePage}>
-                                            {/*className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"*/}
-                                            <ArrowRightIcon />
-                                        </ControlButton>
-                                    </li>
+                                    ? <li className="page-item disabled"><ControlButton
+                                        className="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                        tabindex="-1" aria-disabled="true"><ArrowRightIcon /></ControlButton></li>
+                                    : <li class="page-item"><ControlButton name='nextBtn'
+                                                                           class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                           onClick={this.changePage}><ArrowRightIcon /></ControlButton></li>
                                 }
                             </ul>
                         </nav>

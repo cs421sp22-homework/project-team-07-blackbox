@@ -2,16 +2,19 @@
 import axios from 'axios'
 import { API_URL } from '../../Constants'
 
+axios.defaults.withCredentials=true
 class followStylistListService {
     // Get order list
     getStylistList(pageValue,styleValue,sortValue,searchValue,limitValue){
-        let param = {page: pageValue, style:styleValue,sort: sortValue,search:searchValue,limit:limitValue}
-        return axios.get(`${API_URL}/followStylist`,param, {withCredentials: true})
+        let params = {page: pageValue, style:styleValue,sort: sortValue,search:searchValue,limit:limitValue}
+        console.log(params)
+        return axios.get(`${API_URL}/stylists`,
+            {params:{page: pageValue, style:styleValue,sort: sortValue,search:searchValue,limit:limitValue}})
     }
 
-    searchInfo(info){
-        console.log(info)
-        return axios.post(`${API_URL}/followStylist`,info,{withCredentials: true})
+    searchInfo(params){
+        console.log(params)
+        return axios.get(`${API_URL}/stylists`,params)
     }
 
 
