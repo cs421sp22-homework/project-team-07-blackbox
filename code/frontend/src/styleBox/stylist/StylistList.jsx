@@ -119,7 +119,7 @@ class StylistList extends Component{
         
     }
 
-    checkUser(){
+    checkCustomer(){
         return Cookies.load('role')==='Customer';
     }
 

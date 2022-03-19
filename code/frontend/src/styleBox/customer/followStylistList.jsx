@@ -120,7 +120,7 @@ class followStylistList extends Component{
 
     }
 
-    checkUser(){
+    checkCustomer(){
         return Cookies.load('role')==='Customer';
     }
 
