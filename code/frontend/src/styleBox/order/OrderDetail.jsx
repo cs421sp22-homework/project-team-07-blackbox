@@ -73,10 +73,11 @@ class OrderDetail extends Component {
                         jeanSize: response.data.jeanSize,
                         shoeSize: response.data.shoeSize
                     })
-                        .catch((error) => {
-                            console.log(error.response.data)
-                        })
+                        
                 }
+            })
+            .catch((error) => {
+                console.log(error.response.data)
             })
     }
 
