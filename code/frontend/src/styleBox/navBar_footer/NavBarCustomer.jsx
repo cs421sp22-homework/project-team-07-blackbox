@@ -50,7 +50,7 @@ class NavBarCustomer extends Component{
                         },
                         {
                             ItemName: "Followed Stylists",
-                            link: "#/action-1"
+                            link: "/followStylist"
                         },
                         {
                             ItemName: "Cart",
