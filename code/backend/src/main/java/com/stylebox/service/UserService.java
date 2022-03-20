@@ -163,6 +163,7 @@ public class UserService {
     public void createCustomerProfile(User user, CustomerProfileDTO customerProfileDTO){
         Set<String> styleSet = customerProfileDTO.getStyleSet();
         modifyStyle(styleSet, user);
+        user.setFacebook("F");
         modelMapper.map(customerProfileDTO, user.getCustomerInformation());
         customerInformationRepository.save(user.getCustomerInformation());
         userRepository.save(user);

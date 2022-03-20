@@ -52,8 +52,8 @@ class CustomerProfile extends Component {
     // }
 
     submitInfo() {
+        console.log(this.state.styleSet);
         let info = {
-            token: sessionStorage.getItem('token'),
             gender: this.state.gender,
             ftSize: this.state.ftSize,
             inSize: this.state.inSize,
@@ -64,7 +64,7 @@ class CustomerProfile extends Component {
             shoeSize: this.state.shoeSize,
             styleSet: this.state.styleSet.split(',')
         }
-        console.log(this.state.styleSet)
+        console.log(info)
         this.setState({edit: false})
         CustomerProfileService.modifyProfile(info)
         // this.redirect();
@@ -72,7 +72,8 @@ class CustomerProfile extends Component {
 
     componentDidMount() {
         CustomerProfileService.getHomepage()
-            .then(response => this.setState({
+            .then((response) => {
+                this.setState({
                 gender: response.data.gender,
                 ftSize: response.data.ftSize,
                 inSize: response.data.inSize,
@@ -81,8 +82,10 @@ class CustomerProfile extends Component {
                 bottomSize: response.data.bottomSize,
                 jeanSize: response.data.jeanSize,
                 shoeSize: response.data.shoeSize,
-                styleSet: response.data.styleSet
-            }))
+                styleSet: response.data.styleSet.toString(),
+                });
+                console.log(response.data)
+            })
             .catch(error => console.log(error.response))
 
     }
