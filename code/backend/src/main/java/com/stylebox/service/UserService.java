@@ -156,6 +156,7 @@ public class UserService {
         for (Style st : styles) {
             styleSet.add(st.getStyleName());
         }
+        customerProfileDTO.setGender(user.getGender());
         customerProfileDTO.setStyleSet(styleSet);
         return customerProfileDTO;
     }
