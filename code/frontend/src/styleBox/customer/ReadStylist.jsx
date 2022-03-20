@@ -12,6 +12,7 @@ import { PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Cookies from 'react-cookies';
+import NavBarAuthenticated from "styleBox/navBar_footer/NavBarAuthenticated";
 
 
 const PrimaryButton = styled(PrimaryButtonBase)(props => [
@@ -93,7 +94,7 @@ class ReadStylist extends Component{
   }
 
   checkUser(){
-    return Cookies.get('role');
+    return Cookies.load('role');
   }
 
 
@@ -137,7 +138,7 @@ class ReadStylist extends Component{
     console.log("stylistID:"+this.state.testimonials[0].stylistId)
     return(
       <AnimationRevealPage>
-        {this.checkUser === 'Customer'?<NavBarCustomer/>: <NavBarStylist/>}
+        <NavBarAuthenticated/>
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
         <div align="center">
           <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
