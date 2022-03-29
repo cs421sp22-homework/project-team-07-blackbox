@@ -19,6 +19,11 @@ class OrderService {
         return axios.post(`${API_URL}/order/${stylistId}`, info, {withCredentials: true})
     }
 
+    manageOrder(orderIdV, isAcceptV){
+        console.log(isAcceptV)
+        return axios.post(`${API_URL}/order/action/${orderIdV}`, {params: {orderId: orderIdV, isAccept: isAcceptV}})
+    }
+
 }
 
 export default new OrderService()

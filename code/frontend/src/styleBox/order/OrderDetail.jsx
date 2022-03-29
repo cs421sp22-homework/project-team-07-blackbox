@@ -1,14 +1,12 @@
 import tw from 'twin.macro'
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import NavBarCustomer from '../navBar_footer/NavBarCustomer';
-import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
 import React, {Component} from "react";
 import {Container as ContainerBase} from "components/misc/Layouts";
-import OrderService from 'api/styleBox/OrderService';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 import Cookies from 'react-cookies';
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import OrderService from 'api/styleBox/OrderService';
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg justify-center flex-1`;
@@ -35,10 +33,13 @@ class OrderDetail extends Component {
             bottomSize: "30",
             jeanSize: "15",
             shoeSize: "11",
-            orderId: this.props.location.query.id
+            orderId: this.props.location.query.id,
+            isWindowed: false,
+            isAccept: 2
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
+        this.btnPressed = this.btnPressed.bind(this)
     }
 
     // return user type
@@ -49,6 +50,25 @@ class OrderDetail extends Component {
     // Back to orderList when click back btn
     backToOrders() {
         this.props.history.push("/orders");
+    }
+
+    // Manage button pressed
+    btnPressed(event){
+        if(event.currentTarget.getAttribute('name') === "manageBtn"){
+            this.setState({isWindowed: true});
+        }
+        else if(event.currentTarget.getAttribute('name') === "cancelBtn"){
+            this.setState({isWindowed: false});
+        }
+        else if(event.currentTarget.getAttribute('name') === "acceptBtn"){
+            this.setState({isWindowed: false, isAccept: 0});
+            OrderService.manageOrder(this.state.orderId, 0);
+            
+        }
+        else if(event.currentTarget.getAttribute('name') === "rejectBtn"){
+            this.setState({isWindowed: false, isAccept: 1});
+            OrderService.manageOrder(this.state.orderId, 1);
+        }
     }
 
     componentDidMount() {
@@ -71,7 +91,8 @@ class OrderDetail extends Component {
                         shirtSize: response.data.shirtSize,
                         bottomSize: response.data.bottomSize,
                         jeanSize: response.data.jeanSize,
-                        shoeSize: response.data.shoeSize
+                        shoeSize: response.data.shoeSize,
+                        isAccept: response.data.isAccept
                     })
                         
                 }
@@ -81,10 +102,44 @@ class OrderDetail extends Component {
             })
     }
 
-
     render() {
         return (
             <AnimationRevealPage>
+                {this.state.isAccept === 2 && this.state.isWindowed?
+                    <div>
+                    <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                        <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div className="sm:flex sm:items-start">
+                            <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+
+                                <svg className="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">Manage Your Order</h3>
+                                <div className="mt-2">
+                                <p className="text-sm text-gray-500">Please accept or reject this order. Press cancel if you don't decide the action.</p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="button" name='acceptBtn' onClick={this.btnPressed} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Accept</button>
+                            <button type="button" name='rejectBtn' onClick={this.btnPressed} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Reject</button>
+                            <button type="button" name='cancelBtn' onClick={this.btnPressed} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div> : <div></div>
+                }
+                
+                
                 <NavBarAuthenticated/>
                 <Container>
                     <Content>
@@ -94,12 +149,16 @@ class OrderDetail extends Component {
                                     # {this.state.orderId} Detail</h2>
                                 <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
-                                    <button type="button"
-                                            className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Accept
-                                    </button>
-                                    <button type="button"
-                                            className="m-5 p-2 bg-red-600 text-white text-base leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Reject
-                                    </button>
+                                    <div></div>
+                                    {this.state.isAccept === 2 && (!this.checkCustomer)? 
+                                        <button type="button"
+                                                name='manageBtn'
+                                                className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                onClick={this.btnPressed}>   
+                                                    Manage
+                                        </button>
+                                        : <div> </div>
+                                        }
                                     <button onClick={this.backToOrders} type="button"
                                             className="m-5 p-2 bg-gray-200 text-gray-700 text-base leading-tight rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Back
                                         to Orders
@@ -222,8 +281,6 @@ class OrderDetail extends Component {
                                         </div>
 
                                     }
-
-
                                 </div>
                             </div>
                         </div>

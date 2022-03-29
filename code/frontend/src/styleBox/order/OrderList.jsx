@@ -15,8 +15,8 @@ const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-med
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const MainContent = tw.div`mt-12 flex flex-col items-center`;
-const TableRow = tw.th`text-sm font-medium text-gray-900 px-6 py-4 text-center`;
-const TableValue = tw.td`text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap`;
+const TableRow = tw.th`text-xs font-medium text-gray-900 px-6 py-4 text-center`;
+const TableValue = tw.td`text-xs text-gray-900 font-light px-6 py-4 whitespace-nowrap`;
 const ViewBtn = tw.button`inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out`;
 
 class OrderList extends Component{
@@ -37,7 +37,8 @@ class OrderList extends Component{
                 clothPriceHigh: 300,
                 time: "2022/3/5",
                 orderId: 1,
-                read: false
+                read: false,
+                status: "To be confirmed"
             },
             {
                 nickname: "xxx",
@@ -49,7 +50,8 @@ class OrderList extends Component{
                 clothPriceHigh: 800,
                 time: "2022/3/9",
                 orderId: 2,
-                read: true
+                read: true,
+                status: "To be confirmed"
             }]
         }
         this.sortBtn = this.sortBtn.bind(this)
@@ -91,9 +93,11 @@ class OrderList extends Component{
         .catch(error => console.log(error.response))
     }
 
+    /*
     componentDidMount(){
         this.showOrderList(0, "")
     }
+    */
 
     viewOrder(orderId){
         // console.log(orderId)
@@ -122,7 +126,6 @@ class OrderList extends Component{
                             <table className="min-w-full">
                                 <thead className="bg-white border-b bg-gray-50">
                                     <tr>
-                                        <TableRow> Id </TableRow>
                                         <TableRow> OrderId </TableRow>
                                         <TableRow> Nickname </TableRow>
                                         <TableRow> OrderPrice </TableRow>
@@ -133,13 +136,13 @@ class OrderList extends Component{
                                         <TableRow> ClothPrice (High) </TableRow>
                                         <TableRow> Time <button name="timeBtn" onClick={this.sortBtn}><FontAwesomeIcon icon={Icons.faSort} /></button> </TableRow>
                                         <TableRow> View <button name="viewBtn" onClick={this.sortBtn}><FontAwesomeIcon icon={Icons.faSort} /></button> </TableRow>
+                                        <TableRow> Status </TableRow>
                                         <TableRow> Action </TableRow>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.orderlst.map((order, index) => (
                                         <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                            <TableValue>{index}</TableValue>
                                             <TableValue>{order.orderId}</TableValue>
                                             <TableValue>{order.nickname}</TableValue>
                                             <TableValue>{order.orderPrice}</TableValue>
@@ -150,6 +153,7 @@ class OrderList extends Component{
                                             <TableValue>{order.clothPriceHigh}</TableValue>
                                             <TableValue>{this.showDescription(order.time)}</TableValue>
                                             <TableValue>{order.read.toString()}</TableValue>
+                                            <TableValue>{order.status}</TableValue>
                                             <TableValue><ViewBtn onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn></TableValue>
                                         </tr>
                                     ))}
