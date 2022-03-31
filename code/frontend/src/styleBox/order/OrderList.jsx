@@ -185,9 +185,9 @@ class OrderList extends Component {
                                                 <TableValue>{order.clothPriceHigh}</TableValue>
                                                 <TableValue>{this.showDescription(order.time)}</TableValue>
                                                 <TableValue>{order.read.toString()}</TableValue>
-                                                <TableRow> {
+                                                <TableValue> {
                                                     this.showStatus(order.orderStatus)
-                                                } </TableRow>
+                                                } </TableValue>
                                                 <TableValue>
                                                     <ViewBtn
                                                         onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn>
