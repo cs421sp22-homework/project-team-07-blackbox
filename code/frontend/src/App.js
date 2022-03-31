@@ -20,6 +20,7 @@ import FollowStylist from"./styleBox/customer/followStylistList"
 import NavBarCustomer from "./styleBox/navBar_footer/NavBarCustomer";
 import NavBarStylist from "./styleBox/navBar_footer/NavBarStylist";
 import DropDown from "./styleBox/navBar_footer/Dropdown"
+import ConfirmOrder from "./styleBox/order/ConfirmOrder";
 
 
 export default function App() {
@@ -45,6 +46,7 @@ export default function App() {
               <AuthenticatedRoute path="/orderDetail" component={OrderDetail} />
               <AuthenticatedRoute path="/stylist/homepage" component={ReadStylist}/>
               <AuthenticatedRoute path="/order" component={CreateOrder}/>
+              <AuthenticatedRoute path="/confirmOrder" component={ConfirmOrder}/>
           </Switch>
       </>
   </Router>

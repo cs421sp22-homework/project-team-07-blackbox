@@ -9,9 +9,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 import Cookies from 'react-cookies';
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import {PrimaryButton as PrimaryButtonBase} from "../../components/misc/Buttons";
 
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg justify-center flex-1`;
+const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 
 
 class OrderDetail extends Component {
@@ -39,6 +41,7 @@ class OrderDetail extends Component {
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
+        this.confirmOrder = this.confirmOrder.bind(this)
     }
 
     // return user type
@@ -73,12 +76,22 @@ class OrderDetail extends Component {
                         jeanSize: response.data.jeanSize,
                         shoeSize: response.data.shoeSize
                     })
-                        
+
                 }
             })
             .catch((error) => {
                 console.log(error.response.data)
             })
+    }
+
+    confirmOrder() {
+        console.log(this.props.location)
+        this.props.history.push({
+            pathname:'/confirmOrder',
+            state: {
+                orderId: this.state.orderId
+            }
+        });
     }
 
 
@@ -227,6 +240,7 @@ class OrderDetail extends Component {
                                 </div>
                             </div>
                         </div>
+                        <SubmitButton type="submit" onClick={this.confirmOrder}>Confirm order</SubmitButton>
                     </Content>
                 </Container>
             </AnimationRevealPage>
