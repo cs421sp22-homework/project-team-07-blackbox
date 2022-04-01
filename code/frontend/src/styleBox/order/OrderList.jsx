@@ -155,7 +155,7 @@ class OrderList extends Component {
                                         <thead className="bg-white border-b bg-gray-50">
                                         <tr>
                                             <TableRow> Id </TableRow>
-                                            <TableRow> OrderId </TableRow>
+                                            {/*<TableRow> OrderId </TableRow>*/}
                                             <TableRow> Nickname </TableRow>
                                             <TableRow> OrderPrice </TableRow>
                                             <TableRow> Styles </TableRow>
@@ -175,7 +175,7 @@ class OrderList extends Component {
                                         {this.state.orderlst.map((order, index) => (
                                             <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                                 <TableValue>{index}</TableValue>
-                                                <TableValue>{order.orderId}</TableValue>
+                                                {/*<TableValue>{order.orderId}</TableValue>*/}
                                                 <TableValue>{order.nickname}</TableValue>
                                                 <TableValue>{order.orderPrice}</TableValue>
                                                 <TableValue>{this.showDescription(order.styleSet.join(', '))}</TableValue>
@@ -191,7 +191,7 @@ class OrderList extends Component {
                                                 <TableValue>
                                                     <ViewBtn
                                                         onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn>
-                                                    {order.read ? <div/> : <div className="badge">!</div>}
+                                                    {order.read ? <div/> : <span className="badge">!</span>}
                                                 </TableValue>
                                             </tr>
                                         ))}

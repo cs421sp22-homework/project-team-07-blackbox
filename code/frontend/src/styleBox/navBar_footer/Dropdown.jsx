@@ -60,7 +60,7 @@ export default function Dropdown(
                                         )}
                                     >
                                         {item.ItemName}
-                                        {noti && item.ItemName === "Orders" ? <div className="nav-badge">!</div> : <div/>}
+                                        {noti && item.ItemName === "Orders" ? <span className="nav-badge">!</span> : <div/>}
                                     </a>
                                 )
                                 }

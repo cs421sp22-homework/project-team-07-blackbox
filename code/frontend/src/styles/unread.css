@@ -8,19 +8,21 @@
     font-size: 10px;
     font-weight: 700;
     border-radius: 50%; /* 使正方形变圆形，矩形变椭圆形 */
+    padding: 2px 8px;
 
     z-index: 5;
     position: relative;
-    bottom: 40px;
-    left: 75px;
+    bottom: 15px;
+    right: 15px;
     float: bottom;
 }
 
 .nav-badge {
-    width: 12px;
-    height: 12px;
-    line-height: 12px; /* 数值与height相同，使数字垂直居中 */
+    width: 15px;
+    height: 15px;
+    line-height: 15px; /* 数值与height相同，使数字垂直居中 */
     text-align: center; /* 使数字水平居中 */
+    padding: 0 6px;
     background-color: #fa5959;
     color: white;
     font-size: 4px;
@@ -29,7 +31,7 @@
 
     z-index: 5;
     position: relative;
-    bottom: 20px;
-    left: 55px;
+    bottom: 2px;
+    left: 6px;
     float: bottom;
 }
