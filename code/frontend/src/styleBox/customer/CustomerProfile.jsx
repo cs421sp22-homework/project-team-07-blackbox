@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import QuizForm from "../quiz/QuizForm"
 import "../../styles/tailwind.min.css"
 import tw from 'twin.macro'
-import CustomerProfileService from "../../api/styleBox/CustomerProfileService";
+import CustomerProfileService from "../../api/styleBox/ProfileService";
 import CustomerForm from "./CustomerForm";
 import NavBarCustomer from "../navBar_footer/NavBarCustomer";
 import Footer from 'styleBox/navBar_footer/Footer';
+import {PrimaryButton as PrimaryButtonBase} from "../../components/misc/Buttons";
 
 
 class CustomerProfile extends Component {
@@ -66,7 +67,7 @@ class CustomerProfile extends Component {
         }
         console.log(info)
         this.setState({edit: false})
-        CustomerProfileService.modifyProfile(info)
+        CustomerProfileService.modifyCustomerProfile(info)
         // this.redirect();
     }
 
@@ -89,7 +90,6 @@ class CustomerProfile extends Component {
             .catch(error => console.log(error.response))
 
     }
-
 
     render() {
         return (

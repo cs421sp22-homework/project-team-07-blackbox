@@ -33,9 +33,12 @@ class StylistProfile extends Component{
       }],
       display: [{image: "", idea: ""}]
     }
+
+    this.modifyState()
+    console.log("construct father", this.state.testimonials)
   }
 
-  componentDidMount(){
+  modifyState(){
 
     StylistService.getHomepage()
     .then(response=>this.setState({
@@ -62,6 +65,7 @@ class StylistProfile extends Component{
     return(
       <AnimationRevealPage>
         <NavBarAuthenticated/>
+        {console.log("pass", this.state.testimonials)}
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
         <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
