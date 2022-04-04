@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import ImageUploader from "react-images-upload";
 import tw from "twin.macro";
 
-// const Uploader = tw(ImageUploader)`transparent`;
+const Button = tw.button`w-full sm:w-32 mt-3 py-1 bg-pink-500 text-gray-100 rounded-full font-bold shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 class Products extends React.Component {
 
@@ -11,15 +11,15 @@ class Products extends React.Component {
   
 	  //  this.state.products = [];
 	  this.state = {};
-	  this.state.filterText = "";
 	  this.state.products = [
+		{
+		  id: 0,
+		  itemsId: "",
+		  itemName: "",
+		  link: "",
+		  itemImage: []
+		}, 
 		// {
-		//   id: 1,
-		//   category: 'Sporting Goods',
-		//   price: '49.99',
-		//   qty: 12,
-		//   name: 'football'
-		// }, {
 		//   id: 2,
 		//   category: 'Sporting Goods',
 		//   price: '9.99',
@@ -29,28 +29,27 @@ class Products extends React.Component {
 	  ];
   
 	}
-	handleUserInput(filterText) {
-	  this.setState({filterText: filterText});
-	};
+
 	handleRowDel(product) {
 	  var index = this.state.products.indexOf(product);
 	  this.state.products.splice(index, 1);
 	  this.setState(this.state.products);
+	  this.props.setItems(this.state.products);
 	};
   
 	handleAddEvent(evt) {
 	  var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
 	  var product = {
 		id: id,
-		itemId: "",
+		itemsId: "",
 		itemName: "",
-		itemLink: "",
-		itemImage: ""
+		link: "",
+		itemImage: []
 	  }
 	  console.log(id)
 	  this.state.products.push(product);
 	  this.setState(this.state.products);
-  
+	  this.props.setItems(this.state.products);
 	}
   
 	handleProductTable(evt) {
@@ -59,8 +58,9 @@ class Products extends React.Component {
 		name: evt.target.name,
 		value: evt.target.value
 	  };
-  	var products = this.state.products.slice();
-	var newProducts = products.map(function(product) {
+	//   console.log(evt.target)
+	  var products = this.state.products.slice();
+	  var newProducts = products.map(function(product) {
   
 	  for (var key in product) {
 		if (key == item.name && product.id == item.id) {
@@ -72,16 +72,41 @@ class Products extends React.Component {
 	});
 	  this.setState({products:newProducts});
 	//  console.log(this.state.products);
+	this.props.setItems(this.state.products);
 	};
+
+	changeFile(evt) {
+		var item = {
+		  id: evt.target.id,
+		  name: evt.target.name,
+		  value: evt.target.files[0]
+		};
+		// console.log(evt.target.files)
+		// console.log(evt.target)
+		var products = this.state.products.slice();
+		var newProducts = products.map(function(product) {
+	
+		for (var key in product) {
+		  if (key == item.name && product.id == item.id) {
+			// console.log(product[key])
+			// console.log(evt.target.files[0])
+			product[key] = item.value;
+	
+		  }
+		}
+		return product;
+	  });
+		this.setState({products:newProducts});
+	  //  console.log(this.state.products);
+	  this.props.setItems(this.state.products);
+	  };
+
 	render() {
-  
 	  return (
 		<div>
-		  {/* <SearchBar filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)}/> */}
-		  <ProductTable onProductTableUpdate={this.handleProductTable.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} products={this.state.products} filterText={this.state.filterText}/>
+		  <ProductTable onProductTableUpdate={this.handleProductTable.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} products={this.state.products} changeFile={this.changeFile.bind(this)}/>
 		</div>
 	  );
-  
 	}
   
   }
@@ -91,19 +116,16 @@ class Products extends React.Component {
 	render() {
 	  var onProductTableUpdate = this.props.onProductTableUpdate;
 	  var rowDel = this.props.onRowDel;
-	  var filterText = this.props.filterText;
 	  var products = this.props.products;
+	  var changeFile = this.props.changeFile;
 	  var product = this.props.products.map(function(product) {
-		if (product.itemName.indexOf(filterText) === -1) {
-		  return;
-		}
-		return (<ProductRow onProductTableUpdate={onProductTableUpdate} products={products} product={product} onDelEvent={rowDel.bind(this)} key={product.id}/>)
+		return (<ProductRow onProductTableUpdate={onProductTableUpdate} products={products} product={product} onDelEvent={rowDel.bind(this)} key={product.id} changeFile={changeFile}/>)
 	  });
 	  return (
 		<div>
   
   
-		<button type="button" onClick={this.props.onRowAdd} className="btn btn-success pull-right">Add</button>
+		<Button type="button" onClick={this.props.onRowAdd}>Add Item</Button>
 		  <table className="table table-bordered">
 			<thead>
 			  <tr>
@@ -129,56 +151,57 @@ class Products extends React.Component {
   }
   
   class ProductRow extends React.Component {
+	constructor(props){
+		super(props)
+		this.state={}
+
+		// this.changeFile = this.changeFile.bind(this)
+	}
 	onDelEvent() {
 	  this.props.onDelEvent(this.props.product);
   
 	}
+
+	// changeFile(event){
+	// 	console.log(event.target.files)
+	// }
+
+	
+
 	render() {
   
 	  return (
 		<tr className="eachRow">
-		  {/* <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
-			type: "No",
-			value: this.props.product.id,
-			id: this.props.product.id
-		  }}/> */}
 		  <td align="center">
-			  {this.props.products.indexOf(this.props.product)}
+			  {this.props.products.indexOf(this.props.product)+1}
 		  </td>
 		  <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
-			type: "itemId",
-			value: this.props.product.itemId,
+			name: "itemsId",
+			value: this.props.product.itemsId,
 			id: this.props.product.id
 		  }}/>
 		  <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
-			type: "itemName",
+			name: "itemName",
 			value: this.props.product.itemName,
 			id: this.props.product.id
 		  }}/>
 		  <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
-			type: "itemLink",
-			value: this.props.product.itemLink,
+			name: "link",
+			value: this.props.product.link,
 			id: this.props.product.id
 		  }}/>
-		  <td>
-		  			{/* <Uploader
-                      withIcon={false}
-                      withPreview={true}
-                      withLabel={false}
-					  singleImage={true}
-                      buttonText="Choose images"
-                    //   buttonStyles={{background:'rgb(236 72 153'}}
-                      onChange={this.onDropOutfit}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                      maxFileSize={5242880}
-                    /> */}
-   <input type="file" accept="image/*" />
-    <button onClick={() => {
-        document.querySelector("input[type='file']").click();
-    }}>
-        <i className="fa fa-picture-o" style={{fontSize: 20}}></i>
-    </button>
-		  </td>
+		  
+		  <EditableCellFile changeFile={this.props.changeFile} cellData={{
+			name: "itemImage",
+			value: this.props.product.itemImage,
+			id: this.props.product.id
+		  }}/>
+		  {/* <td>
+		  <input type="file" accept="image/*" onChange={this.changeFile}/>
+		  </td> */}
+			
+					
+		  
 		  <td className="del-cell">
 			<input type="button" onClick={this.onDelEvent.bind(this)} value="X" className="del-btn"/>
 		  </td>
@@ -188,12 +211,25 @@ class Products extends React.Component {
 	}
   
   }
-  class EditableCell extends React.Component {
+class EditableCell extends React.Component {
   
 	render() {
 	  return (
 		<td>
-		  <input type='text' name={this.props.cellData.type} id={this.props.cellData.id} value={this.props.cellData.value} onChange={this.props.onProductTableUpdate}/>
+		  <input type='text' name={this.props.cellData.name} id={this.props.cellData.id} value={this.props.cellData.value} onChange={this.props.onProductTableUpdate}/>
+		</td>
+	  );
+  
+	}
+  
+  }
+
+class EditableCellFile extends React.Component {
+  
+	render() {
+	  return (
+		<td>
+		  <input type="file" accept="image/*" name={this.props.cellData.name} id={this.props.cellData.id} onChange={this.props.changeFile}/>
 		</td>
 	  );
   

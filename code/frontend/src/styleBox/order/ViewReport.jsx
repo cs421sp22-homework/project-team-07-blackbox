@@ -9,6 +9,8 @@ import NavBarAuthenticated from "styleBox/navBar_footer/NavBarAuthenticated";
 import Footer from "styleBox/navBar_footer/Footer";
 import ImageUploader from "react-images-upload";
 import TableDemo from "./TableDemo";
+import ViewOutfit from "./ViewOutfit";
+import ViewItems from "./ViewItems";
 
 
 const Container = tw.div`relative`;
@@ -73,6 +75,19 @@ class CreateReportForm extends Component{
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    ReportService.viewReport(this.props.orderId, info) 
+    .then((response)=>{
+      console.log(response.data);
+      alert("Create order success!");
+      this.props.history.push({
+        pathname:'/orders',
+      })
+    })
+    .catch((error) => {
+      console.log(error.response);
+      alert("Create order failed. Please try again.");
+      // this.props.history.push("/");
+    })
   }
 
   handleChange(event){
@@ -122,19 +137,7 @@ class CreateReportForm extends Component{
     event.preventDefault();
     console.log(info)
 
-    ReportService.createReport(this.props.orderId, info) 
-    .then((response)=>{
-      console.log(response.data);
-      alert("Create order success!");
-      this.props.history.push({
-        pathname:'/orders',
-      })
-    })
-    .catch((error) => {
-      console.log(error.response);
-      alert("Create order failed. Please try again.");
-      // this.props.history.push("/");
-    })
+    
   }
 
   render(){
@@ -144,7 +147,7 @@ class CreateReportForm extends Component{
       <Content>
         <FormContainer>
           <div tw="mx-auto max-w-4xl">
-            <h2 align="center">Create an Report</h2>        
+            <h2 align="center">Outfit Report</h2>        
             <form>
             <Column>
             <Label >Order number: 0001</Label>
@@ -159,35 +162,16 @@ class CreateReportForm extends Component{
                   <Label >Customer Name: customer1</Label>
                   <Label >Customer ID: 0002</Label>
                 </Column>
-              </TwoColumn>
+            </TwoColumn>
                 <Column>
-                  <InputContainer>
-                    <Label htmlFor="style-input">Upload Outfite Image:</Label>
-                    <ImageUploader
-                      withIcon={true}
-                      withPreview={true}
-                      withLabel={false}
-                      buttonText="Choose images"
-                      // buttonStyles={{background:'rgb(236 72 153'}}
-                      onChange={this.onDropOutfit}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                      maxFileSize={5242880}
-                    />
-                  </InputContainer>
-
-                  <InputContainer>
-                    <Label>Outfit Design Idea:</Label>
-                    <TextArea id="message-input" name="idea" placeholder="Details about your design." onChange={this.handleChange}/>
-                    </InputContainer>
-
+                    <ViewOutfit/>
+                    <ViewItems/>
                   <InputContainer>
                     <Label>Items for Outfit:</Label>
                     <TableDemo setItems={this.setItems}/>
                   </InputContainer>
 
                 </Column>
-
-              <SubmitButton type="submit" value="Submit" onClick={this.submitInfo}>Submit</SubmitButton>
             </form>
           </div>
           <SvgDotPattern1 />
