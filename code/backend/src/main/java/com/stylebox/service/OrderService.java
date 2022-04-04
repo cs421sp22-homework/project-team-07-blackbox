@@ -72,7 +72,7 @@ public class OrderService {
         //customer, stylist
         orders.setCustomer(user.getCustomerInformation());
         orders.setStylist(stylistInformationRepository.getById(styid));
-
+        orders.setOrderStatus(1);
         orderRepository.save(orders);
     }
 
@@ -115,8 +115,10 @@ public class OrderService {
             //nickname
             if (user.getRole().getName().equals("Customer")) {
                 orderBrowseDTO.setNickname(o.getStylist().getUser().getNickname());
+                orderBrowseDTO.setRead(o.isCustomerRead());
             } else {
                 orderBrowseDTO.setNickname(o.getCustomer().getUser().getNickname());
+                orderBrowseDTO.setRead(o.isStylistRead());
             }
             //styleSet
             Set<String> styles = new HashSet<>();
@@ -131,7 +133,9 @@ public class OrderService {
             orderBrowseDTO.setTime(o.getLastEditDatetime());
             //orderid
             orderBrowseDTO.setOrderId(o.getId());
+            orderBrowseDTO.setOrderStatus(o.getOrderStatus());
             orderBrowseDTOS.add(orderBrowseDTO);
+
         }
         orderListDTO.setTotalPages(totalPages);
         orderListDTO.setData(orderBrowseDTOS);
@@ -162,12 +166,78 @@ public class OrderService {
             styles.add(s.getStyleName());
         }
         orderDetailDTO.setStyleSet(styles);
+
         //occasionSet
         Set<String> occs = new HashSet<>(Arrays.asList(o.getOccasions().split(",")));
         orderDetailDTO.setOccasionSet(occs);
+        orderDetailDTO.setIsAccept(o.getIsAccept());
+        orderDetailDTO.setOrderStatus(o.getOrderStatus());
 
-        o.setRead(true);
         orderRepository.save(o);
         return orderDetailDTO;
     }
+
+    public void actionOrder(User user, Long orderId, int isAccept) {
+        if (!user.getRole().getName().equals("Stylist")) {
+            throw new Rest401Exception("Customer cannot accept or refuse order");
+        }
+        Optional<Orders> op = orderRepository.findById(orderId);
+        if (!op.isPresent()) {
+            throw new Rest404Exception("Not found the order");
+        }
+        Orders o = op.get();
+        //check user identity
+        if (!o.getCustomer().getUser().getId().equals(user.getId())
+                && !o.getStylist().getUser().getId().equals(user.getId())) {
+            throw new Rest401Exception("Cannot view other users' orders");
+        }
+
+        o.setIsAccept(isAccept);
+        if(isAccept==0) {
+            o.setOrderStatus(2);
+        }else if(isAccept==1){
+            o.setOrderStatus(3);
+        }
+        orderRepository.save(o);
+    }
+
+    public void payOrder(User user, Long orderId) {
+        if (!user.getRole().getName().equals("Customer")) {
+            throw new Rest401Exception("Stylist cannot pay an order");
+        }
+        Optional<Orders> op = orderRepository.findById(orderId);
+        if (!op.isPresent()) {
+            throw new Rest404Exception("Not found the order");
+        }
+        Orders o = op.get();
+        //check user identity
+        if (!o.getCustomer().getUser().getId().equals(user.getId())
+                && !o.getStylist().getUser().getId().equals(user.getId())) {
+            throw new Rest401Exception("Cannot view other users' orders");
+        }
+
+        o.setOrderStatus(4);
+        orderRepository.save(o);
+    }
+
+    public void confirmOrder(User user, Long orderId, int rate, String comment) {
+        if (!user.getRole().getName().equals("Customer")) {
+            throw new Rest401Exception("Stylist cannot confirm and rate an order");
+        }
+        Optional<Orders> op = orderRepository.findById(orderId);
+        if (!op.isPresent()) {
+            throw new Rest404Exception("Not found the order");
+        }
+        Orders o = op.get();
+        //check user identity
+        if (!o.getCustomer().getUser().getId().equals(user.getId())
+                && !o.getStylist().getUser().getId().equals(user.getId())) {
+            throw new Rest401Exception("Cannot view other users' orders");
+        }
+        o.setRate(rate);
+        o.setComment(comment);
+        o.setOrderStatus(6);
+        orderRepository.save(o);
+    }
+
 }

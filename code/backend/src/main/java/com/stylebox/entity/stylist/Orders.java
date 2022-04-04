@@ -57,8 +57,24 @@ public class Orders {
     @Column(name = "cloth_price_high")
     private int clothPriceHigh;
 
-    @Column(name = "is_read")
-    private boolean isRead = false;
+    @Column(name = "stylist_read")
+    private boolean stylistRead = false;
+
+    @Column(name = "customer_read")
+    private boolean customerRead = false;
+
+    @Column(name = "order status")
+    private int orderStatus;
+
+    @Column(name = "is accept")
+    private int isAccept;
+
+    @Column(name = "rate")
+    private int rate;
+
+    @Column(name = "comment")
+    private String comment;
+
 
     @ManyToOne(targetEntity = CustomerInformation.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_info_id", referencedColumnName = "id")

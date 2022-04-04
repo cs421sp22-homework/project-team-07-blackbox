@@ -41,4 +41,37 @@ public class OrderController {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return orderService.getOrderDetail(user, orderId);
     }
+
+    @GetMapping("/order/action/{orderId}")
+    public void actionOrder(HttpServletRequest request,
+                                     @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId,
+                                     @RequestParam(value = "isAccept", required = false, defaultValue = "-1") int isAccept
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.actionOrder(user, orderId, isAccept);
+    }
+
+    @GetMapping("/order/payment/{orderId}")
+    public void payOrder(HttpServletRequest request,
+                            @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.payOrder(user, orderId);
+    }
+
+    @GetMapping("/order/confim/{orderId}")
+    public void confirmOrder(HttpServletRequest request,
+                         @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId,
+                         @RequestParam(value = "rate", required = false, defaultValue = "-1") int rate,
+                         @RequestParam(value = "comment", required = false, defaultValue = "") String comment
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.confirmOrder(user,orderId, rate, comment);
+    }
+
+
+
+
+
+
 }
