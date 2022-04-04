@@ -13,14 +13,13 @@ import Quiz from "./styleBox/quiz/Quiz";
 import OrderList from "./styleBox/order/OrderList";
 import OrderDetail from "styleBox/order/OrderDetail";
 import ReadStylist from "./styleBox/customer/ReadStylist";
-import Test from "demos/EventLandingPage";
+import Test from "components/blogs/PopularAndRecentBlogPosts.js";
 import CreateOrder from "styleBox/order/CreateOrder";
 import StylistList from "./styleBox/stylist/StylistList";
 import FollowStylist from"./styleBox/customer/followStylistList"
-import NavBarCustomer from "./styleBox/navBar_footer/NavBarCustomer";
-import NavBarStylist from "./styleBox/navBar_footer/NavBarStylist";
-import DropDown from "./styleBox/navBar_footer/Dropdown"
 import PayOrder from "./styleBox/order/PayOrder"
+import CreateReport from "styleBox/order/CreateReport";
+import ViewReport from "./styleBox/order/ViewReport";
 
 
 export default function App() {
@@ -47,6 +46,8 @@ export default function App() {
               <AuthenticatedRoute path="/stylist/homepage" component={ReadStylist}/>
               <AuthenticatedRoute path="/order" component={CreateOrder}/>
               <AuthenticatedRoute path="/payOrder" component={PayOrder}/>
+              <AuthenticatedRoute path="/createReport" component={CreateReport}/>
+              <AuthenticatedRoute path="/viewReport" component={ViewReport}/>
           </Switch>
       </>
   </Router>
