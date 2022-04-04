@@ -126,9 +126,12 @@ class CreateReportForm extends Component{
     .then((response)=>{
       console.log(response.data);
       alert("Create report success!");
-      // this.props.history.push({
-      //   pathname:'/orders',
-      // })
+      this.props.history.push({
+        pathname:'/orderDetail',
+        query: {
+            id: this.state.orderId,
+        }
+      })
     })
     .catch((error) => {
       console.log(error.response);
