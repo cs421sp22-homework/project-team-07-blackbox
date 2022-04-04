@@ -147,7 +147,7 @@ class CreateReportForm extends Component{
             <h2 align="center">Create an Report</h2>        
             <form>
             <Column>
-            <Label >Order number: 0001</Label>
+            <Label >Order number: {this.props.location.query.id}</Label>
             </Column>
             <TwoColumn>
                 <Column>

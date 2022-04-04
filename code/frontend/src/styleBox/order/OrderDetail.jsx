@@ -35,8 +35,8 @@ class OrderDetail extends Component {
             shoeSize: "11",
             orderId: this.props.location.query.id,
             isWindowed: false,
-            isAccept: 2,
-            orderStatus: 3
+            isAccept: 1,
+            orderStatus: 4
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
@@ -73,38 +73,41 @@ class OrderDetail extends Component {
             this.setState({isWindowed: false, isAccept: 1});
             OrderService.manageOrder(this.state.orderId, 1);
         }
+        else if(event.currentTarget.getAttribute('name') === "createReportBtn"){
+            this.props.history.push({pathname:"/createReport", query: { id : this.state.orderId, styName: this.state.cusNickname}})
+        }
     }
 
     componentDidMount() {
-        OrderService.getOrderDetail(this.state.orderId)
-            .then((response) => {
-                if (response.status === 200) {
-                    this.setState({
-                        cusNickname: response.data.cusNickname,
-                        orderPrice: response.data.orderPrice,
-                        styleSet: response.data.styleSet,
-                        occasionSet: response.data.occasionSet,
-                        description: response.data.description,
-                        clothPriceLow: response.data.clothPriceLow,
-                        clothPriceHigh: response.data.clothPriceHigh,
-                        time: response.data.time,
-                        gender: response.data.gender,
-                        ftSize: response.data.ftSize,
-                        inSize: response.data.inSize,
-                        weight: response.data.weight,
-                        shirtSize: response.data.shirtSize,
-                        bottomSize: response.data.bottomSize,
-                        jeanSize: response.data.jeanSize,
-                        shoeSize: response.data.shoeSize,
-                        isAccept: response.data.isAccept,
-                        orderStatus: response.data.orderStatus
-                    })
+        // OrderService.getOrderDetail(this.state.orderId)
+        //     .then((response) => {
+        //         if (response.status === 200) {
+        //             this.setState({
+        //                 cusNickname: response.data.cusNickname,
+        //                 orderPrice: response.data.orderPrice,
+        //                 styleSet: response.data.styleSet,
+        //                 occasionSet: response.data.occasionSet,
+        //                 description: response.data.description,
+        //                 clothPriceLow: response.data.clothPriceLow,
+        //                 clothPriceHigh: response.data.clothPriceHigh,
+        //                 time: response.data.time,
+        //                 gender: response.data.gender,
+        //                 ftSize: response.data.ftSize,
+        //                 inSize: response.data.inSize,
+        //                 weight: response.data.weight,
+        //                 shirtSize: response.data.shirtSize,
+        //                 bottomSize: response.data.bottomSize,
+        //                 jeanSize: response.data.jeanSize,
+        //                 shoeSize: response.data.shoeSize,
+        //                 isAccept: response.data.isAccept,
+        //                 orderStatus: response.data.orderStatus
+        //             })
                         
-                }
-            })
-            .catch((error) => {
-                console.log(error.response.data)
-            })
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log(error.response.data)
+        //     })
     }
 
     render() {
@@ -170,6 +173,13 @@ class OrderDetail extends Component {
                                             onClick={this.btnPressed}>   
                                                 Pay
                                             </button>
+                                        : this.state.orderStatus === 4 && (this.checkCustomer)?
+                                        <button type="button"
+                                        name='createReportBtn'
+                                        className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                        onClick={this.btnPressed}>   
+                                            Create Report
+                                        </button>
                                         : <div> </div>
                                     }
 
