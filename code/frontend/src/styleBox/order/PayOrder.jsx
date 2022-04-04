@@ -15,9 +15,11 @@ class PayOrder extends Component {
         super(props);
 
         this.state = {
-            cusName: "sample xxx",
             designFee: 100,
-            stylistName: "my stylist"
+            stylistName: this.props.location.query.styName,
+            orderId: this.props.location.query.id,
+            lowPrice: this.props.location.query.lowPrice,
+            highPrice: this.props.location.query.highPrice 
         }
 
         this.payBtnPressed = this.payBtnPressed.bind(this)
@@ -36,7 +38,7 @@ class PayOrder extends Component {
                 <Container>
                 <Content>
                     <div className="hidden sm:block p-10" aria-hidden="true">
-                        <h2 className="font-semibold text-2xl px-5 py-5 text-center">Pay Your Order # </h2>
+                        <h2 className="font-semibold text-2xl px-5 py-5 text-center">Pay Your Order # {this.state.orderId}</h2>
                         <div className="border-t text-center border-gray-300" />
                     </div>
 
@@ -47,13 +49,11 @@ class PayOrder extends Component {
                                 <h3 className="text-lg font-medium leading-6 text-gray-900">Payment Summary</h3>
                                 <p className="mt-1 text-xs text-gray-600">&#8194;(Check your order information and enter payment method.)</p>
                                 <div className='mb-3 mt-5 shadow rounded-md'>
-                                    <Label>&#8194; Customer name</Label>
-                                    <p className='m-3 text-sm font-medium text-gray-700'> &#8194; {this.state.cusName}</p>
                                     <Label>&#8194; Design fee</Label>
                                     <p className='m-3 text-sm font-medium text-gray-700'> &#8194; $ {this.state.designFee} </p>
                                     <Label>&#8194; Assigned stylist</Label>
                                     <p className='m-3 text-sm font-medium text-gray-700'> &#8194; {this.state.stylistName} </p>
-                                    <Label>&#8194; Total clothes cost </Label>
+                                    <Label>&#8194; Total clothes cost: range ({this.state.lowPrice} - {this.state.highPrice}) </Label>
                                     <p className='m-3 text-sm font-medium text-gray-700 pb-3'> &#8194; (- - - NA, only pay the design fee here - - -) </p>
                                 </div>
                                 

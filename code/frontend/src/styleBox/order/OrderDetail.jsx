@@ -35,7 +35,8 @@ class OrderDetail extends Component {
             shoeSize: "11",
             orderId: this.props.location.query.id,
             isWindowed: false,
-            isAccept: 2
+            isAccept: 2,
+            orderStatus: 3
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
@@ -56,6 +57,9 @@ class OrderDetail extends Component {
     btnPressed(event){
         if(event.currentTarget.getAttribute('name') === "manageBtn"){
             this.setState({isWindowed: true});
+        }
+        else if(event.currentTarget.getAttribute('name') === "payBtn"){
+            this.props.history.push({pathname:"/payOrder", query: { id : this.state.orderId, lowPrice: this.state.clothPriceLow, highPrice: this.state.clothPriceHigh, styName: this.state.cusNickname}})
         }
         else if(event.currentTarget.getAttribute('name') === "cancelBtn"){
             this.setState({isWindowed: false});
@@ -92,7 +96,8 @@ class OrderDetail extends Component {
                         bottomSize: response.data.bottomSize,
                         jeanSize: response.data.jeanSize,
                         shoeSize: response.data.shoeSize,
-                        isAccept: response.data.isAccept
+                        isAccept: response.data.isAccept,
+                        orderStatus: response.data.orderStatus
                     })
                         
                 }
@@ -150,6 +155,7 @@ class OrderDetail extends Component {
                                 <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
                                     <div></div>
+                                    
                                     {this.state.isAccept === 2 && (!this.checkCustomer)? 
                                         <button type="button"
                                                 name='manageBtn'
@@ -157,8 +163,16 @@ class OrderDetail extends Component {
                                                 onClick={this.btnPressed}>   
                                                     Manage
                                         </button>
+                                        : this.state.orderStatus === 3 && (this.checkCustomer)?
+                                            <button type="button"
+                                            name='payBtn'
+                                            className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                            onClick={this.btnPressed}>   
+                                                Pay
+                                            </button>
                                         : <div> </div>
-                                        }
+                                    }
+
                                     <button onClick={this.backToOrders} type="button"
                                             className="m-5 p-2 bg-gray-200 text-gray-700 text-base leading-tight rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Back
                                         to Orders
