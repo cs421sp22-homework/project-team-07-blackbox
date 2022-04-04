@@ -66,78 +66,34 @@ class CreateReportForm extends Component{
       
     }
     
-    this.submitInfo = this.submitInfo.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.back = this.back.bind(this)
-    this.onDropOutfit = this.onDropOutfit.bind(this)
-    this.setItems = this.setItems.bind(this)
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    ReportService.viewReport(this.props.orderId, info) 
+    ReportService.viewReport(this.state.orderId) 
     .then((response)=>{
       console.log(response.data);
-      alert("Create order success!");
-      this.props.history.push({
-        pathname:'/orders',
+      // alert("Load report success!");
+      this.setState({
+        outfitImage: response.data.outfitImage,
+        idea: response.data.idea,
+        items: response.data.items,
       })
     })
     .catch((error) => {
       console.log(error.response);
-      alert("Create order failed. Please try again.");
-      // this.props.history.push("/");
-    })
-  }
-
-  handleChange(event){
-    this.setState({
-      [event.target.name] : event.target.value
+      alert("Load report failed. Please try again.");
     })
   }
 
   back(){
-    // this.props.history.push({
-    //     pathname:'/stylist/homepage',
-    //     query: {
-    //         stylistId: this.props.location.state.stylistId,
-    //     }
-    // })
-    console.log(this.state.outfitImage)
-    console.log(this.state.items)
-  }
-
-  onDropOutfit(pictureFiles, pictureDataURLs){
-    this.setState({
-      outfitImage: pictureFiles
-    });
-    
-  }
-
-  setItems(allItems){
-    this.setState({
-      items:allItems
+    this.props.history.push({
+      pathname:'/orderDetail',
+      query: {
+          id: this.state.orderId,
+      }
     })
-  }
-
-  submitInfo(event){
-    let info = {
-      outfitImage: this.state.outfitImage,
-      idea: this.state.idea,
-      items: this.state.items.map((item)=>{
-        var newItem = {
-          itemsId: item.itemsId,
-		      itemName: item.itemName,
-		      link: item.link,
-		      itemImage: item.itemImage,
-        }
-        return newItem
-      }),
-    }
-    event.preventDefault();
-    console.log(info)
-
-    
   }
 
   render(){
@@ -150,26 +106,26 @@ class CreateReportForm extends Component{
             <h2 align="center">Outfit Report</h2>        
             <form>
             <Column>
-            <Label >Order number: 0001</Label>
+            <Label >Order number: {this.state.orderId}</Label>
             </Column>
             <TwoColumn>
                 <Column>
                   <Label >Stylist Name: stylist1</Label>
                   <Label >Stylist ID: 0001</Label>
+                  {/* <Label >Stylist Name: {this.props.stylistName}</Label>
+                  <Label >Stylist ID: {this.props.stylistId}</Label> */}
                 </Column>
                 <Column>
                   <Label ></Label>
                   <Label >Customer Name: customer1</Label>
                   <Label >Customer ID: 0002</Label>
+                  {/* <Label >Customer Name: {this.props.customerName}</Label>
+                  <Label >Customer ID: {this.props.customerId}</Label> */}
                 </Column>
             </TwoColumn>
                 <Column>
-                    <ViewOutfit/>
-                    <ViewItems/>
-                  <InputContainer>
-                    <Label>Items for Outfit:</Label>
-                    <TableDemo setItems={this.setItems}/>
-                  </InputContainer>
+                    <ViewOutfit outfitImage={this.state.outfitImage} idea={this.state.idea}/>
+                    <ViewItems items={this.state.items}/>
 
                 </Column>
             </form>

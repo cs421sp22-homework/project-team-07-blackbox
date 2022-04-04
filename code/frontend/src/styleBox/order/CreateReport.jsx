@@ -82,14 +82,14 @@ class CreateReportForm extends Component{
   }
 
   back(){
-    // this.props.history.push({
-    //     pathname:'/stylist/homepage',
-    //     query: {
-    //         stylistId: this.props.location.state.stylistId,
-    //     }
-    // })
-    console.log(this.state.outfitImage)
-    console.log(this.state.items)
+    this.props.history.push({
+        pathname:'/orderDetail',
+        query: {
+            id: this.state.orderId,
+        }
+    })
+    // console.log(this.state.outfitImage)
+    // console.log(this.state.items)
   }
 
   onDropOutfit(pictureFiles, pictureDataURLs){
@@ -122,13 +122,13 @@ class CreateReportForm extends Component{
     event.preventDefault();
     console.log(info)
 
-    ReportService.createReport(this.props.orderId, info) 
+    ReportService.createReport(this.state.orderId, info) 
     .then((response)=>{
       console.log(response.data);
-      alert("Create order success!");
-      this.props.history.push({
-        pathname:'/orders',
-      })
+      alert("Create report success!");
+      // this.props.history.push({
+      //   pathname:'/orders',
+      // })
     })
     .catch((error) => {
       console.log(error.response);
@@ -153,11 +153,15 @@ class CreateReportForm extends Component{
                 <Column>
                   <Label >Stylist Name: stylist1</Label>
                   <Label >Stylist ID: 0001</Label>
+                  {/* <Label >Stylist Name: {this.props.stylistName}</Label>
+                  <Label >Stylist ID: {this.props.stylistId}</Label> */}
                 </Column>
                 <Column>
                   <Label ></Label>
                   <Label >Customer Name: customer1</Label>
                   <Label >Customer ID: 0002</Label>
+                  {/* <Label >Customer Name: {this.props.customerName}</Label>
+                  <Label >Customer ID: {this.props.customerId}</Label> */}
                 </Column>
               </TwoColumn>
                 <Column>

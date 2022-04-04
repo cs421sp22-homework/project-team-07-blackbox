@@ -87,20 +87,28 @@ const recentPosts = [
 ]
 
 class ViewItems extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+    }
+  }
+
   render(){
   return (
     <Container>
       <ContentWithPaddingXl>
           <RecentPostsContainer>
-            <Heading>Recent Posts</Heading>
+            <Heading>Items</Heading>
             <PostsContainer>
-              {recentPosts.map((post, index) => (
-              <Post key={index} href={post.url} className="group">
+              {this.props.items.map((item, index) => (
+              <Post key={index} href={item.link} className="group">
                 <PostTextContainer>
-                  <Title>{post.title}</Title>
-                  <AuthorName>{post.authorName}</AuthorName>
+                  <div>{index+1}</div>
+                  <Title>{item.itemName}</Title>
+                  <AuthorName>{item.itemId}</AuthorName>
                 </PostTextContainer>
-                <Image imageSrc={post.postImageSrc} />
+                <Image imageSrc={item.itemImage} />
               </Post>
               ))}
             </PostsContainer>

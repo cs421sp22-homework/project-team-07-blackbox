@@ -85,32 +85,18 @@ class ViewOutfit extends Component{
   render(){
   return (
     <Container>
-      {/* <SingleColumn> */}
-        {/* <HeadingInfoContainer>
-          <HeadingTitle>Popular Events</HeadingTitle>
-          <HeadingDescription>
-            Here are some of the most popular events in New York City curated by professionals.
-          </HeadingDescription>
-        </HeadingInfoContainer> */}
-
         <Content>
-          {cards.map((card, i) => (
-            <Card key={i} reversed={i % 2 === 1}>
-              <Image imageSrc={card.imageSrc} />
+          {/* {cards.map((card, i) => ( */}
+            <Card reversed={false}>
+              <Image imageSrc={this.props.outfitImage} />
               <Details>
-                <Subtitle>{card.subtitle}</Subtitle>
-                <Title>{card.title}</Title>
-                <Description>{card.description}</Description>
-                <Link href={card.url}>See Event Details</Link>
+                {/* <Subtitle>{card.subtitle}</Subtitle> */}
+                <Title>Outfit Design</Title>
+                <Description>{this.props.idea}</Description>
+                {/* <Link href={card.url}>See Event Details</Link> */}
               </Details>
             </Card>
-          ))}
         </Content>
-      {/* </SingleColumn> */}
-      {/* <SvgDotPattern1 />
-      <SvgDotPattern2 />
-      <SvgDotPattern3 />
-      <SvgDotPattern4 /> */}
     </Container>
   );}
 };
