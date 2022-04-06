@@ -35,8 +35,8 @@ class OrderDetail extends Component {
             shoeSize: "11",
             orderId: this.props.location.query.id,
             isWindowed: false,
-            isAccept: 1,
-            orderStatus: 4
+            isAccept: 2,
+            orderStatus: 5
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
@@ -76,9 +76,16 @@ class OrderDetail extends Component {
         else if(event.currentTarget.getAttribute('name') === "createReportBtn"){
             this.props.history.push({pathname:"/createReport", query: { id : this.state.orderId, styName: this.state.cusNickname}})
         }
+        else if(event.currentTarget.getAttribute('name') === "confirmBtn"){
+            this.props.history.push({pathname:"/confirmOrder", query: { id : this.state.orderId }})
+        }
+        else if(event.currentTarget.getAttribute('name') === "viewReportBtn"){
+            this.props.history.push({pathname:"/viewReport", query: { id : this.state.orderId }})
+        }
     }
 
     componentDidMount() {
+        console.log(this.state.orderStatus)
         // OrderService.getOrderDetail(this.state.orderId)
         //     .then((response) => {
         //         if (response.status === 200) {
@@ -157,29 +164,62 @@ class OrderDetail extends Component {
                                     # {this.state.orderId} Detail</h2>
                                 <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
-                                    <div></div>
                                     
-                                    {this.state.isAccept === 2 && (!this.checkCustomer)? 
-                                        <button type="button"
-                                                name='manageBtn'
-                                                className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    {// cust & case 5: view report
+                                        this.state.orderStatus === 5 && (this.checkCustomer)?
+                                            <button type="button"
+                                                name='viewReportBtn'
+                                                className="m-5 p-2 bg-yellow-500 text-white text-base leading-tight rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                                 onClick={this.btnPressed}>   
-                                                    Manage
-                                        </button>
+                                                    View Report
+                                            </button> 
+                                            : <div></div>}
+                                        
+                                    
+                                    
+                                    { /* button part: based on order status */
+                                        // stylist & case 1: wait sty to accept/reject
+                                        this.state.isAccept === 2 && this.state.orderStatus === 1 && (!this.checkCustomer)?
+                                            <button type="button"
+                                                    name='manageBtn'
+                                                    className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                    onClick={this.btnPressed}>   
+                                                        Manage
+                                            </button>
+                                        
+                                        // all & case 2: stylist reject, don't show
+                                        : this.state.orderStatus === 2 ? <div> </div>
+
+                                        // customer & case 3: stylist accept, wait cus to pay
                                         : this.state.orderStatus === 3 && (this.checkCustomer)?
                                             <button type="button"
-                                            name='payBtn'
-                                            className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                                            onClick={this.btnPressed}>   
-                                                Pay
+                                                name='payBtn'
+                                                className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                onClick={this.btnPressed}>   
+                                                    Pay
                                             </button>
-                                        : this.state.orderStatus === 4 && (this.checkCustomer)?
-                                        <button type="button"
-                                        name='createReportBtn'
-                                        className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                                        onClick={this.btnPressed}>   
-                                            Create Report
-                                        </button>
+
+                                        // customer & case 4: cus pay, wait sty to create report
+                                        : this.state.orderStatus === 4 && (!this.checkCustomer)?
+                                                <button type="button"
+                                                    name='createReportBtn'
+                                                    className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                    onClick={this.btnPressed}>   
+                                                        Create Report
+                                                </button>
+
+                                        // customer & case 5: sty create, wait cus to rate
+                                        : this.state.orderStatus === 5 && (this.checkCustomer)?
+                                            <button type="button"
+                                                name='ConfirmBtn'
+                                                className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                onClick={this.btnPressed}>   
+                                                    Confirm and Rate
+                                            </button>
+
+                                        // all & case 6: cus rate, finish
+                                        : this.state.orderStatus === 6 ? <div> </div> 
+                                        
                                         : <div> </div>
                                     }
 
