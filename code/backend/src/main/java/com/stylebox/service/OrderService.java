@@ -133,9 +133,7 @@ public class OrderService {
             orderBrowseDTO.setTime(o.getLastEditDatetime());
             //orderid
             orderBrowseDTO.setOrderId(o.getId());
-            orderBrowseDTO.setOrderStatus(o.getOrderStatus());
             orderBrowseDTOS.add(orderBrowseDTO);
-
         }
         orderListDTO.setTotalPages(totalPages);
         orderListDTO.setData(orderBrowseDTOS);
@@ -153,6 +151,12 @@ public class OrderService {
         if (!o.getCustomer().getUser().getId().equals(user.getId())
                 && !o.getStylist().getUser().getId().equals(user.getId())) {
             throw new Rest401Exception("Cannot view other users' orders");
+        }
+
+        if (user.getRole().getName().equals("Customer")) {
+            o.setCustomerRead(true);
+        }else if(user.getRole().getName().equals("Stylist")){
+            o.setStylistRead(true);
         }
 
         OrderDetailDTO orderDetailDTO = modelMapper.map(o.getCustomer(), OrderDetailDTO.class);
@@ -220,7 +224,7 @@ public class OrderService {
         orderRepository.save(o);
     }
 
-    public void confirmOrder(User user, Long orderId, int rate, String comment) {
+    public void confirmOrder(User user, Long orderId, OrderConfirmDTO orderConfirmDTO) {
         if (!user.getRole().getName().equals("Customer")) {
             throw new Rest401Exception("Stylist cannot confirm and rate an order");
         }
@@ -234,8 +238,7 @@ public class OrderService {
                 && !o.getStylist().getUser().getId().equals(user.getId())) {
             throw new Rest401Exception("Cannot view other users' orders");
         }
-        o.setRate(rate);
-        o.setComment(comment);
+        modelMapper.map(orderConfirmDTO, o);
         o.setOrderStatus(6);
         orderRepository.save(o);
     }

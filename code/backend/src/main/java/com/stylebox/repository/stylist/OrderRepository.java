@@ -10,4 +10,5 @@ import org.springframework.lang.Nullable;
 
 public interface OrderRepository extends JpaRepository<Orders, Long>, JpaSpecificationExecutor<Orders> {
     Page<Orders> findAll(@Nullable Specification<Orders> spec, Pageable pageable);
+
 }

@@ -1,5 +1,6 @@
 package com.stylebox.controller;
 
+import com.stylebox.dto.Order.OrderConfirmDTO;
 import com.stylebox.dto.Order.OrderCreateDTO;
 import com.stylebox.dto.Order.OrderDetailDTO;
 import com.stylebox.dto.Order.OrderListDTO;
@@ -37,39 +38,38 @@ public class OrderController {
     }
 
     @GetMapping("/orderDetail/{id}")
-    public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId) {
+    public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId
+    ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return orderService.getOrderDetail(user, orderId);
     }
 
-    @GetMapping("/order/action/{orderId}")
+    @PostMapping("/order/action/{orderId}")
     public void actionOrder(HttpServletRequest request,
-                                     @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId,
-                                     @RequestParam(value = "isAccept", required = false, defaultValue = "-1") int isAccept
+                                    @RequestParam(value = "isAccept", required = false, defaultValue = "-1") int isAccept,
+                                    @PathVariable(name = "orderId") Long orderId
+
     ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         orderService.actionOrder(user, orderId, isAccept);
     }
 
-    @GetMapping("/order/payment/{orderId}")
+    @PostMapping("/order/payment/{orderId}")
     public void payOrder(HttpServletRequest request,
-                            @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId
+                         @PathVariable(name = "orderId") Long orderId
     ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         orderService.payOrder(user, orderId);
     }
 
-    @GetMapping("/order/confim/{orderId}")
+    @PostMapping("/order/confirm/{orderId}")
     public void confirmOrder(HttpServletRequest request,
-                         @RequestParam(value = "orderId", required = false, defaultValue = "-1") Long orderId,
-                         @RequestParam(value = "rate", required = false, defaultValue = "-1") int rate,
-                         @RequestParam(value = "comment", required = false, defaultValue = "") String comment
+                             @PathVariable(name = "orderId") Long orderId,
+                             @RequestBody OrderConfirmDTO orderConfirmDTO
     ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
-        orderService.confirmOrder(user,orderId, rate, comment);
+        orderService.confirmOrder(user,orderId, orderConfirmDTO);
     }
-
-
 
 
 

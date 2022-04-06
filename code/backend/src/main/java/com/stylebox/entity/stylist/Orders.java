@@ -57,16 +57,19 @@ public class Orders {
     @Column(name = "cloth_price_high")
     private int clothPriceHigh;
 
-    @Column(name = "stylist_read")
-    private boolean stylistRead = false;
-
     @Column(name = "customer_read")
     private boolean customerRead = false;
 
-    @Column(name = "order status")
+    @Column(name = "stylist_read")
+    private boolean stylistRead = false;
+
+    @Column(name = "is_read")
+    private boolean isRead = false;
+
+    @Column(name = "order_status")
     private int orderStatus;
 
-    @Column(name = "is accept")
+    @Column(name = "is_accept")
     private int isAccept;
 
     @Column(name = "rate")
