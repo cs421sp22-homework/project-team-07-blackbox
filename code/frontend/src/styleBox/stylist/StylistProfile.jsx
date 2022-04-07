@@ -5,9 +5,6 @@ import StylistProfileImageIntro from "components/testimonials/StylistProfileImag
 import StylistProfilePastDesign from "components/testimonials/StylistProfileTwoColumnWithImageAndProfilePictureReview.js"
 import StylistService from "api/styleBox/StylistService";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
-import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
-import NavBarCustomer from "../navBar_footer/NavBarCustomer";
-import NavBarStylist from "styleBox/navBar_footer/NavBarStylist";
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 
 class StylistProfile extends Component{
@@ -31,12 +28,12 @@ class StylistProfile extends Component{
         followerNum: 9000,
         likeNum: 3000
       }],
-      display: [{image: "", idea: ""}]
+      display: [{image: "https://media.glamour.com/photos/607f272348c995b3b00ffd38/1:1/w_120,c_limit/terry%20cloth%20trend.jpg", idea: "22"}, {image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80", idea: "111"}]
     }
   }
 
   componentDidMount(){
-
+    /*
     StylistService.getHomepage()
     .then(response=>this.setState({
       testimonials: [{
@@ -56,6 +53,7 @@ class StylistProfile extends Component{
       display: response.data.display
     }))
     .catch(error => console.log(error.response))
+    */
   }
 
   render() {
