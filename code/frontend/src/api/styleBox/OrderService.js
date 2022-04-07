@@ -1,12 +1,11 @@
 import axios from 'axios'
 import {API_URL} from '../../Constants'
-
 axios.defaults.withCredentials=true
 
 class OrderService {
     // Get order list
     getOrderList(pageNum, sortValue) {
-        return axios.get(`${API_URL}/orders`, {params: {page: pageNum, sort: sortValue, limit: 3}})
+        return axios.get(`${API_URL}/orders`, {params: {page: pageNum, sort: sortValue}})
     }
 
     // Get order detail
@@ -28,6 +27,11 @@ class OrderService {
 
     getNotification() {
         return axios.get(`${API_URL}/notification`, {withCredentials: true})
+    }
+
+    manageOrder(orderIdV, isAcceptV){
+        console.log(isAcceptV)
+        return axios.post(`${API_URL}/order/action/${orderIdV}`, {params: {orderId: orderIdV, isAccept: isAcceptV}})
     }
 
 }

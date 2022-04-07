@@ -15,8 +15,8 @@ const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-med
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const MainContent = tw.div`mt-12 flex flex-col items-center`;
-const TableRow = tw.th`text-sm font-medium text-gray-900 px-6 py-4 text-center`;
-const TableValue = tw.td`text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap`;
+const TableRow = tw.th`text-xs font-medium text-gray-900 px-6 py-4 text-center`;
+const TableValue = tw.td`text-xs text-gray-900 font-light px-6 py-4 whitespace-nowrap`;
 const ViewBtn = tw.button`inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out`;
 
 class OrderList extends Component {
@@ -86,29 +86,26 @@ class OrderList extends Component {
         }
     }
 
-    showOrderList(pageValue, sortValue) {
+    showOrderList(pageValue, sortValue){
         OrderService.getOrderList(pageValue, sortValue)
-            .then(response => {
-                console.log(response)
-                this.setState({
-                    orderlst: response.data.data,
-                    totalPage: response.data.totalPages
-                })
-            })
-            .catch(error => console.log(error.response))
+        .then(response => this.setState({
+            orderlst: response.data.data,
+            totalPage: response.data.totalPages
+        }))
+        .catch(error => console.log(error.response))
     }
 
-    componentDidMount() {
+    componentDidMount(){
         this.showOrderList(0, "")
     }
 
-    viewOrder(orderId) {
+    viewOrder(orderId){
         // console.log(orderId)
-        this.props.history.push({pathname: "/orderDetail", query: {id: orderId}})
+        this.props.history.push({pathname:"/orderDetail", query: { id : orderId }})
     }
 
-    showDescription(info) {
-        if (info.length > 10) {
+    showDescription(info){
+        if(info.length > 10){
             return info.substring(0, 9) + " ..."
         }
         return info
@@ -144,10 +141,10 @@ class OrderList extends Component {
                 <NavBarAuthenticated/>
                 <Container>
                     <Content>
-                        <MainContainer>
-                            <MainContent>
-                                <h2 className="text-3xl font-bold mt-0 mb-6">My Order</h2>
-                                <h5 className="text-xl font-bold mb-8">View your order list</h5>
+                    <MainContainer>
+                    <MainContent>
+                        <h2 className="text-3xl font-bold mt-0 mb-6">My Order</h2>
+                        <h5 className="text-xl font-bold mb-8">View your order list</h5>
 
                                 <div
                                     className="flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-6 lg:px-8 overflow-hidden">
