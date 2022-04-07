@@ -38,7 +38,7 @@ class OrderList extends Component {
                 time: "2022/3/5",
                 orderId: 1,
                 isread: false,
-                orderStatus: 0
+                orderStatus: 0,
             },
                 {
                     nickname: "xxx",
@@ -51,7 +51,7 @@ class OrderList extends Component {
                     time: "2022/3/9",
                     orderId: 2,
                     isread: true,
-                    orderStatus: 0
+                    orderStatus: 0,
                 }]
         }
         this.sortBtn = this.sortBtn.bind(this)
@@ -99,9 +99,9 @@ class OrderList extends Component {
         this.showOrderList(0, "")
     }
 
-    viewOrder(orderId){
+    viewOrder(orderId, status){
         // console.log(orderId)
-        this.props.history.push({pathname:"/orderDetail", query: { id : orderId }})
+        this.props.history.push({pathname:"/orderDetail", query: { id : orderId, orderStatus : status}})
     }
 
     showDescription(info){
@@ -187,7 +187,7 @@ class OrderList extends Component {
                                                 } </TableValue>
                                                 <TableValue>
                                                     <ViewBtn
-                                                        onClick={() => this.viewOrder(order.orderId)}>View</ViewBtn>
+                                                        onClick={() => this.viewOrder(order.orderId, order.orderStatus)}>View</ViewBtn>
                                                     {order.isread ? <div/> : <span className="badge">!</span>}
                                                 </TableValue>
                                             </tr>

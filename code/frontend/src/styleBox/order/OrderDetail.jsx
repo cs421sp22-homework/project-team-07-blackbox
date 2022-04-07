@@ -36,7 +36,7 @@ class OrderDetail extends Component {
             orderId: this.props.location.query.id,
             isWindowed: false,
             isAccept: 2,
-            orderStatus: 5
+            orderStatus: this.props.location.query.orderStatus
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
@@ -45,6 +45,7 @@ class OrderDetail extends Component {
 
     // return user type
     checkCustomer() {
+        console.log("cus??", Cookies.load('role')==='Customer')
         return Cookies.load('role')==='Customer';
     }
 
@@ -77,7 +78,7 @@ class OrderDetail extends Component {
             this.props.history.push({pathname:"/createReport", query: { id : this.state.orderId, styName: this.state.cusNickname}})
         }
         else if(event.currentTarget.getAttribute('name') === "confirmBtn"){
-            this.props.history.push({pathname:"/confirmOrder", query: { id : this.state.orderId }})
+            this.props.history.push({pathname:"/confirmOrder", state: { orderId : this.state.orderId }})
         }
         else if(event.currentTarget.getAttribute('name') === "viewReportBtn"){
             this.props.history.push({pathname:"/viewReport", query: { id : this.state.orderId }})
@@ -86,35 +87,35 @@ class OrderDetail extends Component {
 
     componentDidMount() {
         console.log(this.state.orderStatus)
-        // OrderService.getOrderDetail(this.state.orderId)
-        //     .then((response) => {
-        //         if (response.status === 200) {
-        //             this.setState({
-        //                 cusNickname: response.data.cusNickname,
-        //                 orderPrice: response.data.orderPrice,
-        //                 styleSet: response.data.styleSet,
-        //                 occasionSet: response.data.occasionSet,
-        //                 description: response.data.description,
-        //                 clothPriceLow: response.data.clothPriceLow,
-        //                 clothPriceHigh: response.data.clothPriceHigh,
-        //                 time: response.data.time,
-        //                 gender: response.data.gender,
-        //                 ftSize: response.data.ftSize,
-        //                 inSize: response.data.inSize,
-        //                 weight: response.data.weight,
-        //                 shirtSize: response.data.shirtSize,
-        //                 bottomSize: response.data.bottomSize,
-        //                 jeanSize: response.data.jeanSize,
-        //                 shoeSize: response.data.shoeSize,
-        //                 isAccept: response.data.isAccept,
-        //                 orderStatus: response.data.orderStatus
-        //             })
+        OrderService.getOrderDetail(this.state.orderId)
+            .then((response) => {
+                if (response.status === 200) {
+                    this.setState({
+                        cusNickname: response.data.cusNickname,
+                        orderPrice: response.data.orderPrice,
+                        styleSet: response.data.styleSet,
+                        occasionSet: response.data.occasionSet,
+                        description: response.data.description,
+                        clothPriceLow: response.data.clothPriceLow,
+                        clothPriceHigh: response.data.clothPriceHigh,
+                        time: response.data.time,
+                        gender: response.data.gender,
+                        ftSize: response.data.ftSize,
+                        inSize: response.data.inSize,
+                        weight: response.data.weight,
+                        shirtSize: response.data.shirtSize,
+                        bottomSize: response.data.bottomSize,
+                        jeanSize: response.data.jeanSize,
+                        shoeSize: response.data.shoeSize,
+                        isAccept: response.data.isAccept,
+                        // orderStatus: response.data.orderStatus
+                    })
 
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.log(error.response.data)
-        //     })
+                }
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+            })
     }
 
     render() {
@@ -164,9 +165,9 @@ class OrderDetail extends Component {
                                     # {this.state.orderId} Detail</h2>
                                 <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
-
+                                    {/*{console.log("c?", this.checkCustomer)}*/}
                                     {// cust & case 5: view report
-                                        this.state.orderStatus === 5 && (this.checkCustomer)?
+                                        this.state.orderStatus === 5 && (this.checkCustomer())?
                                             <button type="button"
                                                 name='viewReportBtn'
                                                 className="m-5 p-2 bg-yellow-500 text-white text-base leading-tight rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -179,7 +180,7 @@ class OrderDetail extends Component {
 
                                     { /* button part: based on order status */
                                         // stylist & case 1: wait sty to accept/reject
-                                        this.state.isAccept === 2 && this.state.orderStatus === 1 && (!this.checkCustomer)?
+                                        this.state.isAccept === 2 && this.state.orderStatus === 1 && (!this.checkCustomer())?
                                             <button type="button"
                                                     name='manageBtn'
                                                     className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -191,7 +192,7 @@ class OrderDetail extends Component {
                                         : this.state.orderStatus === 2 ? <div> </div>
 
                                         // customer & case 3: stylist accept, wait cus to pay
-                                        : this.state.orderStatus === 3 && (this.checkCustomer)?
+                                        : this.state.orderStatus === 3 && (this.checkCustomer())?
                                             <button type="button"
                                                 name='payBtn'
                                                 className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -200,7 +201,7 @@ class OrderDetail extends Component {
                                             </button>
 
                                         // customer & case 4: cus pay, wait sty to create report
-                                        : this.state.orderStatus === 4 && (!this.checkCustomer)?
+                                        : this.state.orderStatus === 4 && (!this.checkCustomer())?
                                                 <button type="button"
                                                     name='createReportBtn'
                                                     className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -209,9 +210,9 @@ class OrderDetail extends Component {
                                                 </button>
 
                                         // customer & case 5: sty create, wait cus to rate
-                                        : this.state.orderStatus === 5 && (this.checkCustomer)?
+                                        : this.state.orderStatus === 5 && (this.checkCustomer())?
                                             <button type="button"
-                                                name='ConfirmBtn'
+                                                name='confirmBtn'
                                                 className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                                 onClick={this.btnPressed}>
                                                     Confirm and Rate
@@ -284,7 +285,7 @@ class OrderDetail extends Component {
                                 <div className="block p-6 m-3 rounded-lg shadow-lg bg-gray-100">
                                     <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Customer
                                         Info: </h5>
-                                    {this.checkCustomer
+                                    {this.checkCustomer()
                                         ?
                                         <h5 className="text-gray-900 text-base leading-tight font-medium my-8 mx-10">(This
                                             part is available to your stylist. Customer can look the information from
