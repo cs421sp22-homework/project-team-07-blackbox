@@ -235,9 +235,12 @@ class CustomerProfile extends Component {
                                                         <div className="col-span-6 sm:col-span-3">
                                                             <label htmlFor="first-name"
                                                                    className="block text-sm font-medium text-pink-700">Gender</label>
-                                                            <input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
+                                                            <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
                                                             shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
-                                                                  type="text" value={this.state.gender} name="gender" onChange={this.handleChange}/>
+                                                                    value={this.state.gender} name="gender" onChange={this.handleChange}>
+                                                                <option value="male">male</option>
+                                                                <option value="female">female</option>
+                                                            </select>
                                                         </div>
 
                                                         <div className="col-span-6 sm:col-span-3">
@@ -267,25 +270,46 @@ class CustomerProfile extends Component {
                                                         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                                                             <label htmlFor="region"
                                                                    className="block text-sm font-medium text-pink-700">Shirt Size</label>
-                                                            <input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500
-                                                            block w-full shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
-                                                                   type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>
+                                                            {/*<input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500*/}
+                                                            {/*block w-full shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"*/}
+                                                            {/*       type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>*/}
+                                                            <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
+                                                            shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}>
+                                                                <option value="large">Large</option>
+                                                                <option value="middle">Middle</option>
+                                                                <option value="small">Small</option>
+                                                            </select>
                                                         </div>
 
                                                         <div className="col-span-6 sm:col-span-3 lg:col-span-3">
                                                             <label htmlFor="postal-code"
                                                                    className="block text-sm font-medium text-pink-700">Bottom Size</label>
-                                                            <input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
+                                                            {/*<input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full*/}
+                                                            {/*shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"*/}
+                                                            {/*      type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>*/}
+                                                            <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
                                                             shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
-                                                                  type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>
+                                                                    value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}>
+                                                                <option value="large">Large</option>
+                                                                <option value="middle">Middle</option>
+                                                                <option value="small">Small</option>
+                                                            </select>
                                                         </div>
 
                                                         <div className="col-span-6 sm:col-span-3">
                                                             <label htmlFor="email-address"
                                                                    className="block text-sm font-medium text-pink-700">Jean Size</label>
-                                                            <input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block
-                                                            w-full shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100 bg-gray-100"
-                                                                   type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>
+                                                            {/*<input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block*/}
+                                                            {/*w-full shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100 bg-gray-100"*/}
+                                                            {/*       type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>*/}
+                                                            <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
+                                                            shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}>
+                                                                <option value="large">Large</option>
+                                                                <option value="middle">Middle</option>
+                                                                <option value="small">Small</option>
+                                                            </select>
 
                                                         </div>
 
