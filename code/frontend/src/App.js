@@ -39,7 +39,7 @@ export default function App() {
               <Route path="/stylistList" component={StylistList}/>
               <AuthenticatedRoute path="/quiz" component={Quiz}/>
               <AuthenticatedRoute path="/followStylist" component={FollowStylist}/>
-              <Route path="/stylist/profile" component={StylistProfile}/>
+              <AuthenticatedRoute path="/stylist/profile" component={StylistProfile}/>
               <AuthenticatedRoute path="/customer/profile" component={CustomerProfile}/>
               <AuthenticatedRoute path="/account" component={AccountSetting}/>
               <AuthenticatedRoute path="/orders" component={OrderList}/>

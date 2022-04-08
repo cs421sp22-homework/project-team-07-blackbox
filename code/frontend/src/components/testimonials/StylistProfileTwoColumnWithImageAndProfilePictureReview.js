@@ -160,11 +160,6 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       <Container>
         <Content>
           <HeadingInfo tw="text-center lg:hidden" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
-
-          <div className="mb-20" align="center">
-            <PrimaryButton buttonRounded={true} onClick={this.updateDisplay}>{"Update Your Display"}</PrimaryButton>
-          </div>
-
           <TestimonialsContainer>
             <Testimonials>
               {this.state.isEdit? 
@@ -190,7 +185,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                         <button onClick={() => this.deleteDisplay(testimonial.image)} className="mx-20 my-20 py-3 font-bold rounded bg-pink-600 text-white hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" >{"Delete"}</button>
                       </div>
                   ))}
-                  <form>
+                  <div>
                     <h2 className="font-black tracking-wide text-center"> Add new display below ! </h2>
                       <div className="grid grid-cols-4">
                         <ImageUploader
@@ -208,7 +203,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                         <TextArea name="ideas" onChange={this.handleChange} className="col-span-3" placeholder="Input your design idea here."/>
                       </div>
                       <div align="center"><PrimaryButton buttonRounded={true} onClick={this.submitChange}>{"Submit Your Change"}</PrimaryButton></div>
-                  </form>
+                  </div>
                 </div>
               :
               <Testimonial>
@@ -255,6 +250,10 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
             } 
             </Testimonials>
           </TestimonialsContainer>
+          {!this.state.isEdit ? 
+            <div className="mt-20" align="center">
+              <PrimaryButton buttonRounded={true} onClick={this.updateDisplay}>{"Update Your Display"}</PrimaryButton>
+            </div> : <div></div>}
         </Content>
         <DecoratorBlob1 />
         <DecoratorBlob2 />
