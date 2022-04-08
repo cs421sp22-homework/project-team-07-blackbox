@@ -21,7 +21,7 @@ class StylistProfile extends Component{
         gender: "Female",
         style: ["Casual", "Business"],
         age: 23,
-        userName: "Charlotte Hale",
+        username: "Charlotte Hale",
         email:"Charlotte@stylebox.com",
         facebook:"Charlotte_Stylist",
         rate: 5,
@@ -46,7 +46,7 @@ class StylistProfile extends Component{
         gender: response.data.gender,
         style: response.data.style,
         age: response.data.age,
-        userName: response.data.userName,
+        username: response.data.username,
         email:response.data.email,
         facebook: response.data.facebook,
         rate: response.data.rate,
@@ -56,7 +56,7 @@ class StylistProfile extends Component{
       display: response.data.display
     }))
     .catch(error => console.log(error.response))
-    
+
   }
 
   render() {
