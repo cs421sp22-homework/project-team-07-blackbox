@@ -185,14 +185,20 @@ public class FileService {
     }
 
     public StyleReportDTO getReport(User user, Long orderId){
-        Orders order = orderRepository.getById(orderId);
-        if(!user.getStylistInformation().getOrderSet().contains(order)){
+        Optional<Orders> order = orderRepository.findById(orderId);
+        if (!order.isPresent()) {
+            throw new Rest404Exception("Not found the order");
+        }
+        if(user.getRole().getName().equals("Stylist") && !user.getStylistInformation().getOrderSet().contains(order.get())
+        || user.getRole().getName().equals("Customer") && !user.getCustomerInformation().getOrderSet().contains(order.get())){
             throw new Rest404Exception("You have no right to view this styleReport.");
         }
-
-        StyleReportDTO report = modelMapper.map(order.getStyleReport(), StyleReportDTO.class);
-        report.setStylistId(order.getStylist().getId());
-        report.setStylistName(order.getStylist().getUser().getNickname());
+        if(order.get().getStyleReport()==null){
+            throw new Rest404Exception("The style report is not ready for review.");
+        }
+        StyleReportDTO report = modelMapper.map(order.get().getStyleReport(), StyleReportDTO.class);
+        report.setStylistId(order.get().getStylist().getId());
+        report.setStylistName(order.get().getStylist().getUser().getNickname());
         return report;
     }
 

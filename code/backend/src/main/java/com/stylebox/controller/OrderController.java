@@ -1,5 +1,6 @@
 package com.stylebox.controller;
 
+import com.stylebox.dto.Order.OrderConfirmDTO;
 import com.stylebox.dto.Order.OrderCreateDTO;
 import com.stylebox.dto.Order.OrderDetailDTO;
 import com.stylebox.dto.Order.OrderListDTO;
@@ -37,8 +38,44 @@ public class OrderController {
     }
 
     @GetMapping("/orderDetail/{id}")
-    public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId) {
+    public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId
+    ) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return orderService.getOrderDetail(user, orderId);
     }
+
+    @PostMapping("/order/action/{orderId}")
+    public void actionOrder(HttpServletRequest request,
+                                    @RequestParam(value = "isAccept", required = false, defaultValue = "-1") int isAccept,
+                                    @PathVariable(name = "orderId") Long orderId
+
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.actionOrder(user, orderId, isAccept);
+    }
+
+    @PostMapping("/order/payment/{orderId}")
+    public void payOrder(HttpServletRequest request,
+                         @PathVariable(name = "orderId") Long orderId
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.payOrder(user, orderId);
+    }
+
+    @PostMapping("/order/confirm/{orderId}")
+    public void confirmOrder(HttpServletRequest request,
+                             @PathVariable(name = "orderId") Long orderId,
+                             @RequestBody OrderConfirmDTO orderConfirmDTO
+    ) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        orderService.confirmOrder(user,orderId, orderConfirmDTO);
+    }
+
+    @GetMapping("/notification")
+    public boolean newNotification(HttpServletRequest request){
+        User user = jwtTokenUtil.getUserFromRequest(request);
+        return orderService.newNotification(user);
+    }
+
+
 }
