@@ -106,19 +106,32 @@ class CreateReportForm extends Component{
   }
 
   submitInfo(event){
-    let info = {
-      outfitImage: this.state.outfitImage,
-      idea: this.state.idea,
-      items: this.state.items.map((item)=>{
-        var newItem = {
-          itemsId: item.itemsId,
-		      itemName: item.itemName,
-		      link: item.link,
-		      itemImage: item.itemImage,
-        }
-        return newItem
-      }),
-    }
+    var info = new FormData();
+    info.append("outfitImage", this.state.outfitImage);
+    info.append("idea", this.state.idea);
+    info.append("items", 
+    this.state.items.map((item)=>{
+      var newItem = {
+        itemsId: item.itemsId,
+        itemName: item.itemName,
+        link: item.link,
+        itemImage: item.itemImage,
+      }
+      return newItem
+    }));
+    // let info = {
+    //   outfitImage: this.state.outfitImage,
+    //   idea: this.state.idea,
+    //   items: this.state.items.map((item)=>{
+    //     var newItem = {
+    //       itemsId: item.itemsId,
+		//       itemName: item.itemName,
+		//       link: item.link,
+		//       itemImage: item.itemImage,
+    //     }
+    //     return newItem
+    //   }),
+    // }
     event.preventDefault();
     console.log(info)
 
