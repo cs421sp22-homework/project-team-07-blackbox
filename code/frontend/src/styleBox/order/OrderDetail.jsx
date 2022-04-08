@@ -35,9 +35,9 @@ class OrderDetail extends Component {
             shoeSize: "11",
             orderId: this.props.location.query.id,
             isWindowed: false,
-            isAccept: 2,
-            // orderStatus: this.props.location.query.orderStatus
-            orderStatus: 4
+            isAccept: -1,
+            orderStatus: this.props.location.query.orderStatus,
+            // orderStatus: 4
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)
@@ -61,19 +61,19 @@ class OrderDetail extends Component {
             this.setState({isWindowed: true});
         }
         else if(event.currentTarget.getAttribute('name') === "payBtn"){
-            this.props.history.push({pathname:"/payOrder", query: { id : this.state.orderId, lowPrice: this.state.clothPriceLow, highPrice: this.state.clothPriceHigh, styName: this.state.cusNickname}})
+            this.props.history.push({pathname:"/payOrder", query: { id : this.state.orderId, lowPrice: this.state.clothPriceLow, highPrice: this.state.clothPriceHigh, styName: this.state.cusNickname, price: this.state.orderPrice}})
         }
         else if(event.currentTarget.getAttribute('name') === "cancelBtn"){
             this.setState({isWindowed: false});
         }
         else if(event.currentTarget.getAttribute('name') === "acceptBtn"){
-            this.setState({isWindowed: false, isAccept: 0});
-            OrderService.manageOrder(this.state.orderId, 0);
+            this.setState({isWindowed: false, isAccept: 1});
+            OrderService.manageOrder(this.state.orderId, 1);
 
         }
         else if(event.currentTarget.getAttribute('name') === "rejectBtn"){
-            this.setState({isWindowed: false, isAccept: 1});
-            OrderService.manageOrder(this.state.orderId, 1);
+            this.setState({isWindowed: false, isAccept: 0});
+            OrderService.manageOrder(this.state.orderId, 0);
         }
         else if(event.currentTarget.getAttribute('name') === "createReportBtn"){
             this.props.history.push({pathname:"/createReport", query: { id : this.state.orderId, styName: this.state.cusNickname}})
@@ -109,8 +109,9 @@ class OrderDetail extends Component {
                         jeanSize: response.data.jeanSize,
                         shoeSize: response.data.shoeSize,
                         isAccept: response.data.isAccept,
-                        // orderStatus: response.data.orderStatus
+                        orderStatus: response.data.orderStatus
                     })
+                    console.log(response)
 
                 }
             })
@@ -122,7 +123,7 @@ class OrderDetail extends Component {
     render() {
         return (
             <AnimationRevealPage>
-                {this.state.isAccept === 2 && this.state.isWindowed?
+                {this.state.isAccept === -1 && this.state.isWindowed?
                     <div>
                     <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -168,7 +169,7 @@ class OrderDetail extends Component {
                                 <div className='grid grid-cols-3 mb-3'>
                                     {/*{console.log("c?", this.checkCustomer)}*/}
                                     {// cust & case 5: view report
-                                        this.state.orderStatus === 5 && (this.checkCustomer())?
+                                        this.state.orderStatus === 5 ?
                                             <button type="button"
                                                 name='viewReportBtn'
                                                 className="m-5 p-2 bg-yellow-500 text-white text-base leading-tight rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -181,7 +182,7 @@ class OrderDetail extends Component {
 
                                     { /* button part: based on order status */
                                         // stylist & case 1: wait sty to accept/reject
-                                        this.state.isAccept === 2 && this.state.orderStatus === 1 && (!this.checkCustomer())?
+                                        this.state.isAccept === -1 && this.state.orderStatus === 1 && (!this.checkCustomer())?
                                             <button type="button"
                                                     name='manageBtn'
                                                     className="m-5 p-2 bg-blue-600 text-white text-base leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -220,7 +221,13 @@ class OrderDetail extends Component {
                                             </button>
 
                                         // all & case 6: cus rate, finish
-                                        : this.state.orderStatus === 6 ? <div> </div>
+                                        : this.state.orderStatus === 6 ? 
+                                            <button type="button"
+                                                name='viewReportBtn'
+                                                className="m-5 p-2 bg-yellow-500 text-white text-base leading-tight rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                onClick={this.btnPressed}>
+                                                    View Report
+                                            </button>
 
                                         : <div> </div>
                                     }

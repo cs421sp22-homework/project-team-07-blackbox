@@ -178,7 +178,7 @@ public class FileService {
             itemRepository.save(newItem);
             newReport.getItems().add(newItem);
         }
-
+        order.setOrderStatus(5);
         reportRepository.save(newReport);
         order.setStyleReport(newReport);
         orderRepository.save(order);

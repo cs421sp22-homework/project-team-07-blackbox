@@ -110,15 +110,15 @@ class CreateReportForm extends Component{
             </Column>
             <TwoColumn>
                 <Column>
-                  <Label >Stylist Name: stylist1</Label>
-                  <Label >Stylist ID: 0001</Label>
+                  {/* <Label >Stylist Name: stylist1</Label>
+                  <Label >Stylist ID: 0001</Label> */}
                   {/* <Label >Stylist Name: {this.props.stylistName}</Label>
                   <Label >Stylist ID: {this.props.stylistId}</Label> */}
                 </Column>
                 <Column>
                   <Label ></Label>
-                  <Label >Customer Name: customer1</Label>
-                  <Label >Customer ID: 0002</Label>
+                  {/* <Label >Customer Name: customer1</Label>
+                  <Label >Customer ID: 0002</Label> */}
                   {/* <Label >Customer Name: {this.props.customerName}</Label>
                   <Label >Customer ID: {this.props.customerId}</Label> */}
                 </Column>

@@ -44,10 +44,10 @@ public class OrderController {
         return orderService.getOrderDetail(user, orderId);
     }
 
-    @PostMapping("/order/action/{orderId}")
+    @PostMapping("/order/action/{orderId}/{accept}")
     public void actionOrder(HttpServletRequest request,
-                                    @RequestParam(value = "isAccept", required = false, defaultValue = "-1") int isAccept,
-                                    @PathVariable(name = "orderId") Long orderId
+                                    @PathVariable(name = "orderId") Long orderId,
+                                    @PathVariable(name = "accept") int isAccept
 
     ) {
         User user = jwtTokenUtil.getUserFromRequest(request);

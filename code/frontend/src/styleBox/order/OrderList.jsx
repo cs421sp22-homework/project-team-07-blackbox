@@ -37,7 +37,7 @@ class OrderList extends Component {
                 clothPriceHigh: 300,
                 time: "2022/3/5",
                 orderId: 1,
-                isread: false,
+                read: false,
                 orderStatus: 0,
             },
                 {
@@ -50,7 +50,7 @@ class OrderList extends Component {
                     clothPriceHigh: 800,
                     time: "2022/3/9",
                     orderId: 2,
-                    isread: true,
+                    read: true,
                     orderStatus: 0,
                 }]
         }
@@ -88,10 +88,11 @@ class OrderList extends Component {
 
     showOrderList(pageValue, sortValue){
         OrderService.getOrderList(pageValue, sortValue)
-        .then(response => this.setState({
+        .then((response) => {this.setState({
             orderlst: response.data.data,
             totalPage: response.data.totalPages
-        }))
+            });
+            console.log(response)})
         .catch(error => console.log(error.response))
     }
 
@@ -181,14 +182,14 @@ class OrderList extends Component {
                                                 <TableValue>{order.clothPriceLow}</TableValue>
                                                 <TableValue>{order.clothPriceHigh}</TableValue>
                                                 <TableValue>{this.showDescription(order.time)}</TableValue>
-                                                <TableValue>{order.isread.toString()}</TableValue>
+                                                <TableValue>{order.read.toString()}</TableValue>
                                                 <TableValue> {
                                                     this.showStatus(order.orderStatus)
                                                 } </TableValue>
                                                 <TableValue>
                                                     <ViewBtn
                                                         onClick={() => this.viewOrder(order.orderId, order.orderStatus)}>View</ViewBtn>
-                                                    {order.isread ? <div/> : <span className="badge">!</span>}
+                                                    {order.read ? <div/> : <span className="badge">!</span>}
                                                 </TableValue>
                                             </tr>
                                         ))}
