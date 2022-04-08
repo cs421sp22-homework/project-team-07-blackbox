@@ -56,4 +56,6 @@ public class StylistController {
         Long followerId = jwtTokenUtil.getUserFromRequest(request).getId();
         return stylistService.getFollowStylist(followerId, page, style, sort, search, limit);
     }
+
+
 }

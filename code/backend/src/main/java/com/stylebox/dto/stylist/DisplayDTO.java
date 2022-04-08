@@ -1,4 +1,4 @@
-package com.stylebox.dto.user;
+package com.stylebox.dto.stylist;
 
 import lombok.Data;
 
