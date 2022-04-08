@@ -149,7 +149,6 @@ class StylistList extends Component{
             .then(response => {
                 console.log(response.data)
                 this.setState({
-
             stylistLists: response.data.data,
             totalPage: response.data.totalPages
         }
