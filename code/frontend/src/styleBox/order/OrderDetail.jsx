@@ -36,7 +36,8 @@ class OrderDetail extends Component {
             orderId: this.props.location.query.id,
             isWindowed: false,
             isAccept: 2,
-            orderStatus: this.props.location.query.orderStatus
+            // orderStatus: this.props.location.query.orderStatus
+            orderStatus: 4
         }
         this.checkCustomer = this.checkCustomer.bind(this)
         this.backToOrders = this.backToOrders.bind(this)

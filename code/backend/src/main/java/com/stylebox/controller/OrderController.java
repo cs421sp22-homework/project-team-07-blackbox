@@ -3,6 +3,7 @@ package com.stylebox.controller;
 import com.stylebox.dto.Order.OrderCreateDTO;
 import com.stylebox.dto.Order.OrderDetailDTO;
 import com.stylebox.dto.Order.OrderListDTO;
+import com.stylebox.dto.Order.ReportCreateDTO;
 import com.stylebox.entity.user.User;
 import com.stylebox.service.OrderService;
 import com.stylebox.util.JwtTokenUtil;
@@ -40,5 +41,11 @@ public class OrderController {
     public OrderDetailDTO getOrderDetail(HttpServletRequest request, @PathVariable(name = "id") Long orderId) {
         User user = jwtTokenUtil.getUserFromRequest(request);
         return orderService.getOrderDetail(user, orderId);
+    }
+
+    @PostMapping("/stylist/styleReport/{id}")
+    public void createReport(HttpServletRequest request, @PathVariable(name = "id") Long id,
+                             @ModelAttribute ReportCreateDTO reportCreateDTO) {
+        User user = jwtTokenUtil.getUserFromRequest(request);
     }
 }
