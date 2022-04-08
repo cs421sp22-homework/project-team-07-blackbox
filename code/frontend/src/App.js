@@ -13,7 +13,7 @@ import Quiz from "./styleBox/quiz/Quiz";
 import OrderList from "./styleBox/order/OrderList";
 import OrderDetail from "styleBox/order/OrderDetail";
 import ReadStylist from "./styleBox/customer/ReadStylist";
-import Test from "demos/EventLandingPage";
+import Test from "./styleBox/order/Test"
 import CreateOrder from "styleBox/order/CreateOrder";
 import StylistList from "./styleBox/stylist/StylistList";
 import FollowStylist from"./styleBox/customer/followStylistList"

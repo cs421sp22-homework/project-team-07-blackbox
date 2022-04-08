@@ -2,6 +2,7 @@ package com.stylebox.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.stylebox.entity.stylist.Displays;
 import com.stylebox.entity.stylist.Orders;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,9 @@ public class StylistInformation {
 //    @JoinColumn(name = "followee_id", referencedColumnName = "id")
 //    private List<FollowRecord> followRecords = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Displays> displays = new ArrayList<>();
+
     @Column(name = "follow_num")
     private int followNum = 0;
 
@@ -47,6 +51,16 @@ public class StylistInformation {
 
     @Column(name = "age")
     private Integer age;
+
+    public void addDisplay(Displays display){
+        if(!displays.contains(display)) {
+            displays.add(display);
+        }
+    }
+
+    public void deleteDisplay(Displays display){
+        displays.remove(display);
+    }
 
     public void addFollowRecord(FollowRecord followRecord){
         if(!followRecords.contains(followRecord)) {

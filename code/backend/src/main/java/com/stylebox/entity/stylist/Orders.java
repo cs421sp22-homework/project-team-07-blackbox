@@ -69,4 +69,8 @@ public class Orders {
     @JoinColumn(name = "stylist_info_id", referencedColumnName = "id")
     @JsonBackReference
     private StylistInformation stylist;
+
+    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "report_id", referencedColumnName = "id")
+    private StyleReport styleReport;
 }
