@@ -8,10 +8,18 @@ class StylistService {
 
     updateProfile(myImages, myIdeas, myDeletedId){
         let displays = new FormData();
-        displays.append("ideas", myIdeas)
-        displays.append("images", myImages)
-        displays.append("deletedID", myDeletedId)
-        return axios.post(`${API_URL}/stylist/display`, displays)
+        for(var key in myImages){
+            displays.append("images", myImages[key])
+            displays.append("ideas", myIdeas[key])
+        }
+        for(var key in myDeletedId){
+            displays.append("deletedID", myDeletedId[key])
+        }
+        
+        return axios.post(`${API_URL}/stylist/display`, displays, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+        }})
     }
 }
 export default new StylistService()
