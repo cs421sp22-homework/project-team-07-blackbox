@@ -19,6 +19,21 @@ class OrderService {
         return axios.post(`${API_URL}/order/${stylistId}`, info, {withCredentials: true})
     }
 
+    confirmOrder(rate, comment, orderId) {
+        console.log(rate)
+        console.log(comment)
+        return axios.post(`${API_URL}/order/confirm/${orderId}`, {rate: rate, comment: comment}, {withCredentials: true})
+    }
+
+    getNotification() {
+        return axios.get(`${API_URL}/notification`, {withCredentials: true})
+    }
+
+    manageOrder(orderIdV, isAcceptV){
+        console.log(isAcceptV)
+        return axios.post(`${API_URL}/order/action/${orderIdV}`, {params: {orderId: orderIdV, isAccept: isAcceptV}})
+    }
+
 }
 
 export default new OrderService()

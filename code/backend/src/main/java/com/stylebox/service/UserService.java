@@ -183,7 +183,7 @@ public class UserService {
         }
         stylistProfileGetDTO.setStyle(styleSet);
         stylistProfileGetDTO.setDisplay(user.getStylistInformation().getDisplays());
-
+        stylistProfileGetDTO.setPhoto(user.getStylistInformation().getUser().getAvatar());
         return stylistProfileGetDTO;
     }
 
@@ -225,6 +225,7 @@ public class UserService {
         StylistHomepageDTO stylistHomepageDTO = modelMapper.map(stylistProfileGetDTO, StylistHomepageDTO.class);
         Optional<FollowRecord> followRecord = followRepository.findByFollowerIdAndFolloweeId(user.getCustomerInformation().getId(), followeeId);
         stylistHomepageDTO.setFollow(followRecord.isPresent());
+
         return stylistHomepageDTO;
     }
 }

@@ -9,5 +9,8 @@ class AccountSettingService{
     modifyAccount(info){
         return axios.post(`${API_URL}/account`,info,{withCredentials: true})
     }
+    modifyAvatar(file) {
+        return axios.post(`${API_URL}/avatar`, file, {withCredentials: true})
+    }
 }
 export default new AccountSettingService()

@@ -5,10 +5,8 @@ import StylistProfileImageIntro from "components/testimonials/StylistProfileImag
 import StylistProfilePastDesign from "components/testimonials/StylistProfileTwoColumnWithImageAndProfilePictureReview.js"
 import StylistService from "api/styleBox/StylistService";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
-import PastDesign2 from "../../images/StylistProfile_pastdesign2.png"
-import NavBarCustomer from "../navBar_footer/NavBarCustomer";
-import NavBarStylist from "styleBox/navBar_footer/NavBarStylist";
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import {API_URL} from "../../Constants";
 
 class StylistProfile extends Component{
   constructor(props){
@@ -31,39 +29,51 @@ class StylistProfile extends Component{
         followerNum: 9000,
         likeNum: 3000
       }],
-      display: [{image: "", idea: ""}]
+      display: [{image: "https://media.glamour.com/photos/607f272348c995b3b00ffd38/1:1/w_120,c_limit/terry%20cloth%20trend.jpg", idea: "22"}, {image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80", idea: "111"}]
     }
+
+    this.modifyState()
+    console.log("construct father", this.state.testimonials)
   }
 
-  componentDidMount(){
+  modifyState(){
 
     StylistService.getHomepage()
-    .then(response=>this.setState({
-      testimonials: [{
-        nickname: response.data.nickname,
-        photo: response.data.photo,
-        intro: response.data.intro,
-        gender: response.data.gender,
-        style: response.data.style,
-        age: response.data.age,
-        userName: response.data.userName,
-        email:response.data.email,
-        facebook: response.data.facebook,
-        rate: response.data.rate,
-        followerNum: response.data.followerNum,
-        likeNum: response.data.likeNum
-      }],
-      display: response.data.display
-    }))
+    .then(response=>{
+      this.setState({
+            testimonials: [{
+              nickname: response.data.nickname,
+              photo: response.data.photo,
+              intro: response.data.intro,
+              gender: response.data.gender,
+              style: response.data.style,
+              age: response.data.age,
+              userName: response.data.userName,
+              email:response.data.email,
+              facebook: response.data.facebook,
+              rate: response.data.rate,
+              followerNum: response.data.followerNum,
+              likeNum: response.data.likeNum
+            }],
+            display: response.data.display
+          }
+      )
+      console.log(response)
+      console.log("photo:")
+      console.log(this.state.testimonials[0].photo)
+    }
+    )
     .catch(error => console.log(error.response))
+    
   }
 
   render() {
     return(
       <AnimationRevealPage>
         <NavBarAuthenticated/>
+        {console.log("pass", this.state.testimonials)}
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
-        <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
+        <StylistProfilePastDesign photo={this.state.testimonials[0].photo} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
       </AnimationRevealPage>
     )

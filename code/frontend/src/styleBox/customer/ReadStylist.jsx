@@ -51,7 +51,7 @@ class ReadStylist extends Component{
     this.checkUser = this.checkUser.bind(this)
     this.changeFollowState = this.changeFollowState.bind(this)
     this.createOrder = this.createOrder.bind(this)
-
+    this.checkCustomer = this.checkCustomer.bind(this)
   }
 
   componentDidMount(){
@@ -79,7 +79,7 @@ class ReadStylist extends Component{
       }],
       display: response.data.stylistProfileGetDTO.display,
     }
-    ); 
+    );
     if (response.data.follow){
       this.setState({
         button : "Unfollow"
@@ -133,6 +133,12 @@ class ReadStylist extends Component{
     });
   }
 
+  // return user type
+  checkCustomer() {
+    console.log("cus??", Cookies.load('role')==='Customer')
+    return Cookies.load('role')==='Customer';
+  }
+
 
   render() {
     console.log("stylistID:"+this.state.testimonials[0].stylistId)
@@ -140,10 +146,12 @@ class ReadStylist extends Component{
       <AnimationRevealPage>
         <NavBarAuthenticated/>
         <StylistProfileBrowse testimonials={this.state.testimonials}/>
-        <div align="center">
-          <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
-          <PrimaryButton buttonRounded={true} onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
-        </div>
+        {this.checkCustomer() ? (
+            <div align="center">
+              <PrimaryButton buttonRounded={true} onClick={this.changeFollowState}>{this.state.button}</PrimaryButton>
+              <PrimaryButton buttonRounded={true} onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
+            </div>
+        ) : <div/>}
         <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
       </AnimationRevealPage>
