@@ -207,7 +207,7 @@ class StylistProfileImageIntro extends Component {
                                         <CustomerInfo>
                                             <div className="grid grid-cols-2">
                                                 <CustomerTitle>UserName:</CustomerTitle>
-                                                <CustomerName>{testimonial.userName}</CustomerName>
+                                                <CustomerName>{testimonial.username}</CustomerName>
                                             </div>
                                             <div className="grid grid-cols-2">
                                                 <FollowerNumTitle>FollowerNum:</FollowerNumTitle>

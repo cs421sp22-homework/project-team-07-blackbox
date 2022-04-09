@@ -22,7 +22,7 @@ class StylistProfile extends Component{
         gender: "Female",
         style: ["Casual", "Business"],
         age: 23,
-        userName: "Charlotte Hale",
+        username: "Charlotte Hale",
         email:"Charlotte@stylebox.com",
         facebook:"Charlotte_Stylist",
         rate: 5,
@@ -39,32 +39,25 @@ class StylistProfile extends Component{
   modifyState(){
 
     StylistService.getHomepage()
-    .then(response=>{
-      this.setState({
-            testimonials: [{
-              nickname: response.data.nickname,
-              photo: response.data.photo,
-              intro: response.data.intro,
-              gender: response.data.gender,
-              style: response.data.style,
-              age: response.data.age,
-              userName: response.data.userName,
-              email:response.data.email,
-              facebook: response.data.facebook,
-              rate: response.data.rate,
-              followerNum: response.data.followerNum,
-              likeNum: response.data.likeNum
-            }],
-            display: response.data.display
-          }
-      )
-      console.log(response)
-      console.log("photo:")
-      console.log(this.state.testimonials[0].photo)
-    }
-    )
+    .then(response=>this.setState({
+      testimonials: [{
+        nickname: response.data.nickname,
+        photo: response.data.photo,
+        intro: response.data.intro,
+        gender: response.data.gender,
+        style: response.data.style,
+        age: response.data.age,
+        username: response.data.username,
+        email:response.data.email,
+        facebook: response.data.facebook,
+        rate: response.data.rate,
+        followerNum: response.data.followerNum,
+        likeNum: response.data.likeNum
+      }],
+      display: response.data.display
+    }))
     .catch(error => console.log(error.response))
-    
+
   }
 
   render() {

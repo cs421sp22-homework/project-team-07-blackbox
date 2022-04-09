@@ -113,7 +113,7 @@ class StylistList extends Component{
             this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
         }
         //this.showStylistList(this.state.page,this.state.style,this.state.sort, this.state.search,this.state.limit)
-        
+
     }
 
     checkCustomer(){

@@ -146,9 +146,9 @@ public class UserService {
 
     public void modifyAccount(User user, AccountDTO accountDTO){
         user.getUserLogin().setEmail(accountDTO.getEmail());
-        user.getUserLogin().setUsername(accountDTO.getUsername());
         modelMapper.map(accountDTO, user);
         userRepository.save(user);
+        userLoginRepository.save(user.getUserLogin());
     }
 
     public CustomerProfileDTO getCustomerProfile(User user){
@@ -188,7 +188,7 @@ public class UserService {
     }
 
     public void modifyStylistProfile(User user, StylistProfileModifyDTO stylistProfileModifyDTO) {
-        Set<String> styleSet = stylistProfileModifyDTO.getStyle();
+        Set<String> styleSet = stylistProfileModifyDTO.getStyleSet();
         modifyStyle(styleSet, user);
         modelMapper.map(stylistProfileModifyDTO, user);
         userRepository.save(user);

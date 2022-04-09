@@ -71,9 +71,7 @@ class CustomerProfile extends Component {
             bottomSize: this.state.bottomSize,
             jeanSize: this.state.jeanSize,
             shoeSize: this.state.shoeSize,
-            styleSet: this.state.selectedStyles.map((st) => {
-                return {styleName: st}
-            })
+            styleSet: this.state.selectedStyles
         }
         console.log(info)
         this.setState({edit: false})
