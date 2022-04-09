@@ -14,6 +14,11 @@ import { PrimaryButton} from "components/misc/Buttons.js";
 
 import "slick-carousel/slick/slick.css";
 import CustomerBrowseStylistService from "api/styleBox/CustomerBrowseStylistService";
+import {API_URL} from "../../Constants";
+const Image = styled.div(props => [
+    `background-image: url("${props.imageSrc}");`,
+    tw`rounded bg-contain bg-no-repeat bg-center h-full`
+]);
 
 const Button = tw(PrimaryButton)`w-56 mx-8 mt-10 inline-block`
 
@@ -81,14 +86,14 @@ class StylistProfileBrowse extends Component{
     super(props)
 
     this.state = {
-      
+
     }
-    
+
 
     // method part
   }
 
-  
+
 
   render(){
     return (
@@ -103,10 +108,9 @@ class StylistProfileBrowse extends Component{
               {this.props.testimonials.map((testimonial, index) => (
                 <Testimonial key={index}>
                   <ImageContainer>
-                    <img src={testimonial.photo} alt={testimonial.customerName} />
-                    
+                    <img src={`${API_URL}${testimonial.photo}`} alt={testimonial.customerName} />
                   </ImageContainer>
-                  
+
                   <TextContainer>
                     <QuoteContainer>
                       <QuotesLeft />
@@ -159,9 +163,9 @@ class StylistProfileBrowse extends Component{
                   </TextContainer>
                 </Testimonial>
               ))}
-              
+
             </TestimonialSlider>
-            
+
 
           </TestimonialSliderContainer>
         </Content>
