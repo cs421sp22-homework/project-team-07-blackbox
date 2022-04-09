@@ -18,6 +18,7 @@ import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-3-icon.
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-3-icon.svg";
 import QuizService from "../../api/styleBox/QuizService";
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import { API_URL } from 'Constants';
 // const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Container = tw.div`relative`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -149,7 +150,6 @@ class StylistList extends Component{
             .then(response => {
                 console.log(response.data)
                 this.setState({
-
             stylistLists: response.data.data,
             totalPage: response.data.totalPages
         }
@@ -222,7 +222,7 @@ class StylistList extends Component{
                         {this.state.stylistLists.map((stylistLst, index) => (
                             <TwoColumn css={!true && tw`md:items-center`} key={index}>
                                 <ImageColumn css={null}>
-                                    {true ? <Image imageSrc={stylistLst.avatar} css={null}/> :
+                                    {true ? <Image imageSrc={`${API_URL}${stylistLst.avatar}`} css={null}/> :
                                         <img src={null} css={null} alt=""/>}
                                     {false && <DecoratorBlob css={null}/>}
                                 </ImageColumn>

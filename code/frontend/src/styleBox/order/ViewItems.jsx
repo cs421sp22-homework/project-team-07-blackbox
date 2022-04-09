@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading } from "components/misc/Headings.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts.js";
+import {API_URL} from "../../Constants";
 
 // const Row = tw.div`flex flex-col lg:flex-row -mb-10`;
 const Heading = tw(SectionHeading)`text-left lg:text-4xl xl:text-5xl`;
@@ -108,7 +109,8 @@ class ViewItems extends Component{
                   <Title>{item.itemName}</Title>
                   <AuthorName>{item.itemId}</AuthorName>
                 </PostTextContainer>
-                <Image imageSrc={item.itemImage} />
+                <Image imageSrc={API_URL+item.itemImage} />
+                {/* <Image imageSrc={item.itemImage} /> */}
               </Post>
               ))}
             </PostsContainer>

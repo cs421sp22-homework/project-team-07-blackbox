@@ -1,5 +1,7 @@
 package com.stylebox.dto.user;
 
+import com.stylebox.dto.stylist.DisplayDTO;
+import com.stylebox.entity.stylist.Displays;
 import lombok.Data;
 
 import java.util.List;
@@ -19,5 +21,5 @@ public class StylistProfileGetDTO {
     private Integer rate;
     private Integer followerNum;
     private Integer likeNum;
-    private List<DisplayDTO> display;
+    private List<Displays> display;
 }

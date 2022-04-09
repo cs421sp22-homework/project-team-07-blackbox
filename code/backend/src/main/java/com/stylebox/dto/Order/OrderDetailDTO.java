@@ -23,4 +23,6 @@ public class OrderDetailDTO {
     private String bottomSize;//c
     private String jeanSize;//c
     private String shoeSize;//c
+    private int isAccept;
+    private int orderStatus;
 }

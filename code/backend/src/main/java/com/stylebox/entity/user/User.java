@@ -64,7 +64,7 @@ public class User {
     private String nickname;
 
     @Column(name="avartar")
-    private String avartar;
+    private String avartar="/images/default-avatar.jpeg";
 
     @Column(name = "gender")
     private String gender;

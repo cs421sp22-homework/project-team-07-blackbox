@@ -1,5 +1,6 @@
 package com.stylebox.service;
 
+import com.stylebox.dto.stylist.DisplayDTO;
 import com.stylebox.dto.user.*;
 import com.stylebox.entity.user.*;
 import com.stylebox.repository.stylist.FollowRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -180,6 +182,8 @@ public class UserService {
             styleSet.add(st.getStyleName());
         }
         stylistProfileGetDTO.setStyle(styleSet);
+        stylistProfileGetDTO.setDisplay(user.getStylistInformation().getDisplays());
+
         return stylistProfileGetDTO;
     }
 
