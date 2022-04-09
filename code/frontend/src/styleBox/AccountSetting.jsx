@@ -43,7 +43,10 @@ class AccountSetting extends Component {
             {avatar : event.target.files[0]}
         )
         AccountSettingService.modifyAvatar(event.target.files[0])
-            .then((response) => console.log("modify avatar", response))
+            .then((response) => {
+                console.log("modify avatar", response)
+                window.alert("Modify avatar successfully")
+            })
     }
 
     clickedit() {
