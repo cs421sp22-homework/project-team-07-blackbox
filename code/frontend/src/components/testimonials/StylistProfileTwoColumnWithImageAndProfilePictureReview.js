@@ -166,12 +166,9 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
     .then((response)=>{
       console.log(response.data);
       alert("Submit successfully.")
-      this.props.history.push({pathname:'/stylist/profile'})
+      window.location.reload()
     })
-    .catch((error) => {
-      console.log(error.response);
-      alert("Update Failed. Please try again.");
-    })
+    .catch((error) => {console.log(error.response);})
   }
 
 

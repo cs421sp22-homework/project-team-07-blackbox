@@ -128,18 +128,19 @@ public class FileService {
             }
         }
 
-        for(int i = 0; i < images.length; i++){
-            if(images[i].isEmpty())
-                continue;
-            Displays display = new Displays();
-            String designURL = UploadDisplayImage(user, images[i]);
-            display.setIdea(ideas[i]);
-            display.setImage(designURL);
-            displayRepository.save(display);
-            user.getStylistInformation().addDisplay(display);
+        if(!(images == null)){
+            for(int i = 0; i < images.length; i++){
+                if(images[i].isEmpty())
+                    continue;
+                Displays display = new Displays();
+                String designURL = UploadDisplayImage(user, images[i]);
+                display.setIdea(ideas[i]);
+                display.setImage(designURL);
+                displayRepository.save(display);
+                user.getStylistInformation().addDisplay(display);
+            }
         }
         userRepository.save(user);
-
     }
 
 
