@@ -200,6 +200,7 @@ public class OrderService {
         }else if(isAccept==1){
             o.setOrderStatus(3);
         }
+        o.setCustomerRead(false);
         orderRepository.save(o);
     }
 
@@ -219,6 +220,7 @@ public class OrderService {
         }
 
         o.setOrderStatus(4);
+        o.setStylistRead(false);
         orderRepository.save(o);
     }
 
@@ -238,6 +240,7 @@ public class OrderService {
         }
         modelMapper.map(orderConfirmDTO, o);
         o.setOrderStatus(6);
+        o.setStylistRead(false);
         orderRepository.save(o);
     }
 

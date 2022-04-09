@@ -187,7 +187,7 @@ class CreateReportForm extends Component{
                       singleImage={true}
                       // buttonStyles={{background:'rgb(236 72 153'}}
                       onChange={this.onDropOutfit}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                      imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
                       maxFileSize={5242880}
                     />
                   </InputContainer>
