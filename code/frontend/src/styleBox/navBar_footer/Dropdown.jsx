@@ -24,7 +24,7 @@ export default function Dropdown(
                 onClick: {}
             }
         ],
-        noti
+        noti = false
     }
 ) {
     return (

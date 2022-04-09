@@ -21,7 +21,7 @@ class NavBarCustomer extends Component{
         super(props);
 
         this.state = {
-            newNoti: true
+            newNoti: false
         }
         this.getNoti = this.getNoti.bind(this)
     }
@@ -29,8 +29,8 @@ class NavBarCustomer extends Component{
     getNoti() {
         orderService.getNotification().then(
             (response) => {
-                console.log(response)
-                this.setState({newNoti: response.data.newNotification})
+                console.log("noti", response)
+                this.setState({newNoti: response.data})
             }
         )
     }

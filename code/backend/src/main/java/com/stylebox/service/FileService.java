@@ -183,6 +183,7 @@ public class FileService {
         order.setOrderStatus(5);
         reportRepository.save(newReport);
         order.setStyleReport(newReport);
+        order.setCustomerRead(false);
         orderRepository.save(order);
     }
 

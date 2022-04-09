@@ -63,7 +63,13 @@ class ConfirmForm extends Component {
             comment: this.state.comment
         }
         console.log(info)
-        this.props.history.push("/orders");
+        this.props.history.push({
+            pathname:'/orderDetail',
+            query: {
+                id: this.state.orderId,
+                orderStatus: 6
+            }
+        })
     }
 
     handleChange(event){

@@ -61,9 +61,9 @@ class CreateReportForm extends Component{
       outfitImage: [],
       idea:'',
       items: [],
-      
+
     }
-    
+
     this.submitInfo = this.submitInfo.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.back = this.back.bind(this)
@@ -86,6 +86,7 @@ class CreateReportForm extends Component{
         pathname:'/orderDetail',
         query: {
             id: this.state.orderId,
+            orderStatus: 4
         }
     })
   }
@@ -94,7 +95,7 @@ class CreateReportForm extends Component{
     this.setState({
       outfitImage: pictureFiles
     });
-    
+
   }
 
   setItems(allItems){
@@ -129,7 +130,7 @@ class CreateReportForm extends Component{
     event.preventDefault();
     console.log(info.getAll('itemImage'))
 
-    ReportService.createReport(this.state.orderId, info) 
+    ReportService.createReport(this.state.orderId, info)
     .then((response)=>{
       console.log(response.data);
       alert("Create report success!");
@@ -137,6 +138,7 @@ class CreateReportForm extends Component{
         pathname:'/orderDetail',
         query: {
             id: this.state.orderId,
+            orderStatus: 5
         }
       })
     })
@@ -154,7 +156,7 @@ class CreateReportForm extends Component{
       <Content>
         <FormContainer>
           <div tw="mx-auto max-w-4xl">
-            <h2 align="center">Create an Report</h2>        
+            <h2 align="center">Create an Report</h2>
             <form>
             <Column>
             <Label >Order number: {this.state.orderId}</Label>

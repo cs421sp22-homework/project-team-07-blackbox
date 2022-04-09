@@ -19,7 +19,7 @@ class NavBarStylist extends Component{
         super(props);
 
         this.state = {
-            newNoti: true
+            newNoti: false
         }
         this.getNoti = this.getNoti.bind(this)
     }
@@ -27,8 +27,8 @@ class NavBarStylist extends Component{
     getNoti() {
         orderService.getNotification().then(
             (response) => {
-                console.log(response)
-                this.setState({newNoti: response.data.newNotification})
+                console.log("noti", response)
+                this.setState({newNoti: response.data})
             }
         )
     }

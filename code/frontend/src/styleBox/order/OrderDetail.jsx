@@ -82,7 +82,7 @@ class OrderDetail extends Component {
             this.props.history.push({pathname:"/confirmOrder", state: { orderId : this.state.orderId }})
         }
         else if(event.currentTarget.getAttribute('name') === "viewReportBtn"){
-            this.props.history.push({pathname:"/viewReport", query: { id : this.state.orderId }})
+            this.props.history.push({pathname:"/viewReport", query: { orderId : this.state.orderId }})
         }
     }
 
@@ -221,7 +221,7 @@ class OrderDetail extends Component {
                                             </button>
 
                                         // all & case 6: cus rate, finish
-                                        : this.state.orderStatus === 6 ? 
+                                        : this.state.orderStatus === 6 ?
                                             <button type="button"
                                                 name='viewReportBtn'
                                                 className="m-5 p-2 bg-yellow-500 text-white text-base leading-tight rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
