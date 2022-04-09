@@ -4,6 +4,7 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 import { Container as ContainerBase} from "components/misc/Layouts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import OrderService from 'api/styleBox/OrderService';
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg justify-center flex-1`;
 const Label = tw.p`bg-gray-100 block text-sm font-medium text-gray-700 p-2`;
@@ -15,7 +16,7 @@ class PayOrder extends Component {
         super(props);
 
         this.state = {
-            designFee: 100,
+            designFee: this.props.location.query.price,
             stylistName: this.props.location.query.styName,
             orderId: this.props.location.query.id,
             lowPrice: this.props.location.query.lowPrice,
@@ -27,8 +28,16 @@ class PayOrder extends Component {
 
     payBtnPressed(event){
         event.preventDefault();
-        alert("Successfully pay the order!");
-        this.props.history.push({pathname:"/orders"})
+        OrderService.payOrder(this.state.orderId)
+        .then((response)=>{
+            console.log(response)
+            alert("Successfully pay the order!");
+            this.props.history.push({pathname:"/orders"})
+        })
+        .catch((error)=>{
+            console.log(error.response)
+        })
+        
     }
 
     render(){

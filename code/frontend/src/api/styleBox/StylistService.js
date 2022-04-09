@@ -7,7 +7,11 @@ class StylistService {
     }
 
     updateProfile(myImages, myIdeas, myDeletedId){
-        return axios.post(`${API_URL}/stylist/display`, {params: {images: myImages, ideas: myIdeas, deletedId: myDeletedId}})
+        let displays = new FormData();
+        displays.append("ideas", myIdeas)
+        displays.append("images", myImages)
+        displays.append("deletedID", myDeletedId)
+        return axios.post(`${API_URL}/stylist/display`, displays)
     }
 }
 export default new StylistService()

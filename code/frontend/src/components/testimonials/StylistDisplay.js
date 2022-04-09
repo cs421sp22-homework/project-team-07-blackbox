@@ -18,7 +18,6 @@ import StylistService from "../../api/styleBox/StylistService"
 
 import "slick-carousel/slick/slick.css";
 import { CompareSharp } from "@material-ui/icons";
-import {API_URL} from "../../Constants";
 
 
 const Container = tw.div`relative`;
@@ -77,7 +76,7 @@ const DecoratorBlob2 = tw(
 )`absolute w-32 bottom-0 right-0 -z-10 text-pink-500 opacity-15 transform translate-x-2/3 translate-y-8`;
 
 const imageSliderRef = null, setImageSliderRef = null, textSliderRef = null, setTextSliderRef = null;
-
+  
 const HeadingInfo = ({ subheading, heading, description, ...props }) => (
   <div {...props}>
     {subheading ? <Subheading>{subheading}</Subheading> : null}
@@ -86,9 +85,10 @@ const HeadingInfo = ({ subheading, heading, description, ...props }) => (
   </div>
 );
 
-class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
+class StylistDisplay extends Component{
   constructor(props){
     super(props)
+
     this.state = {
       subheading: "",
       heading: "Past Design",
@@ -101,8 +101,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       isEdit: false,
       deletedID: [],
       images: [],
-      ideas: [],
-      photo: this.props.photo
+      ideas: []
     }
 
     this.updateDisplay = this.updateDisplay.bind(this)
@@ -174,10 +173,8 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
     })
   }
 
-
   render(){
     return (
-
       <Container>
         <Content>
           <HeadingInfo tw="text-center lg:hidden" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
@@ -188,11 +185,10 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                 <div> 
                   <h2 className="text-3xl font-black tracking-wide text-center pb-10"> Manage and Update Your Design </h2>
                   {this.props.display.map((testimonial, index) => (
-                      
                       <div className="grid grid-cols-5 my-10"key={index}>
                         <div></div>
                           <ImageAndControlContainer>
-                            <Image1 src={`${API_URL}${testimonial.image}`}/>
+                            <Image1 src={testimonial.image===null?PastDesign1: testimonial.image}/>
                           </ImageAndControlContainer>
                         <TestimonialText className="col-span-2">
                             <QuoteContainer>
@@ -206,37 +202,39 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                         
                         <button onClick={() => this.deleteDisplay(testimonial.image)} className="mx-20 my-20 py-3 font-bold rounded bg-pink-600 text-white hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" >{"Delete"}</button>
                       </div>
-                    ))}
+                  ))}
                   <div>
                     <h2 className="font-black tracking-wide text-center"> Add new display below ! </h2>
                     <div className="grid grid-cols-5">
-                      <div></div>                        
+                      <div></div>
                       <ImageUploader
-                            className="mx-3 mt-6"
-                            withIcon={false}
-                            withPreview={true}
-                            withLabel={false}
-                            buttonText="Choose images"
-                            // buttonStyles={{background:'rgb(236 72 153'}}
-                            onChange={this.onDropOutfit}
-                            imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                            maxFileSize={5242880}
-                          />
-                        <div className="col-span-2">
-                          {this.state.images.map((obj, index) => {
-                              return <TextArea key={index} className="border-2 mx-2 my-1" name={"idea"+index} onChange= {this.handleChange} placeholder="Input your design idea here."/>
-                          })}
-                        </div>
-                        <div align="center"><button className="my-14 px-5 py-3 font-bold rounded bg-pink-700 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" buttonRounded={true} onClick={this.submitChange}>{"Submit Your Change"}</button></div>
-                    </div>                  
+                                  className="mx-3 mt-6"
+                                  withIcon={false}
+                                  withPreview={true}
+                                  withLabel={false}
+                                  buttonText="Choose images"
+                                  // buttonStyles={{background:'rgb(236 72 153'}}
+                                  onChange={this.onDropOutfit}
+                                  imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                                  maxFileSize={5242880}
+                                />
+                      <div className="col-span-2">
+                        {this.state.images.map((obj, index) => {
+                            return <TextArea key={index} className="border-2 mx-2 my-1" name={"idea"+index} onChange= {this.handleChange} placeholder="Input your design idea here."/>
+                        })}
+                      </div>
+                      <div align="center"><button className="my-14 px-5 py-3 font-bold rounded bg-pink-700 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" buttonRounded={true} onClick={this.submitChange}>{"Submit Your Change"}</button></div>
                     </div>
+                      
+          
+                  </div>
                 </div>
               :
               <Testimonial>
               <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
                 {this.props.display.map((testimonial, index) => (
                   <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.image===null?PastDesign1: `${API_URL}${testimonial.image}`}/>
+                    <Image src={testimonial.image===null?PastDesign1: testimonial.image}/>
                     <ControlContainer>
                       <ControlButton onClick={imageSliderRef?.slickPrev}>
                         <ChevronLeftIcon />
@@ -262,7 +260,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                         </Quote>
                       </QuoteContainer>
                       <CustomerInfo>
-                        <CustomerProfilePicture src={`${API_URL}${this.props.photo}`} alt={this.state.customerName} />
+                        <CustomerProfilePicture src={this.state.profileImageSrc} alt={this.state.customerName} />
                         <CustomerTextInfo>
                           <CustomerName>{this.state.customerName}</CustomerName>
                           <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
@@ -288,6 +286,6 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
   }
 }
 
-export default StylistProfileTwoColumnWithImageAndProfilePictureReview
+export default StylistDisplay
 
 

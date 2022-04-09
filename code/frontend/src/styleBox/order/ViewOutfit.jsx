@@ -3,6 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { ReactComponent as SvgDotPatternIcon } from "../../images/dot-pattern.svg";
 import { SectionHeading as HeadingTitle } from "../../components/misc/Headings";
+import { API_URL } from "Constants";
 
 const Container = tw.div`relative`;
 
@@ -88,7 +89,7 @@ class ViewOutfit extends Component{
         <Content>
           {/* {cards.map((card, i) => ( */}
             <Card reversed={false}>
-              <Image imageSrc={this.props.outfitImage} />
+              <Image imageSrc={API_URL+this.props.outfitImage} />
               <Details>
                 {/* <Subtitle>{card.subtitle}</Subtitle> */}
                 <Title>Outfit Design</Title>

@@ -88,10 +88,11 @@ class OrderList extends Component {
 
     showOrderList(pageValue, sortValue){
         OrderService.getOrderList(pageValue, sortValue)
-        .then(response => this.setState({
+        .then((response) => {this.setState({
             orderlst: response.data.data,
             totalPage: response.data.totalPages
-        }))
+            });
+            console.log(response)})
         .catch(error => console.log(error.response))
     }
 

@@ -72,6 +72,7 @@ class StylistProfile extends Component{
       <AnimationRevealPage>
         <NavBarAuthenticated/>
         {console.log("pass", this.state.testimonials)}
+        {/*<StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/> */}
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
         <StylistProfilePastDesign photo={this.state.testimonials[0].photo} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
