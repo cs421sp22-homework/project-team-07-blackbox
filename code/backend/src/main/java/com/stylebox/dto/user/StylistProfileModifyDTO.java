@@ -10,6 +10,6 @@ public class StylistProfileModifyDTO {
     private String photo;
     private String intro;
     private String gender;
-    private Set<String> style;
+    private Set<String> styleSet;
     private Integer age;
 }

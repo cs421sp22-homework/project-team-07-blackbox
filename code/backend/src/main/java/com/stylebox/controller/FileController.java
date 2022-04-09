@@ -4,6 +4,7 @@ package com.stylebox.controller;
 import com.stylebox.dto.Order.StyleReportDTO;
 import com.stylebox.dto.Order.StyleReportPostDTO;
 import com.stylebox.dto.stylist.DisplayPostDTO;
+import com.stylebox.dto.user.AvatarDTO;
 import com.stylebox.entity.user.User;
 import com.stylebox.repository.user.UserRepository;
 import com.stylebox.service.FileService;
@@ -56,11 +57,11 @@ public class FileController {
     }
 
     @PostMapping("/avatar")
-    public String UploadAvatar(HttpServletRequest request, MultipartFile avatar){
+    public String UploadAvatar(HttpServletRequest request, AvatarDTO avatarDTO){
 
         User user = jwtTokenUtil.getUserFromRequest(request);
 
-        return fileService.UploadAvatar(user, avatar);
+        return fileService.UploadAvatar(user, avatarDTO.getImg());
 
     }
 
