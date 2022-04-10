@@ -44,7 +44,7 @@ class AccountSetting extends Component {
             {avatar : event.target.files[0]}
         )
         let newAvatar = new FormData();
-        newAvatar.append("avatar", event.target.files[0])
+        newAvatar.append("img", event.target.files[0])
         AccountSettingService.modifyAvatar(newAvatar)
             .then((response) => {
                 console.log("modify avatar", response)
