@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "node --max_old_space_size=2048 node_modules/react-scripts/bin/react-scripts build",
+    "build": "node --max_old_space_size=2048 node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "yarn build && netlify deploy --prod --dir=build"
