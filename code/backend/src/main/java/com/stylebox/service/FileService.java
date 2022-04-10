@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -185,6 +186,8 @@ public class FileService {
         reportRepository.save(newReport);
         order.setStyleReport(newReport);
         order.setCustomerRead(false);
+        order.setLastEditDatetime(new Date());
+        order.setTimestamp(String.valueOf(order.getLastEditDatetime().getTime()));
         orderRepository.save(order);
     }
 

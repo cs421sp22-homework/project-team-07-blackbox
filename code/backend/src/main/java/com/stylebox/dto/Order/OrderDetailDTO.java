@@ -14,7 +14,7 @@ public class OrderDetailDTO {
     private String description;//o
     private int clothPriceLow;//o
     private int clothPriceHigh;//o
-    private Date time;
+    private String time;
     private String gender;//u
     private String ftSize;//c
     private String inSize;//c

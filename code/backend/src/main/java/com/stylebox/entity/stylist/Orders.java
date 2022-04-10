@@ -35,6 +35,9 @@ public class Orders {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastEditDatetime = new Date();
 
+    @Column(name = "timestamp")
+    private String timestamp;
+
     @ManyToMany(targetEntity = Style.class, cascade = CascadeType.MERGE)
     @JoinTable(name = "order_style",
             joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
