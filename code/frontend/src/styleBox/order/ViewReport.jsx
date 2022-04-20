@@ -59,19 +59,19 @@ class CreateReportForm extends Component{
 
     this.state = {
       // orderId: this.props.orderId,
-      orderId: 1,
+      orderId: this.props.location.query.orderId,
       outfitImage: [],
       idea:'',
       items: [],
-      
+
     }
-    
+
     this.back = this.back.bind(this)
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    ReportService.viewReport(this.state.orderId) 
+    ReportService.viewReport(this.state.orderId)
     .then((response)=>{
       console.log(response.data);
       // alert("Load report success!");
@@ -92,6 +92,7 @@ class CreateReportForm extends Component{
       pathname:'/orderDetail',
       query: {
           id: this.state.orderId,
+          orderStatus: 5
       }
     })
   }
@@ -103,22 +104,22 @@ class CreateReportForm extends Component{
       <Content>
         <FormContainer>
           <div tw="mx-auto max-w-4xl">
-            <h2 align="center">Outfit Report</h2>        
+            <h2 align="center">Outfit Report</h2>
             <form>
             <Column>
             <Label >Order number: {this.state.orderId}</Label>
             </Column>
             <TwoColumn>
                 <Column>
-                  <Label >Stylist Name: stylist1</Label>
-                  <Label >Stylist ID: 0001</Label>
+                  {/* <Label >Stylist Name: stylist1</Label>
+                  <Label >Stylist ID: 0001</Label> */}
                   {/* <Label >Stylist Name: {this.props.stylistName}</Label>
                   <Label >Stylist ID: {this.props.stylistId}</Label> */}
                 </Column>
                 <Column>
                   <Label ></Label>
-                  <Label >Customer Name: customer1</Label>
-                  <Label >Customer ID: 0002</Label>
+                  {/* <Label >Customer Name: customer1</Label>
+                  <Label >Customer ID: 0002</Label> */}
                   {/* <Label >Customer Name: {this.props.customerName}</Label>
                   <Label >Customer ID: {this.props.customerId}</Label> */}
                 </Column>

@@ -18,6 +18,7 @@ import {Input} from "@mui/material";
 import StylistService from "../../api/styleBox/StylistService";
 import ProfileService from "../../api/styleBox/ProfileService";
 import AccountSettingService from "../../api/styleBox/AccountSettingService";
+import {API_URL} from "../../Constants";
 
 const HeadingTitle = tw.h2`text-4xl sm:text-5xl font-black tracking-wide text-center`
 const Container = tw.div`relative`;

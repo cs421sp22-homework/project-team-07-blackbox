@@ -4,31 +4,53 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
 import { Container as ContainerBase} from "components/misc/Layouts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import OrderService from 'api/styleBox/OrderService';
+import Footer from "../navBar_footer/Footer";
 const Container = tw(ContainerBase)`min-h-screen bg-pink-900 text-white font-medium flex justify-center mt-8`;
 const Content = tw.div`m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg justify-center flex-1`;
 const Label = tw.p`bg-gray-100 block text-sm font-medium text-gray-700 p-2`;
 const FormLabel = tw.label`block text-sm font-medium text-gray-700`;
 const FormInput = tw.input`p-2 mt-1 border border-gray-300 focus:border-gray-500 focus:ring-2 focus:ring-gray-500/50 block w-full shadow-sm text-sm rounded-md`;
+const BackButton = tw.button`mx-8 mt-10 mt-8 md:mt-8 sm:w-32 mt-6 py-3 bg-pink-500 text-gray-100 rounded-full font-bold tracking-wide`
 
 class PayOrder extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            designFee: 100,
+            designFee: this.props.location.query.price,
             stylistName: this.props.location.query.styName,
             orderId: this.props.location.query.id,
             lowPrice: this.props.location.query.lowPrice,
-            highPrice: this.props.location.query.highPrice 
+            highPrice: this.props.location.query.highPrice
         }
 
         this.payBtnPressed = this.payBtnPressed.bind(this)
+        this.back = this.back.bind(this)
     }
 
     payBtnPressed(event){
         event.preventDefault();
-        alert("Successfully pay the order!");
-        this.props.history.push({pathname:"/orders"})
+        OrderService.payOrder(this.state.orderId)
+        .then((response)=>{
+            console.log(response)
+            alert("Successfully pay the order!");
+            this.props.history.push({pathname:"/orders"})
+        })
+        .catch((error)=>{
+            console.log(error.response)
+        })
+
+    }
+
+    back(){
+        this.props.history.push({
+            pathname:'/orderDetail',
+            query: {
+                id: this.state.orderId,
+                orderStatus: 3
+            }
+        })
     }
 
     render(){
@@ -56,7 +78,7 @@ class PayOrder extends Component {
                                     <Label>&#8194; Total clothes cost: range ({this.state.lowPrice} - {this.state.highPrice}) </Label>
                                     <p className='m-3 text-sm font-medium text-gray-700 pb-3'> &#8194; (- - - NA, only pay the design fee here - - -) </p>
                                 </div>
-                                
+
                             </div>
                         </div>
                     <div className="mt-5 md:mt-0 md:col-span-2 border-l border-gray-200  mb-7 pr-10">
@@ -73,8 +95,8 @@ class PayOrder extends Component {
                                         </select>
                                     </div>
                                     <div className="col-span-6 sm:col-span-3"></div>
-                                    
-                                    
+
+
                                     <div className="col-span-6 sm:col-span-3">
                                         <FormLabel>Card number</FormLabel>
                                         <FormInput type="text" required/>
@@ -122,6 +144,8 @@ class PayOrder extends Component {
                     </div>
                 </div>
                 </Content>
+                    <BackButton onClick={this.back}>Back</BackButton>
+                    <Footer/>
                 </Container>
             </AnimationRevealPage>
         )

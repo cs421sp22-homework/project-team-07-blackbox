@@ -6,6 +6,7 @@ import StylistProfilePastDesign from "components/testimonials/StylistProfileTwoC
 import StylistService from "api/styleBox/StylistService";
 import PastDesign1 from "../../images/StylistProfile_pastdesign1.png"
 import NavBarAuthenticated from "../navBar_footer/NavBarAuthenticated";
+import {API_URL} from "../../Constants";
 
 class StylistProfile extends Component{
   constructor(props){
@@ -64,8 +65,9 @@ class StylistProfile extends Component{
       <AnimationRevealPage>
         <NavBarAuthenticated/>
         {console.log("pass", this.state.testimonials)}
+        {/*<StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/> */}
         <StylistProfileImageIntro testimonials={this.state.testimonials}/>
-        <StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
+        <StylistProfilePastDesign photo={this.state.testimonials[0].photo} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
       </AnimationRevealPage>
     )

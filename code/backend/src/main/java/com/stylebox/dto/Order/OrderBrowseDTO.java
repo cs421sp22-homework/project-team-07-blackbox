@@ -15,7 +15,7 @@ public class OrderBrowseDTO {
     private String description;
     private int clothPriceLow;
     private int clothPriceHigh;
-    private Date time;
+    private String time;
     private Long orderId;
     private int orderStatus;
 }

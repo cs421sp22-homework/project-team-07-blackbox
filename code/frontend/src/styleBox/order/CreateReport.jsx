@@ -56,14 +56,14 @@ class CreateReportForm extends Component{
     super(props)
 
     this.state = {
-      // orderId: this.props.orderId,
-      orderId: 1,
+      orderId: this.props.location.query.id,
+      // orderId: 1,
       outfitImage: [],
       idea:'',
       items: [],
-      
+
     }
-    
+
     this.submitInfo = this.submitInfo.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.back = this.back.bind(this)
@@ -86,17 +86,16 @@ class CreateReportForm extends Component{
         pathname:'/orderDetail',
         query: {
             id: this.state.orderId,
+            orderStatus: 4
         }
     })
-    // console.log(this.state.outfitImage)
-    // console.log(this.state.items)
   }
 
   onDropOutfit(pictureFiles, pictureDataURLs){
     this.setState({
       outfitImage: pictureFiles
     });
-    
+
   }
 
   setItems(allItems){
@@ -106,23 +105,32 @@ class CreateReportForm extends Component{
   }
 
   submitInfo(event){
-    let info = {
-      outfitImage: this.state.outfitImage,
-      idea: this.state.idea,
-      items: this.state.items.map((item)=>{
-        var newItem = {
-          itemsId: item.itemsId,
-		      itemName: item.itemName,
-		      link: item.link,
-		      itemImage: item.itemImage,
-        }
-        return newItem
-      }),
+    var info = new FormData();
+    info.append("outfitImage", this.state.outfitImage[0]);
+    info.append("idea", this.state.idea);
+    for(var key in this.state.items){
+      info.append("itemsId", this.state.items[key].itemsId);
+      info.append("itemName", this.state.items[key].itemName);
+      info.append("link", this.state.items[key].link);
+      info.append("itemImage", this.state.items[key].itemImage);
     }
+    // let info = {
+    //   outfitImage: this.state.outfitImage,
+    //   idea: this.state.idea,
+    //   items: this.state.items.map((item)=>{
+    //     var newItem = {
+    //       itemsId: item.itemsId,
+		//       itemName: item.itemName,
+		//       link: item.link,
+		//       itemImage: item.itemImage,
+    //     }
+    //     return newItem
+    //   }),
+    // }
     event.preventDefault();
-    console.log(info)
+    console.log(info.getAll('itemImage'))
 
-    ReportService.createReport(this.state.orderId, info) 
+    ReportService.createReport(this.state.orderId, info)
     .then((response)=>{
       console.log(response.data);
       alert("Create report success!");
@@ -130,6 +138,7 @@ class CreateReportForm extends Component{
         pathname:'/orderDetail',
         query: {
             id: this.state.orderId,
+            orderStatus: 5
         }
       })
     })
@@ -147,22 +156,22 @@ class CreateReportForm extends Component{
       <Content>
         <FormContainer>
           <div tw="mx-auto max-w-4xl">
-            <h2 align="center">Create an Report</h2>        
+            <h2 align="center">Create an Report</h2>
             <form>
             <Column>
-            <Label >Order number: {this.props.location.query.id}</Label>
+            <Label >Order number: {this.state.orderId}</Label>
             </Column>
             <TwoColumn>
                 <Column>
-                  <Label >Stylist Name: stylist1</Label>
-                  <Label >Stylist ID: 0001</Label>
+                  {/* <Label >Stylist Name: stylist1</Label>
+                  <Label >Stylist ID: 0001</Label> */}
                   {/* <Label >Stylist Name: {this.props.stylistName}</Label>
                   <Label >Stylist ID: {this.props.stylistId}</Label> */}
                 </Column>
                 <Column>
                   <Label ></Label>
-                  <Label >Customer Name: customer1</Label>
-                  <Label >Customer ID: 0002</Label>
+                  {/* <Label >Customer Name: customer1</Label>
+                  <Label >Customer ID: 0002</Label> */}
                   {/* <Label >Customer Name: {this.props.customerName}</Label>
                   <Label >Customer ID: {this.props.customerId}</Label> */}
                 </Column>
@@ -175,9 +184,10 @@ class CreateReportForm extends Component{
                       withPreview={true}
                       withLabel={false}
                       buttonText="Choose images"
+                      singleImage={true}
                       // buttonStyles={{background:'rgb(236 72 153'}}
                       onChange={this.onDropOutfit}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                      imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
                       maxFileSize={5242880}
                     />
                   </InputContainer>

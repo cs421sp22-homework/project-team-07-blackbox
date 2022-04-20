@@ -47,7 +47,7 @@ class ConfirmForm extends Component {
 
     confirm() {
         console.log("here")
-        console.log(this.child.state.num)
+        console.log("stars",this.child.state.num)
         console.log(this.state.comment)
         console.log(this.props.orderId)
         orderService.confirmOrder(this.child.state.num, this.state.comment, this.props.orderId)
@@ -59,11 +59,17 @@ class ConfirmForm extends Component {
             })
 
         let info = {
-            rate: this.state.rate,
+            rate: this.child.state.num,
             comment: this.state.comment
         }
         console.log(info)
-        this.props.history.push("/orders");
+        this.props.history.push({
+            pathname:'/orderDetail',
+            query: {
+                id: this.state.orderId,
+                orderStatus: 6
+            }
+        })
     }
 
     handleChange(event){

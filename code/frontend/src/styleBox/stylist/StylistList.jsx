@@ -3,11 +3,6 @@ import React, {Component} from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Footer from "styleBox/navBar_footer/Footer.jsx";
 import Cookies from 'react-cookies';
-import { Container as ContainerBase} from "components/misc/Layouts";
-import NavBar from "styleBox/navBar_footer/NavBar.jsx";
-import NavBarCustomer from '../navBar_footer/NavBarCustomer';
-import NavBarStylist from 'styleBox/navBar_footer/NavBarStylist';
-import StylistListSingleProfile from "../../components/testimonials/StylistListSingleProfile";
 import StylistListService from "api/styleBox/StylistListService";
 import styled from "styled-components";
 import {SectionHeading, Subheading as SubheadingBase} from "../../components/misc/Headings";
@@ -191,17 +186,17 @@ class StylistList extends Component{
             <AnimationRevealPage>
                 <NavBarAuthenticated/>
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
-                <div className="col-12 col-lg-5 text-right ">
+                <div className="mt-10 text-right">
                     {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
-                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
-                    <select   onChange={this.sortBtn}>
+                    <input className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg" type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
+                    <select className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg"  onChange={this.sortBtn}>
                         <option disabled selected value> - select an sort option - </option>
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
                         <option value="">null</option>
                     </select>
-                    <select  onChange={this.styleBtn}>
+                    <select className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg" onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
                         <option value="Sexy">sexy</option>
                         <option value="Sports">sports</option>
@@ -222,7 +217,7 @@ class StylistList extends Component{
                         {this.state.stylistLists.map((stylistLst, index) => (
                             <TwoColumn css={!true && tw`md:items-center`} key={index}>
                                 <ImageColumn css={null}>
-                                    {true ? <Image imageSrc={`${API_URL}${stylistLst.avatar}`} css={null}/> :
+                                    {true ? <Image imageSrc={stylistLst.avatar} css={null}/> :
                                         <img src={null} css={null} alt=""/>}
                                     {false && <DecoratorBlob css={null}/>}
                                 </ImageColumn>

@@ -5,6 +5,7 @@ import tw from 'twin.macro'
 import AccountSettingService from "../api/styleBox/AccountSettingService";
 import CustomerForm from "./customer/CustomerForm";
 import NavBarCustomer from "./navBar_footer/NavBarCustomer";
+import NavBarAuthenticated from "./navBar_footer/NavBarAuthenticated"
 import Footer from "./navBar_footer/Footer";
 
 class AccountSetting extends Component {
@@ -42,7 +43,9 @@ class AccountSetting extends Component {
         this.setState(
             {avatar : event.target.files[0]}
         )
-        AccountSettingService.modifyAvatar(event.target.files[0])
+        let newAvatar = new FormData();
+        newAvatar.append("img", event.target.files[0])
+        AccountSettingService.modifyAvatar(newAvatar)
             .then((response) => {
                 console.log("modify avatar", response)
                 window.alert("Modify avatar successfully")
@@ -90,7 +93,7 @@ class AccountSetting extends Component {
     render() {
         return (
             <div>
-                <NavBarCustomer/>
+                <NavBarAuthenticated/>
                 <div className="hidden sm:block" aria-hidden="true">
                     <div className="py-5">
                         <div className="border-t border-gray-200"></div>

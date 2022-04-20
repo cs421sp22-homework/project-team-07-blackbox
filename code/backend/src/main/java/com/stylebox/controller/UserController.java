@@ -127,9 +127,6 @@ public class UserController {
     @GetMapping("/stylist/profile/{id}")
     public StylistHomepageDTO getStylistHomepage(HttpServletRequest request, @PathVariable Long id){
         User user = jwtTokenUtil.getUserFromRequest(request);
-        if (!user.getRole().getName().equals("Customer")) {
-            throw new Rest400Exception("Follower has to be a customer! Customer does not exist!");
-        }
         return userService.getStylistHomepage(user, id);
     }
 

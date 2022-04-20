@@ -71,18 +71,19 @@ public class OrderService {
         orders.setCustomer(user.getCustomerInformation());
         orders.setStylist(stylistInformationRepository.getById(styid));
         orders.setOrderStatus(1);
+        orders.setTimestamp(String.valueOf(orders.getCreatedDatetime().getTime()));
         orderRepository.save(orders);
     }
 
     public OrderListDTO getOrderList(User user, int page, String sort, int limit) {
         OrderListDTO orderListDTO = new OrderListDTO();
         if (sort.equals("time")) {
-            sort = "createdDatetime";
+            sort = "timestamp";
         } else if (sort.equals("-time")) {
-            sort = "-createdDatetime";
+            sort = "-timestamp";
         }
         Pageable pageable = sortUtil.sortPage(sort, page, limit, new ArrayList<>(Arrays.asList
-                ("createdDatetime", "isRead")));
+                ("timestamp", "isRead")));
 
         Specification<Orders> specification = new Specification<Orders>() {
             @Override
@@ -128,7 +129,7 @@ public class OrderService {
             Set<String> occs = new HashSet<>(Arrays.asList(o.getOccasions().split(",")));
             orderBrowseDTO.setOccasionSet(occs);
             //lastEditDatetime -- time
-            orderBrowseDTO.setTime(o.getLastEditDatetime());
+            orderBrowseDTO.setTime(o.getLastEditDatetime().toString().substring(5, 19));
             //orderid
             orderBrowseDTO.setOrderId(o.getId());
             orderBrowseDTOS.add(orderBrowseDTO);
@@ -161,7 +162,7 @@ public class OrderService {
         modelMapper.map(o.getCustomer().getUser(), orderDetailDTO);
         modelMapper.map(o, orderDetailDTO);
         orderDetailDTO.setCusNickname(o.getCustomer().getUser().getNickname());
-        orderDetailDTO.setTime(o.getCreatedDatetime());
+        orderDetailDTO.setTime(o.getLastEditDatetime().toString().substring(5, 19));
         //styleSet
         Set<String> styles = new HashSet<>();
         for (Style s : o.getStyleSet()) {
@@ -200,6 +201,9 @@ public class OrderService {
         }else if(isAccept==1){
             o.setOrderStatus(3);
         }
+        o.setCustomerRead(false);
+        o.setLastEditDatetime(new Date());
+        o.setTimestamp(String.valueOf(o.getLastEditDatetime().getTime()));
         orderRepository.save(o);
     }
 
@@ -219,6 +223,9 @@ public class OrderService {
         }
 
         o.setOrderStatus(4);
+        o.setStylistRead(false);
+        o.setLastEditDatetime(new Date());
+        o.setTimestamp(String.valueOf(o.getLastEditDatetime().getTime()));
         orderRepository.save(o);
     }
 
@@ -238,6 +245,9 @@ public class OrderService {
         }
         modelMapper.map(orderConfirmDTO, o);
         o.setOrderStatus(6);
+        o.setStylistRead(false);
+        o.setLastEditDatetime(new Date());
+        o.setTimestamp(String.valueOf(o.getLastEditDatetime().getTime()));
         orderRepository.save(o);
     }
 

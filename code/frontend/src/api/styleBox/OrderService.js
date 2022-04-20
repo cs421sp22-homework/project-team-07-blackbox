@@ -30,8 +30,13 @@ class OrderService {
     }
 
     manageOrder(orderIdV, isAcceptV){
-        console.log(isAcceptV)
-        return axios.post(`${API_URL}/order/action/${orderIdV}`, {params: {orderId: orderIdV, isAccept: isAcceptV}})
+        console.log(`send isAccept ${isAcceptV}`)
+        return axios.post(`${API_URL}/order/action/${orderIdV}/${isAcceptV}`)
+    }
+
+    payOrder(orderId){
+        console.log(`orderId${orderId}`)
+        return axios.post(`${API_URL}/order/payment/${orderId}`)
     }
 
 }

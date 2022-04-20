@@ -121,9 +121,7 @@ class CreateOrderForm extends Component{
     }
     event.preventDefault();
     console.log("create info")
-    if (this.state.clothPriceLow>this.state.clothPriceHigh){
-      alert("Low price is higher than high price.")
-    }else{
+
     OrderService.createOrder(this.props.stylist.stylistId,info) //this.props.location.stylistId
     .then((response)=>{
       console.log(response.data);
@@ -139,7 +137,7 @@ class CreateOrderForm extends Component{
       console.log(error.response);
       alert("Create order failed. Please try again.");
       // this.props.history.push("/");
-    })}
+    })
   }
 
   render(){
