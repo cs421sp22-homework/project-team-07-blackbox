@@ -55,6 +55,9 @@ class NavBarStylist extends Component{
                     <NavLink target="_self" href="#">
                         Community
                     </NavLink>
+                    <NavLink target="_self" href="/tryon">
+                        Try On
+                    </NavLink>
                     <Dropdown MenuName="Account" items={[
                         {
                         ItemName: "Stylist Profile",
