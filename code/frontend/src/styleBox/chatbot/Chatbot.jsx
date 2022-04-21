@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ChatBot from 'react-simple-chatbot'
-import tw from 'twin.macro'
 import { ThemeProvider } from 'styled-components';
+import ChatbotService from 'api/styleBox/ChatbotService';
 
 const theme = {
     background: '#f5f8fb',
@@ -24,10 +24,23 @@ class Chatbot extends Component {
         super(props)
         
         this.state = {
-            answer: "my ans",
-            ques: "111"
+
         }
         // function part
+        this.getAnsFromBot = this.getAnsFromBot.bind(this)
+    }
+
+    getAnsFromBot(ques){
+        let ans = "answer is changed";
+        ChatbotService.getAnswer(ques)
+        .then((response) => {
+            console.log(response.data);
+            ans = response.data.ans            
+        })
+        .catch((error) => {
+            console.log(error.response)
+        })
+        return ans
     }
 
     render() {
@@ -98,16 +111,16 @@ class Chatbot extends Component {
                         {
                             id: 'ques',
                             user: true,
-                            trigger: 'confirm',
-                        },
-                        {
-                            id: 'confirm',
-                            message: ({ previousValue, steps }) => console.log(previousValue),
                             trigger: 'ans',
                         },
                         {
                             id: 'ans',
-                            message: 'Answer here: ' + this.state.answer + ", does this solve your question?",
+                            message: ({ previousValue, steps }) => this.getAnsFromBot(previousValue),
+                            trigger: 'confirm',
+                        },
+                        {
+                            id: 'confirm',
+                            message: 'Solve your question?',
                             trigger: 'solve',
                         },
                         {
