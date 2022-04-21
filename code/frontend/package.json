@@ -2,6 +2,7 @@
   "name": "treact",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8081",
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
@@ -51,7 +52,8 @@
     "build": "node --max_old_space_size=2048 node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && netlify deploy --prod --dir=build"
+    "deploy": "yarn build && netlify deploy --prod --dir=build",
+    "start-backend": "cd backend && env/bin/flask run --no-debugger"
   },
   "eslintConfig": {
     "extends": "react-app",

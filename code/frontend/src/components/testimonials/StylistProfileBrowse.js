@@ -108,7 +108,7 @@ class StylistProfileBrowse extends Component{
               {this.props.testimonials.map((testimonial, index) => (
                 <Testimonial key={index}>
                   <ImageContainer>
-                    <img src={`${API_URL}${testimonial.photo}`} alt={testimonial.customerName} />
+                    <img src={testimonial.photo} alt={testimonial.customerName} />
                   </ImageContainer>
 
                   <TextContainer>

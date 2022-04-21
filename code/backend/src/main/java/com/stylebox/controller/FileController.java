@@ -57,7 +57,7 @@ public class FileController {
     }
 
     @PostMapping("/avatar")
-    public String UploadAvatar(HttpServletRequest request, AvatarDTO avatarDTO){
+    public String UploadAvatar(HttpServletRequest request, AvatarDTO avatarDTO) throws IOException {
 
         User user = jwtTokenUtil.getUserFromRequest(request);
 
@@ -66,13 +66,13 @@ public class FileController {
     }
 
     @PostMapping("/stylist/display")
-    public void UploadDisplay(HttpServletRequest request, DisplayPostDTO displays){
+    public void UploadDisplay(HttpServletRequest request, DisplayPostDTO displays) throws IOException {
         User user = jwtTokenUtil.getUserFromRequest(request);
         fileService.UpdateDisplay(user, displays);
     }
 
     @PostMapping("/stylist/styleReport/{orderId}")
-    public void UploadStyleReport(HttpServletRequest request, @PathVariable("orderId") Long orderId, StyleReportPostDTO report){
+    public void UploadStyleReport(HttpServletRequest request, @PathVariable("orderId") Long orderId, StyleReportPostDTO report) throws IOException {
         User user = jwtTokenUtil.getUserFromRequest(request);
         fileService.UploadReport(user, report, orderId);
     }
