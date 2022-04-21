@@ -29,11 +29,8 @@ const Plus = tw.div`mt-24 ml-12 lg:h-4 lg:w-1/12 leading-relaxed font-bold text-
 const Category = tw.div`mt-4 text-secondary-100 font-bold text-sm`;
 const Title = tw.h4`mt-2 leading-relaxed font-bold text-lg`;
 const Link = tw.a`inline-block mt-2 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500`;
-const Button = tw.button`mt-20 ml-20 px-3 py-3 bg-pink-500 text-gray-100 rounded-full font-bold tracking-wide 
-shadow-lg text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
-const BackButton = tw.button`mt-20 md:mt-8 sm:w-32 px-3 py-3 bg-pink-500 text-gray-100 rounded-full font-bold tracking-wide 
-shadow-lg text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
-
+const Button = tw.button`mt-20 py-3 bg-pink-500 text-gray-100 rounded-full font-bold tracking-wide 
+shadow-lg uppercase text-sm transition duration-300 transform focus:outline-none focus:shadow-outline hover:bg-gray-300 hover:text-pink-700 hocus:-translate-y-px hocus:shadow-xl`;
 
 const DecoratorBlob1 = tw(
   SvgDecoratorBlob1
@@ -42,77 +39,29 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25`;
 
-
-class Tryon extends Component{
+class TryonResult extends Component{
   constructor(props){
     super(props)
 
     this.state = {
-      loadImage: true,
-      personImage: [],
-      displayPersonImage: '',
-      clothesImage: [],  
-      displayClothesImage: '',   
-      tryonImage: '', 
+      personImage: this.props.location.query.personImage,
+      clothesImage: this.props.location.query.clothesImage,  
+      tryonImage: this.props.location.query.tryonImage,    
     }
     
-    this.submit = this.submit.bind(this)
-    this.onDropPerson = this.onDropPerson.bind(this)
-    this.onDropClothes = this.onDropClothes.bind(this)
-    this.back= this.back.bind(this)
+    this.back = this.back.bind(this)
+
   }
 
   componentDidMount() {
+    console.log(this.state.personImage)
     window.scrollTo(0, 0);
   }
 
-  onDropPerson(pictureFiles, pictureDataURLs){
-    this.setState({
-      personImage: pictureFiles[0],
-      displayPersonImage: pictureDataURLs
-    });
-  }
-
-  onDropClothes(pictureFiles, pictureDataURLs){
-    this.setState({
-      clothesImage: pictureFiles[0],
-      displayClothesImage: pictureDataURLs
-    });
-  }
-
-  submit(event){
-    var info = new FormData();
-    info.append("personImage", this.state.personImage);
-    info.append("clothesImage", this.state.clothesImage);
-
-    console.log(info.getAll('personImage'))
-    console.log(info.getAll('clothesImage'))
-    // event.preventDefault();
-
-    TryonService.getTryon(info) 
-    .then((response)=>{
-      console.log(response.data);
-      alert("Create Tryon success!");
-      this.setState({
-        loadImage: false,
-        tryonImage: response.data.tryonUrl,
-      })
-    })
-    .catch((error) => {
-      console.log(error.response);
-      alert("Create order failed. Please try again.");
-    })
-  }
-
   back(){
-    this.setState({
-      loadImage: true,
-      personImage: [],
-      displayPersonImage: '',
-      clothesImage: [],  
-      displayClothesImage: '',   
-      tryonImage: '', 
-    });
+    this.props.history.push({
+        pathname:'/tryon',
+    })
   }
 
   render(){
@@ -139,21 +88,7 @@ class Tryon extends Component{
            ))}  */}
           <Column>
             <Card>
-            {this.state.loadImage ?<div> <ImageUploader
-                      withIcon={true}
-                      withPreview={true}
-                      withLabel={false}
-                      buttonText="Upload your photo"
-                      buttonStyles={{background:'rgb(236 72 153'}}
-                      onChange={this.onDropPerson}
-                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                      maxFileSize={5242880}
-                      singleImage={true}
-                    /> 
-                    {/* <img src={this.state.displayPersonImage} alt=''/> */}
-                    </div>: 
-                    <img src={this.state.displayPersonImage} alt=''/>
-                    }
+            <Image imageSrc={this.state.personImage} />
               
             </Card>
           </Column>
@@ -167,21 +102,16 @@ class Tryon extends Component{
 
           <Column>
           <Card>
-          {this.state.loadImage ? <div><ImageUploader
+            <ImageUploader
                       withIcon={true}
                       withPreview={true}
                       withLabel={false}
-                      buttonText="Upload clothing image"
+                      buttonText="Choose images"
                       buttonStyles={{background:'rgb(236 72 153'}}
                       onChange={this.onDropClothes}
                       imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                       maxFileSize={5242880}
-                      singleImage={true}
-                      
-                    /> 
-                    </div>:
-                    <img src={this.state.displayClothesImage} alt=''/>
-          }
+                    />
             </Card>
           </Column>
 
@@ -193,24 +123,16 @@ class Tryon extends Component{
           </SmallColumn>
 
           <LargeColumn>
-            <Card>
-            {this.state.loadImage ?
-              <Button onClick={this.submit}>Generate try-on!</Button>
-              :
-              <img src={this.tryonImage} alt=''/>
-            }
-            </Card>
+            {/* <Card><Button onClick={this}>Generate try-on</Button></Card> */}
+            {/* <Card>
+              <Image imageSrc={this.blogPosts[1].imageSrc} />
+              <Category>{this.blogPosts[1].category}</Category>
+              <Title>{this.blogPosts[1].title}</Title>
+              <Link href={this.blogPosts[1].url}>Read Post</Link>
+          </Card> */}
             
           </LargeColumn>
         </ThreeColumn>
-        {this.state.loadImage ?
-              <div></div>
-              :
-              <div class="grid grid-cols-1 gap-4 place-items-center">
-                <BackButton onClick={this.back}>Try again</BackButton>
-              </div>
-              
-            }
       </Content>
       <DecoratorBlob1 />
       <DecoratorBlob2 />
@@ -220,4 +142,4 @@ class Tryon extends Component{
 };
 
 
-export default Tryon
+export default TryonResult
