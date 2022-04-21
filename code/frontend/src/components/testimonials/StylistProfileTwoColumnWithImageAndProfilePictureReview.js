@@ -189,7 +189,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                       <div className="grid grid-cols-5 my-10"key={index}>
                         <div></div>
                           <ImageAndControlContainer>
-                            <Image1 src={`${API_URL}${testimonial.image}`}/>
+                            <Image1 src={testimonial.image}/>
                           </ImageAndControlContainer>
                         <TestimonialText className="col-span-2">
                             <QuoteContainer>
@@ -233,7 +233,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
               <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
                 {this.props.display.map((testimonial, index) => (
                   <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.image===null?PastDesign1: `${API_URL}${testimonial.image}`}/>
+                    <Image src={testimonial.image===null?PastDesign1: testimonial.image}/>
                     <ControlContainer>
                       <ControlButton onClick={imageSliderRef?.slickPrev}>
                         <ChevronLeftIcon />
@@ -259,7 +259,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                         </Quote>
                       </QuoteContainer>
                       <CustomerInfo>
-                        <CustomerProfilePicture src={`${API_URL}${this.props.photo}`} alt={this.state.customerName} />
+                        <CustomerProfilePicture src={this.props.photo} alt={this.state.customerName} />
                         <CustomerTextInfo>
                           <CustomerName>{this.state.customerName}</CustomerName>
                           <CustomerTitle>{this.state.customerTitle}</CustomerTitle>

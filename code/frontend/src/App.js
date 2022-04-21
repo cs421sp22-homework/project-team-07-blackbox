@@ -22,7 +22,6 @@ import CreateReport from "styleBox/order/CreateReport";
 import ViewReport from "./styleBox/order/ViewReport";
 import ConfirmOrder from "./styleBox/order/ConfirmOrder";
 import Tryon from "./styleBox/try_on/Tryon.jsx";
-import TryonResult from "styleBox/try_on/TryonResult";
 
 
 export default function App() {
@@ -53,7 +52,6 @@ export default function App() {
               <AuthenticatedRoute path="/viewReport" component={ViewReport}/>
               <AuthenticatedRoute path="/confirmOrder" component={ConfirmOrder}/>
               <AuthenticatedRoute path="/tryon" component={Tryon}/>
-              <AuthenticatedRoute path="/tryonResult" component={TryonResult}/>
           </Switch>
       </>
   </Router>

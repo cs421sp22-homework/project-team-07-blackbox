@@ -82,11 +82,11 @@ class Tryon extends Component{
 
   submit(event){
     var info = new FormData();
-    info.append("personImage", this.state.personImage);
-    info.append("clothesImage", this.state.clothesImage);
+    info.append("photo", this.state.personImage);
+    info.append("cloth", this.state.clothesImage);
 
-    console.log(info.getAll('personImage'))
-    console.log(info.getAll('clothesImage'))
+    console.log(info.getAll('photo'))
+    console.log(info.getAll('cloth'))
     // event.preventDefault();
 
     TryonService.getTryon(info) 
@@ -100,7 +100,7 @@ class Tryon extends Component{
     })
     .catch((error) => {
       console.log(error.response);
-      alert("Create order failed. Please try again.");
+      alert("Create Tryon failed. Please try again.");
     })
   }
 
@@ -197,7 +197,7 @@ class Tryon extends Component{
             {this.state.loadImage ?
               <Button onClick={this.submit}>Generate try-on!</Button>
               :
-              <img src={this.tryonImage} alt=''/>
+              <img src={this.state.tryonImage} alt=''/>
             }
             </Card>
             
