@@ -33,26 +33,26 @@ class Chatbot extends Component {
         this.getAnsFromBot = this.getAnsFromBot.bind(this)
     }
 
-    async getAnsFromBot(ques){
+     async getAnsFromBot(ques){
         let ans = "";
         let info = {question: ques};
 
-        return axios.get(`${FLASK_API_URL}/chatbot`, {params: info}).then(response=>response.data)
-        // try {
-        //     await axios.get(`${FLASK_API_URL}/chatbot`, {params: info})
-        //         .then(response=>{console.log(response.data.ans);return response.data})
-        //     //console.log(typeof res.data.ans)
-        // }
-        // catch(err){
-        //     console.error(err)
-        // }
+        // await axios.get(`${FLASK_API_URL}/chatbot`, {params: info})
+        //     .then(response => {
+        //         console.log(response.data.ans)
+        //         return response.data
+        //     })
+        await axios.get(`${FLASK_API_URL}/chatbot`, {params: info})
+            .then(response=>{
+                this.setState({answer: response.data.ans})
+                console.log(this.state.answer)
+            })
+            //console.log(typeof res.data.ans)
     }
 
     async getAns(ques){
         let ans = ""
-        await this.getAnsFromBot(ques).then(result => {
-            this.state.answer = result
-        })
+        await this.getAnsFromBot(ques)
         console.log("end2")
     }
 
@@ -85,11 +85,11 @@ class Chatbot extends Component {
                         {
                             id: 'role',
                             component: (
-                                <div className='text-xs'> 
-                                    1. For customer: you can browse stylist list, select stylist you like, and make an order. 
-                                    After the order is accepted, you need to pay and wait. Check order list to track status. 
+                                <div className='text-xs'>
+                                    1. For customer: you can browse stylist list, select stylist you like, and make an order.
+                                    After the order is accepted, you need to pay and wait. Check order list to track status.
                                     If order is finished, rate it and share your experience! <br />
-                                    
+
                                     2. For stylist: you can manage orders, either accept or reject. You should upload design file after finishing design.
                                     You can also update you profile and share your previous design.
                                 </div>
@@ -111,7 +111,7 @@ class Chatbot extends Component {
                         {
                             id: 'orders',
                             component: (
-                                <div className='text-xs'> Login first, click 'Account' in the menu bar. Your will find the order button. 
+                                <div className='text-xs'> Login first, click 'Account' in the menu bar. Your will find the order button.
                                 Click to view all orders you have and check status, view detail or make an action.</div>
                               ),
                             trigger: '1',
@@ -128,11 +128,21 @@ class Chatbot extends Component {
                         },
                         {
                             id: 'ans',
-                            message: ({ previousValue, steps }) => {
-                                this.getAnsFromBot(previousValue)
-                                    .then(data => { console.log(typeof data.ans); this.state.answer = data.ans})
-                                return this.state.answer.PromiseResult
+                            message:  ({ previousValue, steps }) => {
+                                this.getAns(previousValue)
+                                return "Let me check..."
 
+                            },
+                            trigger: 'real-ans',
+                        },
+                        {
+                            id: 'real-ans',
+                            message: ({ previousValue, steps }) =>{
+                                let start = new Date().getTime();
+                                while(new Date().getTime() < start + 1000){
+                                    console.log("wait")
+                                }
+                                return this.state.answer
                             },
                             trigger: 'confirm',
                         },
