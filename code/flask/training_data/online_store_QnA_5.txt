@@ -1,0 +1,8 @@
+Product name?
+Stylebox.
+Stylists?
+Stylist can publish post and edit stylist's profile. Stylist can process orders.
+Process orders?
+Stylist can get notification when receiving new orders. And stylists can accept and reject orders.
+Accept a order?
+Stylist will design report for customers. And they can also edit the report.

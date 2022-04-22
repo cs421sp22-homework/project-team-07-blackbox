@@ -1,0 +1,8 @@
+What is your product name?
+Stylebox.
+What payment do you support?
+We accept debit cards and major credit cards.
+How to place order?
+You can find a stylist first and then place order at their homepage.
+How to pay?
+We accept debit cards and major credit cards.

@@ -1,5 +1,7 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer
+import os
 
 chatbot = ChatBot(
     'e-stylist KK',
@@ -9,78 +11,42 @@ chatbot = ChatBot(
             'default_response': 'I am sorry, I do not understand. I am still learning. Please contact styleBox@gmail.com for further assistance.',
             'maximum_similarity_threshold': 0.30
         }
-    ]
+    ],
+             read_only = True,
+             preprocessors=['chatterbot.preprocessors.clean_whitespace',
+                            'chatterbot.preprocessors.unescape_html',
+                           'chatterbot.preprocessors.convert_to_ascii']
 )
 
-trainer = ListTrainer(chatbot)
+directory = 'training_data'
 
-trainer.train([
-    "Hi there!",
-    "Hello",
-])
+for filename in os.listdir(directory):
+    if filename.endswith(".txt"): # only pick txt file for training
+        print('\n Chatbot training with '+os.path.join(directory, filename)+' file')
+        training_data = open(os.path.join(directory, filename)).read().splitlines()
+        trainer = ListTrainer(chatbot) # bot training
+        trainer.train(training_data)
+    else:
+        continue
 
-trainer.train([
-    "Hi, can I help you",
-    "Who are you?",
-    "I am your virtual assistant. Ask me any questions...",
+# user choose whether to train with English corpus data
+# decision = input('Train chatbot with English corpus data? (Y/N): ')
+#
+# if decision == 'Y':
+#     print('\n Chatbot training with English corpus data')
+    trainer_corpus = ChatterBotCorpusTrainer(chatbot)
+    trainer_corpus.train('chatterbot.corpus.english')
 
-])
-
-
-trainer.train([
-    "What is your name?",
-    "KK"
-])
-
-trainer.train([
-    "Your name?",
-    "KK"
-])
-
-trainer.train([
-    "Name?",
-    "KK"
-])
-
-# trainer.train([
-#     "Payment",
-#     "We support debit card and credit card."
-# ])
-
-trainer.train([
-    "What payment do you support?",
-    "We support debit card and credit card."
-])
-
-# trainer.train([
-#     "How to place order?",
-#     "You can find a stylist first and then place order at they on their homepage."
-# ])
-
-trainer.train([
-    "How should I place order?",
-    "You can find a stylist first and then place order at they on their homepage."
-])
-
-trainer.train([
-    "How can I place order",
-    "You can find a stylist first and then place order at they on their homepage."
-])
-
-
-
-# trainer.train([
-#     "Payment",
-#     "We support debit card and credit card."
-# ])
-
-
-trainer.train([
-    "Bye",
-    "Bye"
-])
-
-trainer.train([
-    "Greetings!",
-    "Hello",
-])
+# name = input('Enter Your Name: ')
+#
+# print ('Welcome to Chatbot Service! Let me know how can I help you')
+#
+# while True:
+#     request = input(name+':')
+#
+#     if request=="Bye" or request=='bye':
+#         print('Bot: Bye')
+#         break
+#     else:
+#         response=chatbot.get_response(request)
+#         print('Bot: ', response)
