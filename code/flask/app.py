@@ -13,10 +13,26 @@ from PIL import Image
 from flask import Flask, request, render_template, jsonify
 import tryonService
 from flask_cors import CORS, cross_origin
+from chatBot import chatbot
 
 # flask web service
 app = Flask(__name__, template_folder="web")
 CORS(app)
+
+
+@app.route('/chatbot', methods=['get'])
+def getResponse():
+    question = request.args.get("question")
+    print(question)
+    answer = chatbot.get_response(question)
+    print(type(answer))
+    response = jsonify({'ans': answer.text})
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
+
+@app.route('/chatbot', methods=['post'])
+def getResponse():
+    return {"ans": "hello"}
 
 @app.route('/tryon', methods=['post'])
 def upload():

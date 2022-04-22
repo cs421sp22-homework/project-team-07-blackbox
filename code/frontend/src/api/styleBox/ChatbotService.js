@@ -4,7 +4,8 @@ axios.defaults.withCredentials=true
 
 class ChatbotService {
     getAnswer(ques){
-        return axios.post(`${FLASK_API_URL}/chatbot`, ques)
+        console.log(ques)
+        return axios.get(`${FLASK_API_URL}/chatbot`, {params:ques})
     }
 }
 

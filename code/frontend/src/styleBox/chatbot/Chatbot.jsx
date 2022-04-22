@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import ChatBot from 'react-simple-chatbot'
 import { ThemeProvider } from 'styled-components';
 import ChatbotService from 'api/styleBox/ChatbotService';
+import axios from "axios";
+import {FLASK_API_URL} from "../../Constants";
+import {getValue} from "@testing-library/user-event/dist/utils";
 
 const theme = {
     background: '#f5f8fb',
@@ -24,23 +27,33 @@ class Chatbot extends Component {
         super(props)
         
         this.state = {
-
+            answer: "origin answer"
         }
         // function part
         this.getAnsFromBot = this.getAnsFromBot.bind(this)
     }
 
-    getAnsFromBot(ques){
-        let ans = "answer is changed";
-        ChatbotService.getAnswer(ques)
-        .then((response) => {
-            console.log(response.data);
-            ans = response.data.ans            
+    async getAnsFromBot(ques){
+        let ans = "";
+        let info = {question: ques};
+
+        return axios.get(`${FLASK_API_URL}/chatbot`, {params: info}).then(response=>response.data)
+        // try {
+        //     await axios.get(`${FLASK_API_URL}/chatbot`, {params: info})
+        //         .then(response=>{console.log(response.data.ans);return response.data})
+        //     //console.log(typeof res.data.ans)
+        // }
+        // catch(err){
+        //     console.error(err)
+        // }
+    }
+
+    async getAns(ques){
+        let ans = ""
+        await this.getAnsFromBot(ques).then(result => {
+            this.state.answer = result
         })
-        .catch((error) => {
-            console.log(error.response)
-        })
-        return ans
+        console.log("end2")
     }
 
     render() {
@@ -115,7 +128,12 @@ class Chatbot extends Component {
                         },
                         {
                             id: 'ans',
-                            message: ({ previousValue, steps }) => this.getAnsFromBot(previousValue),
+                            message: ({ previousValue, steps }) => {
+                                this.getAnsFromBot(previousValue)
+                                    .then(data => { console.log(typeof data.ans); this.state.answer = data.ans})
+                                return this.state.answer.PromiseResult
+
+                            },
                             trigger: 'confirm',
                         },
                         {
