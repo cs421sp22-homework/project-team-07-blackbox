@@ -1,6 +1,6 @@
 import time
 
-# import cv2
+import cv2
 from flask import Flask, request, render_template
 import base64
 import io
@@ -15,7 +15,7 @@ import tryonService
 from flask_cors import CORS, cross_origin
 from chatBot import chatbot
 
-flask web service
+# flask web service
 app = Flask(__name__, template_folder="web")
 CORS(app)
 
