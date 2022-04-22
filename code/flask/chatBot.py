@@ -34,8 +34,8 @@ for filename in os.listdir(directory):
 #
 # if decision == 'Y':
 #     print('\n Chatbot training with English corpus data')
-    trainer_corpus = ChatterBotCorpusTrainer(chatbot)
-    trainer_corpus.train('chatterbot.corpus.english')
+trainer_corpus = ChatterBotCorpusTrainer(chatbot)
+trainer_corpus.train('chatterbot.corpus.english')
 
 # name = input('Enter Your Name: ')
 #
