@@ -4,22 +4,24 @@ import { ThemeProvider } from 'styled-components';
 import ChatbotService from 'api/styleBox/ChatbotService';
 import axios from "axios";
 import {FLASK_API_URL} from "../../Constants";
-import {getValue} from "@testing-library/user-event/dist/utils";
+// import {getValue} from "@testing-library/user-event/dist/utils";
 
 const theme = {
     background: '#f5f8fb',
-    headerBgColor: '#EF6C00',
+    headerBgColor: '#FFB6C1',
     headerFontColor: '#fff',
     headerFontSize: '15px',
-    botBubbleColor: '#EF6C00',
+    botBubbleColor: '#FFB6C1',
     botFontColor: '#fff',
     userBubbleColor: '#fff',
     userFontColor: '#4a4a4a',
+
 };
 
 // Set some properties of the bot
 const config = {
     floating: true,
+
 };
 
 class Chatbot extends Component {
@@ -155,7 +157,14 @@ class Chatbot extends Component {
                                 id: 'solve',
                                 options: [
                                     { value: 1, label: 'Yes', trigger: '1' },
-                                    { value: 2, label: 'No', trigger: 'email' },
+                                    { value: 2, label: 'No', trigger: 'further' },
+                                ],
+                            },
+                            {
+                                id: 'further',
+                                options: [
+                                    { value: 1, label: 'Ask again.', trigger: 'qus' },
+                                    { value: 2, label: 'We contact you.', trigger: 'email' },
                                 ],
                             },
                             {
@@ -180,6 +189,8 @@ class Chatbot extends Component {
                             },
 
                         ]}
+
+
                         {...config}
                     />
                 </div>
