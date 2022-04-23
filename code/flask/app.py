@@ -19,6 +19,9 @@ from chatBot import chatbot
 app = Flask(__name__, template_folder="web")
 CORS(app)
 
+@app.route('/hello', methods=['get'])
+def hello():
+    return "hello"
 
 @app.route('/chatbot', methods=['get'])
 def getResponse():
