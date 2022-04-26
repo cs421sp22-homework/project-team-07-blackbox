@@ -40,15 +40,18 @@ class Login extends Component {
         username: '',
         email: '',
         password: '',
+        confirmPsw: '',
         role: 0,
         emailMessage: '',
-        pswMessage: ''
+        pswMessage: '',
+        confirmPswMsg: ''
     }
     // function part
     this.checkPassword = this.checkPassword.bind(this)
     this.checkEmail = this.checkEmail.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.registerClicked = this.registerClicked.bind(this)
+    this.checkConfirmedPsw = this.checkConfirmedPsw.bind(this)
   }
 
   // -----------------Functions--------------------
@@ -73,6 +76,14 @@ class Login extends Component {
         }
     }
 
+    checkConfirmedPsw(psw){
+      if (psw !== this.state.password){
+        this.setState({confirmPswMsg: 'Password not match !'})
+      }else{
+        this.setState({confirmPswMsg: 'Password match !'})
+      }
+    }
+
     handleChange(event) {
         if (event.target.name === "password"){
             this.checkPassword(event.target.value)
@@ -80,6 +91,10 @@ class Login extends Component {
         
         if(event.target.name === "email"){
             this.checkEmail(event.target.value)
+        }
+
+        if(event.target.name === "confirmPsw"){
+          this.checkConfirmedPsw(event.target.value)
         }
         
         this.setState(
@@ -91,19 +106,24 @@ class Login extends Component {
     }
 
     registerClicked(event) {
-        if(this.state.emailMessage !=='Valid email !' || this.state.pswMessage !== 'Strong password !'){
+        if(this.state.emailMessage !=='Valid email !' || this.state.pswMessage !== 'Strong password !' || this.state.confirmPswMsg !== 'Password match !'){
             alert('Please change your info: not valid user information!')
         }
         else{
             AuthenticationService
             .registerUtil(this.state.username, this.state.email, this.state.password, this.state.role)
             .then((response) => {
-                // 处理前端返回的结果
                 if (response.status === 200) {
                     alert('Register successful, automatic login !')
                     console.log('register successfully with username' + this.state.username + ' and password ' + this.state.password)
                     AuthenticationService.loginSuccessfulRegister(cookie.load)
-                    this.props.history.push(`/stylist/profile`)
+                    
+                    if(this.state.role === 0){
+                      this.props.history.push(`/quiz`)   // customer, go to quiz
+                    }else{
+                      this.props.history.push(`/account`)  // stylist, go to account
+                    }
+                    
                 }            
             })
             .catch((error) => {
@@ -125,11 +145,13 @@ class Login extends Component {
                 <Heading>{"Register"}</Heading>
                 <FormContainer>
                   <Form>
-                    <Input type="text" name='username' placeholder='Enter UserName Here' value={this.state.username} onChange={this.handleChange}/>
-                    <Input type='text' name='email' placeholder='Enter Email Here' value={this.state.email} onChange={this.handleChange} />
+                    <Input type="text" name='username' placeholder='Enter UserName Here' onChange={this.handleChange}/>
+                    <Input type='text' name='email' placeholder='Enter Email Here' onChange={this.handleChange} />
                     <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.emailMessage}</p>
-                    <Input type="text" name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange}/>
+                    <Input type="password" name='password' placeholder='Enter Password Here' onChange={this.handleChange}/>
                     <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.pswMessage}</p>
+                    <Input type="password" name='confirmPsw' placeholder='Enter Password Again To Confirm' onChange={this.handleChange}/>
+                    <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.confirmPswMsg}</p>
                     <div className="grid grid-cols-2">
                         <div>
                             <p className="my-6 md:text-sm text-pink-900 ">Select register role: </p>
