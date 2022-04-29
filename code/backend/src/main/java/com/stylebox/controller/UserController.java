@@ -8,10 +8,7 @@ import com.stylebox.util.JwtTokenUtil;
 import exception.Rest400Exception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,8 +53,14 @@ public class UserController {
 
     @PostMapping("/register/{role}")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO,
-                         @PathVariable int role,
-                         HttpServletRequest request, HttpServletResponse response) {
+                                      @PathVariable int role,
+                                      HttpServletRequest request, HttpServletResponse response) {
+        if(userService.isUsernameDuplicate(registerDTO.getUsername())){
+            throw new Rest400Exception("Username already in use. Please use another one.");
+        }
+        if(userService.isEmailDuplicate(registerDTO.getEmail())){
+            throw new Rest400Exception("Email already in use. Please use another one.");
+        }
         User user = userService.createUser(registerDTO, role);
         String token = jwtTokenUtil.generateToken(registerDTO.getUsername());
         jwtTokenUtil.addJWTToResponse(request, response, token);

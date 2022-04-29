@@ -46,7 +46,7 @@ public class User {
     private StylistInformation stylistInformation;
 
     @Column(name="avatar")
-    private String avatar;
+    private String avatar="https://stylebox.oss-us-west-1.aliyuncs.com/avatar/default-avatar.jpeg";
 
     @Column(name="phone")
     private String phone;
