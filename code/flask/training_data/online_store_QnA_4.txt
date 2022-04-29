@@ -1,0 +1,8 @@
+Product name?
+Stylebox.
+What stylists can do?
+Stylist can publish post and edit stylist's profile. Stylist can process orders.
+How do stylists process orders?
+Stylist can get notification when receiving new orders. And stylists can accept and reject orders.
+If stylist accept a order?
+Stylist will design report for customers. And they can also edit the report.
