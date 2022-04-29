@@ -151,7 +151,7 @@ class HomePage extends Component {
                         </div>
                         <div className="flex justify-center pb-20">
                             <Actions>
-                                <SecondaryButton href="#">
+                                <SecondaryButton href="/stylistList">
                                     Choose a stylist
                                 </SecondaryButton>
                             </Actions>
