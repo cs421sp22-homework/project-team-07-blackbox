@@ -96,14 +96,16 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       testimonials: null,
       textOnLeft: false,
       profileImageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      customerName: "Charlotte Hale",
+      customerName: this.props.nickname,
       customerTitle: "Stylist",
       isEdit: false,
       deletedID: [],
       images: [],
       ideas: [],
       photo: this.props.photo,
-      viewSty: this.props.viewSty
+      viewSty: this.props.viewSty,
+      displayIndex: 0,
+      displaySize: this.props.display.length
     }
 
     this.updateDisplay = this.updateDisplay.bind(this)
@@ -111,6 +113,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
     this.onDropOutfit = this.onDropOutfit.bind(this)
     this.submitChange = this.submitChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.changeDisplayPage = this.changeDisplayPage.bind(this)
   }
 
   updateDisplay(){
@@ -170,6 +173,27 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       window.location.reload()
     })
     .catch((error) => {console.log(error.response);})
+  }
+
+  changeDisplayPage(event){
+    let curIndex = this.state.displayIndex;
+    console.log(curIndex)
+    if (event.target.getAttribute('name') === "nextBtn"){
+      if (curIndex+1 === this.state.displaySize){
+        this.setState({displayIndex : 0})    // go to 1st page
+      }
+      else{
+        this.setState({displayIndex : curIndex+1})
+      } 
+    }else{
+      if (curIndex-1 < 0){
+        this.setState({displayIndex : this.state.displaySize-1})
+      }
+      else{
+        this.setState({displayIndex : curIndex-1})
+      } 
+    }
+    console.log("change page :" + this.state.displayIndex)
   }
 
 
@@ -232,42 +256,39 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
               :
               <Testimonial>
               <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
-                {this.props.display.map((testimonial, index) => (
-                  <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.image===null?PastDesign1: testimonial.image}/>
+                {
+                  <ImageAndControlContainer>
+                    <Image src={this.props.display.length===0?"https://stylebox.oss-us-west-1.aliyuncs.com/display/default-display.png":this.props.display[this.state.displayIndex].image}/>
                     <ControlContainer>
-                      <ControlButton onClick={imageSliderRef?.slickPrev}>
-                        <ChevronLeftIcon />
+                      <ControlButton  onClick={this.changeDisplayPage}>
+                        <ChevronLeftIcon name="prevBtn"/>
                       </ControlButton>
-                      <ControlButton onClick={imageSliderRef?.slickNext}>
-                        <ChevronRightIcon />
+                      <ControlButton  onClick={this.changeDisplayPage}>
+                        <ChevronRightIcon name="nextBtn"/>
                       </ControlButton>
                     </ControlContainer>
-                  </ImageAndControlContainer>
-                ))}
+                </ImageAndControlContainer>}
               </TestimonialImageSlider>
               <TextContainer textOnLeft={this.state.textOnLeft}>
                 <HeadingInfo tw="hidden lg:block" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
                 <TestimonialTextSlider arrows={false} ref={setTextSliderRef} asNavFor={imageSliderRef} fade={true}>
-                  {this.props.display.map((testimonial, index) => (
-
-                    <TestimonialText key={index}>
-                      <QuoteContainer>
-                        <Quote>
-                          <QuotesLeft />
-                          {testimonial.idea===null?"test idea": testimonial.idea}
-                          <QuotesRight />
-                        </Quote>
-                      </QuoteContainer>
-                      <CustomerInfo>
-                        <CustomerProfilePicture src={this.props.photo} alt={this.state.customerName} />
-                        <CustomerTextInfo>
-                          <CustomerName>{this.state.customerName}</CustomerName>
-                          <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
-                        </CustomerTextInfo>
-                      </CustomerInfo>
-                    </TestimonialText>
-                  ))}
+                  {
+                    <TestimonialText>
+                    <QuoteContainer>
+                      <Quote>
+                        <QuotesLeft />
+                        {this.props.display.length === 0?"No past design to show": this.props.display[this.state.displayIndex].idea}
+                        <QuotesRight />
+                      </Quote>
+                    </QuoteContainer>
+                    <CustomerInfo>
+                      <CustomerProfilePicture src={this.props.photo} alt={this.state.customerName} />
+                      <CustomerTextInfo>
+                        <CustomerName>{this.state.customerName}</CustomerName>
+                        <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
+                      </CustomerTextInfo>
+                    </CustomerInfo>
+                  </TestimonialText>}
                 </TestimonialTextSlider>
               </TextContainer>
             </Testimonial>
