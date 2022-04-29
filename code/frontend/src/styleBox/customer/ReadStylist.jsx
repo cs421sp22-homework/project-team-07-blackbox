@@ -39,7 +39,7 @@ class ReadStylist extends Component{
         facebook:"Charlotte_Stylist",
         rate: 5,
         followerNum: 9000,
-        likeNum: 3000,
+        //likeNum: 3000,
         stylistId: 1,
         isFollow: false
       }],
@@ -73,7 +73,7 @@ class ReadStylist extends Component{
         facebook: response.data.stylistProfileGetDTO.facebook,
         rate: response.data.stylistProfileGetDTO.rate,
         followerNum: response.data.stylistProfileGetDTO.followerNum,
-        likeNum: response.data.stylistProfileGetDTO.likeNum,
+        //likeNum: response.data.stylistProfileGetDTO.likeNum,
         stylistId: this.props.location.query.stylistId,
         isFollow: response.data.follow
       }],
@@ -152,7 +152,7 @@ class ReadStylist extends Component{
               <PrimaryButton buttonRounded={true} onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
             </div>
         ) : <div/>}
-        <StylistProfilePastDesign viewSty={true} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
+        <StylistProfilePastDesign nickname={this.state.testimonials[0].nickname} photo={this.state.testimonials[0].photo} viewSty={true} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
       </AnimationRevealPage>
     )

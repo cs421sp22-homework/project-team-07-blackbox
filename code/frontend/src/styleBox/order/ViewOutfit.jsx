@@ -78,9 +78,9 @@ class ViewOutfit extends Component{
     super(props)
 
     this.state = {
-      
+
     }
-    
+
   }
 
   render(){
@@ -89,7 +89,7 @@ class ViewOutfit extends Component{
         <Content>
           {/* {cards.map((card, i) => ( */}
             <Card reversed={false}>
-              <Image imageSrc={API_URL+this.props.outfitImage} />
+              <Image imageSrc={this.props.outfitImage} />
               <Details>
                 {/* <Subtitle>{card.subtitle}</Subtitle> */}
                 <Title>Outfit Design</Title>
