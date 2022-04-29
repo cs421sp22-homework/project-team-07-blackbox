@@ -66,7 +66,9 @@ public class FileService {
 //        } catch(IOException e){
 //            e.printStackTrace();
 //        }
-        if(!user.getAvatar().equals("https://stylebox.oss-us-west-1.aliyuncs.com/avatar/default-avatar.jpeg") && !user.getAvatar().startsWith("/")) {
+        if(!(user.getAvatar() == null ||
+                user.getAvatar().equals("https://stylebox.oss-us-west-1.aliyuncs.com/avatar/default-avatar.jpeg"))
+                && !user.getAvatar().startsWith("/")) {
 //            deleteImage(user.getAvatar());
             String[] split = user.getAvatar().split("/");
             String fileName = split[split.length - 1];
