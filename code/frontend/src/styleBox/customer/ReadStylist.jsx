@@ -152,7 +152,7 @@ class ReadStylist extends Component{
               <PrimaryButton buttonRounded={true} onClick={this.createOrder}>{"Create an Order"}</PrimaryButton>
             </div>
         ) : <div/>}
-        <StylistProfilePastDesign viewSty={true} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
+        <StylistProfilePastDesign nickname={this.state.testimonials[0].nickname} photo={this.state.testimonials[0].photo} viewSty={true} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
         <Footer />
       </AnimationRevealPage>
     )
