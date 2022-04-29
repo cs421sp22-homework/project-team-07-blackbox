@@ -60,9 +60,9 @@ class CreateOrderForm extends Component{
         {name: 'Travel', id: 5}],
       selectedStyles: [],
       selectedOccasions: [],
-      orderPrice: 0,
+      orderPrice: 10,
       clothPriceLow: 0,
-      clothPriceHigh: 0,
+      clothPriceHigh: 100,
       description: ''
       
     }
@@ -110,7 +110,7 @@ class CreateOrderForm extends Component{
     console.log(this.state.selectedStyles)
   }
 
-  submitInfo(event){
+  submitInfo(event){ 
     let info = {
       styleSet : this.state.selectedStyles,
       occasionSet: this.state.selectedOccasions,
@@ -121,6 +121,14 @@ class CreateOrderForm extends Component{
     }
     event.preventDefault();
     console.log("create info")
+    if(info.clothPriceLow>info.clothPriceHigh || info.clothPriceLow<0 || info.clothPriceHigh<0){
+      alert("Wrong Clothes Price!")
+      return
+    }
+    if(info.orderPrice<0){
+      alert("Wrong Order Price!")
+      return
+    }
 
     OrderService.createOrder(this.props.stylist.stylistId,info) //this.props.location.stylistId
     .then((response)=>{
