@@ -31,35 +31,35 @@ const SubmitButton = styled.button`
 `;
 
 class Login extends Component {
-  // -----------------Constructor--------------------
-  constructor(props){
-    super(props)
+    // -----------------Constructor--------------------
+    constructor(props){
+        super(props)
 
-    this.state = {
-        // Register 参数
-        username: '',
-        email: '',
-        password: '',
-        role: 0,
-        emailMessage: '',
-        pswMessage: ''
+        this.state = {
+            // Register 参数
+            username: '',
+            email: '',
+            password: '',
+            role: "0",
+            emailMessage: '',
+            pswMessage: ''
+        }
+        // function part
+        this.checkPassword = this.checkPassword.bind(this)
+        this.checkEmail = this.checkEmail.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.registerClicked = this.registerClicked.bind(this)
     }
-    // function part
-    this.checkPassword = this.checkPassword.bind(this)
-    this.checkEmail = this.checkEmail.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.registerClicked = this.registerClicked.bind(this)
-  }
 
-  // -----------------Functions--------------------
-  
-  checkEmail(myEmail){
-    if(!validator.isEmail(myEmail)){
-        this.setState({emailMessage: 'Invalid email !'})
-    }
-    else{
-        this.setState({emailMessage: 'Valid email !'})
-    }
+    // -----------------Functions--------------------
+
+    checkEmail(myEmail){
+        if(!validator.isEmail(myEmail)){
+            this.setState({emailMessage: 'Invalid email !'})
+        }
+        else{
+            this.setState({emailMessage: 'Valid email !'})
+        }
     }
 
     checkPassword(psw){
@@ -77,11 +77,11 @@ class Login extends Component {
         if (event.target.name === "password"){
             this.checkPassword(event.target.value)
         }
-        
+
         if(event.target.name === "email"){
             this.checkEmail(event.target.value)
         }
-        
+
         this.setState(
             {
                 [event.target.name]
@@ -96,63 +96,68 @@ class Login extends Component {
         }
         else{
             AuthenticationService
-            .registerUtil(this.state.username, this.state.email, this.state.password, this.state.role)
-            .then((response) => {
-                // 处理前端返回的结果
-                if (response.status === 200) {
-                    alert('Register successful, automatic login !')
-                    console.log('register successfully with username' + this.state.username + ' and password ' + this.state.password)
-                    AuthenticationService.loginSuccessfulRegister(cookie.load)
-                    this.props.history.push(`/stylist/profile`)
-                }            
-            })
-            .catch((error) => {
-                alert(error.response.data.displayMessage)
-            })
-        } 
+                .registerUtil(this.state.username, this.state.email, this.state.password, this.state.role)
+                .then((response) => {
+                    // 处理前端返回的结果
+                    if (response.status === 200) {
+                        alert('Register successful, automatic login !')
+                        console.log('register successfully with username' + this.state.username + ' and password ' + this.state.password)
+                        AuthenticationService.loginSuccessfulRegister(cookie.load)
+                        if(this.state.role === "0"){
+                            this.props.history.push(`/quiz`)
+                        }
+                        else{
+                            this.props.history.push(`/account`)
+                        }
+                    }
+                })
+                .catch((error) => {
+                    alert(error.response.data.displayMessage)
+                })
+        }
         event.preventDefault();
     }
-  
-  // -----------------Render--------------------
-  render(){
-    return(
-      <AnimationRevealPage>
-          <NavBarAuthenticated/>
-        <Container>
-          <Content>
-            <MainContainer>
-              <MainContent>
-                <Heading>{"Register"}</Heading>
-                <FormContainer>
-                  <Form>
-                    <Input type="text" name='username' placeholder='Enter UserName Here' value={this.state.username} onChange={this.handleChange}/>
-                    <Input type='text' name='email' placeholder='Enter Email Here' value={this.state.email} onChange={this.handleChange} />
-                    <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.emailMessage}</p>
-                    <Input type="text" name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange}/>
-                    <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.pswMessage}</p>
-                    <div className="grid grid-cols-2">
-                        <div>
-                            <p className="my-6 md:text-sm text-pink-900 ">Select register role: </p>
-                        </div>
-                        <div>
-                            <select className="border-gray-300 my-6 w-full border-solid border rounded py-2 px-4 text-pink-900 text-sm" name="role" value={this.state.role} onChange={this.handleChange}>
-                                <option value="0"> Customer </option>
-                                <option value="1"> Stylist </option>
-                            </select>
-                        </div>
-                    </div>
-                    <SubmitButton type="submit" onClick={this.registerClicked}> Register </SubmitButton>
-                  </Form>
-                </FormContainer>
-              </MainContent>
-            </MainContainer>
-          </Content>
-        </Container>
-      </AnimationRevealPage>
-    )
-  }
 
-  
+    // -----------------Render--------------------
+    render(){
+        return(
+            <AnimationRevealPage>
+                <NavBarAuthenticated/>
+                <Container>
+                    <Content>
+                        <MainContainer>
+                            <MainContent>
+                                <Heading>{"Register"}</Heading>
+                                <FormContainer>
+                                    <Form>
+                                        <Input type="text" name='username' placeholder='Enter UserName Here' value={this.state.username} onChange={this.handleChange}/>
+                                        <Input type='text' name='email' placeholder='Enter Email Here' value={this.state.email} onChange={this.handleChange} />
+                                        <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.emailMessage}</p>
+                                        <Input type="text" name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange}/>
+                                        <p className="flex justify-center mt-2 text-sm text-pink-600">{this.state.pswMessage}</p>
+                                        <div className="grid grid-cols-2">
+                                            <div>
+                                                <p className="my-6 md:text-sm text-pink-900 ">Select register role: </p>
+                                            </div>
+                                            <div>
+                                                <select className="border-gray-300 my-6 w-full border-solid border rounded py-2 px-4 text-pink-900 text-sm" name="role" value={this.state.role} onChange={this.handleChange}>
+                                                    <option value="0"> Customer </option>
+                                                    <option value="1"> Stylist </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <SubmitButton type="submit" onClick={this.registerClicked}> Register </SubmitButton>
+                                    </Form>
+                                </FormContainer>
+                            </MainContent>
+                        </MainContainer>
+                    </Content>
+                </Container>
+            </AnimationRevealPage>
+        )
+    }
+
+
 
 
 }

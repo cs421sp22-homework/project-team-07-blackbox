@@ -191,24 +191,23 @@ class followStylistList extends Component{
             <AnimationRevealPage>
                 {this.checkCustomer?<NavBarCustomer/>: <NavBarStylist/>}
                 {/*<StylistListSingleProfile stylistLists={this.state.stylistLists}/>*/}
-                <div className="col-12 col-lg-5 text-right ">
+
+                <div className="mt-10 text-right">
                     {/*<input type="text" value={this.state.search} onChange = {this.props.changeFt}/>*/}
-                    <input type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
-                    <select   onChange={this.sortBtn}>
+                    <input className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg" type="text" type="text" value={this.state.search} name="search" placeholder='Enter Search Keyword' onChange = {this.searchBtn}/>
+                    <select className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg"  onChange={this.sortBtn}>
                         <option disabled selected value> - select an sort option - </option>
                         <option value="rate">rate</option>
                         <option value="followNum">followNum</option>
                         <option value="orderNum">orderNum</option>
-                        <option value="">null</option>
                     </select>
-                    <select  onChange={this.styleBtn}>
+                    <select className="mr-8 border-gray-300 mb-4 border-solid border rounded py-2 px-4 text-pink-900 text-lg" onChange={this.styleBtn}>
                         <option disabled selected value> - select an style option - </option>
                         <option value="Sexy">sexy</option>
                         <option value="Sports">sports</option>
                         <option value="Casual">casual</option>
                         <option value="Academic">academic</option>
                         <option value="Formal">formal</option>
-                        <option value="">null</option>
                     </select>
                     <PrimaryButton name="submitBtn" className="add-btn btn-Search" type="submit"  onClick={this.submitInfo}>Search </PrimaryButton>
 
