@@ -27,7 +27,6 @@ class StylistProfile extends Component{
         facebook:"Charlotte_Stylist",
         rate: 5,
         followerNum: 9000,
-        likeNum: 3000,
         viewSty: false
       }],
       display: [{image: "https://media.glamour.com/photos/607f272348c995b3b00ffd38/1:1/w_120,c_limit/terry%20cloth%20trend.jpg", idea: "22"}, {image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80", idea: "111"}]
@@ -52,8 +51,7 @@ class StylistProfile extends Component{
         email:response.data.email,
         facebook: response.data.facebook,
         rate: response.data.rate,
-        followerNum: response.data.followerNum,
-        likeNum: response.data.likeNum
+        followerNum: response.data.followerNum
       }],
       display: response.data.display
     }))

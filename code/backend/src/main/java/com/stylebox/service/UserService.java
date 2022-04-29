@@ -191,6 +191,8 @@ public class UserService {
         stylistProfileGetDTO.setStyle(styleSet);
         stylistProfileGetDTO.setDisplay(user.getStylistInformation().getDisplays());
         stylistProfileGetDTO.setPhoto(user.getStylistInformation().getUser().getAvatar());
+        stylistProfileGetDTO.setFollowerNum(user.getStylistInformation().getFollowNum());
+        stylistProfileGetDTO.setRate(Integer.parseInt(user.getStylistInformation().getRate()));
         return stylistProfileGetDTO;
     }
 
@@ -230,6 +232,7 @@ public class UserService {
 
         StylistProfileGetDTO stylistProfileGetDTO = getStylistProfile(stylistInformation.get().getUser());
         StylistHomepageDTO stylistHomepageDTO = modelMapper.map(stylistProfileGetDTO, StylistHomepageDTO.class);
+
         if (!user.getRole().getName().equals("Customer")) {
             stylistHomepageDTO.setFollow(false);
         } else {

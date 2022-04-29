@@ -39,7 +39,7 @@ class ReadStylist extends Component{
         facebook:"Charlotte_Stylist",
         rate: 5,
         followerNum: 9000,
-        likeNum: 3000,
+        //likeNum: 3000,
         stylistId: 1,
         isFollow: false
       }],
@@ -73,7 +73,7 @@ class ReadStylist extends Component{
         facebook: response.data.stylistProfileGetDTO.facebook,
         rate: response.data.stylistProfileGetDTO.rate,
         followerNum: response.data.stylistProfileGetDTO.followerNum,
-        likeNum: response.data.stylistProfileGetDTO.likeNum,
+        //likeNum: response.data.stylistProfileGetDTO.likeNum,
         stylistId: this.props.location.query.stylistId,
         isFollow: response.data.follow
       }],

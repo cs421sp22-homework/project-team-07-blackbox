@@ -127,10 +127,6 @@ class StylistProfileBrowse extends Component{
                           <FollowerNum>{testimonial.followerNum===null?30:testimonial.followerNum}</FollowerNum>
                       </div>
                       <div className="grid grid-cols-2">
-                          <FollowerNumTitle>LikeNum:</FollowerNumTitle>
-                          <FollowerNum>{testimonial.likeNum===null?100:testimonial.likeNum}</FollowerNum>
-                      </div>
-                      <div className="grid grid-cols-2">
                           <FollowerNumTitle>Rate:</FollowerNumTitle>
                           <FollowerNum>{testimonial.rate===null?5:testimonial.rate}</FollowerNum>
                       </div>

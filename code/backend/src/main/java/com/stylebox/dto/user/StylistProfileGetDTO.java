@@ -20,6 +20,6 @@ public class StylistProfileGetDTO {
     private String facebook;
     private Integer rate;
     private Integer followerNum;
-    private Integer likeNum;
+//    private Integer likeNum;
     private List<Displays> display;
 }
