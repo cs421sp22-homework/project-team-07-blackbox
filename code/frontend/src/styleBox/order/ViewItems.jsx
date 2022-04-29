@@ -109,7 +109,7 @@ class ViewItems extends Component{
                   <Title>{item.itemName}</Title>
                   <AuthorName>{item.itemId}</AuthorName>
                 </PostTextContainer>
-                <Image imageSrc={API_URL+item.itemImage} />
+                <Image imageSrc={item.itemImage} />
                 {/* <Image imageSrc={item.itemImage} /> */}
               </Post>
               ))}
