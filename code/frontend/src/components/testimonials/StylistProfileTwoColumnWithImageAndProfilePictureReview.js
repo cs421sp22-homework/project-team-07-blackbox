@@ -102,7 +102,8 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       deletedID: [],
       images: [],
       ideas: [],
-      photo: this.props.photo
+      photo: this.props.photo,
+      viewSty: this.props.viewSty
     }
 
     this.updateDisplay = this.updateDisplay.bind(this)
@@ -273,7 +274,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
             } 
             </Testimonials>
           </TestimonialsContainer>
-          {!this.state.isEdit ? 
+          {!this.state.isEdit && !this.state.viewSty? 
             <div className="mt-20" align="center">
               <PrimaryButton buttonRounded={true} onClick={this.updateDisplay}>{"Update Your Display"}</PrimaryButton>
             </div> : <div></div>}
