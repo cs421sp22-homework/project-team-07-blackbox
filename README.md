@@ -31,22 +31,47 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
    ```shell
    git clone https://github.com/cs421sp22-homework/project-team-07-blackbox.git
    ```
-2. Install frontend dependency
+#### Frontend
+2. Install node.js and npm from https://nodejs.org/en/download/
+3. Install frontend dependency
 
    ```shell
    cd project-team-07-blackbox\code\frontend
    npm install
    ```
-3. Open backend code project from IntelliJ IDEA and run file 'project-team-07-blackbox/code/backend/src/main/java/com/stylebox/StyleBoxBackendApplication.java', make sure your Java version is 1.8 and install Maven.
-
 4. Run frontend with the following command. The frontent webpage is run on http://localhost:3000 in default.
 
    ```shell
    cd project-team-07-blackbox\code\frontend
    npm start
    ```
+#### SpringBoot Backend
+5. Install Java 1.8, follow the instruction https://www.java.com/en/download/help/download_options.html
+6. Install Maven, follow the instruction https://www.baeldung.com/install-maven-on-windows-linux-mac
+7. Run Java Backend with the following command. The backend port is run on http://localhost:8080 in default.
+```shell
+cd project-team-07-blackbox\code\backend
+mvn spring-boot:run
+```
+#### Flask Back
+8. Install Python 3.8 from https://www.python.org/downloads/
+9. Install Anaconda, follow the instruction https://docs.anaconda.com/anaconda/install/
+10. Create a virtual environment and activate it:
 
-   
+```shell
+conda create -n env-name python=3.8
+source activate env-name
+```
+11. Install required packages
+```shell
+cd project-team-07-blackbox\code\flask
+pip install -r requirements.txt
+```
+12. Run Flask Backend with the following command. The backend port is run on http://localhost:8081 in default.
+```shell
+cd project-team-07-blackbox\code\flask
+python app.py
+```
 
 ## Developing
 
