@@ -1,3 +1,5 @@
+
+
 import React, {Component} from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
@@ -30,7 +32,7 @@ const TestimonialSliderContainer = tw.div`mt-24`;
 const TestimonialSlider = styled(Slider)``;
 const Testimonial = tw.div`flex! flex-col items-center md:items-stretch md:flex-row md:justify-center outline-none`;
 const ImageContainer = styled.div`
-  ${tw`md:mx-3 lg:mx-6 w-2/3 md:w-4/12 rounded flex items-center max-w-xs md:max-w-none`}
+  ${tw`bg-gray-100 h-96 w-96 mr-20 mt-20`}
   img {
     ${tw`rounded`}
   }
@@ -49,6 +51,7 @@ const QuotesRight = tw(QuotesRightIcon)`w-8 h-8 lg:w-10 lg:h-10 text-pink-500 ab
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 const MultiSelect = tw(Multiselect)`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
 const InputText = tw.input`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2 bg-gray-100`;
+const MulSelect = tw.select`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2 bg-gray-100`;
 
 const SliderControlButtonContainer = styled.div`
   ${tw`absolute top-0 h-full flex items-end md:items-center z-20`}
@@ -172,14 +175,14 @@ class StylistProfileImageIntro extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-                    nickname: nextProps.testimonials[0].nickname,
-                    age: nextProps.testimonials[0].age,
-                    gender: nextProps.testimonials[0].gender,
-                    email: nextProps.testimonials[0].email,
-                    facebook: nextProps.testimonials[0].facebook,
-                    intro: nextProps.testimonials[0].intro,
-                    selectedStyles: nextProps.testimonials[0].style
-                })
+            nickname: nextProps.testimonials[0].nickname,
+            age: nextProps.testimonials[0].age,
+            gender: nextProps.testimonials[0].gender,
+            email: nextProps.testimonials[0].email,
+            facebook: nextProps.testimonials[0].facebook,
+            intro: nextProps.testimonials[0].intro,
+            selectedStyles: nextProps.testimonials[0].style
+        })
     }
 
     render() {
@@ -195,7 +198,7 @@ class StylistProfileImageIntro extends Component {
                             {this.props.testimonials.map((testimonial, index) => (
                                 <Testimonial key={index}>
                                     <ImageContainer>
-                                        <img src={`${API_URL}${testimonial.photo}`} alt={testimonial.customerName}/>
+                                        <img className="h-full mx-auto" src={testimonial.photo} alt={testimonial.customerName}/>
                                     </ImageContainer>
                                     <TextContainer>
                                         <QuoteContainer>
@@ -213,10 +216,7 @@ class StylistProfileImageIntro extends Component {
                                                 <FollowerNumTitle>FollowerNum:</FollowerNumTitle>
                                                 <FollowerNum>{testimonial.followerNum === null ? 30 : testimonial.followerNum}</FollowerNum>
                                             </div>
-                                            <div className="grid grid-cols-2">
-                                                <FollowerNumTitle>LikeNum:</FollowerNumTitle>
-                                                <FollowerNum>{testimonial.likeNum === null ? 100 : testimonial.likeNum}</FollowerNum>
-                                            </div>
+
                                             <div className="grid grid-cols-2">
                                                 <FollowerNumTitle>Rate:</FollowerNumTitle>
                                                 <FollowerNum>{testimonial.rate === null ? 5 : testimonial.rate}</FollowerNum>
@@ -251,8 +251,13 @@ class StylistProfileImageIntro extends Component {
                                             <div className="grid grid-cols-2">
                                                 <FollowerNumTitle>Gender:</FollowerNumTitle>
                                                 {this.state.edit ?
-                                                    <InputText value={this.state.gender} name="gender" type="text"
-                                                               onChange={this.handleChange}/>
+                                                    // <InputText value={this.state.gender} name="gender" type="text"
+                                                    //            onChange={this.handleChange}/>
+                                                    <MulSelect
+                                                        value={this.state.gender} name="gender" onChange={this.handleChange}>
+                                                        <option value="male">male</option>
+                                                        <option value="female">female</option>
+                                                    </MulSelect>
                                                     :<FollowerNum>{this.state.gender}</FollowerNum>}
                                             </div>
                                             <div className="grid grid-cols-2">
@@ -273,7 +278,7 @@ class StylistProfileImageIntro extends Component {
                                                 <SubmitButton className="w-32 ml-60"
                                                               onClick={this.submitInfo}>Submit</SubmitButton>
                                                 :<SubmitButton className="w-32 ml-60"
-                                                          onClick={this.clickedit}>Edit</SubmitButton>}
+                                                               onClick={this.clickedit}>Edit</SubmitButton>}
                                         </CustomerInfo>
 
                                     </TextContainer>

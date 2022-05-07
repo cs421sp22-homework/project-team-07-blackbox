@@ -14,6 +14,7 @@ import com.stylebox.repository.stylist.DisplayRepository;
 import com.stylebox.repository.stylist.OrderRepository;
 import com.stylebox.repository.stylist.StyleReportRepository;
 import com.stylebox.repository.user.UserRepository;
+import com.stylebox.util.OSSUtil;
 import exception.Rest404Exception;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -45,24 +46,36 @@ public class FileService {
     final OrderRepository orderRepository;
     final ItemRepository itemRepository;
     final StyleReportRepository reportRepository;
+    final OSSUtil ossUtil;
 
-    public String UploadAvatar(User user, MultipartFile image){
-        String newName = "avatar-" + user.getRole().getName() + "-" + user.getId().toString() + "-" + UUID.randomUUID();
-        String avatarUrl = "/images/" + newName;
+    final String avatarUploadPath = "avatar";
+    final String displayUploadPath = "display";
+    final String itemUploadPath = "item";
 
-        File dest = new File(FILE_PATH_ROOT+newName);
+    public String UploadAvatar(User user, MultipartFile image) throws IOException {
+//        String newName = "avatar-" + user.getRole().getName() + "-" + user.getId().toString() + "-" + UUID.randomUUID();
+//        String avatarUrl = "/images/" + newName;
 
-        if(!dest.getParentFile().exists()){
-            dest.getParentFile().mkdirs();
+//        File dest = new File(FILE_PATH_ROOT+newName);
+
+//        if(!dest.getParentFile().exists()){
+//            dest.getParentFile().mkdirs();
+//        }
+//        try{
+//            image.transferTo(dest);
+//        } catch(IOException e){
+//            e.printStackTrace();
+//        }
+        if(!(user.getAvatar() == null ||
+                user.getAvatar().equals("https://stylebox.oss-us-west-1.aliyuncs.com/avatar/default-avatar.jpeg"))
+                && !user.getAvatar().startsWith("/")) {
+//            deleteImage(user.getAvatar());
+            String[] split = user.getAvatar().split("/");
+            String fileName = split[split.length - 1];
+            ossUtil.delelteFile(avatarUploadPath + "/" + split[split.length - 2], fileName);
         }
-        try{
-            image.transferTo(dest);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        if(!user.getAvatar().equals("/images/default-avatar.jpeg")) {
-            deleteImage(user.getAvatar());
-        }
+        String avatarUrl = ossUtil.uploadFile(image, avatarUploadPath);
+
         user.setAvatar(avatarUrl);
         userRepository.save(user);
 
@@ -71,44 +84,43 @@ public class FileService {
 
 
 
-    public String UploadDisplayImage(User user, MultipartFile image){
-        String newName = "design-" + user.getRole().getName() + "-" + user.getId().toString() + "-" + UUID.randomUUID();
-        String designURL = "/images/" + newName;
-
-        File dest = new File(FILE_PATH_ROOT+newName);
-
-        if(!dest.getParentFile().exists()){
-            dest.getParentFile().mkdirs();
-        }
-        try{
-            image.transferTo(dest);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-
-        return designURL;
+    public String UploadDisplayImage(User user, MultipartFile image) throws IOException {
+//        String newName = "design-" + user.getRole().getName() + "-" + user.getId().toString() + "-" + UUID.randomUUID();
+//        String designURL = "/images/" + newName;
+//
+//        File dest = new File(FILE_PATH_ROOT+newName);
+//
+//        if(!dest.getParentFile().exists()){
+//            dest.getParentFile().mkdirs();
+//        }
+//        try{
+//            image.transferTo(dest);
+//        } catch(IOException e){
+//            e.printStackTrace();
+//        }
+        return ossUtil.uploadFile(image, displayUploadPath);
     }
 
-    public String UploadItemImage(MultipartFile image){
-        String newName = "item-" + "-" + UUID.randomUUID();
-        String itemURL = "/images/" + newName;
+    public String UploadItemImage(MultipartFile image) throws IOException {
+//        String newName = "item-" + "-" + UUID.randomUUID();
+//        String itemURL = "/images/" + newName;
+//
+//        File dest = new File(FILE_PATH_ROOT+newName);
+//
+//        if(!dest.getParentFile().exists()){
+//            dest.getParentFile().mkdirs();
+//        }
+//        try{
+//            image.transferTo(dest);
+//        } catch(IOException e){
+//            e.printStackTrace();
+//        }
 
-        File dest = new File(FILE_PATH_ROOT+newName);
-
-        if(!dest.getParentFile().exists()){
-            dest.getParentFile().mkdirs();
-        }
-        try{
-            image.transferTo(dest);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-
-        return itemURL;
+        return ossUtil.uploadFile(image, itemUploadPath);
     }
 
 
-    public void UpdateDisplay(User user, DisplayPostDTO displays){
+    public void UpdateDisplay(User user, DisplayPostDTO displays) throws IOException {
         if(!user.getRole().getName().equals("Stylist")){
             throw new Rest404Exception("This user is not a stylist.");
         }
@@ -154,7 +166,7 @@ public class FileService {
         }
     }
 
-    public void UploadReport(User user, StyleReportPostDTO reportInfo, Long orderId){
+    public void UploadReport(User user, StyleReportPostDTO reportInfo, Long orderId) throws IOException {
         if(!user.getRole().getName().equals("Stylist")){
             throw new Rest404Exception("This user is not a stylist.");
         }

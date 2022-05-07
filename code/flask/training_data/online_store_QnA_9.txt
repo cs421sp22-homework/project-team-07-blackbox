@@ -1,0 +1,11 @@
+My profile?
+You can  click on "Account" and then open your profile. You can also click "Eidt" to edit the information.
+My account?
+You can click on "Account" and then click "Account Setting" to edit the information.
+Followed stylists?
+You can click on "Account" and then click "Follwed Stylists" to view the list of stylists.
+View Stylists?
+You can click on "Stylists" on the homepage and then you can get the list of stylists. You can also search stylists by filters.
+Search stylists?
+You can click on "Stylists" on the homepage. Then you can search by keyword or filter by sort options or style options.
+

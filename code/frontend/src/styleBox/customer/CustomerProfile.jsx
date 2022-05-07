@@ -196,6 +196,13 @@ class CustomerProfile extends Component {
                                                                 {this.state.jeanSize} </text>
                                                         </div>
 
+                                                        <div className="col-span-6 sm:col-span-3">
+                                                            <label htmlFor="email-address"
+                                                                   className="block text-sm font-medium text-pink-700">Shoe Size</label>
+                                                            <text className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md md">
+                                                                {this.state.shoeSize} </text>
+                                                        </div>
+
                                                         <div className="col-span-6">
                                                             <label htmlFor="street-address"
                                                                    className="block text-sm font-medium text-pink-700">Preference Style</label>
@@ -273,10 +280,16 @@ class CustomerProfile extends Component {
                                                             {/*       type="text" value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}/>*/}
                                                             <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
                                                             shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    defaultValue={this.state.shirtSize}
                                                                     value={this.state.shirtSize} name="shirtSize" onChange={this.handleChange}>
-                                                                <option value="large">Large</option>
-                                                                <option value="middle">Middle</option>
-                                                                <option value="small">Small</option>
+                                                                <option value="XXS">XXS</option>
+                                                                <option value="XS">XS</option>
+                                                                <option value="Small">Small</option>
+                                                                <option value="Medium">Medium</option>
+                                                                <option value="Large">Large</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="2XL">2XL</option>
+                                                                <option value="3XL">3XL</option>
                                                             </select>
                                                         </div>
 
@@ -288,10 +301,16 @@ class CustomerProfile extends Component {
                                                             {/*      type="text" value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}/>*/}
                                                             <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
                                                             shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    defaultValue={this.state.bottomSize}
                                                                     value={this.state.bottomSize} name="bottomSize" onChange={this.handleChange}>
-                                                                <option value="large">Large</option>
-                                                                <option value="middle">Middle</option>
-                                                                <option value="small">Small</option>
+                                                                <option value="XXS">XXS</option>
+                                                                <option value="XS">XS</option>
+                                                                <option value="Small">Small</option>
+                                                                <option value="Medium">Medium</option>
+                                                                <option value="Large">Large</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="2XL">2XL</option>
+                                                                <option value="3XL">3XL</option>
                                                             </select>
                                                         </div>
 
@@ -303,10 +322,39 @@ class CustomerProfile extends Component {
                                                             {/*       type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>*/}
                                                             <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
                                                             shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    defaultValue={this.state.jeanSize}
                                                                     value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}>
-                                                                <option value="large">Large</option>
-                                                                <option value="middle">Middle</option>
-                                                                <option value="small">Small</option>
+                                                                <option value="XXS">XXS</option>
+                                                                <option value="XS">XS</option>
+                                                                <option value="Small">Small</option>
+                                                                <option value="Medium">Medium</option>
+                                                                <option value="Large">Large</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="2XL">2XL</option>
+                                                                <option value="3XL">3XL</option>
+                                                            </select>
+
+                                                        </div>
+
+
+                                                        <div className="col-span-6 sm:col-span-3">
+                                                            <label htmlFor="email-address"
+                                                                   className="block text-sm font-medium text-pink-700">Shoe Size</label>
+                                                            {/*<input className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block*/}
+                                                            {/*w-full shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100 bg-gray-100"*/}
+                                                            {/*       type="text" value={this.state.jeanSize} name="jeanSize" onChange={this.handleChange}/>*/}
+                                                            <select className="mt-2 h-6 focus:ring-indigo-500 focus:border-indigo-500 block w-full
+                                                            shadow-sm sm:text-sm border-gray-300 rounded-md md bg-gray-100"
+                                                                    defaultValue={this.state.shoeSize}
+                                                                    value={this.state.shoeSize} name="shoeSize" onChange={this.handleChange}>
+                                                                <option value="XXS">XXS</option>
+                                                                <option value="XS">XS</option>
+                                                                <option value="Small">Small</option>
+                                                                <option value="Medium">Medium</option>
+                                                                <option value="Large">Large</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="2XL">2XL</option>
+                                                                <option value="3XL">3XL</option>
                                                             </select>
 
                                                         </div>

@@ -27,6 +27,7 @@ import NavBar from "./navBar_footer/NavBar";
 import Footer from "./navBar_footer/Footer";
 import Cookies from "react-cookies";
 import NavBarAuthenticated from "./navBar_footer/NavBarAuthenticated";
+import Chatbot from "./chatbot/Chatbot"
 
 const Row = tw.div`flex`;
 
@@ -92,6 +93,7 @@ class HomePage extends Component {
                         <div className="flex flex-col justify-center h-full space-y-5">
                             {/*navigate bar*/}
                             <NavBarAuthenticated/>
+                            <Chatbot />
                             {/*Intro to Style Box*/}
                             <HeroRow>
                                 <TextColumn>
@@ -149,7 +151,7 @@ class HomePage extends Component {
                         </div>
                         <div className="flex justify-center pb-20">
                             <Actions>
-                                <SecondaryButton href="#">
+                                <SecondaryButton href="/stylistList">
                                     Choose a stylist
                                 </SecondaryButton>
                             </Actions>

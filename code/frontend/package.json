@@ -2,6 +2,7 @@
   "name": "treact",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8081",
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
@@ -28,6 +29,7 @@
     "postcss": "^7.0.39",
     "react": "^17.0.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-chatbot-kit": "^2.0.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^17.0.2",
     "react-github-btn": "^1.2.0",
@@ -37,6 +39,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-select": "^5.2.2",
+    "react-simple-chatbot": "^0.6.1",
     "react-slick": "^0.28.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.3",
@@ -49,7 +52,8 @@
     "build": "node --max_old_space_size=2048 node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && netlify deploy --prod --dir=build"
+    "deploy": "yarn build && netlify deploy --prod --dir=build",
+    "start-backend": "cd backend && env/bin/flask run --no-debugger"
   },
   "eslintConfig": {
     "extends": "react-app",

@@ -32,12 +32,13 @@ const TestimonialTextSlider = tw(Slider)``;
 const TestimonialText = tw.div`outline-none`;
 const TextArea = tw.textarea`block px-3 py-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-10 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`;
 
+const ImageAndControlContainerDisplay = tw.div`bg-white h-96 w-6 relative outline-none`;
 const ImageAndControlContainer = tw.div`relative outline-none`;
 //const Image = styled.div(props => [
 //  `background-image: url("${props.imageSrc}");`,
 //  tw`rounded bg-cover bg-center h-80 sm:h-96 lg:h-144`
 //]);
-const Image = tw.img`max-w-full rounded-t sm:rounded`;
+const Image = tw.img`mx-auto h-full rounded-t sm:rounded`;
 const Image1 = tw.img`w-48 h-48 rounded-t sm:rounded`;
 
 const ControlContainer = tw.div`absolute bottom-0 right-0 bg-gray-100 px-6 py-4 rounded-tl-3xl border`;
@@ -96,13 +97,16 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
       testimonials: null,
       textOnLeft: false,
       profileImageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
-      customerName: "Charlotte Hale",
+      customerName: this.props.nickname,
       customerTitle: "Stylist",
       isEdit: false,
       deletedID: [],
       images: [],
       ideas: [],
-      photo: this.props.photo
+      photo: this.props.photo,
+      viewSty: this.props.viewSty,
+      displayIndex: 0,
+      displaySize: this.props.display.length
     }
 
     this.updateDisplay = this.updateDisplay.bind(this)
@@ -110,6 +114,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
     this.onDropOutfit = this.onDropOutfit.bind(this)
     this.submitChange = this.submitChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.changeDisplayPage = this.changeDisplayPage.bind(this)
   }
 
   updateDisplay(){
@@ -118,7 +123,7 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
 
   deleteDisplay(id){
     let result = this.state.deletedID
-    
+
     if (!result.includes(id)) {
       result.push(id)
       this.setState({
@@ -151,10 +156,10 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
   handleChange(event){
     let boxIndex = parseInt((event.target.name).slice(4))
     console.log(boxIndex)
-    
+
     let myIdeas = this.state.ideas
     myIdeas.splice(boxIndex, 1, event.target.value)
-    
+
     this.setState({ideas: myIdeas})
     console.log(myIdeas)
   }
@@ -162,13 +167,34 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
   submitChange(event){
     event.preventDefault();
     console.log("images" + this.state.images + " /n ideas: " + this.state.ideas + "/n id" + this.state.deletedID)
-    StylistService.updateProfile(this.state.images, this.state.ideas, this.state.deletedID) 
+    StylistService.updateProfile(this.state.images, this.state.ideas, this.state.deletedID)
     .then((response)=>{
       console.log(response.data);
       alert("Submit successfully.")
       window.location.reload()
     })
     .catch((error) => {console.log(error.response);})
+  }
+
+  changeDisplayPage(event){
+    let curIndex = this.state.displayIndex;
+    console.log(curIndex)
+    if (event.target.getAttribute('name') === "nextBtn"){
+      if (curIndex+1 === this.state.displaySize){
+        this.setState({displayIndex : 0})    // go to 1st page
+      }
+      else{
+        this.setState({displayIndex : curIndex+1})
+      }
+    }else{
+      if (curIndex-1 < 0){
+        this.setState({displayIndex : this.state.displaySize-1})
+      }
+      else{
+        this.setState({displayIndex : curIndex-1})
+      }
+    }
+    console.log("change page :" + this.state.displayIndex)
   }
 
 
@@ -180,16 +206,16 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
           <HeadingInfo tw="text-center lg:hidden" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
           <TestimonialsContainer>
             <Testimonials>
-              {this.state.isEdit? 
-                /* Edit display part */ 
-                <div> 
+              {this.state.isEdit?
+                /* Edit display part */
+                <div>
                   <h2 className="text-3xl font-black tracking-wide text-center pb-10"> Manage and Update Your Design </h2>
                   {this.props.display.map((testimonial, index) => (
-                      
+
                       <div className="grid grid-cols-5 my-10"key={index}>
                         <div></div>
                           <ImageAndControlContainer>
-                            <Image1 src={`${API_URL}${testimonial.image}`}/>
+                            <Image1 src={testimonial.image}/>
                           </ImageAndControlContainer>
                         <TestimonialText className="col-span-2">
                             <QuoteContainer>
@@ -200,14 +226,14 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                               </Quote1>
                             </QuoteContainer>
                           </TestimonialText>
-                        
+
                         <button onClick={() => this.deleteDisplay(testimonial.image)} className="mx-20 my-20 py-3 font-bold rounded bg-pink-600 text-white hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" >{"Delete"}</button>
                       </div>
                     ))}
                   <div>
                     <h2 className="font-black tracking-wide text-center"> Add new display below ! </h2>
                     <div className="grid grid-cols-5">
-                      <div></div>                        
+                      <div></div>
                       <ImageUploader
                             className="mx-3 mt-6"
                             withIcon={false}
@@ -225,55 +251,52 @@ class StylistProfileTwoColumnWithImageAndProfilePictureReview extends Component{
                           })}
                         </div>
                         <div align="center"><button className="my-14 px-5 py-3 font-bold rounded bg-pink-700 text-gray-100 hocus:bg-pink-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300" buttonRounded={true} onClick={this.submitChange}>{"Submit Your Change"}</button></div>
-                    </div>                  
+                    </div>
                     </div>
                 </div>
               :
               <Testimonial>
               <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
-                {this.props.display.map((testimonial, index) => (
-                  <ImageAndControlContainer key={index}>
-                    <Image src={testimonial.image===null?PastDesign1: `${API_URL}${testimonial.image}`}/>
+                {
+                  <ImageAndControlContainerDisplay>
+                    <Image src={this.props.display.length===0?"https://stylebox.oss-us-west-1.aliyuncs.com/display/default-display.png":this.props.display[this.state.displayIndex].image}/>
                     <ControlContainer>
-                      <ControlButton onClick={imageSliderRef?.slickPrev}>
-                        <ChevronLeftIcon />
+                      <ControlButton  onClick={this.changeDisplayPage}>
+                        <ChevronLeftIcon name="prevBtn"/>
                       </ControlButton>
-                      <ControlButton onClick={imageSliderRef?.slickNext}>
-                        <ChevronRightIcon />
+                      <ControlButton  onClick={this.changeDisplayPage}>
+                        <ChevronRightIcon name="nextBtn"/>
                       </ControlButton>
                     </ControlContainer>
-                  </ImageAndControlContainer>
-                ))}
+                </ImageAndControlContainerDisplay>}
               </TestimonialImageSlider>
               <TextContainer textOnLeft={this.state.textOnLeft}>
                 <HeadingInfo tw="hidden lg:block" subheading={this.state.subheading} heading={this.state.heading} description={this.state.description} />
                 <TestimonialTextSlider arrows={false} ref={setTextSliderRef} asNavFor={imageSliderRef} fade={true}>
-                  {this.props.display.map((testimonial, index) => (
-
-                    <TestimonialText key={index}>
-                      <QuoteContainer>
-                        <Quote>
-                          <QuotesLeft />
-                          {testimonial.idea===null?"test idea": testimonial.idea}
-                          <QuotesRight />
-                        </Quote>
-                      </QuoteContainer>
-                      <CustomerInfo>
-                        <CustomerProfilePicture src={`${API_URL}${this.props.photo}`} alt={this.state.customerName} />
-                        <CustomerTextInfo>
-                          <CustomerName>{this.state.customerName}</CustomerName>
-                          <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
-                        </CustomerTextInfo>
-                      </CustomerInfo>
-                    </TestimonialText>
-                  ))}
+                  {
+                    <TestimonialText>
+                    <QuoteContainer>
+                      <Quote>
+                        <QuotesLeft />
+                        {this.props.display.length === 0?"No past design to show": this.props.display[this.state.displayIndex].idea}
+                        <QuotesRight />
+                      </Quote>
+                    </QuoteContainer>
+                    <CustomerInfo>
+                      <CustomerProfilePicture src={this.props.photo} alt={this.state.customerName} />
+                      <CustomerTextInfo>
+                        <CustomerName>{this.state.customerName}</CustomerName>
+                        <CustomerTitle>{this.state.customerTitle}</CustomerTitle>
+                      </CustomerTextInfo>
+                    </CustomerInfo>
+                  </TestimonialText>}
                 </TestimonialTextSlider>
               </TextContainer>
             </Testimonial>
-            } 
+            }
             </Testimonials>
           </TestimonialsContainer>
-          {!this.state.isEdit ? 
+          {!this.state.isEdit && !this.state.viewSty?
             <div className="mt-20" align="center">
               <PrimaryButton buttonRounded={true} onClick={this.updateDisplay}>{"Update Your Display"}</PrimaryButton>
             </div> : <div></div>}

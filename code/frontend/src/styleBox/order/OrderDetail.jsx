@@ -167,7 +167,7 @@ class OrderDetail extends Component {
                                     # {this.state.orderId} Detail</h2>
                                 <p className='text-base flex items-end mb-8'>(Created In {this.state.time})</p>
                                 <div className='grid grid-cols-3 mb-3'>
-                                    {/*{console.log("c?", this.checkCustomer)}*/}
+                                    {console.log("status", this.state.orderStatus)}
                                     {// cust & case 5: view report
                                         this.state.orderStatus === 5 ?
                                             <button type="button"

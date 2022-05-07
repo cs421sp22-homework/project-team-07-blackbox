@@ -1,0 +1,8 @@
+Product name?
+Stylebox.
+Customers?
+Customers can brow stylist list and follow stylists. You can choose a stylist to design for you.
+Pay?
+We accept debit cards and major credit cards.
+rate?
+Customers can get the design report and then rate the stylists who accept the order.

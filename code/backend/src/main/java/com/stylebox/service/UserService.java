@@ -45,13 +45,20 @@ public class UserService {
 
     static Pattern emailPattern = Pattern.compile("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
 
-//    public Boolean verify(LoginDTO loginDTO) {
+    //    public Boolean verify(LoginDTO loginDTO) {
 //        User user = userRepository.findUserByUsername(loginDTO.getUsername());
 //        if (user == null) {
 //            return false;
 //        }
 //        return user.getPassword().equals(loginDTO.getPassword());
 //    }
+    public boolean isUsernameDuplicate(String username){
+        return userLoginRepository.existsByUsername(username);
+    }
+
+    public boolean isEmailDuplicate(String email){
+        return userLoginRepository.existsByEmail(email);
+    }
 
     public UserLogin getUserByLogin(LoginDTO loginDTO) {
         String login = loginDTO.getUsername();
@@ -72,7 +79,7 @@ public class UserService {
         // 验证密码
         BCryptPasswordEncoder bcryptpasswordencoder = new BCryptPasswordEncoder();
         if (!bcryptpasswordencoder.matches(password, userLogin.getPassword())) {
-                throw new Rest400Exception("Incorrect password");
+            throw new Rest400Exception("Incorrect password");
         }
 
 //        User user = userLogin.getUser();
@@ -184,6 +191,8 @@ public class UserService {
         stylistProfileGetDTO.setStyle(styleSet);
         stylistProfileGetDTO.setDisplay(user.getStylistInformation().getDisplays());
         stylistProfileGetDTO.setPhoto(user.getStylistInformation().getUser().getAvatar());
+        stylistProfileGetDTO.setFollowerNum(user.getStylistInformation().getFollowNum());
+        stylistProfileGetDTO.setRate(Integer.parseInt(user.getStylistInformation().getRate()));
         return stylistProfileGetDTO;
     }
 
@@ -223,6 +232,7 @@ public class UserService {
 
         StylistProfileGetDTO stylistProfileGetDTO = getStylistProfile(stylistInformation.get().getUser());
         StylistHomepageDTO stylistHomepageDTO = modelMapper.map(stylistProfileGetDTO, StylistHomepageDTO.class);
+
         if (!user.getRole().getName().equals("Customer")) {
             stylistHomepageDTO.setFollow(false);
         } else {

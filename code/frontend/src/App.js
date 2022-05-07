@@ -13,7 +13,7 @@ import Quiz from "./styleBox/quiz/Quiz";
 import OrderList from "./styleBox/order/OrderList";
 import OrderDetail from "styleBox/order/OrderDetail";
 import ReadStylist from "./styleBox/customer/ReadStylist";
-import Test from "components/blogs/PopularAndRecentBlogPosts.js";
+import Test from "components/blogs/ThreeColSimpleWithImage.js";
 import CreateOrder from "styleBox/order/CreateOrder";
 import StylistList from "./styleBox/stylist/StylistList";
 import FollowStylist from"./styleBox/customer/followStylistList"
@@ -21,6 +21,7 @@ import PayOrder from "./styleBox/order/PayOrder"
 import CreateReport from "styleBox/order/CreateReport";
 import ViewReport from "./styleBox/order/ViewReport";
 import ConfirmOrder from "./styleBox/order/ConfirmOrder";
+import Tryon from "./styleBox/try_on/Tryon.jsx";
 
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
               <AuthenticatedRoute path="/createReport" component={CreateReport}/>
               <AuthenticatedRoute path="/viewReport" component={ViewReport}/>
               <AuthenticatedRoute path="/confirmOrder" component={ConfirmOrder}/>
+              <AuthenticatedRoute path="/tryon" component={Tryon}/>
           </Switch>
       </>
   </Router>

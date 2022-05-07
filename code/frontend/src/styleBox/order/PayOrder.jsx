@@ -94,7 +94,7 @@ class PayOrder extends Component {
                                             <option>Apple Pay</option>
                                         </select>
                                     </div>
-                                    <div className="col-span-6 sm:col-span-3"></div>
+                                    {/*<div className="col-span-6 sm:col-span-3"></div>*/}
 
 
                                     <div className="col-span-6 sm:col-span-3">
@@ -134,7 +134,7 @@ class PayOrder extends Component {
                                 </div>
                             </div>
                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Confirm and Pay
                                 </button>
                             </div>
@@ -143,10 +143,12 @@ class PayOrder extends Component {
                     </div>
                     </div>
                 </div>
-                </Content>
                     <BackButton onClick={this.back}>Back</BackButton>
-                    <Footer/>
+                </Content>
+
+
                 </Container>
+                <Footer/>
             </AnimationRevealPage>
         )
     }

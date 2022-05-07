@@ -217,7 +217,7 @@ class StylistList extends Component{
                         {this.state.stylistLists.map((stylistLst, index) => (
                             <TwoColumn css={!true && tw`md:items-center`} key={index}>
                                 <ImageColumn css={null}>
-                                    {true ? <Image imageSrc={`${API_URL}${stylistLst.avatar}`} css={null}/> :
+                                    {true ? <Image imageSrc={stylistLst.avatar} css={null}/> :
                                         <img src={null} css={null} alt=""/>}
                                     {false && <DecoratorBlob css={null}/>}
                                 </ImageColumn>

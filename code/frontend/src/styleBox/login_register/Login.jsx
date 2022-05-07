@@ -41,12 +41,12 @@ class Login extends Component {
       password: '',
       hasLoginFailed: false,
       showSuccessMessage: false,
-      showPassword: true
+      showPassword: false
     }
     // bind 方法
     this.handleChange = this.handleChange.bind(this)
     this.loginClicked = this.loginClicked.bind(this)
-    this.hidePassword = this.hidePassword.bind(this)
+    this.showPsw = this.showPsw.bind(this)
   }
 
   // -----------------Functions--------------------
@@ -61,12 +61,12 @@ class Login extends Component {
     )
   }
 
-  hidePassword(event){
+  showPsw(event){
       if(event.target.checked === true){
-          this.setState({showPassword: false})
+          this.setState({showPassword: true})
       }
       else{
-          this.setState({showPassword: true})
+          this.setState({showPassword: false})
       }
   }
 
@@ -109,8 +109,8 @@ class Login extends Component {
                     <Input type="text" name='username' placeholder='Enter Email or UserName Here' value={this.state.username} onChange={this.handleChange}/>
                     <Input type={this.state.showPassword?'text':'password'} name='password' placeholder='Enter Password Here' value={this.state.password} onChange={this.handleChange} />
                       <div className="w-48 grid grid-cols-2 mx-auto">
-                          <p className="mt-4 text-xs text-gray-600 text-center">Hide Password</p>
-                          <Input type="checkbox" name='hiddenbox'onClick={this.hidePassword}/>
+                          <p className="mt-4 text-xs text-gray-600 text-center">Show Password</p>
+                          <Input type="checkbox" name='hiddenbox'onClick={this.showPsw}/>
                       </div>
                     <SubmitButton type="submit" onClick={this.loginClicked}> Login </SubmitButton>
                   </Form>

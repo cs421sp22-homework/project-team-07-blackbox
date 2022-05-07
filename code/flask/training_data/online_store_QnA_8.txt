@@ -1,0 +1,13 @@
+Product name?
+Stylebox.
+How to change my profile information?
+You can  click on "Account" and then open your profile. You can also click "Eidt" to edit the information.
+How to change my account information?
+You can click on "Account" and then click "Account Setting" to edit the information.
+How to view my followed stylists?
+You can click on "Account" and then click "Follwed Stylists" to view the list of stylists.
+How to view all stylists?
+You can click on "Stylists" on the homepage and then you can get the list of stylists. You can also search stylists by filters.
+How to search stylists?
+You can click on "Stylists" on the homepage. Then you can search by keyword or filter by sort options or style options.
+

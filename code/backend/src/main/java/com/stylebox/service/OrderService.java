@@ -42,6 +42,7 @@ public class OrderService {
         }
         Orders orders = new Orders();
         modelMapper.map(orderCreateDTO, orders);
+        orders.setIsAccept(-1);
 
         // save styleSet
         Set<Style> newStyleSet = new HashSet<>();
