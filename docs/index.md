@@ -8,7 +8,7 @@ Users can visit our website here: http://121.41.106.214/.
 
 Users can register as customer or stylist by selecting corresponding role when registration.
 
-<img src="./img/image-20220507165621539.png" alt="image-20220507165621539" style="zoom:33%;" />
+<center><img src="./img/image-20220507165621539.png" alt="image-20220507165621539" style="zoom:80%;" /></center>
 
 #### Login as Customer
 
@@ -16,15 +16,15 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - When first login as a customer, the user would be asked to finish a quiz.
 
-     <img src="./img/image-20220507165815952.png" alt="image-20220507165815952" style="zoom:33%;" />
+     <center><img src="./img/image-20220507165815952.png" alt="image-20220507165815952" style="zoom:80%;" /></center>
 
    - The result of quiz will automatically fill the customer profile.
 
-     <img src="./img/image-20220507170446904.png" alt="image-20220507170446904" style="zoom:33%;" />
+     <img src="./img/image-20220507170446904.png" alt="image-20220507170446904" style="zoom:80%;" />
 
    - Customer can manually edit the customer profile. It can be found at *Account->Customer Profile*.
 
-     <img src="./img/image-20220507170732081.png" alt="image-20220507170732081" style="zoom:25%;" />
+     <center><img src="./img/image-20220507170732081.png" alt="image-20220507170732081" style="zoom:80%;" /></center>
 
    - When customer places order, the customer profile will be delivered to stylists to help them design the outfit.
 
@@ -34,15 +34,15 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - Customer can browser all stylists by clicking *Stylists* button on navbar.
 
-     <img src="./img/image-20220507180010060.png" alt="image-20220507180010060" style="zoom:25%;" />
+     <center><img src="./img/image-20220507180010060.png" alt="image-20220507180010060" style="zoom:80%;" /></center>
 
    - The stylists can be searched based on rate, followNum, orderNum, skilled style and keywords.
 
-     ![image-20220507171226910](./img/image-20220507171226910.png)
+     <center><img src="./img/image-20220507171226910.png" alt="image-20220507180010060" style="zoom:80%;" /></center>
 
    - After entering the stylist page by clicking *Learn More* Button, customer can view stylist's information and past designs. Then the customer can follow the stylist or send order request by clicking corresponding button.
 
-     <img src="./img/image-20220507171455012.png" alt="image-20220507171455012" style="zoom:20%;" />
+     <center><img src="./img/image-20220507171455012.png" alt="image-20220507171455012" style="zoom:80%;" /></center>
 
      
 
@@ -50,11 +50,11 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - After clicking *Create an Order* button on a stylist's homepage, the customer will be directed to the create order page, where they can fullfill the order related information.
 
-     <img src="./img/image-20220507171745056.png" alt="image-20220507171745056" style="zoom:40%;" />
+     <center><img src="./img/image-20220507171745056.png" alt="image-20220507171745056" style="zoom:80%;" /></center>
 
    - Notice that the stylist may not accept the order, the customer can keep track of order updates at *Account->Orders*.
 
-     <img src="./img/image-20220507171937891.png" alt="image-20220507171937891" style="zoom:25%;" />
+     <center><img src="./img/image-20220507171937891.png" alt="image-20220507171937891" style="zoom:80%;" /></center>
 
    - The exclamation marks on the order list page indicate the order has an update. There are six status of order shown as follows: 
 
@@ -70,7 +70,7 @@ Users can register as customer or stylist by selecting corresponding role when r
 
      ​			(6)  Completed: The order is completed.
 
-     <img src="./img/image-20220507172535628.png" alt="image-20220507172535628" style="zoom:33%;" />
+     <center><img src="./img/image-20220507172535628.png" alt="image-20220507172535628" style="zoom:80%;" /></center>
 
      ​	In each state, the customer can click *VIEW* button and do corresponding operation.
 
@@ -86,15 +86,17 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - The stylist can view and modify their Stylist Profile at *Account->Stylist Profile*
 
-     <img src="./img/image-20220507174947593.png" alt="image-20220507174947593" style="zoom:33%;" />
+     <center><img src="./img/image-20220507174947593.png" alt="image-20220507174947593" style="zoom:80%;" /></center>
 
    - By clicking *Edit* button, the stylist can change their basic information.
 
-     ![image-20220507175036368](./img/image-20220507175036368.png)
+     <center><img src="./img/image-20220507175036368.png" alt="image-20220507174947593" style="zoom:80%;" /></center>
+
+     
 
    - By clicking *Update Your Display* button, stylist can modify their past design.
 
-     <img src="./img/image-20220507175154153.png" alt="image-20220507175154153" style="zoom:33%;" />
+     <center><img src="./img/image-20220507175154153.png" alt="image-20220507175154153" style="zoom:80%;" /></center>
 
      
 
@@ -104,7 +106,7 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - When there are new orders, the stylist will see a exclamation mark on *Account->Orders* button.
 
-     <img src="./img/image-20220507173022567.png" alt="image-20220507173022567" style="zoom:25%;" />
+     <center><img src="./img/image-20220507173022567.png" alt="image-20220507173022567" style="zoom:80%;" /></center>
 
      
 
@@ -112,11 +114,11 @@ Users can register as customer or stylist by selecting corresponding role when r
 
      - To be accepted Status: Stylist can choose to accept or refuse the order request by clicking *VIEW->Manage*.
 
-       <img src="./img/image-20220507173444114.png" alt="image-20220507173444114" style="zoom:30%;" />
+       <center><img src="./img/image-20220507173444114.png" alt="image-20220507173444114" style="zoom:80%;" /></center>
 
      - In process Status: Stylist can start to finish the style report at *Account->Orders->VIEW->Create Report* .
 
-       <img src="./img/image-20220507174022742.png" alt="image-20220507174022742" style="zoom:33%;" />
+       <center><img src="./img/image-20220507174022742.png" alt="image-20220507174022742" style="zoom:80%;" /></center>
 
 #### Other function
 
@@ -124,21 +126,21 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - By clicking *Try On* button on navbar, user will be directed to virtual try on page.
 
-     ![image-20220507175310228](/Users/alice/Library/Application Support/typora-user-images/image-20220507175310228.png)
+     <center><img src="./img/image-20220507175310228.png" alt="image-20220507174022742" style="zoom:80%;" /></center>
 
    - User can use use the try-on function by selecting a human photo and a cloth image.
 
-<img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175607262.png" alt="image-20220507175607262" style="zoom:33%;" />
+<center><img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175607262.png" alt="image-20220507175607262" style="zoom:80%;" /></center>
 
 2. ChatBot
 
    - User can find chatbot on the homepage.
 
-     <img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175902562.png" alt="image-20220507175902562" style="zoom:23%;" />
+     <center><img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175902562.png" alt="image-20220507175902562" style="zoom:80%;" /></center>
 
    - The chatbot will answer basic questions to help customer better understand how to use our website.
    
-     <img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175813512.png" alt="image-20220507175813512" style="zoom:33%;" />
+     <center><img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175813512.png" alt="image-20220507175813512" style="zoom:80%;" /></center>
    
      
 
