@@ -49,6 +49,7 @@ const QuotesRight = tw(QuotesRightIcon)`w-8 h-8 lg:w-10 lg:h-10 text-pink-500 ab
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 const MultiSelect = tw(Multiselect)`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2`;
 const InputText = tw.input`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2 bg-gray-100`;
+const MulSelect = tw.select`font-medium text-xl lg:text-xl xl:text-xl text-gray-700 mb-2 w-full border-solid border rounded py-1 px-2 bg-gray-100`;
 
 const SliderControlButtonContainer = styled.div`
   ${tw`absolute top-0 h-full flex items-end md:items-center z-20`}
@@ -248,8 +249,13 @@ class StylistProfileImageIntro extends Component {
                                             <div className="grid grid-cols-2">
                                                 <FollowerNumTitle>Gender:</FollowerNumTitle>
                                                 {this.state.edit ?
-                                                    <InputText value={this.state.gender} name="gender" type="text"
-                                                               onChange={this.handleChange}/>
+                                                    // <InputText value={this.state.gender} name="gender" type="text"
+                                                    //            onChange={this.handleChange}/>
+                                                    <MulSelect
+                                                                    value={this.state.gender} name="gender" onChange={this.handleChange}>
+                                                                <option value="male">male</option>
+                                                                <option value="female">female</option>
+                                                            </MulSelect>
                                                     :<FollowerNum>{this.state.gender}</FollowerNum>}
                                             </div>
                                             <div className="grid grid-cols-2">
