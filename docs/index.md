@@ -136,13 +136,12 @@ Users can register as customer or stylist by selecting corresponding role when r
 
      <img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175902562.png" alt="image-20220507175902562" style="zoom:23%;" />
 
-   -  The chatbot will answer basic questions to help customer better understand how to use our website.
-   
-     
+   - The chatbot will answer basic questions to help customer better understand how to use our website.
    
      <img src="/Users/alice/Library/Application Support/typora-user-images/image-20220507175813512.png" alt="image-20220507175813512" style="zoom:33%;" />
+   
      
-     
+
 
 
 
