@@ -54,7 +54,7 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
    cd project-team-07-blackbox\code\backend
    mvn spring-boot:run
    ```
-#### Flask Back
+#### Flask Backend
 8. Install Python 3.8 from https://www.python.org/downloads/
 9. Install Anaconda, follow the instruction https://docs.anaconda.com/anaconda/install/
 10. Create a virtual environment and activate it:
