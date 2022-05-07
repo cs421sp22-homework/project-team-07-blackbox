@@ -32,7 +32,7 @@ const TestimonialSliderContainer = tw.div`mt-24`;
 const TestimonialSlider = styled(Slider)``;
 const Testimonial = tw.div`flex! flex-col items-center md:items-stretch md:flex-row md:justify-center outline-none`;
 const ImageContainer = styled.div`
-  ${tw`md:mx-3 lg:mx-6 w-2/3 md:w-4/12 rounded flex items-center max-w-xs md:max-w-none`}
+  ${tw`bg-gray-100 h-96 w-96 mr-20 mt-20`}
   img {
     ${tw`rounded`}
   }
@@ -108,7 +108,7 @@ class StylistProfileBrowse extends Component{
               {this.props.testimonials.map((testimonial, index) => (
                 <Testimonial key={index}>
                   <ImageContainer>
-                    <img src={testimonial.photo} alt={testimonial.customerName} />
+                    <img className="h-full mx-auto" src={testimonial.photo} alt={testimonial.customerName} />
                   </ImageContainer>
 
                   <TextContainer>

@@ -16,9 +16,9 @@ class StylistProfile extends Component{
       testimonials: [{
         nickname: "Charlotte",
         photo:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
         intro:
-          "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
+            "Charlotte Hale is an 3-year experienced stylist, who is proficient at casual style and using details to highlight personal characteristics. ",
         gender: "Female",
         style: ["Casual", "Business"],
         age: 23,
@@ -39,36 +39,36 @@ class StylistProfile extends Component{
   modifyState(){
 
     StylistService.getHomepage()
-    .then(response=>this.setState({
-      testimonials: [{
-        nickname: response.data.nickname,
-        photo: response.data.photo,
-        intro: response.data.intro,
-        gender: response.data.gender,
-        style: response.data.style,
-        age: response.data.age,
-        username: response.data.username,
-        email:response.data.email,
-        facebook: response.data.facebook,
-        rate: response.data.rate,
-        followerNum: response.data.followerNum
-      }],
-      display: response.data.display
-    }))
-    .catch(error => console.log(error.response))
+        .then(response=>this.setState({
+          testimonials: [{
+            nickname: response.data.nickname,
+            photo: response.data.photo,
+            intro: response.data.intro,
+            gender: response.data.gender,
+            style: response.data.style,
+            age: response.data.age,
+            username: response.data.username,
+            email:response.data.email,
+            facebook: response.data.facebook,
+            rate: response.data.rate,
+            followerNum: response.data.followerNum
+          }],
+          display: response.data.display
+        }))
+        .catch(error => console.log(error.response))
 
   }
 
   render() {
     return(
-      <AnimationRevealPage>
-        <NavBarAuthenticated/>
-        {console.log("pass", this.state.testimonials)}
-        {/*<StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/> */}
-        <StylistProfileImageIntro testimonials={this.state.testimonials}/>
-        <StylistProfilePastDesign viewSty={false} photo={this.state.testimonials[0].photo} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
-        <Footer />
-      </AnimationRevealPage>
+        <AnimationRevealPage>
+          <NavBarAuthenticated/>
+          {console.log("pass", this.state.testimonials)}
+          {/*<StylistProfilePastDesign display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/> */}
+          <StylistProfileImageIntro testimonials={this.state.testimonials}/>
+          <StylistProfilePastDesign viewSty={false} photo={this.state.testimonials[0].photo} display={this.state.display===null?[{image: PastDesign1, idea: "sample idea"}]: this.state.display}/>
+          <Footer />
+        </AnimationRevealPage>
     )
   }
 }
