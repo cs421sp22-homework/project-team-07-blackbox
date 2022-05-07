@@ -4,7 +4,7 @@ The Style Box is a platform that integrates the idea of e-commerce and social ne
 
 ## User Manual
 
-Users can visit our website here: https://stylebox5.herokuapp.com/.
+Users can visit our website here: http://121.41.106.214.
 
 You can login as a customer or a stylist. If you are a customer, you can login to finish the quiz about your body shape, preference and favorite styles, which can help stylists to make the most customized recommendation for you. You can also modify the information in the future. If you are a stylist, you can modify your profile including photos, certificates and introduction to attract more customers. Additionally, all users can modify their account setting.
 
