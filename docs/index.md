@@ -140,7 +140,7 @@ Users can register as customer or stylist by selecting corresponding role when r
 
    - The chatbot will answer basic questions to help customer better understand how to use our website.
    
-     <center><img src="./img/image-20220507175813512.png" alt="image-20220507175813512" style="zoom:80%;" /></center>
+     <center><img src="./img/image-20220507175813512.png" alt="image-20220507175813512" style="zoom:50%;" /></center>
    
      
 
